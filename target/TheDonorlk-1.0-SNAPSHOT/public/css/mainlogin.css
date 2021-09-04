@@ -1,0 +1,217 @@
+body{
+    margin:0;
+}
+
+.maincontainer{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lucida Sans';
+    background-color: #D3AAAA;
+}
+
+
+/* .container{
+      box-shadow: 0 0 3px 1px #808080;
+      padding: 0px;
+      width:1000px;
+      background-color: #FFFFFF;
+      height: 600px;
+      align-items: center;
+      border: 0px;
+}
+
+#subcontainer {
+    display: grid;
+    grid-template-rows: 600px;
+	grid-template-columns: 1fr 1fr;
+} */
+
+.subcontainer {
+    display: grid;
+    grid-template-rows: 600px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "left right";
+    box-shadow: 0 0 3px 1px #808080;
+    padding: 0px;
+    width:1000px;
+    background-color: #FFFFFF;
+    height: 600px;
+    align-items: center;
+    border: 0px;
+}
+.inter_lcontainer{
+    display: flex;
+    flex-direction: column;
+    grid-area: left;
+}
+.inter_rcontainer{
+    display: flex;
+    flex-direction: column;
+    grid-area: right;
+}
+
+@media (max-width:600px){
+    .subcontainer{
+        grid-template-areas: "right""left";
+    }
+    .maincontainer{
+        /* width: 100vh;
+        height: 100vw; */
+        background-color: #D3AAAA;
+        height: max-content;
+    }
+    .inter_lcontainer{
+        /* width: 100vh; */
+        height: 100vw;
+    }
+}
+
+.inter_lcontainer #ml1{
+    opacity: 70%;
+}
+.logo{
+    margin-left: 90px;
+    height: 90px;
+    margin-top: 20px;
+}
+.inputf1 i{
+    padding-left: 10px;
+    margin-right: 10px;
+}
+.inputf1{
+    padding: 5px;
+    padding-left: 10px;
+    width: 350px;
+    margin-bottom: 15px;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 2px solid #8f8787;
+    background-color: #EAE5E5;
+    margin-left: 60px;
+    background: transparent;
+}
+.input-fields{
+    margin-bottom: 25px;
+    height: 60px;
+}
+.uname{
+    border: 0px;
+    outline: none;
+    width: 300px;
+    font-weight: bold;
+}
+.pwd{
+    border: 0px;
+    outline: none;
+    width: 300px;
+    font-weight: bold;
+}
+.remember{
+    margin-left: 60px;
+    margin-top: 20px;
+    height: 40px;
+    font-weight: bold;
+    font-size: smaller;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.chech-box{
+    margin: 3px 10px 3px 20px;
+
+}
+.remember a{
+    margin-left: 120px;
+    text-decoration: none;
+}
+
+#Login{
+    float:right;
+    height: 40px;
+    width: 120px;
+    background-color: #0078c8;
+    color: white;
+    border: none;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    margin-right: 70px;
+    font-weight: bold;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+#Login:hover{
+    background-color: white;
+    color: rgb(0, 120, 200);
+    box-shadow: 0 0 3px 1px rgb(115, 158, 250);
+}
+h6{
+    margin-left: 240px;
+}
+.SocialM{
+    display: grid;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    /* grid-template-rows: 600px;
+	grid-template-columns: 1fr 1fr; */
+}
+.SocialMediea{
+    display: flex;
+    margin-bottom: 15px;
+    width: 370px;
+    height: 40px;
+    font-weight: bold;
+    padding-top: 13px;
+    /* padding: auto; */
+}
+.SocialMediea i{
+    padding-right: 55px;
+    margin-left: 50px;
+    height: 20px;
+    width: 20px;
+}
+
+#LoginF{
+    background-color: #1a0f79;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    margin-left: 50px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+#LoginF:hover
+{
+    background-color: white;
+    color: #1a0f79;
+    box-shadow: 0 0 3px 1px #423c77;
+}
+
+#LoginG{
+    background-color: #fc0a0a;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    margin-left: 50px;
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+#LoginG:hover
+{
+    background-color: white;
+    color: #fc0a0a;
+    box-shadow: 0 0 3px 1px #e66868;
+}
+.bottom{
+    margin-left: 60px;
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: smaller;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.bottom a{
+    text-decoration: none;
+    color: #0078c8;
+}a
