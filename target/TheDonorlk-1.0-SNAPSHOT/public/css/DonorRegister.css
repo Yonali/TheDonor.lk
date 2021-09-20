@@ -1,49 +1,33 @@
 body{
     margin:0;
+    background-color: #D3AAAA;
+    background-image: linear-gradient(to right, #360000, #750605);
 }
 
 .maincontainer{
-    height: 100vh;
     display: flex;
+    margin: auto;
+    padding: 10px;
     align-items: center;
     justify-content: center;
     font-family: 'Lucida Sans';
-    background-color: #D3AAAA;
 }
-
-
-/* .container{
-      box-shadow: 0 0 3px 1px #808080;
-      padding: 0px;
-      width:1000px;
-      background-color: #FFFFFF;
-      height: 600px;
-      align-items: center;
-      border: 0px;
-}
-
-
-.subcontainer {
-    display: grid;
-    grid-template-rows: 600px;
-	grid-template-columns: 1fr 1fr;
-    grid-template-areas: "left right";
-} */
 
 .subcontainer {
     display: grid;
     grid-template-rows: 600px;
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "left right";
-    box-shadow: 0 0 3px 1px #808080;
+    box-shadow: 1px 1px 15px 0px #000000;
     padding: 0px;
     width:1000px;
     background-color: #FFFFFF;
     height: 600px;
     align-items: center;
     border: 0px;
+    border-radius: 25px;
+    margin: 20px;
 }
-
 .inter_lcontainer{
     display: flex;
     flex-direction: column;
@@ -53,52 +37,19 @@ body{
     display: flex;
     flex-direction: column;
     grid-area: right;
-
-}
-/* @media only screen and (max-width:1006px){
-    .subcontainer{
-        grid-template-areas: "right""left";
-    }
-} */
-@media (max-width:600px){
-    .subcontainer{
-        grid-template-areas: "right""left";
-    }
-    .maincontainer{
-        /* width: 100vh;
-        height: 100vw; */
-        background-color: #D3AAAA;
-        height:max-content
-    }
-    .inter_lcontainer{
-        /* width: 100vh; */
-        height: 100vw;
-    }
 }
 
-.inter_lcontainer #ml1{
-    opacity: 70%;
-}
 
 .logo{
-    margin-left: 90px;
-
-    margin-top: auto;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
 
 }
-/* .form-section{
-    height: 500px;
-} */
 .inputf1 i{
     padding-left: 10px;
     margin-right: 10px;
 }
-/* .inputcal i{
-    padding-left: 50px;
-    margin-top: 10px;
-    color: #000000;
-
-} */
 .inputf1{
     padding: 5px;
     padding-left: 10px;
@@ -132,23 +83,10 @@ body{
 .input{
     border: 0px;
     outline: none;
-    width: 300px;
+    /* width: 300px; */
     font-weight: bold;
+    margin-left: 10px;
 }
-/* .cal{
-    display: grid;
-
-	grid-template-columns: 1fr 1fr;
-} */
-/* .inputcal{
-    display: flex;
-    flex-direction: column;
-    border: 0px;
-    outline: none;
-    width: 170px;
-    font-weight: bold;
-    margin-left: 40px;
-} */
 
 .btn{
     border: none;
@@ -156,28 +94,7 @@ body{
     background:none;
     margin-top: 5px;
 }
-/* .pwd{
-    border: 0px;
-    outline: none;
-    width: 300px;
-    font-weight: bold;
-} */
-/* .remember{
-    margin-left: 60px;
-    margin-top: 20px;
-    height: 40px;
-    font-weight: bold;
-    font-size: smaller;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.chech-box{
-    margin: 3px 10px 3px 20px;
 
-    }
-.remember a{
-    margin-left: 120px;
-    text-decoration: none;
-} */
 
 #Signup{
     float:right;
@@ -200,9 +117,11 @@ body{
     color: rgb(0, 120, 200);
     box-shadow: 0 0 3px 1px rgb(115, 158, 250);
 }
-h6{
-    margin-left: 240px;
-    margin-top: 5px;
+h4{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
 }
 .SocialM{
     display: grid;
@@ -214,7 +133,7 @@ h6{
 }
 .SocialMediea{
     display: flex;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     width: 370px;
     height: 40px;
     font-weight: bold;
@@ -222,14 +141,14 @@ h6{
     /* padding: auto; */
 }
 .SocialMediea i{
-    padding-right: 55px;
-    margin-left: 50px;
+    padding-right: 10px;
+    margin-left: 90px;
     height: 20px;
     width: 20px;
 }
 
 #LoginF{
-    background-color: #1a0f79;
+    background-color: #3B5998;
     color: white;
     border: none;
     border-radius: 15px;
@@ -240,12 +159,11 @@ h6{
 #LoginF:hover
 {
     background-color: white;
-    color: #1a0f79;
+    color: #3B5998;
     box-shadow: 0 0 3px 1px #423c77;
 }
-
 #LoginG{
-    background-color: #fc0a0a;
+    background-color: #db3236;
     color: white;
     border: none;
     border-radius: 15px;
@@ -256,17 +174,43 @@ h6{
 #LoginG:hover
 {
     background-color: white;
-    color: #fc0a0a;
+    color: #db3236;
     box-shadow: 0 0 3px 1px #e66868;
 }
-/* .bottom{
-    margin-left: 60px;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: smaller;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+/*------------------------------------------------------------------
+[ Mobile Responsive ] */
+
+@media (max-width: 768px) {
+    .inter_lcontainer {
+        width: 350px;
+        height: 480px;
+    }
+    #ml1 {
+        width: 100%;
+    }
+    .inter_rcontainer {
+        margin-left: -100px;
+        padding: 20px;
+    }
+
 }
-.bottom a{
-    text-decoration: none;
-    color: #0078c8;
-} */
+
+@media (max-width:600px){
+    .subcontainer{
+        grid-template-areas: "right""left";
+    }
+    .maincontainer{
+        background-color: #D3AAAA;
+        height: max-content;
+    }
+    .inter_lcontainer {
+        display: none;
+    }
+    .inter_rcontainer {
+        margin-left: -40px;
+    }
+}
+
+/*------------------------------------------------------------------
+*/

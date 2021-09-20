@@ -14,6 +14,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="TheDonorlk" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.25" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+          <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework.cloud:spring-cloud-contract-shade:1.2.2.RELEASE" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/TheDonorlk-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
