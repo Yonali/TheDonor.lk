@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDao {
+public class LoginDAO {
 
     public boolean validate(LoginBean loginBean)
     {

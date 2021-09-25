@@ -1,7 +1,7 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.LoginBean;
-import com.example.thedonorlk.Database.LoginDao;
+import com.example.thedonorlk.Database.LoginDAO;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletException;
@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginDao loginDao = new LoginDao();
+        LoginDAO loginDao = new LoginDAO();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
