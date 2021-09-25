@@ -16,7 +16,7 @@ public class LoginDAO {
         // Initialize the database
         Connection con = DatabaseConnection.initializeDatabase();
 
-        String sql = "select * from login where username = ? and password =?";
+        String sql = "select * from user where username = ? and password =?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
