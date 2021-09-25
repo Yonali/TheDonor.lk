@@ -5,13 +5,11 @@ import com.example.thedonorlk.Database.LoginDAO;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-//@WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -32,12 +30,14 @@ public class LoginServlet extends HttpServlet {
         LoginBean loginBean = new LoginBean();
         loginBean.setUsername(username);
         loginBean.setPassword(DigestUtils.sha256Hex(password));
-        //out.println(DigestUtils.sha256Hex(password));
 
         if (loginDao.validate(loginBean)) {
             response.sendRedirect("./view/timeline.jsp");
         } else {
-            response.sendRedirect("./view/mainlogin.jsp");
+            //response.sendRedirect("./view/mainlogin.jsp");
+
+            request.setAttribute("error","Incorrect Username or Password");
+            request.getRequestDispatcher("./view/mainlogin.jsp").forward(request, response);
         }
 
     }

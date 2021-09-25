@@ -8,7 +8,6 @@ Center element CSS {
 
 body{
     margin:0;
-    background-color: #D3AAAA;
     background-image: linear-gradient(to right, #360000, #750605);
 }
 
@@ -52,6 +51,15 @@ body{
     width: 50%;
     padding: 10px;
 }
+.error{
+    margin: auto;
+    width: 50%;
+    color: #750605;
+    text-align: center;
+    font-weight: bold;
+    font-size: smaller;
+}
+
 .inputf1 i{
     padding-left: 10px;
     margin-right: 10px;
