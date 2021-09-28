@@ -1,3 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+:root {
+    --main-color: #750605;
+    --accent-color: #360000;
+    --div-color: #d62828;
+    --sub-color: #dd2f6e;
+    --text-gray: #555f6b;
+}
+
 body{
     margin:0;
     background-color: #D3AAAA;
@@ -27,6 +36,7 @@ body{
     border: 0px;
     border-radius: 25px;
     margin: 20px;
+    padding: 30px;
 }
 .inter_lcontainer{
     display: flex;
@@ -39,17 +49,29 @@ body{
     grid-area: right;
 }
 
-.logo{
+#error_message{
     margin: auto;
     width: 50%;
+    color: var(--main-color);
+    text-align: center;
+    font-weight: bold;
+    font-size: smaller;
     padding: 10px;
+    box-shadow: 0 8px 10px -10px;
+    margin-top: -20px;
+    margin-bottom: 20px;
 }
 
+.logo{
+    margin: auto;
+    /* width: 50%;
+    padding: 10px; */
+
+}
 .inputf1 i{
     padding-left: 10px;
     margin-right: 10px;
 }
-
 .inputf1{
     padding: 5px;
     padding-left: 10px;
@@ -63,10 +85,6 @@ body{
     margin-left: 60px;
     background: transparent;
 }
-.inputf1 .inputd{
-    text-decoration: none;
-}
-
 .inputf2{
     padding: 5px;
     padding-left: 10px;
@@ -87,18 +105,18 @@ body{
 .input{
     border: 0px;
     outline: none;
-    width: 290px;
+    width: 80%;
     font-weight: bold;
     margin-left: 10px;
 }
-.inputd{
-    border: 0px;
-    outline: none;
-    /* width: 300px; */
-    font-weight: bold;
-    margin-left: 10px;
 
+.inputf1 #dob {
+    width: auto;
+    margin-left: -20px;
+    flex-direction: row-reverse;
+    gap: 20px;
 }
+
 .btn{
     border: none;
     cursor: pointer;
