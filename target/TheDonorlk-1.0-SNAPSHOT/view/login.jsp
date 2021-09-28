@@ -34,8 +34,8 @@
                     if(login_msg == null)
                         login_msg = "";
                 %>
-                <div class="error">
-                    <p><%= login_msg %></p>
+                <div class="error_message">
+                    <%= login_msg %>
                 </div>
 
                 <form action="<%=request.getContextPath()%>/login" class="form-section" method="post">
