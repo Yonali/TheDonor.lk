@@ -46,7 +46,7 @@
                 <p><%= reg_msg %></p>
             </div>
 
-
+<%--2021/09/28--%>
             <form name="form2" action="/register" class="form-section" method="post" onsubmit="return Validation()">
 
                 <div id="register_form" class="input-fields">
