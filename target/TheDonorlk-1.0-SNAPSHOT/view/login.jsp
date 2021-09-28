@@ -26,7 +26,7 @@
 
             <div class="inter_rcontainer">
                 <div class="logo">
-                    <img src="<%=request.getContextPath()%>/public/images/dlk.PNG" height="80px" width="300px">
+                    <img src="<%=request.getContextPath()%>/public/images/Logo.png" height="100px">
                 </div>
 
                 <%

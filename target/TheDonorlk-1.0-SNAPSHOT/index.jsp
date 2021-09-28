@@ -60,37 +60,37 @@
 
 <div class="service">
     <h3>Our Services</h3>
-        <h1 class="centre_heading">The Need for Blood and Platelets is Constant</h1>
+    <h1 class="centre_heading">The Need for Blood and Platelets is Constant</h1>
 
-        <div class="row-service">
-            <div class="column">
-                <img src="<%=request.getContextPath()%>/public/images/service-1.jpg" width="325px">
-                <div class="coloumn-text">
-                    <h2>Exclusive Donor Platform</h2>
-                    <br>
-                    <p>This is the perfect place for all the blood donors. You can communicate with others and share
-                        your knowledge with them.</p>
-                </div>
+    <div class="row-service">
+        <div class="column">
+            <img src="<%=request.getContextPath()%>/public/images/service-1.jpg" width="325px">
+            <div class="coloumn-text">
+                <h2>Exclusive Donor Platform</h2>
+                <br>
+                <p>This is the perfect place for all the blood donors. You can communicate with others and share
+                    your knowledge with them.</p>
+            </div>
 
-            </div>
-            <div class="column">
-                <img src="<%=request.getContextPath()%>/public/images/service-1-1.jpg" width="325px">
-                <div class="coloumn-text">
-                    <h2>Blood Donor Management</h2>
-                    <br>
-                    <p>Blood Banks can use our services to effectively manage their blood donors.</p>
-                </div>
-            </div>
-            <div class="column">
-                <img src="<%=request.getContextPath()%>/public/images/service-3.jpg" width="325px">
-                <div class="coloumn-text">
-                    <h2>Blood Stock Management</h2>
-                    <br>
-                    <p>Blood Banks can quicky and effectively manage their blood stocks and get analysis reports to
-                        make data driven decisions and initiatives easily.</p>
-                </div>
+        </div>
+        <div class="column">
+            <img src="<%=request.getContextPath()%>/public/images/service-1-1.jpg" width="325px">
+            <div class="coloumn-text">
+                <h2>Blood Donor Management</h2>
+                <br>
+                <p>Blood Banks can use our services to effectively manage their blood donors.</p>
             </div>
         </div>
+        <div class="column">
+            <img src="<%=request.getContextPath()%>/public/images/service-3.jpg" width="325px">
+            <div class="coloumn-text">
+                <h2>Blood Stock Management</h2>
+                <br>
+                <p>Blood Banks can quicky and effectively manage their blood stocks and get analysis reports to
+                    make data driven decisions and initiatives easily.</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="footer">
