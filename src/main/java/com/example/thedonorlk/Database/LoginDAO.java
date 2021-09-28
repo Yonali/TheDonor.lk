@@ -9,25 +9,48 @@ import java.sql.SQLException;
 
 public class LoginDAO {
 
-    public boolean validate(LoginBean loginBean)
-    {
+    public boolean validate(LoginBean loginBean) {
         boolean status = false;
 
         // Initialize the database
         Connection con = DatabaseConnection.initializeDatabase();
 
-        String sql = "select * from user where username = ? and password =?";
+        String sql = "select * from user where username = ? and password = ?";
         PreparedStatement ps;
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, loginBean.getUsername());
             ps.setString(2, loginBean.getPassword());
+
             ResultSet rs = ps.executeQuery();
             status = rs.next();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return status;
+    }
+
+    public String getUserRole(LoginBean loginBean) {
+        String role = null;
+
+        // Initialize the database
+        Connection con = DatabaseConnection.initializeDatabase();
+
+        String sql = "select * from user where username = ? and password = ?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, loginBean.getUsername());
+            ps.setString(2, loginBean.getPassword());
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return role;
     }
 }

@@ -8,7 +8,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+
 
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -22,7 +25,7 @@ public class LoginServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LoginDAO loginDao = new LoginDAO();
+        LoginDAO loginDAO = new LoginDAO();
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -31,13 +34,17 @@ public class LoginServlet extends HttpServlet {
         loginBean.setUsername(username);
         loginBean.setPassword(DigestUtils.sha256Hex(password));
 
-        if (loginDao.validate(loginBean)) {
+        if (loginDAO.validate(loginBean)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("username", username);
+            session.setAttribute("role", loginDAO.getUserRole(loginBean));
+
             response.sendRedirect("./view/timeline.jsp");
         } else {
-            //response.sendRedirect("./view/mainlogin.jsp");
+            //response.sendRedirect("./view/login.jsp");
 
             request.setAttribute("error","Incorrect Username or Password");
-            request.getRequestDispatcher("./view/mainlogin.jsp").forward(request, response);
+            request.getRequestDispatcher("./view/login.jsp").forward(request, response);
         }
 
     }
