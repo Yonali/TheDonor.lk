@@ -49,7 +49,7 @@
                 </div>
                 <div class="icon">
                     <h4>Register</h4>
-                    <a href="<%=request.getContextPath()%>">
+                    <a href="<%=request.getContextPath()%>/view/DonorRegister.jsp">
                         <img src="<%=request.getContextPath()%>/public/images/register.png">
                     </a>
                 </div>
