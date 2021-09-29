@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-@WebServlet(name = "DonorRegServlet", value = "/register")
 public class DonorRegServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -23,25 +22,38 @@ public class DonorRegServlet extends HttpServlet {
         String fname = request.getParameter("fname");
         String lname = request.getParameter("lname");
         String email = request.getParameter("email");
+        String contact = request.getParameter("contact");
         String dob = request.getParameter("dob");
+        String gender = request.getParameter("gender");
         String pwd = request.getParameter("pwd");
-        String cpwd = request.getParameter("cpwd");
+        String cnfrm_pwd = request.getParameter("cnfrm_pwd");
+        String hash_pwd = DigestUtils.sha256Hex(pwd);
+        String hash_cnfrm_pwd = DigestUtils.sha256Hex(cnfrm_pwd);
 
         DonorRegBean donorRegBean = new DonorRegBean();
         donorRegBean.setFname(fname);
         donorRegBean.setLname(lname);
         donorRegBean.setEmail(email);
+        donorRegBean.setContact(contact);
         donorRegBean.setDob(dob);
-        donorRegBean.setPwd(DigestUtils.sha256Hex(pwd));
-        donorRegBean.setCpwd(DigestUtils.sha256Hex(cpwd));
+        donorRegBean.setGender(gender);
+        donorRegBean.setPwd(hash_pwd);
+        donorRegBean.setCnfrm_pwd(hash_cnfrm_pwd);
 
-        if (donorRegDAO.addDonorreg(donorRegBean)) {
-            response.sendRedirect("./view/timeline.jsp");
-        } else {
-            //response.sendRedirect("./view/DonorRegister.jsp");
-
-            request.setAttribute("error","Invalid email or password");
+        if (pwd.length() < 8) {
+            request.setAttribute("error","Password should be Minimum 8 Characters long");
             request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+        } else if (!hash_pwd.equals(hash_cnfrm_pwd)) {
+            request.setAttribute("error","Passwords do not match, Please try again");
+            request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+        } else {
+            if (donorRegDAO.addDonorReg(donorRegBean)) {
+                response.sendRedirect("./view/login.jsp");
+            } else {
+                System.out.println("Something went wrong, Please Try Again");
+                request.setAttribute("error","Something went wrong, Please Try Again");
+                request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+            }
         }
     }
 }

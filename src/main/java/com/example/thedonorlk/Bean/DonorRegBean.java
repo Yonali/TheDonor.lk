@@ -5,20 +5,13 @@ public class DonorRegBean {
     private String fname;
     private String lname;
     private String email;
+    private String contact;
     private String dob;
+    private String gender;
     private String pwd;
-    private String cpwd;
+    private String cnfrm_pwd;
 
     public DonorRegBean() {
-    }
-
-    public DonorRegBean(String fname, String lname, String email, String dob, String pwd, String cpwd) {
-        this.fname = fname;
-        this.lname = lname;
-        this.email = email;
-        this.dob = dob;
-        this.pwd = pwd;
-        this.cpwd = cpwd;
     }
 
     public String getFname() {
@@ -45,12 +38,28 @@ public class DonorRegBean {
         this.email = email;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
     public String getDob() {
         return dob;
     }
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getPwd() {
@@ -61,11 +70,11 @@ public class DonorRegBean {
         this.pwd = pwd;
     }
 
-    public String getCpwd() {
-        return cpwd;
+    public String getCnfrm_pwd() {
+        return cnfrm_pwd;
     }
 
-    public void setCpwd(String cpwd) {
-        this.cpwd = cpwd;
+    public void setCnfrm_pwd(String cnfrm_pwd) {
+        this.cnfrm_pwd = cnfrm_pwd;
     }
 }

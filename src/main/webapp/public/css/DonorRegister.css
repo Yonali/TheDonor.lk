@@ -31,13 +31,27 @@ body{
     padding: 0px;
     width:1000px;
     background-color: #FFFFFF;
-    height: 600px;
+    height: 620px;
     align-items: center;
     border: 0px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin: 20px;
     padding: 30px;
 }
+
+/*********************************************************/
+
+select {
+    background-color: transparent;
+    border: none;
+    width: 25%;
+    cursor: pointer;
+    line-height: inherit;
+    z-index: 1;
+}
+
+/*********************************************************/
+
 .inter_lcontainer{
     display: flex;
     flex-direction: column;
@@ -51,7 +65,6 @@ body{
 
 #error_message{
     margin: auto;
-    width: 50%;
     color: var(--main-color);
     text-align: center;
     font-weight: bold;
@@ -84,6 +97,12 @@ body{
     background-color: #EAE5E5;
     margin-left: 60px;
     background: transparent;
+
+}
+.inputf1 label {
+    font-weight: bold;
+    font-size: small;
+    color: rgba(59, 59, 59, 0.753);
 }
 .inputf2{
     padding: 5px;
@@ -100,7 +119,7 @@ body{
 }
 .input-fields{
     margin-bottom: 25px;
-    height: 90px;
+    height: 170px;
 }
 .input{
     border: 0px;

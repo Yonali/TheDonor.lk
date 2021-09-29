@@ -24,7 +24,6 @@
 <body>
 <div class="maincontainer">
 
-    <!-- <div class="container"> -->
     <div class="subcontainer">
         <div class="inter_lcontainer">
             <img src="<%=request.getContextPath()%>/public/images/ml1.png" height="580px" width="500px" id="ml1">
@@ -35,11 +34,17 @@
                 <img src="<%=request.getContextPath()%>/public/images/Logo.png" height="100px">
             </div>
 
+            <%
+                String reg_msg = (String)request.getAttribute("error");
+                if(reg_msg == null)
+                    reg_msg = "";
+            %>
             <div id="error_message">
-
+                <%= reg_msg %>
             </div>
 
-            <form action="" class="form-section" onsubmit="return validate();">
+            <!-- onsubmit="return validate();" -->
+            <form action="<%=request.getContextPath()%>/register" class="form-section" method="post" onsubmit="return validate();">
                 <div id="register_form" class="input-fields">
                     <div class="inputf1">
                         <i class="fa fa-user"></i>
@@ -55,10 +60,24 @@
                         <input type="text" name="email" id="email" class="input" placeholder="Email" required />
                     </div>
 
-                    <div class="cal">
-                        <div class="inputf1">
-                            <input type="date" name="dob" id="dob" class="input" required />
-                        </div>
+                    <div class="inputf1">
+                        <i class="fa fa-phone"></i>
+                        <input type="text" name="contact" id="contact" class="input" placeholder="Contact Number" required />
+                    </div>
+
+                    <div class="inputf1">
+                        <input type="date" name="dob" id="dob" class="input" required />
+                        <label>Date of Birth</label>
+                    </div>
+
+                    <div class="inputf1">
+                        <i class="fa fa-intersex"></i>
+                        <select name="gender" style="margin-left: 5px;">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">other</option>
+                        </select>
+                        <label style="margin-left: 15px;">Select your Gender</label>
                     </div>
 
                     <div class="inputf1">
@@ -83,12 +102,10 @@
                 <button class="SocialMediea" id="LoginF"><i class="fa fa-facebook-f"></i>Sign up with Facebook</button>
                 <button class="SocialMediea" id="LoginG"><i class="fa fa-google"></i>Sign up with Google</button>
             </div>
-
         </div>
 
     </div>
 </div>
 </body>
-
 </html>
 
