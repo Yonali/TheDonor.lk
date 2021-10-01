@@ -48,7 +48,7 @@ public class DonorRegServlet extends HttpServlet {
             request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
         } else {
             if (donorRegDAO.addDonorReg(donorRegBean)) {
-                response.sendRedirect("./view/login.jsp");
+                response.sendRedirect("./view/timeline.jsp");
             } else {
                 System.out.println("Something went wrong, Please Try Again");
                 request.setAttribute("error","Something went wrong, Please Try Again");
