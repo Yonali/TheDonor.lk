@@ -47,6 +47,7 @@ public class DonorRegServlet extends HttpServlet {
             request.setAttribute("error","Passwords do not match, Please try again");
             request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
         } else {
+<<<<<<< HEAD
             if (!donorRegDAO.validateEmail(donorRegBean)) {
                 if (donorRegDAO.addDonorReg(donorRegBean)) {
                     response.sendRedirect("./view/timeline.jsp");
@@ -54,6 +55,10 @@ public class DonorRegServlet extends HttpServlet {
                     request.setAttribute("error","Something went wrong, Please Try Again");
                     request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
                 }
+=======
+            if (donorRegDAO.addDonorReg(donorRegBean)) {
+                response.sendRedirect("./view/timeline.jsp");
+>>>>>>> 7a073c01c485dd93a6e36aae0f48f34e7942609f
             } else {
                 request.setAttribute("error","Email already registered, Please try Login");
                 request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
