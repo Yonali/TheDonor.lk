@@ -54,4 +54,23 @@ public class DonorRegDAO {
         }
         return status;
     }
+
+    public boolean validateEmail(DonorRegBean donorRegBean) {
+        boolean status = false;
+
+        // Initialize the database
+        Connection con = DatabaseConnection.initializeDatabase();
+
+        String sql = "select * from user where username = ?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, donorRegBean.getEmail());
+            ResultSet rs = ps.executeQuery();
+            status = rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 }
