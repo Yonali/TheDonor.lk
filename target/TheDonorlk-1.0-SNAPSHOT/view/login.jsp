@@ -62,12 +62,12 @@
                     </div>
                 </form>
 
-                <h4>or</h4>
+                <!-- <h4>or</h4>
 
                 <div class="SocialM">
                     <button class="SocialMediea" id="LoginF"><i class="fa fa-facebook-f"></i>Login with Facebook</button>
                     <button class="SocialMediea" id="LoginG"><i class="fa fa-google"></i> Login with Google</button>
-                </div>
+                </div> -->
 
                 <div class="bottom">
                     <p>Don't have an account?

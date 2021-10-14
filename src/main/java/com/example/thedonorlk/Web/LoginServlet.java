@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginServlet extends HttpServlet {
@@ -33,6 +34,9 @@ public class LoginServlet extends HttpServlet {
 
         if (loginDAO.validate(loginBean)) {
             String role = loginDAO.getUserRole(loginBean);
+            HttpSession session = request.getSession();
+            session.setAttribute("username",loginBean.getUsername());
+            session.setAttribute("role", role);
 
             // Check user role and redirect accordingly
             if (role.equals("admin")) {
