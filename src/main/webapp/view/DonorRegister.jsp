@@ -16,12 +16,13 @@
     <title>Register</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/DonorRegister.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./datepicker.css" />
+    <link rel="stylesheet" href="./datepicker.css"/>
     <script src="./datepicker.js"></script>
     <script src="<%=request.getContextPath()%>/public/js/DonorRegister.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id"
@@ -42,8 +43,8 @@
             </div>
 
             <%
-                String reg_msg = (String)request.getAttribute("error");
-                if(reg_msg == null)
+                String reg_msg = (String) request.getAttribute("error");
+                if (reg_msg == null)
                     reg_msg = "";
             %>
             <div id="error_message">
@@ -51,29 +52,31 @@
             </div>
 
             <!-- onsubmit="return validate();" -->
-            <form action="<%=request.getContextPath()%>/register" class="form-section" method="post" onsubmit="return validate();">
+            <form action="<%=request.getContextPath()%>/register" class="form-section" method="post"
+                  onsubmit="return validate();">
                 <div id="register_form" class="input-fields">
                     <div class="inputf1">
                         <i class="fa fa-user"></i>
-                        <input type="text" name="fname" id="fname" class="input" placeholder="First Name" required />
+                        <input type="text" name="fname" id="fname" class="input" placeholder="First Name" required/>
                     </div>
                     <div class="inputf1">
                         <i class="fa fa-user"></i>
-                        <input type="text" name="lname" id="uname" class="input" placeholder="Last Name" required />
+                        <input type="text" name="lname" id="uname" class="input" placeholder="Last Name" required/>
                     </div>
 
                     <div class="inputf1">
                         <i class="fa fa-envelope"></i>
-                        <input type="text" name="email" id="email" class="input" placeholder="Email" required />
+                        <input type="text" name="email" id="email" class="input" placeholder="Email" required/>
                     </div>
 
                     <div class="inputf1">
                         <i class="fa fa-phone"></i>
-                        <input type="text" name="contact" id="contact" class="input" placeholder="Contact Number" required />
+                        <input type="text" name="contact" id="contact" class="input" placeholder="Contact Number"
+                               required/>
                     </div>
 
                     <div class="inputf1">
-                        <input type="date" name="dob" id="dob" class="input" required />
+                        <input type="date" name="dob" id="dob" class="input" required/>
                         <label>Date of Birth</label>
                     </div>
 
@@ -89,12 +92,13 @@
 
                     <div class="inputf1">
                         <i class="fa fa-lock"></i>
-                        <input type="password" name="pwd" id="pwd" class="input" placeholder="Password" required />
+                        <input type="password" name="pwd" id="pwd" class="input" placeholder="Password" required/>
                     </div>
 
                     <div class="inputf1">
                         <i class="fa fa-lock"></i>
-                        <input type="password" name="cnfrm_pwd" id="cnfrm_pwd" class="input" placeholder="Confirm Password" required />
+                        <input type="password" name="cnfrm_pwd" id="cnfrm_pwd" class="input"
+                               placeholder="Confirm Password" required/>
                     </div>
                 </div>
 
@@ -103,39 +107,14 @@
                 </div>
             </form>
 
-            <h4>or</h4>
+            <!--<h4>or</h4>
 
-            <div class="SocialM SocialMediea">
-                <!-- <button class="SocialMediea" id="LoginF"><i class="fa fa-facebook-f"></i>Sign up with Facebook</button>
-                <button class="SocialMediea" id="LoginG" data-onsuccess="onSignIn"><i class="fa fa-google"></i>Sign up with Google</button> -->
+            <div class="SocialMediea">
+                 <button class="SocialMediea" id="LoginF"><i class="fa fa-facebook-f"></i>Sign up with Facebook</button>
+                <button class="SocialMediea" id="LoginG" data-onsuccess="onSignIn"><i class="fa fa-google"></i>Sign up with Google</button>
+            </div>-->
 
-            </div>
-            <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
-
-        <script>
-            //google callback. This function will redirect to our login servlet
-            function onSignIn(googleUser) {
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId());
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail());
-                console.log('id_token: ' + googleUser.getAuthResponse().id_token);
-
-                //do not post all above info to the server because that is not secure.
-                //just send the id_token
-                var redirectUrl = "<%=request.getContextPath()%>/OAuth";
-
-                //using jquery to post data dynamically
-                var form = $('<form action="' + redirectUrl + '" method="post">' +
-                    '<input type="text" name="id_token" value="' +
-                    googleUser.getAuthResponse().id_token + '" />' +
-                    '</form>');
-                $('body').append(form);
-                form.submit();
-            }
-        </script>
 
     </div>
 </div>

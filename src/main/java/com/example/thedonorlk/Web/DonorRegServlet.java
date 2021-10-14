@@ -49,6 +49,10 @@ public class DonorRegServlet extends HttpServlet {
         } else {
             if (!donorRegDAO.validateEmail(donorRegBean)) {
                 if (donorRegDAO.addDonorReg(donorRegBean)) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username",donorRegBean.getEmail());
+                    session.setAttribute("role", "Donor");
+
                     response.sendRedirect("./view/timeline.jsp");
                 } else {
                     request.setAttribute("error","Something went wrong, Please Try Again");
