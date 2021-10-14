@@ -173,20 +173,12 @@ h4{
 }
 .SocialM{
     display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    /* grid-template-rows: 600px;
-	grid-template-columns: 1fr 1fr; */
+    justify-content: center;
 }
 .SocialMediea{
     display: flex;
     margin-bottom: 15px;
-    width: 370px;
     height: 40px;
-    font-weight: bold;
-    padding-top: 13px;
-    /* padding: auto; */
 }
 .SocialMediea i{
     padding-right: 10px;
