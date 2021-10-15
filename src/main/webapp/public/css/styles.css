@@ -1,0 +1,639 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+:root {
+  --main-color: #750605;
+  --accent-color: #360000;
+  --div-color: #d62828;
+  --sub-color: #dd2f6e;
+  --text-gray: #929191;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Poppins", sans-serif;
+}
+
+/* -------------------- Popup Modal --------------------------- */
+.fields input {
+  width: 200px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s;
+}
+
+.modal-content {
+  position: fixed;
+  top: 100px;
+  background-color: #fefefe;
+  width: 100%;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+}
+
+.close-popup, .close-popup-multi {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-popup:hover, .close-popup-multi:hover,
+.close-popup:focus, .close-popup-multi:focus {
+  color: var(--div-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 20px 150px;
+  background-color: var(--accent-color);
+  color: white;
+}
+
+.modal-body {
+  padding: 40px 150px;
+}
+
+.modal-footer {
+  padding: 20px 50px 50px 50px;
+  background-color: var(--accent-color);
+  color: white;
+  align-items: center;
+  text-align: center;
+  font-size: small;
+  margin-bottom: -10px;
+}
+
+.modal-submit-button {
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding-top: 30px;
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    top: 100px;
+    opacity: 1;
+  }
+}
+@keyframes slideIn {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+
+  to {
+    top: 100px;
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------------------------- */
+
+.wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 1fr 10fr;
+}
+.wrapper div {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.logo {
+  padding-top: 10px;
+  padding-left: 10%;
+}
+
+.sidebar {
+  width: 20%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--main-color);
+  z-index: 100;
+  overflow: auto;
+}
+
+.sidebar-menu {
+  margin: 0;
+  height: fit-content;
+  margin-top: 20px;
+}
+
+.sidebar-menu li {
+  width: 90%;
+  margin-bottom: 20px;
+  padding-left: 25px;
+}
+
+.sidebar-menu a {
+  padding-left: 10px;
+  display: flex;
+  color: #fff;
+  font-size: medium;
+}
+
+.sidebar-menu a.active {
+  background: #fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: var(--main-color);
+  border-radius: 30px 0px 0px 30px;
+}
+
+.sidebar-menu a span:first-child {
+  font-size: medium;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+/* ----------------------------- button hover list --------------------------------- */
+
+.sidebar-menu ul ul {
+  display: none;
+}
+
+.sidebar-menu ul ul #nav_button:hover > ul {
+  display: block;
+}
+.sidebar-menu ul ul li > ul {
+  display: none;
+}
+
+.sidebar-menu ul li:hover > ul {
+  display: block;
+  margin-top: 10px;
+}
+
+.main-content {
+  margin-left: 20%;
+}
+
+/* -------------------------------------------------------------------------------- */
+
+/* .sidebar-menu li:hover {
+  background-color: #fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 30px 0px 0px 30px;
+}
+.sidebar-menu li a:hover {
+  color: var(--main-color);
+}  */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 25px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  position: fixed;
+  left: 20%;
+  width: 80%;
+  height: 80px;
+  top: 0;
+  z-index: 100;
+}
+header h2 {
+  color: #222;
+  padding: 10px;
+}
+
+header label span {
+  font-size: 1.7rem;
+  padding-right: 1rem;
+}
+
+.user-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.user-wrapper img {
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.user-wrapper small {
+  display: inline-block;
+  color: var(--text-gray);
+}
+
+/* -------------- Profile Dropdown ------------------ */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/*  ------------------------------------------------------*/
+
+main {
+  margin-top: 75px;
+  padding: 2rem 1.5rem;
+  background: #f1f5f9;
+  min-height: calc(100vh - 55px);
+}
+
+.chart {
+  width: 500px;
+  height: 300px;
+  margin-left: 320px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  grid-gap: 30px;
+  padding: 0px 40px 10px 60px;
+}
+
+.card-single {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+
+  border-radius: 2px;
+}
+
+.card-single div:first-child span {
+  color: var(--text-gray);
+}
+
+.card-2col-centered {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px;
+}
+
+.big_num {
+  color: var(--main-color);
+  font-size: x-large;
+  padding: 10px;
+  text-align: center;
+}
+
+/*------------------------------------- campaigns----------------------------------*/
+
+.search-wrapper {
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.search-wrapper span {
+  display: inline-block;
+  padding: 0rem 1rem;
+  font-size: 1.5rem;
+}
+
+.search-wrapper input {
+  height: 100%;
+  padding: 0.5rem;
+  border: none;
+  outline: none;
+}
+
+::placeholder {
+  color: var(--text-gray);
+}
+
+/* ----------------------------calendar search ------------------------------ */
+
+::-webkit-datetime-edit-text {
+  color: var(--text-gray);
+}
+::-webkit-datetime-edit-month-field {
+  color: var(--text-gray);
+}
+::-webkit-datetime-edit-day-field {
+  color: var(--text-gray);
+}
+::-webkit-datetime-edit-year-field {
+  color: var(--text-gray);
+}
+::-webkit-calendar-picker-indicator {
+  padding-right: 2em;
+}
+
+.recent-grid {
+  margin-top: 1rem;
+  display: grid;
+}
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+}
+
+.card-header,
+.card-body {
+  padding: 1rem;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-header-center {
+  padding: 1rem;
+  display: block;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-header button,
+.modal-submit-button button {
+  background: var(--main-color);
+  width: 6rem;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--main-color);
+  margin: 5px;
+  cursor: pointer;
+}
+
+.card-header button:hover,
+.modal-submit-button button:hover {
+  background-color: var(--accent-color);
+}
+
+/* ----------------------------- tables ---------------------------------- */
+
+table {
+  border-collapse: collapse;
+}
+
+thead tr {
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+thead td {
+  font-weight: 700;
+}
+
+td {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  color: #222;
+}
+
+tbody tr:hover {
+  background-color: #f2f2f2;
+  border-radius: 30px 0px 0px 30px;
+}
+
+tbody th:hover {
+  background-color: none !important;
+}
+/* previous status design */
+/* td .status {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin-right: 1rem;
+} */
+td .status {
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1;
+  font-size: 0.8rem;
+}
+
+tr td:last-child {
+  display: flex;
+  align-items: center;
+}
+
+.status.open {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.status.progress {
+  background: greenyellow;
+  color: black;
+}
+
+.status.close {
+  background: red;
+  color: white;
+}
+
+.status.consulted {
+  background: plum;
+  color: white;
+}
+
+.status.cancelled {
+  background: orange;
+  color: white;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ---------------------------------- status filter --------------------------------- */
+
+.dropbtn {
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #222;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--accent-color);
+  min-width: 230px;
+  overflow: auto;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {
+  background-color: var(--text-gray);
+} */
+
+/*------------------------------------- form ----------------------------------*/
+
+.fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-rows: repeat(3, 1fr); */
+  grid-gap: 15px;
+  grid-column-gap: 100px;
+  margin-top: 1rem;
+}
+
+.field-single {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 5px;
+  height: 40px;
+}
+
+.formcard {
+  width: 700px;
+  height: 1000px;
+}
+
+/* ----------------------------------- iframe -------------------------------------------- */
+.content {
+  position: inherit;
+  width: 100%;
+  height: fit-content;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------ select ----------------------------------------- */
+
+.select-selected {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+.box {
+  height: 40px;
+  width: 200px;
+}
+
+/* select {
+  color: white;
+  background-color: var(--accent-color);
+} */
