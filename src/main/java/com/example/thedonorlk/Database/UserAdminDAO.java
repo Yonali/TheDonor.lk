@@ -24,7 +24,7 @@ public class UserAdminDAO {
     private Connection con = DatabaseConnection.initializeDatabase();
 
     public void insertUser(UserAdminBean user) throws SQLException {
-        System.out.println(INSERT_USERS_SQL);
+        //System.out.println(INSERT_USERS_SQL);
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, "Test");
