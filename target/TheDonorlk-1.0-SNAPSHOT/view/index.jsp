@@ -72,7 +72,7 @@
                   class="las la-angle-right"></span><span>Doctors</span></a></li>
           <li><a href="<%=request.getContextPath()%>/view/nurses.jsp" target="iframe"><span
                   class="las la-angle-right"></span><span>Nurses</span></a></li>
-          <li><a href="<%=request.getContextPath()%>/view/admin.jsp" target="iframe"><span class="las la-angle-right"></span><span>System
+          <li><a href="<%=request.getContextPath()%>/userAdmin" target="iframe"><span class="las la-angle-right"></span><span>System
                                     Admins</span></a></li>
         </ul>
       </li>

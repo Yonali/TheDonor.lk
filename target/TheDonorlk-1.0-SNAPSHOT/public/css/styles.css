@@ -16,6 +16,19 @@
   font-family: "Poppins", sans-serif;
 }
 
+/*-----------------------Error msg----------------------------------------*/
+#error_message{
+  margin: auto;
+  color: var(--main-color);
+  text-align: center;
+  font-weight: bold;
+  font-size: smaller;
+  padding: 10px;
+  box-shadow: 0 8px 10px -10px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+}
+
 /* -------------------- Popup Modal --------------------------- */
 .fields input {
   width: 200px;
@@ -41,7 +54,7 @@
 
 .modal-content {
   position: fixed;
-  top: 100px;
+  top: 80px;
   background-color: #fefefe;
   width: 100%;
   -webkit-animation-name: slideIn;
@@ -99,7 +112,7 @@
   }
 
   to {
-    top: 100px;
+    top: 80px;
     opacity: 1;
   }
 }
@@ -110,7 +123,7 @@
   }
 
   to {
-    top: 100px;
+    top: 80px;
     opacity: 1;
   }
 }
@@ -428,9 +441,12 @@ main {
 }
 
 .card-header button,
-.modal-submit-button button {
+.modal-submit-button button,
+.card-header a,
+.modal-submit-button a,
+td a {
   background: var(--main-color);
-  width: 6rem;
+  /*width: 6rem;*/
   border-radius: 10px;
   color: #fff;
   font-size: 0.8rem;
@@ -440,8 +456,8 @@ main {
   cursor: pointer;
 }
 
-.card-header button:hover,
-.modal-submit-button button:hover {
+.card-header a:hover,
+.modal-submit-button a:hover, td a:hover {
   background-color: var(--accent-color);
 }
 

@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,8 +22,7 @@
                     <input type="search" placeholder="search here" />
                 </div>
                 <div class="buttons">
-                    <button>Delete</button>
-                    <button id="newBtn">New</button>
+                    <a href="<%=request.getContextPath()%>/userAdminShowNewForm">New</a>
                 </div>
             </div>
 
@@ -32,34 +33,21 @@
                         <tr>
                             <td>Admin ID</td>
                             <td>Username</td>
+                            <td>Actions</td>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>jamie_stark</td>
-
-                        </tr>
-                        <tr>
-                            <td>#DC102</td>
-                            <td>susan_helen</td>
-
-                        </tr>
-                        <tr>
-                            <td>#DC103</td>
-                            <td>audrey_b</td>
-
-                        </tr>
-                        <tr>
-                            <td>#DC104</td>
-                            <td>selena_009</td>
-
-                        </tr>
-                        <tr>
-                            <td>#DC105</td>
-                            <td>bob_mart</td>
-
-                        </tr>
+                        <c:forEach var="user" items="${listUser}">
+                            <tr>
+                                <td>
+                                    <c:out value="${user.id}" />
+                                </td>
+                                <td>
+                                    <c:out value="${user.username}" />
+                                </td>
+                                <td><a href="<%=request.getContextPath()%>/userAdminShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="userAdminDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -67,46 +55,6 @@
         </div>
     </div>
 </main>
-
-<!-- The Popup Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Admin Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Username</span>
-                        <input type="text" />
-                    </div>
-                    <br>
-                    <p>(Username should be a valid email address)</p>
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
-</div>
 
 </body>
 
