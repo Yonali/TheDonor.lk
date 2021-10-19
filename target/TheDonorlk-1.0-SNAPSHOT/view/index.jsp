@@ -66,7 +66,7 @@
         <a href="#"><span class="las la-user-circle"></span>
           <span>System Users</span></a>
         <ul class="user-show">
-          <li><a href="<%=request.getContextPath()%>/view/bloodbank.jsp" target="iframe"><span class="las la-angle-right"></span><span>Blood
+          <li><a href="<%=request.getContextPath()%>/userBloodBank" target="iframe"><span class="las la-angle-right"></span><span>Blood
                                     Banks</span></a></li>
           <li><a href="<%=request.getContextPath()%>/view/doctors.jsp" target="iframe"><span
                   class="las la-angle-right"></span><span>Doctors</span></a></li>

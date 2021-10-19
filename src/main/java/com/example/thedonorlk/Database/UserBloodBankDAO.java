@@ -28,7 +28,6 @@ public class UserBloodBankDAO {
 
     public boolean insertUser(UserBloodBankBean user) throws SQLException {
         boolean status = true;
-        //System.out.println(INSERT_USERS_SQL);
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getUsername());
             preparedStatement.setString(2, "Test");
@@ -53,8 +52,6 @@ public class UserBloodBankDAO {
             e.printStackTrace();
         }
 
-        //"INSERT INTO user_bloodbank (ID, Code, Name, Contact, Email, Address_Number, Address_Street, Address_City) " +
-        //            "VALUES (?, ?, ?, ?, ?, null, ?, ?)";
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL2)) {
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, user.getCode());

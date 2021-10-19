@@ -46,8 +46,8 @@ public class UserBloodBankUpdate extends HttpServlet {
         String contact = request.getParameter("contact");
         String add_street = request.getParameter("add_street");
         String add_city = request.getParameter("add_city");
-
         UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, contact, email, add_street, add_city);
+
         if (!userBloodBankDAO.validateUsername(user)) {
             if (userBloodBankDAO.updateUser(user)) {
                 response.sendRedirect("./userBloodBank");
@@ -57,6 +57,5 @@ public class UserBloodBankUpdate extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
             dispatcher.forward(request, response);
         }
-
     }
 }

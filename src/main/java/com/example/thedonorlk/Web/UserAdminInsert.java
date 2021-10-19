@@ -35,10 +35,18 @@ public class UserAdminInsert extends HttpServlet {
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException {
         String username = request.getParameter("username");
         UserAdminBean newUser = new UserAdminBean(0, username);
-        userDAO.insertUser(newUser);
-        response.sendRedirect("./userAdmin");
+
+        if (!userDAO.validateUsername(newUser)) {
+            if (userDAO.insertUser(newUser)) {
+                response.sendRedirect("./userAdmin");
+            }
+        } else {
+            request.setAttribute("error","Username already registered, Try a new username");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 }

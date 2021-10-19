@@ -34,11 +34,19 @@ public class UserAdminUpdate extends HttpServlet {
     }
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException {
+            throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String username = request.getParameter("username");
-        UserAdminBean book = new UserAdminBean(id, username);
-        userDAO.updateUser(book);
-        response.sendRedirect("./userAdmin");
+        UserAdminBean user = new UserAdminBean(id, username);
+
+        if (!userDAO.validateUsername(user)) {
+            if (userDAO.updateUser(user)) {
+                response.sendRedirect("./userAdmin");
+            }
+        } else {
+            request.setAttribute("error","Username already registered, Try a new username");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 }
