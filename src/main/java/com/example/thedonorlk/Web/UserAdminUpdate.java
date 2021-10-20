@@ -29,7 +29,10 @@ public class UserAdminUpdate extends HttpServlet {
         try {
             updateUser(request, response);
         } catch (SQLException ex) {
-            throw new ServletException(ex);
+            request.setAttribute("error","Something went wrong, Please Try Again");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
+            dispatcher.forward(request, response);
+            //throw new ServletException(ex);
         }
     }
 
@@ -45,7 +48,9 @@ public class UserAdminUpdate extends HttpServlet {
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
+            UserAdminBean existingUser = userDAO.selectUser(id);
             RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            request.setAttribute("user", existingUser);
             dispatcher.forward(request, response);
         }
     }

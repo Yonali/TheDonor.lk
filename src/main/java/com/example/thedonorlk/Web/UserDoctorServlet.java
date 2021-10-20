@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.UserAdminBean;
-import com.example.thedonorlk.Database.UserAdminDAO;
+import com.example.thedonorlk.Bean.UserBloodBankBean;
+import com.example.thedonorlk.Bean.UserDoctorBean;
+import com.example.thedonorlk.Database.UserBloodBankDAO;
+import com.example.thedonorlk.Database.UserDoctorDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +15,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/userAdminDelete")
-public class UserAdminDelete extends HttpServlet {
+@WebServlet("/userDoctor")
+public class UserDoctorServlet extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
-    private UserAdminDAO userDAO;
+    private UserDoctorDAO userDAO;
     public void init() {
-        userDAO = new UserAdminDAO();
+        userDAO = new UserDoctorDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,18 +29,20 @@ public class UserAdminDelete extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            deleteUser(request, response);
+            listUser(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
             dispatcher.forward(request, response);
-//            throw new ServletException(ex);
+            //throw new ServletException(ex);
         }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        userDAO.deleteUser(id);
-        response.sendRedirect("./userAdmin");
+    private void listUser(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        List <UserDoctorBean> listUser = userDAO.selectAllUsers();
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctors.jsp");
+        dispatcher.forward(request, response);
     }
 }

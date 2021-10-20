@@ -1,9 +1,9 @@
 package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.UserAdminBean;
 import com.example.thedonorlk.Bean.UserBloodBankBean;
-import com.example.thedonorlk.Database.UserAdminDAO;
+import com.example.thedonorlk.Bean.UserDoctorBean;
 import com.example.thedonorlk.Database.UserBloodBankDAO;
+import com.example.thedonorlk.Database.UserDoctorDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,14 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
-@WebServlet("/userBloodBankUpdate")
-public class UserBloodBankUpdate extends HttpServlet {
+@WebServlet("/userDoctorUpdate")
+public class UserDoctorUpdate extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
-    private UserBloodBankDAO userBloodBankDAO;
+    private UserDoctorDAO userDAO;
+    private UserBloodBankDAO bloodbankDAO;
     public void init() {
-        userBloodBankDAO = new UserBloodBankDAO();
+        userDAO = new UserDoctorDAO();
+        bloodbankDAO = new UserBloodBankDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,10 +34,10 @@ public class UserBloodBankUpdate extends HttpServlet {
         try {
             updateUser(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userBloodBank");
+            request.setAttribute("error",ex + " Something went wrong, Please Try Again");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
             dispatcher.forward(request, response);
-            //throw new ServletException(ex);
+//            throw new ServletException(ex);
         }
     }
 
@@ -41,22 +45,25 @@ public class UserBloodBankUpdate extends HttpServlet {
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String username = request.getParameter("username");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
         String contact = request.getParameter("contact");
-        String add_street = request.getParameter("add_street");
-        String add_city = request.getParameter("add_city");
-        UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, contact, email, add_street, add_city);
+        String nic = request.getParameter("nic");
+        String section = request.getParameter("section");
+        String bloodbank_code = request.getParameter("bloodbank_code");
+        UserDoctorBean user = new UserDoctorBean(id, username, first_name, last_name, contact, nic, username, section, bloodbank_code);
 
-        if (!userBloodBankDAO.validateUsername(user)) {
-            if (userBloodBankDAO.updateUser(user)) {
-                response.sendRedirect("./userBloodBank");
+        if (!userDAO.validateUsername(user)) {
+            if (userDAO.updateUser(user)) {
+                response.sendRedirect("./userDoctor");
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            UserBloodBankBean existingUser = userBloodBankDAO.selectUser(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
+            UserDoctorBean existingUser = userDAO.selectUser(id);
             request.setAttribute("user", existingUser);
+            List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
+            request.setAttribute("listBloodBank", listBloodBank);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctorForm.jsp");
             dispatcher.forward(request, response);
         }
     }

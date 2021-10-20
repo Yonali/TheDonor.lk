@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.UserAdminBean;
-import com.example.thedonorlk.Database.UserAdminDAO;
+import com.example.thedonorlk.Bean.UserBloodBankBean;
+import com.example.thedonorlk.Bean.UserDoctorBean;
+import com.example.thedonorlk.Database.UserBloodBankDAO;
+import com.example.thedonorlk.Database.UserDoctorDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,15 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/userAdminInsert")
-public class UserAdminInsert extends HttpServlet {
+@WebServlet("/userDoctorInsert")
+public class UserDoctorInsert extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
 
-    private UserAdminDAO userDAO;
+    private UserDoctorDAO userDAO;
     public void init() {
-        userDAO = new UserAdminDAO();
+        userDAO = new UserDoctorDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,24 +32,30 @@ public class UserAdminInsert extends HttpServlet {
             insertUser(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
             dispatcher.forward(request, response);
-//            throw new ServletException(ex);
+            //throw new ServletException(ex);
         }
     }
 
     private void insertUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         String username = request.getParameter("username");
-        UserAdminBean newUser = new UserAdminBean(0, username);
+        String first_name = request.getParameter("first_name");
+        String last_name = request.getParameter("last_name");
+        String contact = request.getParameter("contact");
+        String nic = request.getParameter("nic");
+        String section = request.getParameter("section");
+        String bloodbank_code = request.getParameter("bloodbank_code");
+        UserDoctorBean newUser = new UserDoctorBean(0, username, first_name, last_name, contact, nic, username, section, bloodbank_code);
 
         if (!userDAO.validateUsername(newUser)) {
             if (userDAO.insertUser(newUser)) {
-                response.sendRedirect("./userAdmin");
+                response.sendRedirect("./userDoctor");
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctorForm.jsp");
             dispatcher.forward(request, response);
         }
     }
