@@ -43,7 +43,7 @@
                             <td>Donor ID</td>
                             <td>Post ID</td>
                             <td>Reported Date</td>
-<%--                            <td>Reason</td>--%>
+                            <td>Reason</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn">Remark</button>
@@ -61,7 +61,7 @@
                             <td>#D101</td>
                             <td>#P301</td>
                             <td>21/09/2021</td>
-<%--                            <td>Reason here</td>--%>
+                            <td>Reason goes here</td>
                             <td>
                                 <span class="status Removed">Removed</span>
 
@@ -71,7 +71,7 @@
                             <td>#D102</td>
                             <td>#P302</td>
                             <td>16/09/2021</td>
-<%--                            <td>Reason here</td>--%>
+                            <td>Reason goes here</td>
                             <td>
                                 <span class="status Removed">Removed</span>
 
@@ -81,7 +81,7 @@
                             <td>#D103</td>
                             <td>#P303</td>
                             <td>21/08/2021</td>
-<%--                            <td>Reason here</td>--%>
+                            <td>Reason goes here</td>
                             <td>
                                 <span class="status Decline">Decline</span>
 
@@ -91,7 +91,7 @@
                             <td>#D104</td>
                             <td>#P304</td>
                             <td>18/08/2021</td>
-<%--                            <td>Reason here</td>--%>
+                            <td>Reason goes here</td>
                             <td>
                                 <span class="status Decline">Decline</span>
                             </td>
@@ -100,7 +100,7 @@
                             <td>#D105</td>
                             <td>#P305</td>
                             <td>15/08/2021</td>
-<%--                            <td>Reason here</td>--%>
+                            <td>Reason goes here</td>
                             <td>
                                 <span class="status Pending">Pending</span>
                             </td>
