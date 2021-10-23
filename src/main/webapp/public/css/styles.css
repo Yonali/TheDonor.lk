@@ -538,7 +538,17 @@ tr td:last-child {
   background: orange;
   color: white;
 }
-
+.status.Decline {
+  background: #18720f;
+  color: white;
+}.status.Removed {
+   background: #be1919;
+   color: white;
+ }
+.status.Pending {
+   background: #e8e535;
+   color: white;
+ }
 .table-responsive {
   width: 100%;
   overflow-x: auto;

@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TheDonor.lk</title>
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 
   <script src="<%=request.getContextPath()%>/public/scripts/scripts.js"></script>
@@ -75,6 +76,10 @@
           <li><a href="<%=request.getContextPath()%>/userAdmin" target="iframe"><span class="las la-angle-right"></span><span>System
                                     Admins</span></a></li>
         </ul>
+      </li>
+      <li>
+        <a href="<%=request.getContextPath()%>/view/violation_Report.jsp" target="iframe"><span class="fa fa-exclamation-triangle"></span>
+          <span>Violation Report</span></a>
       </li>
       <!-- <li>
           <a href=""><span class="las la-cog"></span>
