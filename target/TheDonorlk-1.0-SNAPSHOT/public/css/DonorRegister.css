@@ -9,7 +9,7 @@
 
 body{
     margin:0;
-    background-color: #D3AAAA;
+    background-color: #750605;
     background-image: linear-gradient(to right, #360000, #750605);
 }
 
@@ -77,6 +77,8 @@ select {
 
 .logo{
     margin: auto;
+    align-content: center;
+    justify-content: center;
     /* width: 50%;
     padding: 10px; */
 
@@ -221,6 +223,9 @@ h4{
 /*------------------------------------------------------------------
 [ Mobile Responsive ] */
 
+
+
+
 @media (max-width: 768px) {
     .inter_lcontainer {
         width: 350px;
@@ -234,6 +239,7 @@ h4{
         padding: 20px;
     }
 
+
 }
 
 @media (max-width:600px){
@@ -241,7 +247,7 @@ h4{
         grid-template-areas: "right""left";
     }
     .maincontainer{
-        background-color: #D3AAAA;
+        background-color: #750605;
         height: max-content;
     }
     .inter_lcontainer {
@@ -249,8 +255,40 @@ h4{
     }
     .inter_rcontainer {
         margin-left: -40px;
+        /*width: 250px;*/
+        align-content: center;
+        justify-content: center;
     }
+
+    .inputf1{
+        width: 255px;
+        margin-left: 20px;
+    }
+
+    .inputf1 input{
+        width: 150px;
+        font-size: 13px;
+    }
+
+    h3{
+        font-size: 11px;
+    }
+
+    #Login{
+        width: 80px;
+        margin-right: 60px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    .logo{
+        width: 120px;
+        align-content: center;
+        justify-content: center;
+    }
+
 }
+
 
 /*------------------------------------------------------------------
 */
