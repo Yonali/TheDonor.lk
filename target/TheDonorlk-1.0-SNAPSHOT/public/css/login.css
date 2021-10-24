@@ -331,14 +331,14 @@ h4{
     margin: 5px;
     cursor: pointer;
 }
-/* @-webkit-keyframes slideIn {
+@-webkit-keyframes slideIn {
   from {
     top: -300px;
     opacity: 0;
   }
 
   to {
-    top: 100px;
+    top: 120px;
     opacity: 1;
   }
 }
@@ -349,7 +349,7 @@ h4{
   }
 
   to {
-    top: 100px;
+    top: 120px;
     opacity: 1;
   }
 }
@@ -370,7 +370,7 @@ h4{
   to {
     opacity: 1;
   }
-} */
+}
 
 /* ----------------------------------------------- */
 /*------------------------------------- form ----------------------------------*/

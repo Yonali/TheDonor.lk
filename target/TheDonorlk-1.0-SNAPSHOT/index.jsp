@@ -18,9 +18,9 @@
         <div class="logo"></div>
         <div class="nav-links">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a href="<%=request.getContextPath()%>">Home</a></li>
+                <li><a href="<%=request.getContextPath()%>/view/about_us.jsp">About</a></li>
+                <li><a href="<%=request.getContextPath()%>/view/contact_us.jsp">Contact</a></li>
             </ul>
         </div>
     </nav>
