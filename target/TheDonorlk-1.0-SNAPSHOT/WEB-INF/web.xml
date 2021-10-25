@@ -3,4 +3,28 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <servlet>
+<<<<<<< HEAD
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.example.thedonorlk.Web.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
+
+=======
+        <servlet-name>DonorRegServlet</servlet-name>
+        <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+
+
+>>>>>>> register
 </web-app>
