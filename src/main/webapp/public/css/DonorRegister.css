@@ -1,14 +1,15 @@
-/*
-Center element CSS {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+:root {
+    --main-color: #750605;
+    --accent-color: #360000;
+    --div-color: #d62828;
+    --sub-color: #dd2f6e;
+    --text-gray: #555f6b;
 }
-*/
 
 body{
     margin:0;
-    background-color: #D3AAAA;
+    background-color: #750605;
     background-image: linear-gradient(to right, #360000, #750605);
 }
 
@@ -30,12 +31,27 @@ body{
     padding: 0px;
     width:1000px;
     background-color: #FFFFFF;
-    height: 600px;
+    height: 620px;
     align-items: center;
     border: 0px;
-    border-radius: 25px;
+    border-radius: 15px;
     margin: 20px;
+    padding: 30px;
 }
+
+/*********************************************************/
+
+select {
+    background-color: transparent;
+    border: none;
+    width: 25%;
+    cursor: pointer;
+    line-height: inherit;
+    z-index: 1;
+}
+
+/*********************************************************/
+
 .inter_lcontainer{
     display: flex;
     flex-direction: column;
@@ -47,10 +63,25 @@ body{
     grid-area: right;
 }
 
+#error_message{
+    margin: auto;
+    color: var(--main-color);
+    text-align: center;
+    font-weight: bold;
+    font-size: smaller;
+    padding: 10px;
+    box-shadow: 0 8px 10px -10px;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+
 .logo{
     margin: auto;
-    width: 50%;
-    padding: 10px;
+    align-content: center;
+    justify-content: center;
+    /* width: 50%;
+    padding: 10px; */
+
 }
 .inputf1 i{
     padding-left: 10px;
@@ -68,42 +99,54 @@ body{
     background-color: #EAE5E5;
     margin-left: 60px;
     background: transparent;
+
+}
+.inputf1 label {
+    font-weight: bold;
+    font-size: small;
+    color: rgba(59, 59, 59, 0.753);
+}
+.inputf2{
+    padding: 5px;
+    padding-left: 10px;
+    width: 330px;
+    margin-bottom: 15px;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 2px solid #8f8787;
+    background-color: #EAE5E5;
+    margin-left: 60px;
+    background: transparent;
 }
 .input-fields{
     margin-bottom: 25px;
-    height: 60px;
+    height: 170px;
 }
-.uname{
+.input{
     border: 0px;
     outline: none;
-    width: 300px;
+    width: 80%;
     font-weight: bold;
-}
-.pwd{
-    border: 0px;
-    outline: none;
-    width: 300px;
-    font-weight: bold;
-}
-.remember{
-    margin-left: 60px;
-    margin-top: 20px;
-    height: 40px;
-    font-weight: bold;
-    font-size: smaller;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.chech-box{
-    margin: 3px 10px 3px 20px;
-
-}
-.remember a{
-    margin-left: 120px;
-    text-decoration: none;
-    color: #0078c8;
+    margin-left: 10px;
 }
 
-#Login{
+.inputf1 #dob {
+    width: auto;
+    margin-left: -20px;
+    flex-direction: row-reverse;
+    gap: 20px;
+}
+
+.btn{
+    border: none;
+    cursor: pointer;
+    background:none;
+    margin-top: 5px;
+}
+
+
+#Signup{
     float:right;
     height: 40px;
     width: 120px;
@@ -114,11 +157,12 @@ body{
     padding-right: 20px;
     border-radius: 15px;
     margin-right: 70px;
+    margin-top: 175px;
     font-weight: bold;
     transition: ease-in-out 0.1s;
     cursor: pointer;
 }
-#Login:hover{
+#Signup:hover{
     background-color: white;
     color: rgb(0, 120, 200);
     box-shadow: 0 0 3px 1px rgb(115, 158, 250);
@@ -131,24 +175,16 @@ h4{
 }
 .SocialM{
     display: grid;
-    padding-left: 10px;
-    padding-right: 10px;
-
-    /* grid-template-rows: 600px;
-	grid-template-columns: 1fr 1fr; */
+    justify-content: center;
 }
 .SocialMediea{
     display: flex;
     margin-bottom: 15px;
-    width: 370px;
     height: 40px;
-    font-weight: bold;
-    padding-top: 13px;
-    /* padding: auto; */
 }
 .SocialMediea i{
     padding-right: 10px;
-    margin-left: 100px;
+    margin-left: 90px;
     height: 20px;
     width: 20px;
 }
@@ -184,20 +220,11 @@ h4{
     box-shadow: 0 0 3px 1px #e66868;
 }
 
-.bottom{
-    margin-left: 60px;
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: smaller;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-.bottom a{
-    text-decoration: none;
-    color: #0078c8;
-}
-
 /*------------------------------------------------------------------
 [ Mobile Responsive ] */
+
+
+
 
 @media (max-width: 768px) {
     .inter_lcontainer {
@@ -212,6 +239,7 @@ h4{
         padding: 20px;
     }
 
+
 }
 
 @media (max-width:600px){
@@ -219,7 +247,7 @@ h4{
         grid-template-areas: "right""left";
     }
     .maincontainer{
-        background-color: #D3AAAA;
+        background-color: #750605;
         height: max-content;
     }
     .inter_lcontainer {
@@ -227,8 +255,40 @@ h4{
     }
     .inter_rcontainer {
         margin-left: -40px;
+        /*width: 250px;*/
+        align-content: center;
+        justify-content: center;
     }
+
+    .inputf1{
+        width: 255px;
+        margin-left: 20px;
+    }
+
+    .inputf1 input{
+        width: 150px;
+        font-size: 13px;
+    }
+
+    h3{
+        font-size: 11px;
+    }
+
+    #Login{
+        width: 80px;
+        margin-right: 60px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+    }
+    .logo{
+        width: 120px;
+        align-content: center;
+        justify-content: center;
+    }
+
 }
+
 
 /*------------------------------------------------------------------
 */
