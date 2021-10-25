@@ -1,24 +1,23 @@
 var modal = document.getElementById("myModal");
-var newbtn = document.getElementById("newbtn");
-var editbtn = document.getElementsByClassName("editBtn");
-var span = document.getElementsByClassName("close")[0];
+var newbtn = document.getElementById("newBtn");
+var editbtn = document.getElementById("editBtn");
+var span = document.getElementsByClassName("close-popup")[0];
+var status_input = document.getElementById("status");
 
 if (newbtn != null) {
     newbtn.onclick = function () {
         modal.style.display = "block";
+        status_input.style.display = "none";
     }
 }
-for (var i = 0; i < editbtn.length; i++) {
-    if (editbtn[i] != null) {
-        editbtn[i].onclick = function () {
-            modal.style.display = "block";
-        }
+if (editbtn != null) {
+    editbtn.onclick = function () {
+        modal.style.display = "block";
+        status_input.style.display = "flex";
     }
 }
-if (span != null) {
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+span.onclick = function () {
+    modal.style.display = "none";
 }
 window.onclick = function (event) {
     if (event.target == modal) {
@@ -26,90 +25,84 @@ window.onclick = function (event) {
     }
 }
 
-// --------------------comment box---in profile-------------
+/************************* */
 
-var btn2 = document.getElementById("comments_box2");
-var modal2 = document.getElementById("myModal2");
-var span2 = document.getElementsByClassName("close2")[0];
+var modalparent = document.getElementsByClassName("modal_multi");
+var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
+var span_close_multi = document.getElementsByClassName("close_multi");
 
-// --------------------added-------------
+function setDataIndex() {
 
-btn2.onclick = function () {
-    modal2.style.display = "block";
-}
-span2.onclick = function () {
-    modal2.style.display = "none";
-}
-window.onclick = function (event) {
-    if (event.target == modal2) {
-        modal2.style.display = "none";
+    for (i = 0; i < modal_btn_multi.length; i++) {
+        modal_btn_multi[i].setAttribute('data-index', i);
+        modalparent[i].setAttribute('data-index', i);
+        span_close_multi[i].setAttribute('data-index', i);
     }
 }
-// --------------------added-------------
 
-// --------------------report popup modal-------------
+for (i = 0; i < modal_btn_multi.length; i++) {
+    modal_btn_multi[i].onclick = function () {
+        var ElementIndex = this.getAttribute('data-index');
+        modalparent[ElementIndex].style.display = "block";
+    };
 
-// var btn4 = document.getElementById("Report");
-// var modal4 = document.getElementById("myModal4");
-// var span4 = document.getElementsByClassName("close4")[0];
+    // When the user clicks on <span> (x), close the modal
+    span_close_multi[i].onclick = function () {
+        var ElementIndex = this.getAttribute('data-index');
+        modalparent[ElementIndex].style.display = "none";
+    };
+
+}
+
+window.onload = function () {
+
+    setDataIndex();
+};
+
+window.onclick = function (event) {
+    if (event.target === modalparent[event.target.getAttribute('data-index')]) {
+        modalparent[event.target.getAttribute('data-index')].style.display = "none";
+    }
+
+    // // OLD CODE
+    // if (event.target === modal) {
+    //     modal.style.display = "none";
+    // }
+};
 
 
+// var stockmodal_edit = document.getElementById("editModal");
+// var editBtn = document.getElementById("editBtn");
+// var span = document.getElementsByClassName("close-popup")[0];
 
-// btn4.onclick = function () {
-//     modal4.style.display = "block";
+// if (editBtn != null) {
+//     editBtn.onclick = function () {
+//         stockmodal_edit.style.display = "block";
+//     }
 // }
-// span4.onclick = function () {
-//     modal4.style.display = "none";
+// span.onclick = function () {
+//     stockmodal_edit.style.display = "none";
 // }
 // window.onclick = function (event) {
-//     if (event.target == modal4) {
-//         modal4.style.display = "none";
+//     if (event.target == stockmodal_edit) {
+//         stockmodal_edit.style.display = "none";
 //     }
 // }
 
-// --------------------show more-----------------
+// var stockmodal_transfer = document.getElementById("transferModal");
+// var transferBtn = document.getElementById("transferBtn");
+// var span_stockmodal_transfer = document.getElementsByClassName("close-popup")[0];
 
-function appShowMore() {
-    var moreText = document.getElementsByClassName("container_more");
-    var btnText = document.getElementById("appShowMoreBtn");
-
-    for (var i = 0; i < moreText.length; i++) {
-        if (moreText[i].style.display !== "none") {
-            btnText.innerHTML = "Show more";
-            moreText[i].style.display = "none";
-        } else {
-            btnText.innerHTML = "Show less";
-            moreText[i].style.display = "grid";
-        }
-    }
-}
-
-function progressShowMore() {
-    var moreText = document.getElementsByClassName("container_progress_more");
-    var btnText = document.getElementById("progressShowMoreBtn");
-
-    for (var i = 0; i < moreText.length; i++) {
-        if (moreText[i].style.display !== "none") {
-            btnText.innerHTML = "Show more";
-            moreText[i].style.display = "none";
-        } else {
-            btnText.innerHTML = "Show less";
-            moreText[i].style.display = "grid";
-        }
-    }
-}
-
-function upcomingShowMore() {
-    var moreText = document.getElementsByClassName("container_upcoming_more");
-    var btnText = document.getElementById("upcomingShowMoreBtn");
-
-    for (var i = 0; i < moreText.length; i++) {
-        if (moreText[i].style.display !== "none") {
-            btnText.innerHTML = "Show more";
-            moreText[i].style.display = "none";
-        } else {
-            btnText.innerHTML = "Show less";
-            moreText[i].style.display = "grid";
-        }
-    }
-}
+// if (transferBtn != null) {
+//     transferBtn.onclick = function () {
+//         stockmodal_transfer.style.display = "block";
+//     }
+// }
+// // span_stockmodal_transfer.onclick = function () {
+// //     stockmodal_transfer.style.display = "none";
+// // }
+// window.onclick = function (event) {
+//     if (event.target == stockmodal_transfer) {
+//         stockmodal_transfer.style.display = "none";
+//     }
+// }
