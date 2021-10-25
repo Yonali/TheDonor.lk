@@ -78,6 +78,7 @@
                             <td><a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
                         </tr>
                         </c:forEach>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -71,7 +71,7 @@
                                     Banks</span></a></li>
           <li><a href="<%=request.getContextPath()%>/userDoctor" target="iframe"><span
                   class="las la-angle-right"></span><span>Doctors</span></a></li>
-          <li><a href="<%=request.getContextPath()%>/view/nurses.jsp" target="iframe"><span
+          <li><a href="<%=request.getContextPath()%>/userNurse" target="iframe"><span
                   class="las la-angle-right"></span><span>Nurses</span></a></li>
           <li><a href="<%=request.getContextPath()%>/userAdmin" target="iframe"><span class="las la-angle-right"></span><span>System
                                     Admins</span></a></li>
