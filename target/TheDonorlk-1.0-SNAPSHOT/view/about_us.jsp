@@ -53,7 +53,7 @@
     <a onclick="topFunction()" id="myBtn" title="Go to top">
         <i class="fa fa-arrow-up" aria-hidden="true"></i>
     </a>
-    <script src="../public/js/backtotop.js"></script>
+    <script src="../public/scripts/backtotop.js"></script>
 </div>
 <!-- --------------------back to up------------------------------------------------ -->
 
