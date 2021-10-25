@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="./datepicker.css"/>
     <script src="./datepicker.js"></script>
-    <script src="<%=request.getContextPath()%>/public/js/DonorRegister.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/DonorRegister.js"></script>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
