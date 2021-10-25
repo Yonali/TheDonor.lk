@@ -81,14 +81,6 @@
         <a href="<%=request.getContextPath()%>/view/violation_Report.jsp" target="iframe"><span class="fa fa-exclamation-triangle"></span>
           <span>Violation Report</span></a>
       </li>
-      <!-- <li>
-          <a href=""><span class="las la-cog"></span>
-              <span>Settings</span></a>
-      </li>
-      <li>
-          <a href=""><span class="las la-sign-out-alt"></span>
-              <span>Logout</span></a>
-      </li> -->
     </ul>
   </div>
 </div>
@@ -96,7 +88,7 @@
 <div class="main-content">
   <header>
     <h2>
-      <label for="Test">
+      <label>
         <span class="las la-bars"></span>
       </label>
       NBTS Narahenpita

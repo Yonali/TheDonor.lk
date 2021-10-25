@@ -8,6 +8,6 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="<%=request.getContextPath()%>/view/index.jsp">Hello Servlet</a>
+<a href="<%=request.getContextPath()%>/view/index_dashboard.jsp">Hello Servlet</a>
 </body>
 </html>
