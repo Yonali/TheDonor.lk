@@ -108,6 +108,13 @@
   padding-top: 30px;
 }
 
+.bottom-full {
+  width: 100%;
+  border-radius: 0px !important;
+  margin: 0px !important;
+  padding: 10px !important;
+}
+
 @-webkit-keyframes slideIn {
   from {
     top: -300px;
@@ -515,27 +522,23 @@ tr td:last-child {
 }
 
 .status.open {
-  background-color: rebeccapurple;
+  background-color: #7d3c98;
   color: white;
 }
-
 .status.progress {
-  background: greenyellow;
-  color: black;
+  background: #27ae60;
+  color: white;
 }
-
 .status.close {
   background: red;
   color: white;
 }
-
 .status.consulted {
-  background: plum;
+  background: #2471a3;
   color: white;
 }
-
 .status.cancelled {
-  background: orange;
+  background: #e67e22;
   color: white;
 }
 .status.Decline {
@@ -549,6 +552,7 @@ tr td:last-child {
    background: #e8e535;
    color: white;
  }
+
 .table-responsive {
   width: 100%;
   overflow-x: auto;

@@ -23,7 +23,6 @@
         <div class="buttons">
           <button>Accept</button>
           <button>Decline</button>
-          <button id="newBtn">Create</button>
         </div>
       </div>
       <div class="card-body">
