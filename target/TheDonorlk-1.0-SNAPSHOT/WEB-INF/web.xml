@@ -5,7 +5,6 @@
          version="4.0">
 
     <servlet>
-<<<<<<< HEAD
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.example.thedonorlk.Web.LoginServlet</servlet-class>
     </servlet>
@@ -13,9 +12,7 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
-
-=======
+    <servlet>
         <servlet-name>DonorRegServlet</servlet-name>
         <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
     </servlet>
@@ -23,8 +20,4 @@
         <servlet-name>DonorRegServlet</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-
-
-
->>>>>>> register
 </web-app>

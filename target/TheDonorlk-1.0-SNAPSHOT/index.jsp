@@ -13,7 +13,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
 <div class="header">
     <nav>
         <div class="logo"></div>
@@ -115,16 +114,6 @@
 <div class="copyright">
     <p>Copyright © 2021 TheDonor.lk | Project by University of Colombo School of Computing</p>
 </div>
-=======
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<<<<<<< HEAD
-<a href="<%=request.getContextPath()%>/view/index.jsp">Hello Servlet</a>
-=======
-<a href="<%=request.getContextPath()%>/view/DonorRegister.jsp">Hello Servlet</a>
->>>>>>> register
->>>>>>> dev
 </body>
 
 </html>
