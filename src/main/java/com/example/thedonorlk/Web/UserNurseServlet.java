@@ -40,7 +40,7 @@ public class UserNurseServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List <UserNurseBean> listUser = userDAO.selectAllUsers();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/nurses.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/nurses.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -330,6 +330,25 @@ main {
   margin-left: 320px;
 }
 
+.card-details {
+  margin-left: auto;
+  display: grid;
+  height: fit-content;
+  width: max-content;
+}
+
+.card-details p {
+  color: white;
+  background-color: var(--main-color);
+  text-align: center;
+  padding: 10px 0px 10px 0px;
+}
+
+.card-details div {
+  padding: 5px 60px 5px 60px;
+  line-height: 2;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -420,6 +439,13 @@ main {
 .card {
   background: #fff;
   border-radius: 2px;
+}
+
+.card-bb {
+  background: #fff;
+  border-radius: 2px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card-header,

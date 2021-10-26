@@ -18,9 +18,9 @@
         <div class="logo"></div>
         <div class="nav-links">
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="">Contact</a></li>
+                <li><a href="<%=request.getContextPath()%>">Home</a></li>
+                <li><a href="<%=request.getContextPath()%>/about_us.jsp">About</a></li>
+                <li><a href="<%=request.getContextPath()%>/contact_us.jsp">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -43,13 +43,13 @@
             <div class="social-media">
                 <div class="icon">
                     <h4>Login</h4>
-                    <a href="<%=request.getContextPath()%>/view/login.jsp">
+                    <a href="<%=request.getContextPath()%>/login.jsp">
                         <img src="<%=request.getContextPath()%>/public/images/login.png">
                     </a>
                 </div>
                 <div class="icon">
                     <h4>Register</h4>
-                    <a href="<%=request.getContextPath()%>/view/DonorRegister.jsp">
+                    <a href="<%=request.getContextPath()%>/DonorRegister.jsp">
                         <img src="<%=request.getContextPath()%>/public/images/register.png">
                     </a>
                 </div>

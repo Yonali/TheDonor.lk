@@ -38,7 +38,7 @@ public class UserAdminServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List < UserAdminBean > listUser = userDAO.selectAllUsers();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/admin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/admin.jsp");
         dispatcher.forward(request, response);
     }
 }

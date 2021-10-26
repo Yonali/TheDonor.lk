@@ -42,13 +42,13 @@ public class LoginServlet extends HttpServlet {
 
             // Check user role and redirect accordingly
             if (role.equals("admin")) {
-                response.sendRedirect("./view/dashboard.jsp");
+                response.sendRedirect("./view/non_donor/dashboard_index.jsp");
             } else if (role.equals("donor")) {
-                response.sendRedirect("./view/timeline.jsp");
+                response.sendRedirect("./view/donor/timeline.jsp");
             }
         } else {
             request.setAttribute("error","Incorrect Username or Password");
-            request.getRequestDispatcher("./view/login.jsp").forward(request, response);
+            request.getRequestDispatcher("./login.jsp").forward(request, response);
         }
     }
 }

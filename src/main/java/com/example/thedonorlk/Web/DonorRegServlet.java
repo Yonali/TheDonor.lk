@@ -43,10 +43,10 @@ public class DonorRegServlet extends HttpServlet {
 
         if (pwd.length() < 8) {
             request.setAttribute("error","Password should be Minimum 8 Characters long");
-            request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+            request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
         } else if (!hash_pwd.equals(hash_cnfrm_pwd)) {
             request.setAttribute("error","Passwords do not match, Please try again");
-            request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+            request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
         } else {
             if (!donorRegDAO.validateEmail(donorRegBean)) {
                 if (donorRegDAO.addDonorReg(donorRegBean)) {
@@ -54,14 +54,14 @@ public class DonorRegServlet extends HttpServlet {
                     session.setAttribute("username",donorRegBean.getEmail());
                     session.setAttribute("role", "Donor");
 
-                    response.sendRedirect("./view/timeline.jsp");
+                    response.sendRedirect("./view/donor/timeline.jsp");
                 } else {
                     request.setAttribute("error","Something went wrong, Please Try Again");
-                    request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+                    request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
                 }
             } else {
                 request.setAttribute("error","Email already registered, Please try Login");
-                request.getRequestDispatcher("./view/DonorRegister.jsp").forward(request, response);
+                request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
             }
 
         }

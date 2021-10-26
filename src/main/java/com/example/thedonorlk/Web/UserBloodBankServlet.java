@@ -42,7 +42,7 @@ public class UserBloodBankServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List <UserBloodBankBean> listUser = userBloodBankDAO.selectAllUsers();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbank.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/bloodbank.jsp");
         dispatcher.forward(request, response);
     }
 }
