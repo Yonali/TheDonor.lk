@@ -515,12 +515,12 @@ tr td:last-child {
 }
 
 .status.open {
-  background-color: rebeccapurple;
+  background-color: #7d3c98;
   color: white;
 }
 
 .status.progress {
-  background: greenyellow;
+  background: #27ae60;
   color: black;
 }
 
@@ -530,12 +530,12 @@ tr td:last-child {
 }
 
 .status.consulted {
-  background: plum;
+  background: #2471a3;
   color: white;
 }
 
 .status.cancelled {
-  background: orange;
+  background: #e67e22;
   color: white;
 }
 .status.Decline {

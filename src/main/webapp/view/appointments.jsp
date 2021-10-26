@@ -23,7 +23,6 @@
         <div class="buttons">
           <button>Accept</button>
           <button>Decline</button>
-          <button id="newBtn">Create</button>
         </div>
       </div>
       <div class="card-body">
@@ -155,7 +154,7 @@
 
   <!-- IMPORTANT -->
   <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-  <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
+  <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
 </div>
 
 </body>

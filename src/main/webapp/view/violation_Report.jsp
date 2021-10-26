@@ -185,7 +185,7 @@
 
 <%--    <!-- IMPORTANT -->--%>
 <%--    <!-- Javascript file with popup modal function should be called here just after the popup modal -->--%>
-<%--    <script src="scripts/popup_modal.js"></script>--%>
+<%--    <script src="scripts/popup_modal_dashboard.js"></script>--%>
 <%--</div>--%>
 
 </body>
