@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+<<<<<<< HEAD
 
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
@@ -12,6 +13,14 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-
-
+    <servlet>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+=======
+>>>>>>> 6eb30bb14b0ef8697f30c93b02144da5c363236a
 </web-app>

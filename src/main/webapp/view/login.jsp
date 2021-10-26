@@ -129,14 +129,6 @@
 </div>
 
 
-
-
-
-
-
-
-
-
 <!-- --------------------New password-------------------------------------------------------- -->
 
 
@@ -187,11 +179,6 @@
     <!-- Javascript file with popup modal function should be called here just after the popup modal -->
     <script src="../public/js/forgotpwd_popup.js"></script>
 </div>
-
-
-
-
-
 
 </body>
 </html>
