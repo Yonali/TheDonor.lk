@@ -5,7 +5,6 @@
          version="4.0">
 
     <servlet>
-<<<<<<< HEAD
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.example.thedonorlk.Web.LoginServlet</servlet-class>
     </servlet>
@@ -15,25 +14,4 @@
     </servlet-mapping>
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
-=======
-        <servlet-name>DonorRegServlet</servlet-name>
-        <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DonorRegServlet</servlet-name>
-        <url-pattern>/register</url-pattern>
-    </servlet-mapping>
-
-
-
->>>>>>> register
-<<<<<<< HEAD
->>>>>>> parent of 09bc0a9 (Bug fixes)
-=======
->>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
 </web-app>
