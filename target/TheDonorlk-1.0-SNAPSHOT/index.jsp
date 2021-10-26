@@ -13,7 +13,14 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
+=======
+<h1><%= "Hello World!" %>
+</h1>
+<br/>
+<a href="<%=request.getContextPath()%>/view/index.jsp">Hello Servlet</a>
+>>>>>>> parent of 6b9d02d (Seperated popup_modal js file for dashboard)
 </body>
 
 </html>
