@@ -4,6 +4,11 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/mainlogin.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view" />
+<<<<<<< HEAD
+=======
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/violation_Report.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/timeline.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view" />
+>>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
       </map>
     </option>
   </component>

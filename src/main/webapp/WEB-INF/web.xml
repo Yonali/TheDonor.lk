@@ -12,6 +12,17 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+<<<<<<< HEAD
 
 
+=======
+    <servlet>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+>>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
 </web-app>

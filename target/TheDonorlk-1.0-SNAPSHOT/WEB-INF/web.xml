@@ -16,7 +16,10 @@
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
 =======
         <servlet-name>DonorRegServlet</servlet-name>
         <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
@@ -29,5 +32,8 @@
 
 
 >>>>>>> register
+<<<<<<< HEAD
 >>>>>>> parent of 09bc0a9 (Bug fixes)
+=======
+>>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
 </web-app>
