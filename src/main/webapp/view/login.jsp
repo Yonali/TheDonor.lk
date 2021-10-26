@@ -14,10 +14,14 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Login</title>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/login.css">
 =======
     <link rel="stylesheet" href="../public/css/login.css">
 >>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
+=======
+    <link rel="stylesheet" href="../public/css/login.css">
+>>>>>>> parent of 0ffce7c (CSS loading issue fixed)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -27,19 +31,27 @@
     <div class="subcontainer">
         <div class="inter_lcontainer">
 <<<<<<< HEAD
+<<<<<<< HEAD
             <img src="<%=request.getContextPath()%>/public/images/ml1.png" height="580px" width="500px" id="ml1">
 =======
             <img src="../public/images/ml1.png" height="580px" width="500px" id="ml1">
 >>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
+=======
+            <img src="../public/images/ml1.png" height="580px" width="500px" id="ml1">
+>>>>>>> parent of 0ffce7c (CSS loading issue fixed)
         </div>
 
         <div class="inter_rcontainer">
             <div class="logo">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <img src="<%=request.getContextPath()%>/public/images/Logo.png" height="100px">
 =======
                 <img src="../public/images/Logo.png" height="100px">
 >>>>>>> parent of 6eb30bb (Merge pull request #6 from Yonali/dashboard)
+=======
+                <img src="../public/images/Logo.png" height="100px">
+>>>>>>> parent of 0ffce7c (CSS loading issue fixed)
             </div>
 
             <%
