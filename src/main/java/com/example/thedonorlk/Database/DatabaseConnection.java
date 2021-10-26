@@ -8,7 +8,7 @@ public class DatabaseConnection {
     public static Connection initializeDatabase() {
 
         String dbDriver = "com.mysql.cj.jdbc.Driver";
-        String dbURL = "jdbc:mysql://localhost:3306/thedonor?allowMultiQueries=true";
+        String dbURL = "jdbc:mysql://localhost:3306/thedonor";
 
         String dbUsername = "root";
         String dbPassword = "";
