@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 mybutton = document.getElementById("myBtn");
 
         
@@ -14,3 +15,9 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0; 
 }
+=======
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+}
+>>>>>>> 6eb30bb14b0ef8697f30c93b02144da5c363236a

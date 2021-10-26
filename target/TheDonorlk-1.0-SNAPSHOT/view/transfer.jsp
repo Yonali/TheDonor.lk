@@ -190,7 +190,7 @@
 
   <!-- IMPORTANT -->
   <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-  <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
+  <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
 </div>
 
 </body>
