@@ -5,6 +5,7 @@
          version="4.0">
 
     <servlet>
+<<<<<<< HEAD
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>com.example.thedonorlk.Web.LoginServlet</servlet-class>
     </servlet>
@@ -14,4 +15,19 @@
     </servlet-mapping>
 
 
+<<<<<<< HEAD
+=======
+=======
+        <servlet-name>DonorRegServlet</servlet-name>
+        <servlet-class>com.example.thedonorlk.Web.DonorRegServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DonorRegServlet</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+
+
+>>>>>>> register
+>>>>>>> parent of 09bc0a9 (Bug fixes)
 </web-app>
