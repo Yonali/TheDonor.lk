@@ -108,6 +108,13 @@
   padding-top: 30px;
 }
 
+.bottom-full {
+  width: 100%;
+  border-radius: 0px !important;
+  margin: 0px !important;
+  padding: 10px !important;
+}
+
 @-webkit-keyframes slideIn {
   from {
     top: -300px;

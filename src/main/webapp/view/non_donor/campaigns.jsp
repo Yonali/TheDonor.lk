@@ -3,6 +3,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,9 +28,11 @@
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <button id="editBtn">Edit</button>
-                    <button>Cancel</button>
-                    <button id="newBtn">Create</button>
+                    <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                        <button id="editBtn">Edit</button>
+                        <button>Cancel</button>
+                        <button id="newBtn">Create</button>
+                    <% } %>
                 </div>
             </div>
 

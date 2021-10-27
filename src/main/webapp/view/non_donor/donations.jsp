@@ -21,7 +21,6 @@
     <form>
       <div class="card">
         <div class="modal-body">
-
           <div class="fields">
             <div class="field-single">
               <span>Scan Blood ID</span>
@@ -41,7 +40,7 @@
       </div>
     </form>
   </div>
-  
+
   <div class="recent-grid">
     <div class="card">
       <div class="card-header">

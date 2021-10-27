@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.LoginBean;
+import com.example.thedonorlk.Bean.UserDonorBean;
 import com.example.thedonorlk.Database.LoginDAO;
+import com.example.thedonorlk.Database.UserDonorDAO;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletException;
@@ -41,9 +43,13 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("role", role);
 
             // Check user role and redirect accordingly
-            if (role.equals("admin")) {
+            if (!role.equals("donor")) {
                 response.sendRedirect("./view/non_donor/dashboard_index.jsp");
-            } else if (role.equals("donor")) {
+            } else {
+                UserDonorDAO userDAO = new UserDonorDAO();
+                UserDonorBean userBean = userDAO.selectUser(username);
+                session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
+
                 response.sendRedirect("./view/donor/timeline.jsp");
             }
         } else {

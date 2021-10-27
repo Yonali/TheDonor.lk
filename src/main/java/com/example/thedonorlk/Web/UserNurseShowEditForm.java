@@ -45,7 +45,7 @@ public class UserNurseShowEditForm extends HttpServlet {
         request.setAttribute("user", existingUser);
         List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
         request.setAttribute("listBloodBank", listBloodBank);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/nurseForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/nurseForm.jsp");
         dispatcher.forward(request, response);
     }
 }

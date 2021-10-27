@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    if (session.getAttribute("username") == null) {
+    if (session.getAttribute("username") == null || !session.getAttribute("role").equals("donor")) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
 %>
@@ -56,7 +56,7 @@
                     <div class="col-3-2">
                         <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP" style="width:50px;height:50px;">
                         <div class="d col-3-3">
-                            <a href="#">Anne Doe</a>
+                            <a href="#"><%=session.getAttribute("name")%></a>
                         </div>
                     </div>
                     <div class="dropdown-content">
