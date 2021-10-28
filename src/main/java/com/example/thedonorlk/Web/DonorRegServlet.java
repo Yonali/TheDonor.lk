@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.DonorRegBean;
+import com.example.thedonorlk.Bean.UserDonorBean;
 import com.example.thedonorlk.Database.DonorRegDAO;
+import com.example.thedonorlk.Database.UserDonorDAO;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.*;
@@ -52,7 +54,11 @@ public class DonorRegServlet extends HttpServlet {
                 if (donorRegDAO.addDonorReg(donorRegBean)) {
                     HttpSession session = request.getSession();
                     session.setAttribute("username",donorRegBean.getEmail());
-                    session.setAttribute("role", "Donor");
+                    session.setAttribute("role", "donor");
+
+                    UserDonorDAO userDAO = new UserDonorDAO();
+                    UserDonorBean userBean = userDAO.selectUser(donorRegBean.getEmail());
+                    session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
 
                     response.sendRedirect("./view/donor/timeline.jsp");
                 } else {

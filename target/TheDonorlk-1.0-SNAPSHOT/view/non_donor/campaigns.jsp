@@ -1,4 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -14,24 +16,33 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 <main>
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
                 <h3>Campaigns</h3>
                 <div class="search-wrapper">
                     <span class="las la-search"></span>
-                    <input type="search" placeholder="search here" />
+                    <input type="search" placeholder="search here"/>
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
                     <% if (role.equals("bloodbank") || role.equals("admin")) { %>
-                        <button id="editBtn">Edit</button>
-                        <button>Cancel</button>
-                        <button id="newBtn">Create</button>
+                    <a href="<%=request.getContextPath()%>/userAdminShowNewForm">New</a>
                     <% } %>
                 </div>
             </div>
@@ -47,6 +58,7 @@
                             <td>Date</td>
                             <td>Start Time</td>
                             <td>End Time</td>
+                            <td>Blood Bank</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
@@ -60,64 +72,36 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#C101</td>
-                            <td>Campaign 01</td>
-                            <td>Viharamahadevi Park, Colombo</td>
-                            <td>21/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status open">Upcoming</span>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C102</td>
-                            <td>Campaign 02</td>
-                            <td>Red Cross Society, Colombo</td>
-                            <td>16/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status progress">In Progress</span>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C103</td>
-                            <td>Campaign 03</td>
-                            <td>Central Park, Kandy</td>
-                            <td>21/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C104</td>
-                            <td>Campaign 04</td>
-                            <td>Navy Hospital, Welisara</td>
-                            <td>18/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C105</td>
-                            <td>Campaign 05</td>
-                            <td>HCC, Kalmunai</td>
-                            <td>15/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-                            </td>
-                        </tr>
+                        <c:forEach var="campaign" items="${listCampaign}">
+                            <tr>
+                                <td>
+                                    <c:out value="${campaign.id}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.name}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.address_street}, ${campaign.address_city}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.date}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.start_time}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.end_time}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.bloodbank_code}"/>
+                                </td>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="campaignAdminDelete?id=<c:out value='${campaign.id}' />">Delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -139,19 +123,19 @@
                 <div class="fields">
                     <div class="field-single">
                         <span>Campaign Name</span>
-                        <input type="text" />
+                        <input type="text"/>
                     </div>
                     <div class="field-single">
                         <span>Start Time</span>
-                        <input type="text" />
+                        <input type="text"/>
                     </div>
                     <div class="field-single">
                         <span>Location</span>
-                        <input type="text" />
+                        <input type="text"/>
                     </div>
                     <div class="field-single">
                         <span>End Time</span>
-                        <input type="text" />
+                        <input type="text"/>
                     </div>
                     <div class="field-single">
                         <span>Date</span>
