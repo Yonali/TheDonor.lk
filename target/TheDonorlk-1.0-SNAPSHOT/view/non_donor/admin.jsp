@@ -14,6 +14,9 @@
     <title>TheDonor.lk</title>
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -50,7 +53,7 @@
                                 <td>
                                     <c:out value="${user.username}" />
                                 </td>
-                                <td><a href="<%=request.getContextPath()%>/userAdminShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="userAdminDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                <td><a href="<%=request.getContextPath()%>/userAdminShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userAdminDelete?id=<c:out value='${user.id}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>
@@ -61,6 +64,7 @@
     </div>
 </main>
 
+<script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
 </body>
 
 </html>
