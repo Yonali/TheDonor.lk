@@ -111,7 +111,7 @@
                                     <fmt:parseDate value = "${end}" var = "parsedEndDate" pattern = "yyy-MM-dd HH:mm:ss" />
 
                                     <c:if test="${(parsedStartDate le now) && (parsedEndDate ge now)}">
-                                        <span class="status progress">In Progress</span>
+                                        <span class="status progress">InProgress</span>
                                     </c:if>
                                     <c:if test="${(parsedStartDate le now) && (parsedEndDate le now)}">
                                         <span class="status close">Closed</span>

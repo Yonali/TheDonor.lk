@@ -328,6 +328,7 @@ main {
   margin-top: 75px;
   padding: 2rem 1.5rem;
   background: #f1f5f9;
+  width: available;
   min-height: calc(100vh - 55px);
 }
 
@@ -656,6 +657,7 @@ tr td:last-child {
   position: inherit;
   width: 100%;
   height: fit-content;
+  background-color: #f1f5f9;
 }
 iframe {
   width: 100%;

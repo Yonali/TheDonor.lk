@@ -59,7 +59,7 @@
                     </div>
                     <div class="field-single">
                         <span>Start Time</span>
-                        <input type="time" name="Start_Time" id="Start_Time" value="<c:out value='${user.start_time}' />"/>
+                        <input type="time" step="any" name="Start_Time" id="Start_Time" value="<c:out value='${user.start_time}' />"/>
                     </div>
                     <div class="field-single">
                         <span>Address Street</span>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="field-single">
                         <span>End Time</span>
-                        <input type="time" name="End_Time" id="End_Time" value="<c:out value='${user.end_time}' />"/>
+                        <input type="time" step="any" name="End_Time" id="End_Time" value="<c:out value='${user.end_time}' />"/>
                     </div>
                     <div class="field-single">
                         <span>Address City</span>
