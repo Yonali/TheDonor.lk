@@ -17,6 +17,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles2.css">
 
     <script src="<%=request.getContextPath()%>/public/scripts/scripts.js"></script>
 </head>
@@ -166,7 +167,6 @@
                 <a href="<%=request.getContextPath()%>/logout">Logout</a>
             </div>
         </div>
-
     </header>
 
     <div class="content">

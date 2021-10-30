@@ -21,8 +21,8 @@
         <form>
             <div class="card">
                 <div class="modal-body">
-                    <div class="fields" style="grid-template-columns: repeat(1, 1fr);">
-                        <div class="field-single" style="justify-content: center;">
+                    <div class="fields" style="grid-template-columns: repeat(1, 1fr); justify-content: center;">
+                        <div class="field-single">
                             <span style="padding: 10px;">Scan Blood ID</span>
                             <select class="box">
                                 <option value="GH">General Hospital, Matara</option>

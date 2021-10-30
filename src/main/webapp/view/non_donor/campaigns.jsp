@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
+
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -42,7 +45,7 @@
                 </div>
                 <div class="buttons">
                     <% if (role.equals("bloodbank") || role.equals("admin")) { %>
-                    <a href="<%=request.getContextPath()%>/userAdminShowNewForm">New</a>
+                    <a href="<%=request.getContextPath()%>/campaignShowNewForm">New</a>
                     <% } %>
                 </div>
             </div>
@@ -63,12 +66,13 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#open">Upcoming</a>
+                                        <a href="#open" class="card-drop-down">Upcoming</a>
                                         <a href="#progress">In Progress</a>
                                         <a href="#close">Closed</a>
                                     </div>
                                 </div>
                             </td>
+                            <td>Actions</td>
                         </tr>
                         </thead>
                         <tbody>
@@ -96,9 +100,30 @@
                                     <c:out value="${campaign.bloodbank_code}"/>
                                 </td>
                                 <td>
+
+
+                                    <jsp:useBean id="now" class="java.util.Date"/>
+
+                                    <c:set var = "start" value = "${campaign.date} ${campaign.start_time}" />
+                                    <c:set var = "end" value = "${campaign.date} ${campaign.end_time}" />
+
+                                    <fmt:parseDate value = "${start}" var = "parsedStartDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:parseDate value = "${end}" var = "parsedEndDate" pattern = "yyy-MM-dd HH:mm:ss" />
+
+                                    <c:if test="${(parsedStartDate le now) && (parsedEndDate ge now)}">
+                                        <span class="status progress">In Progress</span>
+                                    </c:if>
+                                    <c:if test="${(parsedStartDate le now) && (parsedEndDate le now)}">
+                                        <span class="status close">Closed</span>
+                                    </c:if>
+                                    <c:if test="${(parsedStartDate ge now) && (parsedEndDate ge now)}">
+                                        <span class="status open">Upcoming</span>
+                                    </c:if>
+                                </td>
+                                <td>
                                     <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
-                                                                href="campaignAdminDelete?id=<c:out value='${campaign.id}' />">Delete</a>
+                                                                href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -110,79 +135,6 @@
     </div>
 </main>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Campaign Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Campaign Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Start Time</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Location</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>End Time</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Date</span>
-                        <input type="date" id="donation-date">
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Bank</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single" id="status">
-                        <span>Status</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="open">Upcoming</option>
-                                <option value="in progress">In Progress</option>
-                                <option value="close">Closed</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="images/Logo - White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
 </div>
 
 </body>

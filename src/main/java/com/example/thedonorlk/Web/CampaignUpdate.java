@@ -31,9 +31,9 @@ public class CampaignUpdate extends HttpServlet {
             updateUser(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("campaign");
             dispatcher.forward(request, response);
-            //throw new ServletException(ex);
+            throw new ServletException(ex);
         }
     }
 

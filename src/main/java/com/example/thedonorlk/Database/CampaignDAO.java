@@ -115,6 +115,7 @@ public class CampaignDAO {
             statement.setString(5, campaign.getAddress_street());
             statement.setString(6, campaign.getAddress_city());
             statement.setString(7, campaign.getBloodbank_code());
+            statement.setInt(8, campaign.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }
