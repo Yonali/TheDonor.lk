@@ -1,6 +1,5 @@
 package com.example.thedonorlk.Database;
 
-import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.EmergencyBean;
 
 import java.sql.Connection;
