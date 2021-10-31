@@ -17,6 +17,7 @@
 
 <body>
 <main>
+  <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
   <div class="recent-grid">
     <form>
       <div class="card">
@@ -62,6 +63,7 @@
             <thead>
             <tr>
               <td>Donor ID</td>
+              <td>Blood Bank</td>
               <td>Blood ID</td>
               <td>Donor Name</td>
               <td>Donor NIC</td>
@@ -85,6 +87,7 @@
             <tbody>
             <tr>
               <td>#DC101</td>
+              <td>NBTS</td>
               <td>#B101</td>
               <td>Jamie Stark</td>
               <td>64342388</td>
@@ -97,6 +100,7 @@
             </tr>
             <tr>
               <td>#DC101</td>
+              <td>NBTS</td>
               <td>#B101</td>
               <td>Nick Jones</td>
               <td>64342388</td>
@@ -109,6 +113,7 @@
             </tr>
             <tr>
               <td>#DC101</td>
+              <td>NBTS</td>
               <td>#B101</td>
               <td>Timothy Cameron</td>
               <td>64342388</td>
@@ -121,6 +126,7 @@
             </tr>
             <tr>
               <td>#DC101</td>
+              <td>NBTS</td>
               <td>#B101</td>
               <td>Jake Clinton</td>
               <td>64342388</td>
@@ -133,6 +139,7 @@
             </tr>
             <tr>
               <td>#DC101</td>
+              <td>NBTS</td>
               <td>#B101</td>
               <td>Anita Rosewell</td>
               <td>64342388</td>

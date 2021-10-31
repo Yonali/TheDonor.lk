@@ -67,12 +67,14 @@
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
                                         <a href="#open" class="card-drop-down">Upcoming</a>
-                                        <a href="#progress">In Progress</a>
-                                        <a href="#close">Closed</a>
+                                        <a href="#progress" class="card-drop-down">In Progress</a>
+                                        <a href="#close" class="card-drop-down">Closed</a>
                                     </div>
                                 </div>
                             </td>
+                            <% if (role.equals("bloodbank") || role.equals("admin")) { %>
                             <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
@@ -120,11 +122,13 @@
                                         <span class="status open">Upcoming</span>
                                     </c:if>
                                 </td>
+                                <% if (role.equals("bloodbank") || role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
                                 </td>
+                                <% } %>
                             </tr>
                         </c:forEach>
                         </tbody>

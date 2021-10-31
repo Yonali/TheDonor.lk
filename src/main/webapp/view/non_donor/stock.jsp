@@ -17,13 +17,14 @@
 
 <body>
 <main>
+    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <form>
             <div class="card">
                 <div class="modal-body">
                     <div class="fields" style="grid-template-columns: repeat(1, 1fr); justify-content: center;">
-                        <div class="field-single">
-                            <span style="padding: 10px;">Scan Blood ID</span>
+                        <div class="field-single" style="justify-content: center;">
+                            <span style="padding: 10px;">Select Blood Bank</span>
                             <select class="box">
                                 <option value="GH">General Hospital, Matara</option>
                                 <option value="LHS">LHS, Colombo</option>
@@ -86,11 +87,12 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#new">New</a>
-                                        <a href="#consulted">Processed</a>
-                                        <a href="#completed">NOT Processed</a>
-                                        <a href="#cancelled">Active</a>
-                                        <a href="#deferred">Discarded</a>
+                                        <a href="#new" class="card-drop-down">New</a>
+                                        <a href="#consulted" class="card-drop-down">Processed</a>
+                                        <a href="#completed" class="card-drop-down">NOT Processed</a>
+                                        <a href="#cancelled" class="card-drop-down">Active</a>
+                                        <a href="#consulted" class="card-drop-down">Transfused</a>
+                                        <a href="#deferred" class="card-drop-down">Discarded</a>
                                     </div>
                                 </div>
                             </td>
@@ -98,7 +100,20 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>#B101</td>
+                            <td>#B102</td>
+                            <td>Whole Blood</td>
+                            <td>o-</td>
+                            <td>NBTS</td>
+                            <td>21/09/2021</td>
+                            <td>22/09/2021</td>
+                            <td>30/09/2021</td>
+                            <td>
+                                <span class="status open">NOT Processed</span>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#B205</td>
                             <td>Whole Blood</td>
                             <td>A+</td>
                             <td>NBTS</td>
@@ -110,7 +125,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>#B101</td>
+                            <td>#B205</td>
                             <td>RBC</td>
                             <td>A+</td>
                             <td>NBTS</td>
@@ -123,7 +138,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>#B101</td>
+                            <td>#B205</td>
                             <td>WBC</td>
                             <td>A+</td>
                             <td>NBTS</td>
@@ -136,9 +151,45 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>#B101</td>
+                            <td>#B205</td>
                             <td>Platelets</td>
                             <td>A+</td>
+                            <td>NBTS</td>
+                            <td>21/09/2021</td>
+                            <td>22/09/2021</td>
+                            <td>30/09/2021</td>
+                            <td>
+                                <span class="status consulted">Transfused</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#B205</td>
+                            <td>Plasma</td>
+                            <td>A+</td>
+                            <td>NBTS</td>
+                            <td>21/09/2021</td>
+                            <td>22/09/2021</td>
+                            <td>30/09/2021</td>
+                            <td>
+                                <span class="status close">Discarded</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#B103</td>
+                            <td>Whole Blood</td>
+                            <td>B+</td>
+                            <td>NBTS</td>
+                            <td>21/09/2021</td>
+                            <td>22/09/2021</td>
+                            <td>30/09/2021</td>
+                            <td>
+                                <span class="status cancelled">NOT Processed</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#B103</td>
+                            <td>RBC</td>
+                            <td>B+</td>
                             <td>NBTS</td>
                             <td>21/09/2021</td>
                             <td>22/09/2021</td>
@@ -149,29 +200,40 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>#B101</td>
-                            <td>Plasma</td>
-                            <td>A+</td>
+                            <td>#B103</td>
+                            <td>WBC</td>
+                            <td>B+</td>
                             <td>NBTS</td>
                             <td>21/09/2021</td>
                             <td>22/09/2021</td>
                             <td>30/09/2021</td>
                             <td>
-                                <span class="status close">Discarded</span>
+                                <span class="status progress">Active</span>
 
                             </td>
                         </tr>
                         <tr>
-                            <td>#B102</td>
-                            <td>Whole Blood</td>
-                            <td>A+</td>
+                            <td>#B103</td>
+                            <td>Platelets</td>
+                            <td>B+</td>
                             <td>NBTS</td>
                             <td>21/09/2021</td>
                             <td>22/09/2021</td>
                             <td>30/09/2021</td>
                             <td>
-                                <span class="status open">NOT Processed</span>
-
+                                <span class="status progress">Active</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#B103</td>
+                            <td>Plasma</td>
+                            <td>B+</td>
+                            <td>NBTS</td>
+                            <td>21/09/2021</td>
+                            <td>22/09/2021</td>
+                            <td>30/09/2021</td>
+                            <td>
+                                <span class="status progress">Active</span>
                             </td>
                         </tr>
                         </tbody>

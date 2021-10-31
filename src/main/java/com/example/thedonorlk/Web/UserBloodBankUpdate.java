@@ -51,6 +51,10 @@ public class UserBloodBankUpdate extends HttpServlet {
         if (!userBloodBankDAO.validateUsername(user)) {
             if (userBloodBankDAO.updateUser(user)) {
                 response.sendRedirect("./userBloodBank");
+            } else {
+                request.setAttribute("error","Something went wrong, Please Try Again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userBloodBank");
+                dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");

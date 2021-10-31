@@ -17,6 +17,7 @@
 
 <body>
 <main>
+    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -46,8 +47,8 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Remark</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#Decline">Decline</a>
-                                        <a href="#Removed">Removed</a>
+                                        <a href="#Decline" class="card-drop-down">Decline</a>
+                                        <a href="#Removed" class="card-drop-down">Removed</a>
 <%--                                        <a href="#close">Pending</a>--%>
                                     </div>
                                 </div>

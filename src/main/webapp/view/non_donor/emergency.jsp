@@ -1,4 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
+
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -14,10 +19,21 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 <main>
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -29,9 +45,7 @@
                 </div>
                 <div class="buttons">
                     <% if (role.equals("bloodbank") || role.equals("admin")) { %>
-                    <button id="editBtn">Edit</button>
-                    <button>Cancel</button>
-                    <button id="newBtn">Create</button>
+                    <a href="<%=request.getContextPath()%>/emergencyShowNewForm">New</a>
                     <% } %>
                 </div>
             </div>
@@ -40,74 +54,63 @@
                     <table width="100%">
                         <thead>
                         <tr>
-                            <td>Request ID</td>
-                            <td>Blood Bank</td>
+                            <td>ID</td>
                             <td>Blood Group</td>
                             <td>Date</td>
                             <td>Time</td>
+                            <td>Blood Bank</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#open">Open</a>
-                                        <a href="#closed">Closed</a>
+                                        <a href="#open" class="card-drop-down">Open</a>
+                                        <a href="#closed" class="card-drop-down">Closed</a>
                                     </div>
                                 </div>
                             </td>
+                            <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                            <td>Action</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#E101</td>
-                            <td>General Hospital, Matara</td>
-                            <td>A+</td>
-                            <td>21/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#E102</td>
-                            <td>Nawaloka Hospitals, Colombo</td>
-                            <td>B-</td>
-                            <td>22/09/2021</td>
-                            <td>10.00AM</td>
-                            <td>
-                                <span class="status close">Closed</span>
+                        <c:forEach var="emergency" items="${listEmergency}">
+                            <tr>
+                                <td>
+                                    <c:out value="${emergency.id}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${emergency.blood_group}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${emergency.date}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${emergency.time}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${emergency.bloodbank_code}"/>
+                                </td>
+                                <td>
+                                    <c:set var = "open" value = "Open" />
+                                    <c:set var = "closed" value = "Closed" />
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#E104</td>
-                            <td>LHS, Colombo</td>
-                            <td>O+</td>
-                            <td>22/09/2021</td>
-                            <td>3.00PM</td>
-                            <td>
-                                <span class="status open">Open</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#E105</td>
-                            <td>NBTS, Matale</td>
-                            <td>O-</td>
-                            <td>24/09/2021</td>
-                            <td>11.00AM</td>
-                            <td>
-                                <span class="status open">Open</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#E107</td>
-                            <td>NBTS, Kalmunai</td>
-                            <td>AB-</td>
-                            <td>24/09/2021</td>
-                            <td>4.00PM</td>
-                            <td>
-                                <span class="status open">Open</span>
-                            </td>
-                        </tr>
+                                    <c:if test="${emergency.status == open}">
+                                        <span class="status open">Open</span>
+                                    </c:if>
+                                    <c:if test="${emergency.status == closed}">
+                                        <span class="status close">Closed</span>
+                                    </c:if>
+                                </td>
+                                <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
+                                </td>
+                                <% } %>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -116,86 +119,7 @@
     </div>
 </main>
 
-<!-- The Popup Modal -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Emergency Blood Requirement Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Blood Group</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Product</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="RBC">RBC</option>
-                                <option value="WBC">WBC</option>
-                                <option value="Plasma">Plasma</option>
-                                <option value="Platelets">Platelets</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Bank</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single" id="status">
-                        <span>Status</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="open">Open</option>
-                                <option value="closed">Closed</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
+<
 </div>
 
 </body>

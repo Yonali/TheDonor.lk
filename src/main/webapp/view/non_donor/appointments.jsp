@@ -18,6 +18,7 @@
 
 <body>
 <main>
+    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -40,6 +41,7 @@
                         <thead>
                         <tr>
                             <td>Appt. ID</td>
+                            <td>Blood Bank</td>
                             <td>Donor Name</td>
                             <td>Donor NIC</td>
                             <td>Date</td>
@@ -48,9 +50,9 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#accepted">New</a>
-                                        <a href="#accepted">Accepted</a>
-                                        <a href="#declined">Declined</a>
+                                        <a href="#accepted" class="card-drop-down">New</a>
+                                        <a href="#accepted" class="card-drop-down">Accepted</a>
+                                        <a href="#declined" class="card-drop-down">Declined</a>
                                     </div>
                                 </div>
                             </td>
@@ -59,6 +61,7 @@
                         <tbody>
                         <tr>
                             <td>#D101</td>
+                            <td>NBTS</td>
                             <td>Jake Clinton</td>
                             <td>112344</td>
                             <td>21/09/2021</td>
@@ -69,6 +72,7 @@
                         </tr>
                         <tr>
                             <td>#D102</td>
+                            <td>NBTS</td>
                             <td>Anita Rosewell</td>
                             <td>112356</td>
                             <td>21/09/2021</td>
@@ -80,6 +84,7 @@
                         </tr>
                         <tr>
                             <td>#D104</td>
+                            <td>NBTS</td>
                             <td>Timothy Cameron</td>
                             <td>234489</td>
                             <td>21/09/2021</td>
@@ -90,6 +95,7 @@
                         </tr>
                         <tr>
                             <td>#D105</td>
+                            <td>NBTS</td>
                             <td>Brendon Mack</td>
                             <td>476532</td>
                             <td>22/09/2021</td>
@@ -100,6 +106,7 @@
                         </tr>
                         <tr>
                             <td>#D107</td>
+                            <td>NBTS</td>
                             <td>Sara Ellies</td>
                             <td>787855</td>
                             <td>23/09/2021</td>

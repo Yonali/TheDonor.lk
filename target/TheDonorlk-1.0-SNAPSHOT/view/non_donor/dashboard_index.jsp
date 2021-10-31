@@ -60,7 +60,7 @@
             <% } %>
             <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/emergency.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/emergency" target="iframe"><span
                         class="las la-ambulance"></span>
                     <span>Emergency Requirements</span></a>
             </li>
@@ -161,9 +161,7 @@
                 </div>
             </div>
             <div class="dropdown-content">
-                <% if (!role.equals("admin")) { %>
                 <a href="#" id="newbtn">Settings</a>
-                <% } %>
                 <a href="<%=request.getContextPath()%>/logout">Logout</a>
             </div>
         </div>
@@ -191,14 +189,14 @@
                                     <!-- <span>Upload Your Profile Picture</span> -->
                                     <div class="edit_div1">
 
-                                        <img src="<%=request.getContextPath()%>/public/images/postdp.jpg" id="PP"
+                                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP"
                                              style="width:120px;height:120px;">
                                     </div>
 
                                     <div class="edit_div2">
                                         <div class="inter_edit_div2">
                                             <h3>Change</h3>
-                                            <a href="upload.jsp">
+                                            <a href="../donor/upload.jsp">
                                                 <i class="fa fa-cloud-upload" aria-hidden="true"></i>
                                             </a>
                                             <!-- <button id="change"> <a href="./upload.jsp">Change</a></button>                               -->

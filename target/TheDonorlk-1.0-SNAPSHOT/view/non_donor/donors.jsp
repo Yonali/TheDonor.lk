@@ -17,6 +17,7 @@
 
 <body>
 <main>
+  <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
   <div class="recent-grid">
     <div class="card">
       <div class="card-header">
@@ -49,9 +50,9 @@
                 <div class="dropdown">
                   <button class="dropbtn">Status</button>
                   <div id="myDropdown" class="dropdown-content">
-                    <a href="#normal">Normal</a>
-                    <a href="#Tdeferred">T Deferred</a>
-                    <a href="#Pdeferred">P Deferred</a>
+                    <a href="#normal" class="card-drop-down">Normal</a>
+                    <a href="#Tdeferred" class="card-drop-down">T_Deferred</a>
+                    <a href="#Pdeferred" class="card-drop-down">P_Deferred</a>
                   </div>
                 </div>
               </td>
@@ -79,7 +80,7 @@
               <td>22/11/1988</td>
               <td>Female</td>
               <td>
-                <span class="status open">T deffered</span>
+                <span class="status open">T_Deferred</span>
 
               </td>
             </tr>
@@ -92,7 +93,7 @@
               <td>03/01/1995</td>
               <td>Male</td>
               <td>
-                <span class="status open">T deffered</span>
+                <span class="status open">T_Deferred</span>
 
               </td>
             </tr>
@@ -105,7 +106,7 @@
               <td>30/03/1995</td>
               <td>Male</td>
               <td>
-                <span class="status close">P deffered</span>
+                <span class="status close">P_Deferred</span>
               </td>
             </tr>
             <tr>

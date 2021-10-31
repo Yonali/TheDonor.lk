@@ -17,6 +17,7 @@
 
 <body>
 <main>
+    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -50,10 +51,10 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#requested">New</a>
-                                        <a href="#accepted">Accepted</a>
-                                        <a href="#declined">Declined</a>
-                                        <a href="#cancelled">Cancelled</a>
+                                        <a href="#requested" class="card-drop-down">New</a>
+                                        <a href="#accepted" class="card-drop-down">Accepted</a>
+                                        <a href="#declined" class="card-drop-down">Declined</a>
+                                        <a href="#cancelled" class="card-drop-down">Cancelled</a>
                                     </div>
                                 </div>
                             </td>
@@ -145,14 +146,6 @@
             <form>
                 <div class="fields">
                     <div class="field-single">
-                        <span>Blood ID</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Date</span>
-                        <input type="date" id="donation-date">
-                    </div>
-                    <div class="field-single">
                         <span>Blood Group</span>
                         <div class="custom-select" style="width:200px">
                             <select class="box">
@@ -166,10 +159,6 @@
                                 <option value="O-">O-</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Time</span>
-                        <input type="text" />
                     </div>
                     <div class="field-single">
                         <span>Blood Product</span>
@@ -186,6 +175,11 @@
                         <span>Count</span>
                         <input type="text" />
                     </div>
+
+                    <div class="field-single">
+                        <span>Remark</span>
+                        <input type="text" />
+                    </div>
                     <div class="field-single">
                         <span>Send Request To</span>
                         <div class="custom-select" style="width:200px">
@@ -197,10 +191,6 @@
                                 <option value="NM">NBTS, Matale</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Remark</span>
-                        <input type="text" />
                     </div>
                 </div>
                 <div class="modal-submit-button">

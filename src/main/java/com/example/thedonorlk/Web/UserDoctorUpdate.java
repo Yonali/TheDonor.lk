@@ -56,6 +56,10 @@ public class UserDoctorUpdate extends HttpServlet {
         if (!userDAO.validateUsername(user)) {
             if (userDAO.updateUser(user)) {
                 response.sendRedirect("./userDoctor");
+            } else {
+                request.setAttribute("error","Something went wrong, Please Try Again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
+                dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");

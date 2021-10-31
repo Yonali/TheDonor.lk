@@ -45,6 +45,10 @@ public class UserAdminUpdate extends HttpServlet {
         if (!userDAO.validateUsername(user)) {
             if (userDAO.updateUser(user)) {
                 response.sendRedirect("./userAdmin");
+            } else {
+                request.setAttribute("error","Something went wrong, Please Try Again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
+                dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
