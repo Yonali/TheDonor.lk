@@ -16,6 +16,10 @@
   font-family: "Poppins", sans-serif;
 }
 
+#sidebar_btn, .user-wrapper {
+  cursor: pointer;
+}
+
 /*-----------------------Error msg----------------------------------------*/
 #error_message{
   margin: auto;

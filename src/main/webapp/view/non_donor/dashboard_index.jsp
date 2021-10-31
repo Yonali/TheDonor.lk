@@ -25,7 +25,7 @@
 <body>
 <!-- <input type="checkbox" id="nav-toggle"> -->
 
-<div class="sidebar">
+<div class="sidebar" id="sidebar">
     <div class="logo">
         <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
     </div>
@@ -142,14 +142,17 @@
     </div>
 </div>
 
-<div class="main-content">
-    <header>
+<div class="main-content" id="main-content">
+    <header id="header">
         <h2>
             <label>
-                <span class="las la-bars"></span>
+                <span class="las la-bars" id="sidebar_btn"></span>
             </label>
+            <% if (!role.equals("admin")) { %>
             NBTS Narahenpita
+            <% } %>
         </h2>
+        <script src="<%=request.getContextPath()%>/public/scripts/sidebar_button.js"></script>
         <div class="dropdown">
             <div class="user-wrapper">
                 <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" width="40px" height="40px" alt="">
