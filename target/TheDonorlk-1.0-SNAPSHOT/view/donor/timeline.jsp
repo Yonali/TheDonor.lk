@@ -83,7 +83,7 @@
                         <a href="Donors_Instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
                         <!-- <a href="./Profile.jsp" target="mainframe" onclick="profileSelect()">Search</a> -->
                         <a href="Profile.jsp" target="mainframe" onclick="profileSelect()">Profile</a>
-                        <a href="#">Logout</a>
+                        <a href="<%=request.getContextPath()%>/logout">Logout</a>
                     </div>
                 </div>
                  <!-- -----------------------responsive dropdown------------------------------   -->
