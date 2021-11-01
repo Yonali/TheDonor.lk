@@ -9,6 +9,7 @@
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,8 +93,8 @@
                                     <c:out value="${emergency.bloodbank_code}"/>
                                 </td>
                                 <td>
-                                    <c:set var = "open" value = "Open" />
-                                    <c:set var = "closed" value = "Closed" />
+                                    <c:set var="open" value="Open"/>
+                                    <c:set var="closed" value="Closed"/>
 
                                     <c:if test="${emergency.status == open}">
                                         <span class="status open">Open</span>
@@ -102,12 +103,22 @@
                                         <span class="status close">Closed</span>
                                     </c:if>
                                 </td>
-                                <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                                <% if (role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
                                 </td>
+                                <% } %>
+
+                                <% if (role.equals("bloodbank")) { %>
+                                <c:if test="${campaign.bloodbank_code == bloodbank}">
+                                    <td>
+                                        <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                    href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
+                                    </td>
+                                </c:if>
                                 <% } %>
                             </tr>
                         </c:forEach>

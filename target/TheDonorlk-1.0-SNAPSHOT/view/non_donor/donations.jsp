@@ -74,7 +74,7 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#new" class="card-drop-down">>New</a>
+                                        <a href="#new" class="card-drop-down">New</a>
                                         <a href="#consulted" class="card-drop-down">Consulted</a>
                                         <a href="#completed" class="card-drop-down">Completed</a>
                                         <a href="#cancelled" class="card-drop-down">Cancelled</a>

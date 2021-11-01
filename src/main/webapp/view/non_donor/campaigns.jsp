@@ -9,6 +9,7 @@
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +32,7 @@
         if (reg_msg == null)
             reg_msg = "";
     %>
+
     <div id="error_message">
         <%= reg_msg %>
     </div>
@@ -122,12 +124,23 @@
                                         <span class="status open">Upcoming</span>
                                     </c:if>
                                 </td>
-                                <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+
+                                <% if (role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
                                 </td>
+                                <% } %>
+
+                                <% if (role.equals("bloodbank")) { %>
+                                <c:if test="${campaign.bloodbank_code == bloodbank}">
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
+                                </td>
+                                </c:if>
                                 <% } %>
                             </tr>
                         </c:forEach>

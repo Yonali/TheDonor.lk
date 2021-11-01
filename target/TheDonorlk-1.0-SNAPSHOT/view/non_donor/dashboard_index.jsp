@@ -149,7 +149,7 @@
                 <span class="las la-bars" id="sidebar_btn"></span>
             </label>
             <% if (!role.equals("admin")) { %>
-            NBTS Narahenpita
+                <%=session.getAttribute("bloodbank")%>
             <% } %>
         </h2>
         <script src="<%=request.getContextPath()%>/public/scripts/sidebar_button.js"></script>

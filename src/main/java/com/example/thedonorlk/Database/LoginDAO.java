@@ -50,4 +50,25 @@ public class LoginDAO {
         }
         return role;
     }
+
+    public int getUserID(LoginBean loginBean) {
+        int id = 0;
+
+        // Initialize the database
+        Connection con = DatabaseConnection.initializeDatabase();
+
+        String sql = "select ID from user where username = ? and password =?";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, loginBean.getUsername());
+            ps.setString(2, loginBean.getPassword());
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            id = rs.getInt("ID");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+    }
 }

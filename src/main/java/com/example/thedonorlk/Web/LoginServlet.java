@@ -1,9 +1,7 @@
 package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.LoginBean;
-import com.example.thedonorlk.Bean.UserDonorBean;
-import com.example.thedonorlk.Database.LoginDAO;
-import com.example.thedonorlk.Database.UserDonorDAO;
+import com.example.thedonorlk.Bean.*;
+import com.example.thedonorlk.Database.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletException;
@@ -38,19 +36,39 @@ public class LoginServlet extends HttpServlet {
 
         if (loginDAO.validate(loginBean)) {
             String role = loginDAO.getUserRole(loginBean);
+            int id = loginDAO.getUserID(loginBean);
             HttpSession session = request.getSession();
             session.setAttribute("username",loginBean.getUsername());
             session.setAttribute("role", role);
 
             // Check user role and redirect accordingly
-            if (!role.equals("donor")) {
-                response.sendRedirect("./view/non_donor/dashboard_index.jsp");
-            } else {
+            if (role.equals("donor")) {
                 UserDonorDAO userDAO = new UserDonorDAO();
                 UserDonorBean userBean = userDAO.selectUser(username);
                 session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
 
                 response.sendRedirect("./view/donor/timeline.jsp");
+            } else {
+                if (role.equals("admin")) {
+                    UserAdminDAO userDAO = new UserAdminDAO();
+                    UserAdminBean userBean = userDAO.selectUser(id);
+                } else {
+                    if (role.equals("bloodbank")) {
+                        UserBloodBankDAO userDAO = new UserBloodBankDAO();
+                        UserBloodBankBean userBean = userDAO.selectUser(id);
+                        session.setAttribute("bloodbank", userBean.getCode());
+                    } else if (role.equals("doctor")) {
+                        UserDoctorDAO userDAO = new UserDoctorDAO();
+                        UserDoctorBean userBean = userDAO.selectUser(id);
+                        session.setAttribute("bloodbank", userBean.getBloodbank_code());
+                    } else if (role.equals("nurse")) {
+                        UserNurseDAO userDAO = new UserNurseDAO();
+                        UserNurseBean userBean = userDAO.selectUser(id);
+                        session.setAttribute("bloodbank", userBean.getBloodbank_code());
+                    }
+                }
+
+                response.sendRedirect("./view/non_donor/dashboard_index.jsp");
             }
         } else {
             request.setAttribute("error","Incorrect Username or Password");
