@@ -208,26 +208,6 @@ h3 {
     ;
 }
 
-/*------------------------------------------------------------------
-[ Mobile Responsive ] */
-
-/*
-@media (max-width: 320px) {
-    .left-sidebar {
-        width: 30%;
-    }
-    .row {
-        padding: 10% 10%;
-    }
-
-    .row-service {
-        display: block;
-        align-items: center;
-        text-align: center;
-    }
-}
-*/
-
 @media (max-width: 768px) {
     .left-sidebar {
         width: 30%;
@@ -290,6 +270,3 @@ h3 {
         padding: 25px;
     }
 }
-
-/*------------------------------------------------------------------
-*/
