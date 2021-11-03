@@ -105,8 +105,8 @@
                             <td>o-</td>
                             <td>NBTS</td>
                             <td>21/09/2021</td>
-                            <td>22/09/2021</td>
-                            <td>30/09/2021</td>
+                            <td></td>
+                            <td></td>
                             <td>
                                 <span class="status open">NOT Processed</span>
 
@@ -183,7 +183,7 @@
                             <td>22/09/2021</td>
                             <td>30/09/2021</td>
                             <td>
-                                <span class="status cancelled">NOT Processed</span>
+                                <span class="status cancelled">Processed</span>
                             </td>
                         </tr>
                         <tr>
