@@ -21,7 +21,12 @@
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
       <button>Browse File</button>
-      <input type="file" hidden>
+<%--      <input type="file" hidden>--%>
+        <input type='file'  id='videoUpload' hidden/>
+
+        <video width="320" height="240" controls>
+            Your browser does not support the video tag.
+        </video>
     </div>
     <div class="c">
       <button id="save"><a>Done</a></button>

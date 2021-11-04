@@ -3,6 +3,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +27,7 @@
                         <div class="field-single" style="justify-content: center;">
                             <span style="padding: 10px;">Select Blood Bank</span>
                             <select class="box">
+                                <option value="all">All</option>
                                 <option value="GH">General Hospital, Matara</option>
                                 <option value="LHS">LHS, Colombo</option>
                                 <option value="NHC">Nawaloka Hospitals, Colombo</option>
@@ -64,10 +66,14 @@
 
             <div class="card-header" style="display: block; text-align: center;">
                 <div class="buttons">
+                    <% if (role.equals("admin") || role.equals("bloodbank") ) { %>
                     <button>Transfuse</button>
                     <button class="myBtn_multi">Blood Transfer</button>
                     <button class="myBtn_multi">Blood Processing</button>
+                    <% } %>
+                    <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("nurse")) { %>
                     <button>Discard</button>
+                    <% } %>
                 </div>
             </div>
 
@@ -119,7 +125,7 @@
                             <td>NBTS</td>
                             <td>21/09/2021</td>
                             <td>22/09/2021</td>
-                            <td>30/09/2021</td>
+                            <td></td>
                             <td>
                                 <span class="status cancelled">Processed</span>
                             </td>
@@ -181,7 +187,7 @@
                             <td>NBTS</td>
                             <td>21/09/2021</td>
                             <td>22/09/2021</td>
-                            <td>30/09/2021</td>
+                            <td></td>
                             <td>
                                 <span class="status cancelled">Processed</span>
                             </td>

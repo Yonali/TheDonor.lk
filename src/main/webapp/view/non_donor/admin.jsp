@@ -53,7 +53,9 @@
                                 <td>
                                     <c:out value="${user.username}" />
                                 </td>
-                                <td><a href="<%=request.getContextPath()%>/userAdminShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userAdminDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                <td>
+<%--                                    <a href="<%=request.getContextPath()%>/userAdminShowEditForm?id=<c:out value='${user.id}' />">Edit</a>--%>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userAdminDelete?id=<c:out value='${user.id}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

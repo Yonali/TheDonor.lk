@@ -28,9 +28,9 @@
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <button id="editBtn">Delete</button>
-<%--                    <button>Cancel</button>--%>
-<%--                    <button id="newBtn">Create</button>--%>
+                    <button id="editBtn">Remove</button>
+                    <button>View</button>
+                    <button id="newBtn">Decline</button>
                 </div>
             </div>
 
@@ -49,7 +49,7 @@
                                     <div id="myDropdown" class="dropdown-content">
                                         <a href="#Decline" class="card-drop-down">Decline</a>
                                         <a href="#Removed" class="card-drop-down">Removed</a>
-<%--                                        <a href="#close">Pending</a>--%>
+                                        <a href="#Pending" class="card-drop-down">Pending</a>
                                     </div>
                                 </div>
                             </td>

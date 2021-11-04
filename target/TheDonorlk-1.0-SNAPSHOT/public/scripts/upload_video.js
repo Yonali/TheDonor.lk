@@ -35,10 +35,11 @@ function showFile(){
   if(validExtensions.includes(fileType)){ 
     let fileReader = new FileReader(); 
     fileReader.onload = ()=>{
-      let fileURL = fileReader.result; 
-      let imgTag = `<img src="${fileURL}" alt="image">`;
+      let fileURL = fileReader.result;
+      let blobURL = URL.createObjectURL(file);
+      // let imgTag = `<img src="${fileURL}" alt="image">`;
     //   ____________???_________________________
-      dropArea.innerHTML = imgTag; 
+    //   dropArea.innerHTML = imgTag;
     }
     fileReader.readAsDataURL(file);
   }else{
@@ -47,6 +48,15 @@ function showFile(){
     dragText.textContent = "Drag & Drop to Upload File";
   }
 }
+
+
+  document.getElementById("videoUpload")
+  .onchange = function(event) {
+  let file = event.target.files[0];
+  let blobURL = URL.createObjectURL(file);
+  document.querySelector("video").src = blobURL;
+}
+
 
 
 
