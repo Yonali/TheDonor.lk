@@ -92,29 +92,20 @@ body{
     width: 250px;
   }
 
-  }
- /*@media(max-width:720px) {
-  .drag-area{
-    width: 360px;
-  }
+}
 
-  } */
 
-  
+
 @media (min-width:380px) and (max-width:768px) {
   .drag-area{
     width: 350px;
   }
-  }  
+}
 
-  /* @media (max-width: 1006px) {
-  
-    .col-3-2 a{
-        display: none;
-    }
-   
-      }    */
-    
-    /* @media (max-width: 1300px) {
-        
-      }  */
+/* @media (max-width: 1006px) {
+
+    }    */
+
+/* @media (max-width: 1300px) {
+
+  }  */
