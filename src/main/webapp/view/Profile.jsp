@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (session.getAttribute("username") == null || !session.getAttribute("role").equals("donor")) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,10 +21,10 @@
             <div class="donor">    
                 <div class="sub_donor">
                     <div class="dn_pp">
-                        <img src="<%=request.getContextPath()%>/public/images/postdp.jpg" id="PP" style="width:95px;height:95px;margin-top: 8px; margin-left: 320px;">
+                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP" style="width:95px;height:95px;margin-top: 8px; margin-left: 320px;">
                     </div>
                     <div class="dnametl">
-                        <a href="#">Jenny Doe</a>                   
+                        <a href="#"><%=session.getAttribute("name")%></a>
                     </div>
                     <div class="dcount">
                         <div class="dnbr"><h1>05</h1> </div>
@@ -45,7 +51,7 @@
                     <i class="fa fa-pencil-square-o" aria-hidden="true"> </i>
                     <textarea name="textarea" class="textarea" id="textarea" placeholder="write something..." cols="100" rows="3"></textarea>
                      <!-- --------------------------------responsive------------------------------------- -->
-                    <textarea name="textarea" class="textarea_responsive" id="textarea" placeholder="write something..." cols="25" rows="3"></textarea>
+                    <textarea name="textarea" class="textarea_responsive" id="textarea_responsive" placeholder="write something..." cols="25" rows="3"></textarea>
                      <!-- --------------------------------responsive------------------------------------- -->
                 </div>
    
@@ -73,20 +79,20 @@
                 <div class="posts">
                     <div class="singlepost">
                         <div class="Profilename">
-                            <img src="<%=request.getContextPath()%>/public/images/postdp.jpg" id="PP" style="width:60px;height:60px;">
-                            <a href="#">Jenny Doe</a>
+                            <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP" style="width:60px;height:60px;">
+                            <a href="#"><%=session.getAttribute("name")%></a>
                             <h6 id="postdate">2021/09/10</h6>
                         </div>
 
                         <div class="caption">
-                            <h6>I saved a life today and this is my fifth blood transfusion. </h6>
+                            <h6>Save lives. Donate Blood. </h6>
                         </div>
                         <div class="imgOrV">
-                                    <img src="<%=request.getContextPath()%>/public/images//postpic.jpg" id="PP1" style="width:400px;height:300px;">
+                                    <img src="<%=request.getContextPath()%>/public/images/postpic.jpg" id="PP1" style="width:400px;height:300px;">
                         </div>
                          <!-- --------------------------------responsive------------------------------------- -->
                          <div class="imgOrV_responsive">
-                            <img src="<%=request.getContextPath()%>/public/images//postpic.jpg" id="PP1_r" style="width:300px;height:250px;">
+                            <img src="<%=request.getContextPath()%>/public/images/postpic.jpg" id="PP1_r" style="width:300px;height:250px;">
                           </div>
                           <!-- --------------------------------responsive------------------------------------- -->
                         <div class="footer">
@@ -144,7 +150,7 @@
                                     <!-- <span>Upload Your Profile Picture</span> -->
                                     <div class="edit_div1">
                                        
-                                        <img src="<%=request.getContextPath()%>/public/images/postdp.jpg" id="PP" style="width:120px;height:120px;">
+                                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="edit_PP" style="width:120px;height:120px;">
                                     </div>
                                    
                                      <div class="edit_div2">
@@ -158,7 +164,7 @@
                                      </div>
                                     
                                     <div class="edit_div3">
-                                        <textarea name="textarea" class="about_textarea" id="textarea" placeholder="About You..." cols="6" rows="6"></textarea>                            
+                                        <textarea name="textarea" class="about_textarea" id="about_textarea" placeholder="About You..." cols="6" rows="6"></textarea>
                                     </div>                 
                                 </div>
                             </div>
@@ -250,7 +256,7 @@
             </div>
 
             <div class="modal-footer">
-                <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
+                <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
                 <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
                     Blood Makes a Big Difference in the Lives of Others.
                 </p>
@@ -294,7 +300,7 @@
                 </div>
     
                 <div class="comment_modal-footer">
-                    <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
+                    <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
 
                 </div>
             </div>

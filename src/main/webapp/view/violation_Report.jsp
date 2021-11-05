@@ -1,11 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Yonali
-  Date: 10/23/2021
-  Time: 4:51 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,9 +28,9 @@
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <button id="editBtn">Delete</button>
-<%--                    <button>Cancel</button>--%>
-<%--                    <button id="newBtn">Create</button>--%>
+                    <button id="editBtn">Remove</button>
+                    <button>View</button>
+                    <button id="newBtn">Decline</button>
                 </div>
             </div>
 
@@ -49,9 +47,9 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Remark</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#Decline">Decline</a>
-                                        <a href="#Removed">Removed</a>
-<%--                                        <a href="#close">Pending</a>--%>
+                                        <a href="#Decline" class="card-drop-down">Decline</a>
+                                        <a href="#Removed" class="card-drop-down">Removed</a>
+                                        <a href="#Pending" class="card-drop-down">Pending</a>
                                     </div>
                                 </div>
                             </td>

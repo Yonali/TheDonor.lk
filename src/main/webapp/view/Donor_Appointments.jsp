@@ -1,3 +1,9 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (session.getAttribute("username") == null || !session.getAttribute("role").equals("donor")) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +50,7 @@
                     <div class="category open">Open</div>
                     <h1 class="title">#1562 <br>Date - 27/11/2021 <br>Time - 12 PM</h1>
                     <h2 class="sub_title">National Blood Transfusion Services</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -65,7 +71,7 @@
                     <div class="category accepted">Accepted</div>
                     <h1 class="title">#1421 <br>Date - 25/10/2021 <br>Time - 2.30 PM</h1>
                     <h2 class="sub_title">General Hospital, Colombo</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -86,7 +92,7 @@
                     <div class="category rejected">Rejected</div>
                     <h1 class="title">#1102 <br>Date - 15/06/2021 <br>Time - 9.30 PM</h1>
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -107,7 +113,7 @@
                     <div class="category completed">Completed</div>
                     <h1 class="title">#1086 <br>Date - 12/01/2021 <br>Time - 10 PM</h1>
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -128,7 +134,7 @@
                     <div class="category open">Open</div>
                     <h1 class="title">#1562 <br>Date - 27/11/2021 <br>Time - 12 PM</h1>
                     <h2 class="sub_title">National Blood Transfusion Services</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -149,7 +155,7 @@
                     <div class="category accepted">Accepted</div>
                     <h1 class="title">#1421 <br>Date - 25/10/2021 <br>Time - 2.30 PM</h1>
                     <h2 class="sub_title">General Hospital, Colombo</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -170,7 +176,7 @@
                     <div class="category rejected">Rejected</div>
                     <h1 class="title">#1102 <br>Date - 15/06/2021 <br>Time - 9.30 PM</h1>
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -191,7 +197,7 @@
                     <div class="category completed">Completed</div>
                     <h1 class="title">#1086 <br>Date - 12/01/2021 <br>Time - 10 PM</h1>
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
-                    <p class="description">Donor - Anne Doe <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -266,7 +272,7 @@
             </div>
 
             <div class="modal-footer">
-                <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
+                <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
                 <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
                     Blood Makes a Big Difference in the Lives of Others.
                 </p>
