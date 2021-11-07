@@ -25,7 +25,7 @@ public class UserBloodBankShowNewForm extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/bloodbankForm.jsp");
         dispatcher.forward(request, response);
     }
 }

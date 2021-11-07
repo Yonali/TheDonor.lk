@@ -39,7 +39,7 @@ public class UserBloodBankShowEditForm extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         UserBloodBankBean existingUser = userBloodBankDAO.selectUser(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/bloodbankForm.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
     }

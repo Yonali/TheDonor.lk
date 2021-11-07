@@ -35,7 +35,7 @@ public class UserNurseUpdate extends HttpServlet {
         try {
             updateUser(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error",ex + " Something went wrong, Please Try Again");
+            request.setAttribute("error"," Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("userNurse");
             dispatcher.forward(request, response);
 //            throw new ServletException(ex);
@@ -57,6 +57,10 @@ public class UserNurseUpdate extends HttpServlet {
         if (!userDAO.validateUsername(user)) {
             if (userDAO.updateUser(user)) {
                 response.sendRedirect("./userNurse");
+            } else {
+                request.setAttribute("error","Something went wrong, Please Try Again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userNurse");
+                dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");

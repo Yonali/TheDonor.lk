@@ -35,7 +35,7 @@ public class UserAdminShowEditForm extends HttpServlet {
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         UserAdminBean existingUser = userDAO.selectUser(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/adminForm.jsp");
         request.setAttribute("user", existingUser);
         dispatcher.forward(request, response);
     }

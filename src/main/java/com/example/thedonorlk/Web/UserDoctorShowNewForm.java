@@ -33,7 +33,7 @@ public class UserDoctorShowNewForm extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
         request.setAttribute("listBloodBank", listBloodBank);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctorForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/doctorForm.jsp");
         dispatcher.forward(request, response);
     }
 }

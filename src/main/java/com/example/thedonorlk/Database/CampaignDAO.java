@@ -1,7 +1,6 @@
 package com.example.thedonorlk.Database;
 
 import com.example.thedonorlk.Bean.CampaignBean;
-import com.example.thedonorlk.Bean.UserAdminBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -32,7 +32,7 @@ public class UserAdminShowNewForm extends HttpServlet {
     }
 
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/adminForm.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -42,7 +42,7 @@ public class UserDoctorServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List <UserDoctorBean> listUser = userDAO.selectAllUsers();
         request.setAttribute("listUser", listUser);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctors.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/doctors.jsp");
         dispatcher.forward(request, response);
     }
 }
