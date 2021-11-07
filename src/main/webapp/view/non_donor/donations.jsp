@@ -3,6 +3,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,6 +21,7 @@
     <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <form>
+            <% if (role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
             <div class="card">
                 <div class="modal-body">
                     <div class="fields">
@@ -39,6 +41,7 @@
                     </div>
                 </div>
             </div>
+            <% } %>
         </form>
     </div>
 

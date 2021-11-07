@@ -20,7 +20,7 @@
       <div class="icon"><i class="fa fa-cloud-upload" aria-hidden="true"></i></div>
       <header>Drag & Drop to Upload File</header>
       <span>OR</span>
-      <button>Browse File</button>
+      <button>Browse File</button></br>
 <%--      <input type="file" hidden>--%>
         <input type='file'  id='videoUpload' hidden/>
 

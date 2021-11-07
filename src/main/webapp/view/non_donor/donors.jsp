@@ -3,6 +3,7 @@
   if (session.getAttribute("username") == null) {
     response.sendRedirect(request.getContextPath() + "/login.jsp");
   }
+  Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -152,6 +153,7 @@
       <!-- The form inside popup modal -->
       <form>
         <div class="fields">
+<%--          <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>--%>
           <div class="field-single">
             <span>First Name</span>
             <input type="text" />
@@ -192,6 +194,8 @@
               </select>
             </div>
           </div>
+<%--          <% } %>--%>
+
           <div class="field-single">
             <span>Status</span>
             <div class="custom-select" style="width:200px">
@@ -202,6 +206,8 @@
               </select>
             </div>
           </div>
+
+
         </div>
         <div class="modal-submit-button">
           <div class="buttons">

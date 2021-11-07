@@ -91,7 +91,7 @@
                     <% } %>
                 </ul>
             </li>
-            <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor")) { %>
+            <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
             <li>
                 <a href="<%=request.getContextPath()%>/view/non_donor/donors.jsp" target="iframe"><span
                         class="las la-user-tag"></span>
@@ -227,10 +227,10 @@
                                         <span>NIC</span>
                                         <input type="email"/>
                                     </div>
-                                    <div class="field-single">
-                                        <span>Section</span>
-                                        <input type="text"/>
-                                    </div>
+<%--                                    <div class="field-single">--%>
+<%--                                        <span>Section</span>--%>
+<%--                                        <input type="text"/>--%>
+<%--                                    </div>--%>
                                 </div>
                             </div>
                             <% } %>

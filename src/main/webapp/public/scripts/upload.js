@@ -2,6 +2,8 @@ const dropArea = document.querySelector(".drag-area"),
 dragText = dropArea.querySelector("header"),
 button = dropArea.querySelector("button"),
 input = dropArea.querySelector("input");
+var modal = document.getElementById("u");
+var span = document.getElementsByClassName("save")[0];
 
 let file; 
 button.onclick = ()=>{
@@ -29,6 +31,17 @@ dropArea.addEventListener("drop", (event)=>{
   file = event.dataTransfer.files[0];
   showFile(); 
 });
+if (span != null) {
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
 function showFile(){
   let fileType = file.type; 
   let validExtensions = ["image/jpeg", "image/jpg", "image/png"]; 
