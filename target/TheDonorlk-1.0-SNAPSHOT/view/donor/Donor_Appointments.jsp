@@ -71,7 +71,7 @@
                     <div class="category accepted">Accepted</div>
                     <h1 class="title">#1421 <br>Date - 25/10/2021 <br>Time - 2.30 PM</h1>
                     <h2 class="sub_title">General Hospital, Colombo</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0707123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -92,7 +92,7 @@
                     <div class="category rejected">Rejected</div>
                     <h1 class="title">#1102 <br>Date - 15/06/2021 <br>Time - 9.30 PM</h1>
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0767123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -113,7 +113,7 @@
                     <div class="category completed">Completed</div>
                     <h1 class="title">#1086 <br>Date - 12/01/2021 <br>Time - 10 PM</h1>
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0117123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -126,13 +126,13 @@
                 <div class="thumbnail">
                     <div class="date">
                         <div class="day">27</div>
-                        <div class="month">Nov</div>
-                    </div><img src="<%=request.getContextPath()%>/public/images/open.png" />
+                        <div class="month">Jun</div>
+                    </div><img src="<%=request.getContextPath()%>/public/images/completed.png" />
                 </div>
                 <!-- Post Content-->
                 <div class="post-content">
-                    <div class="category open">Open</div>
-                    <h1 class="title">#1562 <br>Date - 27/11/2021 <br>Time - 12 PM</h1>
+                    <div class="category completed">Completed</div>
+                    <h1 class="title">#0562 <br>Date - 27/06/2020 <br>Time - 08.30 PM</h1>
                     <h2 class="sub_title">National Blood Transfusion Services</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
                     </p>
@@ -146,16 +146,16 @@
                 <!-- Thumbnail-->
                 <div class="thumbnail">
                     <div class="date">
-                        <div class="day">25</div>
-                        <div class="month">Oct</div>
-                    </div><img src="<%=request.getContextPath()%>/public/images/accepted.png" />
+                        <div class="day">23</div>
+                        <div class="month">Feb</div>
+                    </div><img src="<%=request.getContextPath()%>/public/images/rejected.png" />
                 </div>
                 <!-- Post Content-->
                 <div class="post-content">
-                    <div class="category accepted">Accepted</div>
-                    <h1 class="title">#1421 <br>Date - 25/10/2021 <br>Time - 2.30 PM</h1>
+                    <div class="category rejected">Rejected</div>
+                    <h1 class="title">#1412 <br>Date - 23/02/2020 <br>Time - 1.30 PM</h1>
                     <h2 class="sub_title">General Hospital, Colombo</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0707123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -174,9 +174,9 @@
                 <!-- Post Content-->
                 <div class="post-content">
                     <div class="category rejected">Rejected</div>
-                    <h1 class="title">#1102 <br>Date - 15/06/2021 <br>Time - 9.30 PM</h1>
+                    <h1 class="title">#1123 <br>Date - 15/06/2021 <br>Time - 12.30 PM</h1>
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0767123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>
@@ -195,9 +195,9 @@
                 <!-- Post Content-->
                 <div class="post-content">
                     <div class="category completed">Completed</div>
-                    <h1 class="title">#1086 <br>Date - 12/01/2021 <br>Time - 10 PM</h1>
+                    <h1 class="title">#0086 <br>Date - 12/01/2021 <br>Time - 11 PM</h1>
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
-                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0777123456 <br>Address -
+                    <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0117123456 <br>Address -
                     </p>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">
                                 Edit</a></span></div>

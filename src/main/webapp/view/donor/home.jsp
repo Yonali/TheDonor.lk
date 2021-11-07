@@ -21,42 +21,48 @@
     <div class="frame">
         <div class="contentbox">
             <div class="emergency">
-                <div class="E">
+<%--                <div class="E" title="Go to top">--%>
+
+<%--                    <div class="BG">A+</div>--%>
+<%--                    <div class="BB">NBTS<h6>2021/03/11</h6>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">A+</div>
                     <div class="BB">NBTS<h6>2021/03/11</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">AB+</div>
                     <div class="BB">National Blood Centre<h6>2021/11/11</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">A-</div>
                     <div class="BB">NHSL Blood Bank<h6>2021/01/01</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">AB+</div>
                     <div class="BB">Blood bank Matara<h6>2021/05/19</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">AB+</div>
                     <div class="BB">National Blood Centre<h6>2021/03/21</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">AB+</div>
                     <div class="BB">National Blood Centre<h6>2021/03/21</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">AB+</div>
                     <div class="BB">National Blood Centre<h6>2021/03/21</h6>
                     </div>
                 </div>
-                <div class="E">
+                <div class="E" title="Emergency Blood Requirement">
                     <div class="BG">B+</div>
                     <div class="BB">National Blood Centre<h6>2021/03/21</h6>
                     </div>

@@ -12,6 +12,8 @@
     <title>TheDonor.lk</title>
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 </head>
 
@@ -28,9 +30,9 @@
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <button id="editBtn">Remove</button>
-                    <button>View</button>
-                    <button id="newBtn">Decline</button>
+                    <button id="remove">Remove</button>
+                    <button id="newBtn">View</button>
+                    <button id="decline">Decline</button>
                 </div>
             </div>
 
@@ -112,15 +114,15 @@
     </div>
 </main>
 
-<%--<div id="myModal" class="modal">--%>
-<%--    <div class="modal-content">--%>
-<%--        <div class="modal-header">--%>
-<%--            <span class="close-popup">&times;</span>--%>
-<%--            <h3>Enter Campaign Details</h3>--%>
-<%--        </div>--%>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="close-popup">&times;</span>
+            <h3>View Report</h3>
+        </div>
 
-<%--        <div class="modal-body">--%>
-<%--            <!-- The form inside popup modal -->--%>
+        <div class="modal-body">
+            <!-- The form inside popup modal -->
 <%--            <form>--%>
 <%--                <div class="fields">--%>
 <%--                    <div class="field-single">--%>
@@ -172,20 +174,130 @@
 <%--                    </div>--%>
 <%--                </div>--%>
 <%--            </form>--%>
-<%--        </div>--%>
+            <div class="posts">
+                <div class="singlepost">
+                    <div class="Profilename">
+                        <img src="<%=request.getContextPath()%>/public/images/postdp.jpg" id="PP" style="width:60px;height:60px;">
+                        <a href="#">Jenny Doe</a>
+                        <h6 id="postdate">2021/09/10</h6>
 
-<%--        <div class="modal-footer">--%>
-<%--            <img src="images/Logo - White.png" height="100px">--%>
+
+                    </div>
+
+                    <div class="caption">
+                        <h6>I saved a life today and this is my fifth blood transfusion. </h6>
+                    </div>
+                    <div class="imgOrV">
+                        <img src="<%=request.getContextPath()%>/public/images//postpic.jpg" id="PP1" style="width:400px;height:300px;">
+                    </div>
+                    <!-- --------------------------------responsive------------------------------------- -->
+<%--                    <div class="imgOrV_responsive">--%>
+<%--                        <img src="<%=request.getContextPath()%>/public/images//postpic.jpg" id="PP1_r" style="width:250px;height:200px;">--%>
+<%--                    </div>--%>
+                    <!-- --------------------------------responsive------------------------------------- -->
+                    <div class="footer">
+                        <div class="sub_footer">
+                            <div class="like_div">
+                                <button id="likes_box"><i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>25 likes</button>
+                                <!-- <button id="mediabtn" class="mediabtn_pht"><i class="fa fa-picture-o" aria-hidden="true"></i>Photo</button> -->
+                            </div>
+                            <div class="comment_div">
+                                <button id="comments_box3"> <i onclick="myFunction(this)" class="fa fa-comment-o"
+                                                               aria-hidden="true"></i>9 Comments</button>
+                            </div>
+<%--                            <div class="report_div">--%>
+<%--                                <button class="Report" id="Report">Report</button>--%>
+<%--                            </div>--%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer" style="padding: 10px 100px;">
+<%--            <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">--%>
 <%--            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating--%>
 <%--                Blood Makes a Big Difference in the Lives of Others.--%>
 <%--            </p>--%>
+        </div>
+    </div>
+
+    <!-- IMPORTANT -->
+    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
+    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
+</div>
+
+
+<!-- -------------------report button popup------------------------------------------------------------------ -->
+
+<%--<div id="myModal4" class="modal4">--%>
+<%--    <div class="Inner_m4">--%>
+<%--        <div class="modal-content4">--%>
+<%--            <div class="modal-header4">--%>
+<%--                <span class="close4">&times;</span>--%>
+<%--                <h3>Reason to Report</h3>--%>
+<%--            </div>--%>
+
+<%--            <div class="modal-body4">--%>
+<%--                <!-- The form inside popup modal -->--%>
+<%--                <form>--%>
+<%--                    <!-- <div class="inner_form"> -->--%>
+<%--                    <div class="fields4">--%>
+<%--                        <div class="field-single4">--%>
+<%--                            <!-- <span>Enter Your Email Address</span> -->--%>
+<%--                            <input type="text" placeholder="Enter the reason"/>--%>
+<%--                        </div>--%>
+<%--                        <div class="field-single4">--%>
+<%--                            <span>Do you want to Report?</span>--%>
+<%--                        </div>--%>
+
+
+<%--                    </div>--%>
+<%--                    <div class="modal-submit-button4">--%>
+<%--                        <div class="buttons">--%>
+<%--                            <button type="submit" id="continue">Yes</button>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                    <!-- </div> -->--%>
+<%--                </form>--%>
+<%--            </div>--%>
+
+<%--            <div class="modal-footer4">--%>
+
+<%--            </div>--%>
 <%--        </div>--%>
 <%--    </div>--%>
 
+
 <%--    <!-- IMPORTANT -->--%>
 <%--    <!-- Javascript file with popup modal function should be called here just after the popup modal -->--%>
-<%--    <script src="scripts/popup_modal_dashboard.js"></script>--%>
+<%--    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>--%>
 <%--</div>--%>
+
+<%--<script>--%>
+<%--    var btn4 = document.getElementById("new");--%>
+<%--    var modal4 = document.getElementById("myModal4");--%>
+<%--    var span4 = document.getElementsByClassName("close4")[0];--%>
+
+
+<%--    if (newbtn != null) {--%>
+<%--        btn4.onclick = function () {--%>
+<%--            modal4.style.display = "block";--%>
+<%--        }--%>
+<%--    }--%>
+<%--    if (span != null) {--%>
+<%--        span4.onclick = function () {--%>
+<%--            modal4.style.display = "none";--%>
+<%--        }--%>
+<%--    }--%>
+<%--    window.onclick = function (event) {--%>
+<%--        if (event.target == modal4) {--%>
+<%--            modal4.style.display = "none";--%>
+<%--        }--%>
+<%--    }--%>
+
+<%--</script>--%>
+
 
 </body>
 

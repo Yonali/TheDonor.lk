@@ -54,14 +54,14 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 8.30AM - 5PM</h1>
           <h2 class="sub_title">University of Colombo Camp <br>@ University Premises</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -75,16 +75,16 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 9AM - 4PM</h1>
           <h2 class="sub_title">Arimac Camp <br>@ Arimac Office</h2>
-          <p class="description">Blood Bank - LHS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - LHS <br>Blood Bank Contact - 0912223456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -95,16 +95,16 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 8.30AM - 5PM</h1>
           <h2 class="sub_title">University of Kelaniya Camp <br>@ UOK Premises</h2>
-          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0114123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -115,14 +115,14 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 9AM - 4.30PM</h1>
           <h2 class="sub_title">Rotaract Cinnamon Gardens Camp <br>@ YMMA Hall</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -135,16 +135,16 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 9AM - 5PM</h1>
           <h2 class="sub_title">Leo Club Camp <br>@ Dence Hall</h2>
-          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0114123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
 
@@ -156,16 +156,16 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 9AM - 5PM</h1>
           <h2 class="sub_title">Brandix Camp <br>@ Brandix Facility </h2>
-          <p class="description">Blood Bank - AMHK <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - AMHK <br>Blood Bank Contact - 0917123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -176,14 +176,14 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">15</div>
+            <div class="day">08</div>
             <div class="month">Jun</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 9AM - 4.30PM</h1>
           <h2 class="sub_title">Help Life Camp <br>@ Independence Squarek</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -196,16 +196,16 @@
         <!-- Thumbnail-->
         <div class="thumbnail">
           <div class="date">
-            <div class="day">27</div>
+            <div class="day">08</div>
             <div class="month">Nov</div>
           </div><img src="<%=request.getContextPath()%>/public/images/progress.png" />
         </div>
         <!-- Post Content-->
         <div class="post-content">
           <div class="category completed">In Progress</div>
-          <h1 class="title">Date - 27/11/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 08/11/2021 <br>Time - 8AM - 5PM</h1>
           <h2 class="sub_title">Sri Lanka Unite Camp <br>@ Viharamahadevi Park</h2>
-          <p class="description">Blood Bank - BHA <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - BHA <br>Blood Bank Contact - 01157123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -229,7 +229,7 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 12/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 12/12/2021 <br>Time - 8.30AM - 4PM</h1>
           <h2 class="sub_title">University of Colombo Camp <br>@ University Premises</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -250,9 +250,9 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 14/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 14/12/2021 <br>Time - 10AM - 4PM</h1>
           <h2 class="sub_title">Arimac Camp <br>@ Arimac Office</h2>
-          <p class="description">Blood Bank - LHS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - LHS <br>Blood Bank Contact - 0912223456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -270,9 +270,9 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 15/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 15/12/2021 <br>Time - 8.30AM - 5PM</h1>
           <h2 class="sub_title">University of Kelaniya Camp <br>@ UOK Premises</h2>
-          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0114123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -290,7 +290,7 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 16/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 16/12/2021 <br>Time - 9AM - 4.30PM</h1>
           <h2 class="sub_title">Rotaract Cinnamon Gardens Camp <br>@ YMMA Hall</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -310,9 +310,9 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 17/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 17/12/2021 <br>Time - 8AM - 4PM</h1>
           <h2 class="sub_title">Leo Club Camp <br>@ Dence Hall</h2>
-          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - Ragama <br>Blood Bank Contact - 0114123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
 
@@ -331,9 +331,9 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 17/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 17/12/2021 <br>Time - 10AM - 5PM</h1>
           <h2 class="sub_title">Brandix Camp <br>@ Brandix Facility </h2>
-          <p class="description">Blood Bank - AMHK <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - AMHK <br>Blood Bank Contact - 0917123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>
@@ -351,7 +351,7 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 20/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 20/12/2021 <br>Time - 8.30AM - 4PM</h1>
           <h2 class="sub_title">Help Life Camp <br>@ Independence Squarek</h2>
           <p class="description">Blood Bank - NBTS <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
@@ -371,9 +371,9 @@
         <!-- Post Content-->
         <div class="post-content">
           <div class="category open">Upcoming</div>
-          <h1 class="title">Date - 21/12/2021 <br>Time - 9AM - 5PM</h1>
+          <h1 class="title">Date - 21/12/2021 <br>Time - 9.30AM - 5PM</h1>
           <h2 class="sub_title">Sri Lanka Unite Camp <br>@ Viharamahadevi Park</h2>
-          <p class="description">Blood Bank - BHA <br>Blood Bank Contact - 0777123456 <br>Blood Bank Address -
+          <p class="description">Blood Bank - BHA <br>Blood Bank Contact - 0115123456 <br>Blood Bank Address -
             <br>Blood Bank Email -
           </p>
         </div>

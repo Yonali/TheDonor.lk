@@ -63,13 +63,17 @@
   .BG{
     display: flex;
     flex-direction: column;
-    grid-area: left; 
-    margin-bottom: 10px;
+    grid-area: left;
+    /* margin-bottom: 10px; */
     background: rgb(85, 20, 20);
     color: #ffffff;
-    width: 50px;
-    height: 25px;
-    padding: 5px;
+    width: 55px;
+    height: 30px;
+    /* padding: 15px; */
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
     border-radius: 10px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -111,7 +115,7 @@
   display: flex;
   margin-left: 10px;
   margin-right: 10px;
-  border-top: 1px solid #EAE5E5;
+  border-top: 1px solid #cbc5c5;
   border-radius: 0px 0px 15px 15px;
   width: 100%;
 

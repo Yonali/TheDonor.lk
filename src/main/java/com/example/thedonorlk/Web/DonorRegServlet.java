@@ -60,7 +60,7 @@ public class DonorRegServlet extends HttpServlet {
                     UserDonorBean userBean = userDAO.selectUser(donorRegBean.getEmail());
                     session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
 
-                    response.sendRedirect("./view/donor/timeline.jsp");
+                    response.sendRedirect("./login.jsp");
                 } else {
                     request.setAttribute("error","Something went wrong, Please Try Again");
                     request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
