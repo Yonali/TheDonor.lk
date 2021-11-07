@@ -55,8 +55,11 @@
                     <!-- <span class="las la-calendar-week"></span> -->
                     <input type="date" id="donation-date-search">
                 </div>
+
                 <div class="buttons">
+                    <% if (!role.equals("admin")) { %>
                     <button id="newBtn">Edit</button>
+                    <% } %>
                 </div>
             </div>
 

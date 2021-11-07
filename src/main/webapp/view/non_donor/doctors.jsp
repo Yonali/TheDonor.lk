@@ -5,6 +5,8 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,7 +58,9 @@
                             <td>Contact Number</td>
                             <td>Section</td>
                             <td>BloodBank</td>
+                            <% if (role.equals("admin")) { %>
                             <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
@@ -83,7 +87,20 @@
                             <td>
                                 <c:out value="${user.bloodbank_code}" />
                             </td>
-                            <td><a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+
+                            <% if (role.equals("admin")) { %>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                            <% } %>
+
+                            <% if (role.equals("bloodbank")) { %>
+                            <c:if test="${emergency.bloodbank_code == bloodbank}">
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                            </c:if>
+                            <% } %>
                         </tr>
                         </c:forEach>
                         </tbody>

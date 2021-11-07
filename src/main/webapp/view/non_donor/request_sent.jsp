@@ -3,6 +3,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,10 +28,12 @@
                     <input type="search" placeholder="search here" />
                     <input type="date" id="request-date-search">
                 </div>
+
                 <div class="buttons">
-                    <button id="editBtn">Edit</button>
+                    <% if (!role.equals("admin")) { %>
                     <button>Cancel</button>
                     <button id="newBtn">New</button>
+                    <% } %>
                 </div>
             </div>
 
@@ -144,54 +147,16 @@
         <div class="modal-body">
             <!-- The form inside popup modal -->
             <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Blood Group</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
-                        </div>
+                <div class="field-single" id="status">
+                    <span>Status</span>
+                    <div class="custom-select" style="width:200px">
+                        <select class="box">
+                            <option value="open">New</option>
+                            <option value="in progress">Accepted</option>
+                            <option value="close">Declined</option>
+                        </select>
                     </div>
-                    <div class="field-single">
-                        <span>Blood Product</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="RBC">RBC</option>
-                                <option value="WBC">WBC</option>
-                                <option value="Plasma">Plasma</option>
-                                <option value="Platelets">Platelets</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Count</span>
-                        <input type="text" />
-                    </div>
-
-                    <div class="field-single">
-                        <span>Remark</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Send Request To</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
+                </div>
                 </div>
                 <div class="modal-submit-button">
                     <div class="buttons">

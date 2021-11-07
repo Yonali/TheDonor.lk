@@ -55,16 +55,18 @@
                     <input type="search" placeholder="search here"/>
                     <span class="las la-calendar-week"></span>
                 </div>
+
                 <div class="buttons">
-                    <!-- <button>Transfuse</button>
-                    <button class="myBtn_multi">Transfer</button>
-                    <button class="myBtn_multi">Process</button>
-                    <button>Discard</button> -->
+                    <% if (!role.equals("admin")) { %>
                     <button id="editBtn">Edit</button>
+                    <% } %>
                 </div>
+
+
             </div>
 
             <div class="card-header" style="display: block; text-align: center;">
+                <% if (!role.equals("admin")) { %>
                 <div class="buttons">
                     <% if (role.equals("admin") || role.equals("bloodbank") ) { %>
                     <button>Transfuse</button>
@@ -75,6 +77,8 @@
                     <button>Discard</button>
                     <% } %>
                 </div>
+                <% } %>
+
             </div>
 
             <div class="card-body">

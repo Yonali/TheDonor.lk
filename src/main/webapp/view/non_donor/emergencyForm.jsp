@@ -119,7 +119,7 @@
                             </select>
                         </div>
                     </div>
-                    <c:if test="${user != null}">
+<%--                    <c:if test="${user != null}">
                         <div class="field-single">
                             <span>Date</span>
                             <input type="date" name="Date" id="Date" value="<c:out value='${user.date}' />">
@@ -128,8 +128,8 @@
                             <span>Time</span>
                             <input type="time" step="any" name="Time" id="Time" value="<c:out value='${user.time}' />"/>
                         </div>
-                    </c:if>
-                    <div class="field-single">
+                    </c:if>--%>
+                    <%--<div class="field-single">
                         <span>BloodBank Code</span>
                         <select name="BloodBank_Code" id="BloodBank_Code">
                             <c:forEach items="${listBloodBank}" var="bloodbank_code">
@@ -142,7 +142,7 @@
 
                             </c:forEach>
                         </select>
-                    </div>
+                    </div>--%>
                     <c:if test="${user != null}">
                         <div class="field-single" id="status">
                             <span>Status</span>

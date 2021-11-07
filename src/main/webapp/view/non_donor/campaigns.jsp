@@ -46,7 +46,7 @@
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                    <% if (role.equals("bloodbank")) { %>
                     <a href="<%=request.getContextPath()%>/campaignShowNewForm">New</a>
                     <% } %>
                 </div>
@@ -74,7 +74,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                            <% if (role.equals("bloodbank")) { %>
                             <td>Actions</td>
                             <% } %>
                         </tr>
@@ -125,13 +125,13 @@
                                     </c:if>
                                 </td>
 
-                                <% if (role.equals("admin")) { %>
+                                <%--<% if (role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
                                 </td>
-                                <% } %>
+                                <% } %>--%>
 
                                 <% if (role.equals("bloodbank")) { %>
                                 <c:if test="${campaign.bloodbank_code == bloodbank}">

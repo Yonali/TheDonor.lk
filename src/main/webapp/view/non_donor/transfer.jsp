@@ -29,8 +29,7 @@
             <input type="date" id="request-date-search">
           </div>
           <div class="buttons">
-            <!-- <button id="editBtn">Edit</button> -->
-            <button>Cancel</button>
+            <%--<button>Cancel</button>--%>
           </div>
         </div>
 

@@ -45,7 +45,7 @@
                     <input type="date" id="emergency-date-search">
                 </div>
                 <div class="buttons">
-                    <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                    <% if (role.equals("bloodbank")) { %>
                     <a href="<%=request.getContextPath()%>/emergencyShowNewForm">New</a>
                     <% } %>
                 </div>
@@ -69,7 +69,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                            <% if (role.equals("bloodbank")) { %>
                             <td>Action</td>
                             <% } %>
                         </tr>
@@ -103,16 +103,16 @@
                                         <span class="status close">Closed</span>
                                     </c:if>
                                 </td>
-                                <% if (role.equals("admin")) { %>
+                                <%--<% if (role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
                                 </td>
-                                <% } %>
+                                <% } %>--%>
 
                                 <% if (role.equals("bloodbank")) { %>
-                                <c:if test="${campaign.bloodbank_code == bloodbank}">
+                                <c:if test="${emergency.bloodbank_code == bloodbank}">
                                     <td>
                                         <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"

@@ -29,7 +29,7 @@
                     <input type="date" id="appointment-date-search">
                 </div>
                 <div class="buttons">
-                    <% if (role.equals("bloodbank") || role.equals("admin")) { %>
+                    <% if (role.equals("bloodbank")) { %>
                     <button>Accept</button>
                     <button>Decline</button>
                     <% } %>
