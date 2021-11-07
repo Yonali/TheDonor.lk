@@ -21,7 +21,6 @@
     <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <form>
-            <% if (role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
             <div class="card">
                 <div class="modal-body">
                     <div class="fields" style="grid-template-columns: repeat(1, 1fr); justify-content: center;">
@@ -44,7 +43,6 @@
                     </div>
                 </div>
             </div>
-            <% } %>
         </form>
     </div>
 
