@@ -16,7 +16,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 
-    <script src="<%=request.getContextPath()%>/public/scripts/validate_username_contact.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/validate_username_only.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
@@ -26,10 +26,10 @@
         <span class="close-popup" onclick="history.back()">&times;</span>
         <h3>
             <c:if test="${user != null}">
-                Edit Nurse User
+                Edit Campaign
             </c:if>
             <c:if test="${user == null}">
-                Add New Nurse User
+                Add New Campaign
             </c:if>
         </h3>
     </div>
@@ -45,42 +45,41 @@
         </div>
 
         <c:if test="${user != null}">
-            <form action="userNurseUpdate" method="post" onsubmit="return validate();">
-        </c:if>
-        <c:if test="${user == null}">
-            <form action="userNurseInsert" method="post" onsubmit="return validate();">
-        </c:if>
+        <form action="campaignUpdate" method="post" onsubmit="return validate();"></c:if>
+            <c:if test="${user == null}">
+            <form action="campaignInsert" method="post" onsubmit="return validate();">
+                </c:if>
                 <div class="fields">
                     <c:if test="${user != null}">
-                        <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
+                        <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>
                     </c:if>
                     <div class="field-single">
-                        <span>Username (Valid Email address)</span>
-                        <input type="text" name="username" id="username" value="<c:out value='${user.username}' />"/>
+                        <span>Campaign Name</span>
+                        <input type="text" name="Campaign_Name" id="Campaign_Name" value="<c:out value='${user.name}' />"/>
                     </div>
                     <div class="field-single">
-                        <span>NIC</span>
-                        <input type="text" name="nic" id="nic" value="<c:out value='${user.nic}' />"/>
+                        <span>Start Time</span>
+                        <input type="time" step="any" name="Start_Time" id="Start_Time" value="<c:out value='${user.start_time}' />"/>
                     </div>
                     <div class="field-single">
-                        <span>First Name</span>
-                        <input type="text" name="first_name" id="first_name" value="<c:out value='${user.first_name}' />"/>
+                        <span>Address Street</span>
+                        <input type="text" name="Address_Street" id="Address_Street" value="<c:out value='${user.address_street}' />"/>
                     </div>
                     <div class="field-single">
-                        <span>Last Name</span>
-                        <input type="text" name="last_name" id="last_name" value="<c:out value='${user.last_name}' />"/>
+                        <span>End Time</span>
+                        <input type="time" step="any" name="End_Time" id="End_Time" value="<c:out value='${user.end_time}' />"/>
                     </div>
                     <div class="field-single">
-                        <span>Contact Number</span>
-                        <input type="text" name="contact" id="contact" value="<c:out value='${user.contact}' />"/>
+                        <span>Address City</span>
+                        <input type="text" name="Address_City" id="Address_City" value="<c:out value='${user.address_city}' />"/>
                     </div>
                     <div class="field-single">
-                        <span>Section</span>
-                        <input type="text" name="section" id="section" value="<c:out value='${user.section}' />"/>
+                        <span>Date</span>
+                        <input type="date"  name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
                     </div>
                     <div class="field-single">
                         <span>BloodBank Code</span>
-                        <select name="bloodbank_code" id="bloodbank_code" >
+                        <select name="BloodBank_Code" id="BloodBank_Code" >
                             <c:forEach items="${listBloodBank}" var="bloodbank_code">
                                 <c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
@@ -91,8 +90,19 @@
 
                             </c:forEach>
                         </select>
-<%--                        <input type="text" name="bloodbank_code" id="bloodbank_code" value="<c:out value='${user.bloodbank_code}' />"/>--%>
                     </div>
+                    <%--<c:if test="${user != null}">
+                    <div class="field-single" id="status">
+                        <span>Status</span>
+                        <div class="custom-select" style="width:200px">
+                            <select class="box">
+                                <option value="open">Upcoming</option>
+                                <option value="in progress">In Progress</option>
+                                <option value="close">Closed</option>
+                            </select>
+                        </div>
+                    </div>
+                    </c:if>--%>
                 </div>
                 <div class="modal-submit-button">
                     <div class="buttons">
@@ -111,5 +121,4 @@
 </div>
 
 </body>
-
 </html>

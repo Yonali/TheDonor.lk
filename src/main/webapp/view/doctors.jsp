@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+    Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +17,9 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -48,7 +58,9 @@
                             <td>Contact Number</td>
                             <td>Section</td>
                             <td>BloodBank</td>
+                            <% if (role.equals("admin")) { %>
                             <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
@@ -75,7 +87,20 @@
                             <td>
                                 <c:out value="${user.bloodbank_code}" />
                             </td>
-                            <td><a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+
+                            <% if (role.equals("admin")) { %>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                            <% } %>
+
+                            <% if (role.equals("bloodbank")) { %>
+                            <c:if test="${emergency.bloodbank_code == bloodbank}">
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                            </c:if>
+                            <% } %>
                         </tr>
                         </c:forEach>
                         </tbody>
