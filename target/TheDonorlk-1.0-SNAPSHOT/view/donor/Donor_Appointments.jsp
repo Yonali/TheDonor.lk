@@ -73,8 +73,6 @@
                     <h2 class="sub_title">General Hospital, Colombo</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0707123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -96,8 +94,6 @@
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0767123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -119,8 +115,6 @@
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0117123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -142,8 +136,6 @@
                     <h2 class="sub_title">National Blood Transfusion Services</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - NBTS <br>Contact - 0777123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -165,8 +157,6 @@
                     <h2 class="sub_title">General Hospital, Colombo</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - GHC <br>Contact - 0707123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -188,8 +178,6 @@
                     <h2 class="sub_title">Teaching Hospital, Kandy</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - THK <br>Contact - 0767123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>
@@ -211,8 +199,6 @@
                     <h2 class="sub_title">Lady Ridgeway Hospital, Colombo</h2>
                     <p class="description">Donor - <%=session.getAttribute("name")%> <br>Blood Bank - LRHC <br>Contact - 0117123456 <br>Address -
                     </p>
-<%--                    <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i><a href="#" class="editBtn">--%>
-<%--                                Edit</a></span></div>--%>
                     <div class="post-meta"><span class="comments"><i class="fa fa-edit"></i>
                     <a href="#" class="editBtn">Edit</a>&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></span></div>
                 </div>

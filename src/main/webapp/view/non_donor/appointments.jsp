@@ -11,23 +11,54 @@
 <head>
     <meta charset="UTF-8">
     <title>TheDonor.lk</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+<%--    <script src="<%=request.getContextPath()%>/public/scripts/calender.js"></script>--%>
+
+
 </head>
 
 <body>
 <main>
-    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
+<%--    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>--%>
+
+    <%----------------------------calendar----------------------------------------%>
+    <div class="container">
+        <div class="calendar">
+            <div class="month">
+                <i class="fa fa-angle-left prev"></i>
+                <div class="date">
+                    <h1></h1>
+                    <p></p>
+                </div>
+
+                <i class="fa fa-angle-right next"></i>
+            </div>
+            <div class="weekdays">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="days"></div>
+        </div>
+    </div>
+    <%---------------------------------------------------------------------------------%>
+
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
                 <h3>Appointments</h3>
-                <div class="search-wrapper">
+                <diiiiiiiv class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
-                </div>
+                </diiiiiiiv>
                 <div class="buttons">
                     <% if (role.equals("bloodbank")) { %>
                     <button>Accept</button>
@@ -122,6 +153,9 @@
         </div>
     </div>
 </main>
+
+
+
 
 <!-- The Popup Modal -->
 <div id="myModal" class="modal">
