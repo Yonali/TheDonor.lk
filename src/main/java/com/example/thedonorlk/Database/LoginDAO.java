@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class LoginDAO {
 
+    public LoginDAO() {}
+
     public boolean validate(LoginBean loginBean) {
         boolean status = false;
 

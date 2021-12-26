@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 public class DonorRegDAO {
 
+    public DonorRegDAO() {}
+
     public boolean addDonorReg(DonorRegBean donorRegBean){
         boolean status = true;
         String id = "1";
