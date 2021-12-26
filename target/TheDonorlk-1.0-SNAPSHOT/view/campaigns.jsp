@@ -1,4 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
+
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+    Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,23 +20,35 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 <main>
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
                 <h3>Campaigns</h3>
                 <div class="search-wrapper">
                     <span class="las la-search"></span>
-                    <input type="search" placeholder="search here" />
+                    <input type="search" placeholder="search here"/>
                     <input type="date" id="campaign-date-search">
                 </div>
                 <div class="buttons">
-                    <button id="editBtn">Edit</button>
-                    <button>Cancel</button>
-                    <button id="newBtn">Create</button>
+                    <% if (role.equals("bloodbank")) { %>
+                    <a href="<%=request.getContextPath()%>/campaignShowNewForm">New</a>
+                    <% } %>
                 </div>
             </div>
 
@@ -39,77 +63,87 @@
                             <td>Date</td>
                             <td>Start Time</td>
                             <td>End Time</td>
+                            <td>Blood Bank</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#open">Upcoming</a>
-                                        <a href="#progress">In Progress</a>
-                                        <a href="#close">Closed</a>
+                                        <a href="#open" class="card-drop-down">Upcoming</a>
+                                        <a href="#progress" class="card-drop-down">In Progress</a>
+                                        <a href="#close" class="card-drop-down">Closed</a>
                                     </div>
                                 </div>
                             </td>
+                            <% if (role.equals("bloodbank")) { %>
+                            <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#C101</td>
-                            <td>Campaign 01</td>
-                            <td>Viharamahadevi Park, Colombo</td>
-                            <td>21/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status open">Upcoming</span>
+                        <c:forEach var="campaign" items="${listCampaign}">
+                            <tr>
+                                <td>
+                                    <c:out value="${campaign.id}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.name}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.address_street}, ${campaign.address_city}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.date}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.start_time}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.end_time}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${campaign.bloodbank_code}"/>
+                                </td>
+                                <td>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C102</td>
-                            <td>Campaign 02</td>
-                            <td>Red Cross Society, Colombo</td>
-                            <td>16/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status progress">In Progress</span>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C103</td>
-                            <td>Campaign 03</td>
-                            <td>Central Park, Kandy</td>
-                            <td>21/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
+                                    <jsp:useBean id="now" class="java.util.Date"/>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C104</td>
-                            <td>Campaign 04</td>
-                            <td>Navy Hospital, Welisara</td>
-                            <td>18/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#C105</td>
-                            <td>Campaign 05</td>
-                            <td>HCC, Kalmunai</td>
-                            <td>15/08/2021</td>
-                            <td>9.00AM</td>
-                            <td>2.00PM</td>
-                            <td>
-                                <span class="status close">Closed</span>
-                            </td>
-                        </tr>
+                                    <c:set var = "start" value = "${campaign.date} ${campaign.start_time}" />
+                                    <c:set var = "end" value = "${campaign.date} ${campaign.end_time}" />
+
+                                    <fmt:parseDate value = "${start}" var = "parsedStartDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+                                    <fmt:parseDate value = "${end}" var = "parsedEndDate" pattern = "yyy-MM-dd HH:mm:ss" />
+
+                                    <c:if test="${(parsedStartDate le now) && (parsedEndDate ge now)}">
+                                        <span class="status progress">InProgress</span>
+                                    </c:if>
+                                    <c:if test="${(parsedStartDate le now) && (parsedEndDate le now)}">
+                                        <span class="status close">Closed</span>
+                                    </c:if>
+                                    <c:if test="${(parsedStartDate ge now) && (parsedEndDate ge now)}">
+                                        <span class="status open">Upcoming</span>
+                                    </c:if>
+                                </td>
+
+                                <%--<% if (role.equals("admin")) { %>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
+                                </td>
+                                <% } %>--%>
+
+                                <% if (role.equals("bloodbank")) { %>
+                                <c:if test="${campaign.bloodbank_code == bloodbank}">
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
+                                </td>
+                                </c:if>
+                                <% } %>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -118,79 +152,6 @@
     </div>
 </main>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Campaign Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Campaign Name</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Start Time</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Location</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>End Time</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Date</span>
-                        <input type="date" id="donation-date">
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Bank</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single" id="status">
-                        <span>Status</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="open">Upcoming</option>
-                                <option value="in progress">In Progress</option>
-                                <option value="close">Closed</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="images/Logo - White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
 </div>
 
 </body>

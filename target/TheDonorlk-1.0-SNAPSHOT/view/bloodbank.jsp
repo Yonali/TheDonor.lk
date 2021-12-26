@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,6 +16,9 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
     <%--  <script src="<%=request.getContextPath()%>/public/css/scripts.js"></script>--%>
+
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
@@ -72,7 +80,7 @@
                                 <td>
                                     <c:out value="${user.add_street}, ${user.add_city}" />
                                 </td>
-                                <td><a href="<%=request.getContextPath()%>/userBloodBankShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="userBloodBankDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                <td><a href="<%=request.getContextPath()%>/userBloodBankShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userBloodBankDelete?id=<c:out value='${user.id}' />">Delete</a></td>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -1,4 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    if (session.getAttribute("username") == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp");
+    }
+    Object role = session.getAttribute("role");
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +18,7 @@
 
 <body>
 <main>
+    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -21,10 +28,12 @@
                     <input type="search" placeholder="search here" />
                     <input type="date" id="request-date-search">
                 </div>
+
                 <div class="buttons">
-                    <button id="editBtn">Edit</button>
+                    <% if (!role.equals("admin")) { %>
                     <button>Cancel</button>
                     <button id="newBtn">New</button>
+                    <% } %>
                 </div>
             </div>
 
@@ -45,10 +54,10 @@
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
-                                        <a href="#requested">New</a>
-                                        <a href="#accepted">Accepted</a>
-                                        <a href="#declined">Declined</a>
-                                        <a href="#cancelled">Cancelled</a>
+                                        <a href="#requested" class="card-drop-down">New</a>
+                                        <a href="#accepted" class="card-drop-down">Accepted</a>
+                                        <a href="#declined" class="card-drop-down">Declined</a>
+                                        <a href="#cancelled" class="card-drop-down">Cancelled</a>
                                     </div>
                                 </div>
                             </td>
@@ -138,65 +147,16 @@
         <div class="modal-body">
             <!-- The form inside popup modal -->
             <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Blood ID</span>
-                        <input type="text" />
+                <div class="field-single" id="status">
+                    <span>Status</span>
+                    <div class="custom-select" style="width:200px">
+                        <select class="box">
+                            <option value="open">New</option>
+                            <option value="in progress">Accepted</option>
+                            <option value="close">Declined</option>
+                        </select>
                     </div>
-                    <div class="field-single">
-                        <span>Date</span>
-                        <input type="date" id="donation-date">
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Group</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Time</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Product</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="RBC">RBC</option>
-                                <option value="WBC">WBC</option>
-                                <option value="Plasma">Plasma</option>
-                                <option value="Platelets">Platelets</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Count</span>
-                        <input type="text" />
-                    </div>
-                    <div class="field-single">
-                        <span>Send Request To</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="field-single">
-                        <span>Remark</span>
-                        <input type="text" />
-                    </div>
+                </div>
                 </div>
                 <div class="modal-submit-button">
                     <div class="buttons">
@@ -207,7 +167,7 @@
         </div>
 
         <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
+            <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
             <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
                 Blood Makes a Big Difference in the Lives of Others.
             </p>

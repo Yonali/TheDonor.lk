@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  if (session.getAttribute("username") == null) {
+    response.sendRedirect(request.getContextPath() + "/login.jsp");
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +19,7 @@
 
 <body>
 <main>
+  <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
   <div class="recent-grid">
     <div class="card">
       <div class="card-header-center">

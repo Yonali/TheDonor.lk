@@ -1,4 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+  if (session.getAttribute("username") == null) {
+    response.sendRedirect(request.getContextPath() + "/login.jsp");
+  }
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +17,7 @@
 
 <body>
 <main>
+  <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
   <div class="recent-grid">
     <div class="campaigns">
       <div class="card">
@@ -23,8 +29,7 @@
             <input type="date" id="request-date-search">
           </div>
           <div class="buttons">
-            <!-- <button id="editBtn">Edit</button> -->
-            <button>Cancel</button>
+            <%--<button>Cancel</button>--%>
           </div>
         </div>
 
@@ -181,7 +186,7 @@
     </div>
 
     <div class="modal-footer">
-      <img src="<%=request.getContextPath()%>/public/images/Logo - White.png" height="100px">
+      <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
       <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
         Blood Makes a Big Difference in the Lives of Others.
       </p>
