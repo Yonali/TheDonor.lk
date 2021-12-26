@@ -15,6 +15,7 @@
           <element id="module-output" name="TheDonorlk" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.15" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.25" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />

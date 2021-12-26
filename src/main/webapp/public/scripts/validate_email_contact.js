@@ -10,6 +10,7 @@ function validate() {
         return false;
     }
     if (isNaN(contact) || contact.length < 9 || contact.length > 10) {
+        swal("Warning!", "Please Enter a valid Phone Number!", "warning");
         text = "Please Enter a valid Phone Number";
         error_message.innerHTML = text;
         return false;

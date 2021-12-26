@@ -1,0 +1,767 @@
+:root {
+    --main-color: #750605;
+    --accent-color: #360000;
+    --div-color: #d62828;
+    --sub-color: #dd2f6e;
+    --text-gray: #8390a2;
+}
+
+/* -------------------- Popup Modal ------(Edit Profile)--------------------- */
+.fields input {
+    width: 200px;
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-animation-name: fadeIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn;
+    animation-duration: 0.4s
+}
+
+.modal-content {
+    position: relative;
+    /* top: 100px; */
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn;
+    animation-duration: 0.4s
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: var(--div-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-header {
+    padding: 20px 150px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.modal-body {
+    padding: 40px 50px;
+}
+
+.modal-footer {
+    padding: 20px 50px 50px 50px;
+    background-color: var(--accent-color);
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    margin-bottom: -10px;
+}
+
+.about_textarea{
+    margin-top: 20px;
+    width: 200px;
+    height: 60px;
+}
+.modal-submit-button {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 30px;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.modal-submit-button button, .Change_pwd button{
+    background: var(--main-color);
+    width: 6rem;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--main-color);
+    margin: 5px;
+    cursor: pointer;
+}
+/* .dlt_act button{
+  background: #ffffff;
+  width: 6rem;
+  border-radius: 10px;
+  color: var(--main-color);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--main-color);
+  margin: 5px;
+  cursor: pointer;
+} */
+
+.modal-submit-button button:hover {
+    background-color: var(--accent-color);
+}
+
+
+@-webkit-keyframes slideIn {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0px;
+        opacity: 1
+    }
+}
+@keyframes slideIn {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0px;
+        opacity: 1
+    }
+}
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* ---------------------------------Popup Modal --(Edit Profile)----end-------------- */
+/*------------------------------------- form ----------------------------------*/
+.fields input {
+    width: 180px;
+}
+
+.inter_fields {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-areas: "left right"; */
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+.fields{
+    display: flex;
+    width: 100%;
+}
+.inter_B_container{
+    display: grid;
+    /* grid-template-columns: 40% 60%; */
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 15px;
+    grid-column-gap: 80px;
+    margin-top: 1rem;
+    /* background: #d4d1d1; */
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.A_container{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+.B_container{
+    display: flex;
+    flex-direction: column;
+    /* grid-area: right; */
+}
+
+.field-single {
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.main_edit_div{
+    display: grid;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    padding: 15px;
+}
+.edit_div1{
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-content: center;
+    justify-content: center;
+}
+.edit_div2{
+    display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+.inter_edit_div2{
+    height: 30px;
+    width: 120px;
+    margin-right: 10px;
+    color: #ffffff;
+    background: var(--main-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    border-radius: 15px;
+    font-family:"Poppins", sans-serif;
+    font-size: 14px;
+}
+.inter_edit_div2 a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #360000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.5s;
+    text-decoration: none;
+    color: #ffffff;
+    border-radius: 15px;
+}
+
+.edit_div2 a:hover{
+    border-radius: 15px;
+    opacity: 1;
+    background-color: var(--accent-color);
+}
+.edit_div3{
+    display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+.edit_div1 img{
+    border-radius: 90px;
+}
+.formcard {
+    width: 700px;
+    /* height: 1000px; */
+}
+/*------------------------------------- form ---change pwd-------------------------------*/
+.Change_pwd{
+    padding: 15px;
+    display: flex;
+    border-top: 5px solid #EAE5E5;
+    grid-gap: 15px;
+    grid-column-gap: 100px;
+    margin-top: 1rem;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+.inter_Change_pwd{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* grid-template-rows: repeat(3, 1fr); */
+    grid-gap: 15px;
+    grid-column-gap: 100px;
+    margin-top: 1rem;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.Change_pwd_1{
+    /* background: #d4d1d1; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    color: var(--main-color);
+}
+.Change_pwd_2{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 15px;
+    grid-column-gap: 100px;
+    margin-top: 1rem;
+    align-content: center;
+    justify-content: center;
+}
+/*----------------------- form -----------delete account-----------------------*/
+.dlt_act{
+    padding: 15px;
+    display: flex;
+    border-top: 5px solid #EAE5E5;
+}
+.inter_dlt_act{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 15px;
+    grid-column-gap: 100px;
+    margin-top: 1rem;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+.dlt_act_1{
+    display: flex;
+    flex-direction: column;
+    color: var(--main-color);
+    align-content: center;
+    justify-content: center;
+}
+.dlt_act_2{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+}
+.modal-submit-button-dlt{
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+    display: flex;
+}
+.modal-submit-button-dlt button{
+    color:  var(--accent-color);
+    background: #ffffff;
+    width: 6rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--main-color);
+    margin: 5px;
+    cursor: pointer;
+
+}
+.modal-submit-button-dlt button:hover{
+    /* border-radius: 15px; */
+    opacity: 1;
+    color: #ffffff;
+    background-color: var(--accent-color);
+}
+
+/* ----------------------------------form-------end------------------------------------ */
+
+
+/* -----------------------------------comment box--modal2----------------------- */
+.modal2 {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-animation-name: fadeIn2;
+    -webkit-animation-duration: 0.4s;
+    animation-name: fadeIn2;
+    animation-duration: 0.4s
+}
+.close2 {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close2:hover,
+.close2:focus {
+    color: var(--div-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal2-content {
+    position: fixed;
+    top: 100px;
+    background-color: #fefefe;
+    width: 100%;
+    -webkit-animation-name: slideIn2;
+    -webkit-animation-duration: 0.4s;
+    animation-name: slideIn2;
+    animation-duration: 0.4s
+}
+
+
+.modal2-header {
+    padding: 20px 150px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.modal2-body {
+    padding: 40px 150px;
+}
+
+.comment_modal-footer {
+    padding: 4px 10px 10px 10px;
+    background-color: var(--accent-color);
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: small;
+    margin-bottom: -10px;
+}
+
+.modal2-submit-button {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding-top: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+
+.modal2-submit-button button {
+    background: var(--main-color);
+    width: 6rem;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--main-color);
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+.modal2-submit-button button:hover {
+    background-color: var(--accent-color);
+}
+
+
+@-webkit-keyframes slideIn2 {
+    from {
+
+        top: 300px;
+        opacity: 0
+    }
+
+    to {
+
+        top: 100px;
+        opacity: 1
+    }
+}
+@keyframes slideIn2 {
+    from {
+
+        top: 300px;
+        opacity: 0
+    }
+
+    to {
+        top: 100px;
+        opacity: 1
+    }
+}
+@-webkit-keyframes fadeIn2 {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+@keyframes fadeIn2 {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/*------------------------------------- form ----------------------------------*/
+
+.add_comment_fields input {
+    width: 400px;
+    border: none;
+    background-color: #c7c2c350;
+    color: #000000;
+    border-radius: 15px 15px 0px 15px;
+    padding: 7px;
+    font-family: Roboto;
+    font-weight: bold;
+}
+.comment_fields input {
+    width: 400px;
+    border: none;
+    background-color: #EAE5E5;
+    color: #000000;
+    border-radius: 15px 15px 15px 0px;
+    padding: 7px;
+    font-family: Roboto;
+    font-weight: bold;
+}
+
+.add_comment_fields{
+    display: flex;
+    grid-gap: 15px;
+    grid-column-gap: 5px;
+    margin-top: 1rem;
+    align-items: right;
+    justify-content: right;
+}
+
+.comment_fields {
+    display: flex;
+    grid-gap: 15px;
+    grid-column-gap: 5px;
+    margin-top: 1rem;
+    align-items: left;
+    justify-content: left;
+}
+
+.comment_field-single {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.formcard {
+    width: 700px;
+    height: 700px;
+}
+
+
+/* ----------------------------------form-------end------------------------------------ */
+/* -----------------------------------comment box----end--------------------- */
+
+
+/*  --------------------back to up------------------------------------------------  */
+
+
+#myBtn {
+    display: none;
+    position: fixed;
+    bottom: 45px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #750605;
+    color: white;
+    cursor: pointer;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 18px;
+}
+
+#myBtn:hover {
+    background-color: var(--accent-color);
+    opacity: 1;
+    /* background-color: #555;  */
+}
+
+
+.icon a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #360000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/* ____________________________________RESPONSIVE_____________________ */
+
+
+@media(max-width:320px) {
+    .postcontainer{
+        background: rgb(202, 17, 17);
+    }
+    #sharebtn{
+        margin-right: 20px;
+    }
+    .dlt{
+        margin-right: 70px;
+    }
+
+    .modal2-body {
+        padding: 20px 20px;
+    }
+    .comment_fields input, .add_comment_fields input {
+        width: 120px;
+    }
+    .modal2-header {
+        padding: 10px 40px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .imgOrV_responsive {
+        display: block;
+        width: 100%;
+        height: 250px;
+        align-items: center;
+        justify-content: center;
+        align-self: center;
+    }
+    .imgOrV_responsive img{
+        display: block;
+        width: 100%;
+        align-self: auto;
+    }
+    .imgOrV , .imgOrV img{
+        display: none;
+    }
+    .postcontainer{
+        background: rgb(202, 17, 17);
+    }
+    .Upload_vedio{
+        margin-left: 30px;
+    }
+    #sharebtn i{
+        display: none;
+    }
+    #sharebtn{
+        margin-left: -120px;
+        width: 80px;
+    }
+    .dlt{
+        margin-left: -120px;
+        width: 80px;
+    }
+    #comments_box2{
+        margin-left: 30px;
+    }
+    /*
+    here....................................
+    } */
+    .optiondiv{
+        margin-left: 0px;
+        justify-content: left flex-start;
+    }
+    .dn_pp{
+        margin-left: -360px;
+    }
+    .dnametl{
+        margin-left: -45px;
+    }
+    .dcount{
+        margin-left: -80px;
+    }
+    .newbtn{
+        margin-left: -30px;
+        width: 80px;
+    }
+    .modal2-body {
+        padding: 20px 20px;
+    }
+    .modal2-header {
+        padding: 10px 40px;
+    }
+    .comment_fields input, .add_comment_fields input  {
+        width: 200px;
+    }
+    /* .fields {
+      grid-template-columns: repeat(1, 1fr);
+
+    } */
+    /* grid-template-columns: repeat(2, 1fr); */
+    .inter_fields{
+        /* grid-area: "right" "left"; */
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (max-width: 1006px) {
+    .postcontainer{
+        background: rgb(255, 254, 254);
+
+    }
+    .sharepost .textarea_responsive{
+        display: block;
+    }
+    .sharepost .textarea {
+        display: none;
+    }
+    .Upload_vedio, .Upload_pht{
+        width: 70px;
+        background: #d4d1d1;
+        text-emphasis: none;
+    }
+    #comments_box2{
+        width: 80px;
+    }
+    #likes_box{
+        width: 80px;
+    }
+    .modal2-body {
+        padding: 20px 20px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .postcontainer{
+        background: rgb(255, 254, 254);
+    }
+
+    .inter_B_container{
+        grid-template-columns: repeat(1, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
+    .inter_fields {
+        grid-template-columns: 50% 50%;
+        /* grid-template-areas: "left right"; */
+    }
+    .main_edit_div{
+        background: #d4d1d1;
+    }
+}
