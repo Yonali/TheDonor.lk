@@ -53,7 +53,7 @@
             <% } %>
             <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/appointments.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/appointment" target="iframe"><span
                         class="las la-clipboard-list"></span>
                     <span>Appointments</span></a>
             </li>

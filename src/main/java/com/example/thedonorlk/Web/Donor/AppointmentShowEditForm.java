@@ -1,8 +1,8 @@
 package com.example.thedonorlk.Web.Donor;
 
-import com.example.thedonorlk.Bean.Donor.CampaignBean;
+import com.example.thedonorlk.Bean.AppointmentBean;
 import com.example.thedonorlk.Bean.UserBloodBankBean;
-import com.example.thedonorlk.Database.Donor.CampaignDAO;
+import com.example.thedonorlk.Database.Donor.AppointmentDAO;
 import com.example.thedonorlk.Database.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -15,35 +15,38 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/campaign_donor")
-public class CampaignServlet extends HttpServlet {
-    //private static final long serialVersionUID = 1 L;
-    private CampaignDAO campaignDAO;
-    private UserBloodBankDAO userBloodBankDAO;
+@WebServlet("/appointmentShowEditForm")
+public class AppointmentShowEditForm extends HttpServlet {
+
+    private AppointmentDAO appointmentDAO;
+    private UserBloodBankDAO bloodbankDAO;
     public void init() {
-        campaignDAO = new CampaignDAO();
-        userBloodBankDAO = new UserBloodBankDAO();
+        appointmentDAO = new AppointmentDAO();
+        bloodbankDAO = new UserBloodBankDAO();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            listUser(request, response);
+            showEditForm(request, response);
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
     }
 
-    private void listUser(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
-        List <CampaignBean> listCampaign = campaignDAO.selectAllCampaigns();
-        request.setAttribute("listCampaign", listCampaign);
-        List <UserBloodBankBean> listBloodBank = userBloodBankDAO.selectAllUsers();
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        AppointmentBean appointment = appointmentDAO.selectAppointment(id);
+        List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
         request.setAttribute("listBloodBank", listBloodBank);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/campaign.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/appointmentsForm.jsp");
+        request.setAttribute("appointment", appointment);
         dispatcher.forward(request, response);
     }
 }

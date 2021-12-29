@@ -34,8 +34,8 @@
                         <div id="myDropdown" class="dropdown-content">
                             <a href="home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
                             <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
-                            <a href="Donor_Appointments.jsp" target="mainframe" onclick="appSelect()">Appointment</a>
-                            <a href="Donors_Instructions.jsp" target="mainframe"
+                            <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
+                            <a href="intructions.jsp" target="mainframe"
                                onclick="instructionSelect()">Instructions</a>
                         </div>
                     </div>
@@ -79,9 +79,8 @@
                     <div class="dropdown-content_responsive">
                         <a href="home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
                         <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
-                        <a href="Donor_Appointments.jsp" target="mainframe" onclick="appSelect()">Appointment</a>
-                        <a href="Donors_Instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
-                        <!-- <a href="./Profile.jsp" target="mainframe" onclick="profileSelect()">Search</a> -->
+                        <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
+                        <a href="intructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
                         <a href="Profile.jsp" target="mainframe" onclick="profileSelect()">Profile</a>
                         <a href="<%=request.getContextPath()%>/logout">Logout</a>
                     </div>
