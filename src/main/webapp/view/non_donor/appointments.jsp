@@ -1,9 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,15 +20,13 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
-<%--    <script src="<%=request.getContextPath()%>/public/scripts/calender.js"></script>--%>
 
-
+    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 <main>
-<%--    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>--%>
-
     <%----------------------------calendar----------------------------------------%>
     <div class="container">
         <div class="calendar">
@@ -50,6 +53,15 @@
     </div>
     <%---------------------------------------------------------------------------------%>
 
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -59,12 +71,12 @@
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
                 </diiiiiiiv>
-                <div class="buttons">
+                <%--<div class="buttons">
                     <% if (role.equals("bloodbank")) { %>
                     <button>Accept</button>
                     <button>Decline</button>
                     <% } %>
-                </div>
+                </div>--%>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -84,68 +96,70 @@
                                         <a href="#accepted" class="card-drop-down">New</a>
                                         <a href="#accepted" class="card-drop-down">Accepted</a>
                                         <a href="#declined" class="card-drop-down">Declined</a>
+                                        <a href="#declined" class="card-drop-down">Completed</a>
                                     </div>
                                 </div>
                             </td>
+                            <% if (role.equals("bloodbank")) { %>
+                            <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#D101</td>
-                            <td>NBTS</td>
-                            <td>Jake Clinton</td>
-                            <td>112344</td>
-                            <td>21/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status open">New</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D102</td>
-                            <td>NBTS</td>
-                            <td>Anita Rosewell</td>
-                            <td>112356</td>
-                            <td>21/09/2021</td>
-                            <td>10.00AM</td>
-                            <td>
-                                <span class="status close">Declined</span>
+                        <c:forEach var="appointment" items="${listAppointment}">
+                            <c:if test="${appointment.bloodbank_code == bloodbank}">
+                                <tr>
+                                    <td>
+                                        <c:out value="${appointment.id}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.bloodbank_code}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.donor_name}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.donor_contact}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.appointment_date}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.appointment_time}"/>
+                                    </td>
+                                    <td>
+                                        <c:set var="open" value="New"/>
+                                        <c:set var="accepted" value="Accepted"/>
+                                        <c:set var="rejected" value="Rejected"/>
+                                        <c:set var="completed" value="Completed"/>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D104</td>
-                            <td>NBTS</td>
-                            <td>Timothy Cameron</td>
-                            <td>234489</td>
-                            <td>21/09/2021</td>
-                            <td>3.00PM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D105</td>
-                            <td>NBTS</td>
-                            <td>Brendon Mack</td>
-                            <td>476532</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D107</td>
-                            <td>NBTS</td>
-                            <td>Sara Ellies</td>
-                            <td>787855</td>
-                            <td>23/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
+                                        <c:if test="${appointment.status == open}">
+                                            <span class="status open">New</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == accepted}">
+                                            <span class="status progress">Accepted</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == rejected}">
+                                            <span class="status close">Rejected</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == completed}">
+                                            <span class="status consulted">Completed</span>
+                                        </c:if>
+                                    </td>
+                                    <% if (role.equals("bloodbank")) { %>
+                                    <td>
+                                        <a onclick="appointment_confirmation(event)"
+                                           href="<%=request.getContextPath()%>/appointmentStatusAccept?id=<c:out value='${appointment.id}' />">Accept</a>
+                                        <a onclick="appointment_confirmation(event)"
+                                           href="<%=request.getContextPath()%>/appointmentStatusReject?id=<c:out value='${appointment.id}' />">Reject</a>
+                                        <a onclick="appointment_confirmation(event)"
+                                           href="<%=request.getContextPath()%>/appointmentStatusComplete?id=<c:out value='${appointment.id}' />">Complete</a>
+                                    </td>
+                                    <% } %>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
@@ -153,8 +167,6 @@
         </div>
     </div>
 </main>
-
-
 
 
 <!-- The Popup Modal -->

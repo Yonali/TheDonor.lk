@@ -1,9 +1,9 @@
-package com.example.thedonorlk.Web.Donor;
+package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.Donor.CampaignBean;
-import com.example.thedonorlk.Bean.UserBloodBankBean;
-import com.example.thedonorlk.Database.Donor.CampaignDAO;
-import com.example.thedonorlk.Database.UserBloodBankDAO;
+import com.example.thedonorlk.Bean.AppointmentDonorBean;
+import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Database.AppointmentDAO;
+import com.example.thedonorlk.Database.CampaignDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,14 +15,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/campaign_donor")
-public class CampaignServlet extends HttpServlet {
+@WebServlet("/appointment")
+public class AppointmentServlet extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
-    private CampaignDAO campaignDAO;
-    private UserBloodBankDAO userBloodBankDAO;
+    private AppointmentDAO appointmentDAO;
     public void init() {
-        campaignDAO = new CampaignDAO();
-        userBloodBankDAO = new UserBloodBankDAO();
+        appointmentDAO = new AppointmentDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,11 +37,9 @@ public class CampaignServlet extends HttpServlet {
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List <CampaignBean> listCampaign = campaignDAO.selectAllCampaigns();
-        request.setAttribute("listCampaign", listCampaign);
-        List <UserBloodBankBean> listBloodBank = userBloodBankDAO.selectAllUsers();
-        request.setAttribute("listBloodBank", listBloodBank);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/campaign.jsp");
+        List <AppointmentDonorBean> listAppointment = appointmentDAO.selectAllAppointments();
+        request.setAttribute("listAppointment", listAppointment);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/appointments.jsp");
         dispatcher.forward(request, response);
     }
 }

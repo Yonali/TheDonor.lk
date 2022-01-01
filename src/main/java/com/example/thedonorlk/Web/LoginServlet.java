@@ -45,9 +45,10 @@ public class LoginServlet extends HttpServlet {
             if (role.equals("donor")) {
                 UserDonorDAO userDAO = new UserDonorDAO();
                 UserDonorBean userBean = userDAO.selectUser(username);
+                session.setAttribute("id", userBean.getId());
                 session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
 
-                response.sendRedirect("./view/donor/timeline.jsp");
+                response.sendRedirect("./view/donor/index.jsp");
             } else {
                 if (role.equals("admin")) {
                     UserAdminDAO userDAO = new UserAdminDAO();
@@ -68,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
 
-                response.sendRedirect("./view/non_donor/dashboard_index.jsp");
+                response.sendRedirect("./view/non_donor/index.jsp");
             }
         } else {
             request.setAttribute("error","Incorrect Username or Password");
