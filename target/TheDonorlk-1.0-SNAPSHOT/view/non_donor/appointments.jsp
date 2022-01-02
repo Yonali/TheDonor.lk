@@ -71,12 +71,9 @@
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
                 </diiiiiiiv>
-                <%--<div class="buttons">
-                    <% if (role.equals("bloodbank")) { %>
-                    <button>Accept</button>
-                    <button>Decline</button>
-                    <% } %>
-                </div>--%>
+                <div class="buttons">
+
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

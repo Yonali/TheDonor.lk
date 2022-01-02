@@ -29,7 +29,7 @@
   font-size: smaller;
   padding: 10px;
   box-shadow: 0 8px 10px -10px;
-  margin-top: -20px;
+  //margin-top: -20px;
   margin-bottom: 20px;
 }
 
@@ -578,6 +578,18 @@ main {
   padding: 10px;
 }
 
+.card-2col-right {
+  display: flexbox;
+  justify-content: right;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px;
+  float: right;
+  padding-right: 20%;
+  padding-left: 50px;
+}
+
 .big_num {
   color: var(--main-color);
   font-size: x-large;
@@ -651,6 +663,11 @@ main {
 .card-header,
 .card-body {
   padding: 1rem;
+}
+
+.left-right-padding {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .card-header {
@@ -775,6 +792,14 @@ tr td:last-child {
    background: #e8e535;
    color: white;
  }
+
+.red-text {
+  color: red;
+}
+.green-text {
+  color: green;
+}
+
 .table-responsive {
   width: 100%;
   overflow-x: auto;

@@ -1,4 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -14,11 +18,19 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
 </head>
 
 <body>
 <main>
-    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -29,9 +41,7 @@
                     <!-- <input type="date" id="request-date-search"> -->
                 </div>
                 <div class="buttons">
-                    <% if (!role.equals("admin")) { %>
-                    <button id="newBtn">Edit</button>
-                    <% } %>
+
                 </div>
             </div>
 
@@ -41,6 +51,7 @@
                         <thead>
                         <tr>
                             <td>Donor ID</td>
+                            <td>Nearby</td>
                             <td>Donor Name</td>
                             <td>Donor NIC</td>
                             <td>Blood Group</td>
@@ -57,83 +68,64 @@
                                     </div>
                                 </div>
                             </td>
+                            <% if (!role.equals("admin")) { %>
+                            <td>Action</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="donor" items="${listDonor}">
                         <tr>
-                            <td>#D101</td>
-                            <td>Jake Clinton</td>
-                            <td>112344</td>
-                            <td>O+</td>
-                            <td>0714342388</td>
-                            <td>22/08/1988</td>
-                            <td>Male</td>
                             <td>
-                                <span class="status progress">Normal</span>
+                                <c:out value="${donor.id}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D102</td>
-                            <td>Anita Rosewell</td>
-                            <td>112356</td>
-                            <td>O-</td>
-                            <td>0714342399</td>
-                            <td>22/11/1988</td>
-                            <td>Female</td>
                             <td>
-                                <span class="status open">T_Deferred</span>
+                                <c:out value="${donor.bloodbank_code}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.fname}"/> <c:out value="${donor.lname}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.nic}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.blood_group}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.contact}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.dob}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.gender}"/>
+                            </td>
+                            <td>
+                                <c:set var="normal" value="Normal"/>
+                                <c:set var="t_deferred" value="T_Deferred"/>
+                                <c:set var="p_deferred" value="P_Deferred"/>
+                                <c:set var="not_verified" value="Not_Verified"/>
 
+                                <c:if test="${donor.status == normal}">
+                                    <span class="status progress">Normal</span>
+                                </c:if>
+                                <c:if test="${donor.status == t_deferred}">
+                                    <span class="status open">T_Deferred</span>
+                                </c:if>
+                                <c:if test="${donor.status == p_deferred}">
+                                    <span class="status close">P_Deferred</span>
+                                </c:if>
+                                <c:if test="${donor.status == not_verified}">
+                                    <span class="status cancelled">Not_Verified</span>
+                                </c:if>
                             </td>
+                            <% if (!role.equals("admin")) { %>
+                                <td>
+                                    <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                </td>
+                            <% } %>
                         </tr>
-                        <tr>
-                            <td>#D103</td>
-                            <td>Nick Jones</td>
-                            <td>476536</td>
-                            <td>B-</td>
-                            <td>0714342399</td>
-                            <td>03/01/1995</td>
-                            <td>Male</td>
-                            <td>
-                                <span class="status open">T_Deferred</span>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D104</td>
-                            <td>Timothy Cameron</td>
-                            <td>234489</td>
-                            <td>B+</td>
-                            <td>0714300199</td>
-                            <td>30/03/1995</td>
-                            <td>Male</td>
-                            <td>
-                                <span class="status close">P_Deferred</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D105</td>
-                            <td>Brendon Mack</td>
-                            <td>476532</td>
-                            <td>AB+</td>
-                            <td>0714300195</td>
-                            <td>28/02/1994</td>
-                            <td>Male</td>
-                            <td>
-                                <span class="status progress">Normal</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D107</td>
-                            <td>Sara Ellies</td>
-                            <td>787855</td>
-                            <td>A+</td>
-                            <td>0714342195</td>
-                            <td>28/05/1994</td>
-                            <td>Female</td>
-                            <td>
-                                <span class="status progress">Normal</span>
-                            </td>
-                        </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

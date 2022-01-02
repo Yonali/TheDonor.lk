@@ -93,7 +93,7 @@
             </li>
             <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/donors.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/donor" target="iframe"><span
                         class="las la-user-tag"></span>
                     <span>Donors</span></a>
             </li>
