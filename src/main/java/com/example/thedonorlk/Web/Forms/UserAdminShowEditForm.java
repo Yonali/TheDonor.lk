@@ -1,7 +1,7 @@
 package com.example.thedonorlk.Web.Forms;
 
-import com.example.thedonorlk.Bean.UserAdminBean;
-import com.example.thedonorlk.Database.UserAdminDAO;
+import com.example.thedonorlk.Bean.User.UserAdminBean;
+import com.example.thedonorlk.Database.User.UserAdminDAO;
 
 import javax.servlet.*;
 import javax.servlet.http.*;

@@ -1,9 +1,7 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.CampaignBean;
-import com.example.thedonorlk.Bean.UserAdminBean;
 import com.example.thedonorlk.Database.CampaignDAO;
-import com.example.thedonorlk.Database.UserAdminDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +27,7 @@ public class CampaignInsert extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            insertUser(request, response);
+            insertCampaign(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("campaign");
@@ -38,7 +36,7 @@ public class CampaignInsert extends HttpServlet {
         }
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+    private void insertCampaign(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         String campaign_name = request.getParameter("Campaign_Name");
         String campaign_date = request.getParameter("Campaign_Date");

@@ -1,7 +1,6 @@
 package com.example.thedonorlk.Web.Forms;
 
-import com.example.thedonorlk.Bean.UserAdminBean;
-import com.example.thedonorlk.Database.UserAdminDAO;
+import com.example.thedonorlk.Database.User.UserAdminDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet("/userAdminShowNewForm")
 public class UserAdminShowNewForm extends HttpServlet {

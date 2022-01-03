@@ -39,7 +39,7 @@
             </li>
             <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/donations.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/donation" target="iframe"><span
                         class="las la-tint"></span>
                     <span>Donations</span></a>
             </li>

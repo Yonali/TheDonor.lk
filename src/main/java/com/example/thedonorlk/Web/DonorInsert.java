@@ -1,12 +1,12 @@
 package com.example.thedonorlk.Web;
 
-import com.example.thedonorlk.Bean.Donor.DonorRegBean;
+import com.example.thedonorlk.Bean.DonationBean;
 import com.example.thedonorlk.Bean.DonorBean;
-import com.example.thedonorlk.Bean.UserBloodBankBean;
-import com.example.thedonorlk.Database.Donor.DonorRegDAO;
+import com.example.thedonorlk.Bean.DonorCardBean;
+import com.example.thedonorlk.Bean.User.UserBloodBankBean;
+import com.example.thedonorlk.Database.DonationDAO;
 import com.example.thedonorlk.Database.DonorDAO;
-import com.example.thedonorlk.Database.UserBloodBankDAO;
-import org.apache.commons.codec.digest.DigestUtils;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,10 +21,12 @@ import java.util.List;
 public class DonorInsert extends HttpServlet {
     private DonorDAO donorDAO;
     private UserBloodBankDAO bloodbankDAO;
+    private DonationDAO donationDAO;
 
     public void init() {
         donorDAO = new DonorDAO();
         bloodbankDAO = new UserBloodBankDAO();
+        donationDAO = new DonationDAO();
     }
 
     @Override
@@ -53,9 +55,13 @@ public class DonorInsert extends HttpServlet {
 
         if (!donorDAO.validateEmail(email)) {
             if (donorDAO.insertDonor(newDonor)) {
-                //response.sendRedirect("./login.jsp");
                 //Redirect to donation start page
-
+                List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
+                request.setAttribute("listDonation", listDonation);
+                DonorCardBean donor = donorDAO.selectDonorCard(nic);
+                request.setAttribute("donor", donor);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
+                dispatcher.forward(request, response);
             } else {
                 //Redirect to same page with error msg
                 request.setAttribute("error", "Something went wrong, Please Try Again");
