@@ -47,6 +47,7 @@ public class LoginServlet extends HttpServlet {
                 UserDonorBean userBean = userDAO.selectUser(username);
                 session.setAttribute("id", userBean.getId());
                 session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
+                session.setAttribute("role", "donor");
 
                 response.sendRedirect("./view/donor/index.jsp");
             } else {

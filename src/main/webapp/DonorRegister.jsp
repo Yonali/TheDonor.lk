@@ -76,9 +76,9 @@
                     <div class="inputf1">
                         <i class="fa fa-intersex"></i>
                         <select name="gender" style="margin-left: 5px;">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">other</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
                         </select>
                         <label style="margin-left: 15px;">Select your Gender</label>
                     </div>

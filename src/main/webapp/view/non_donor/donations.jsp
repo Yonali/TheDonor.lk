@@ -19,30 +19,39 @@
 <body>
 <main>
     <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
+    <%
+        String reg_msg = (String) request.getAttribute("error");
+        if (reg_msg == null)
+            reg_msg = "";
+    %>
+
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
     <div class="recent-grid">
-        <form>
             <% if (role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
             <div class="card">
-                <div class="modal-body">
-                    <div class="fields">
-                        <div class="field-single">
-                            <span>Scan Blood ID</span>
-                            <input type="text"/>
-                        </div>
-                        <div class="field-single">
-                            <span>Type NIC</span>
-                            <input type="text"/>
+                <form action="<%=request.getContextPath()%>/donationSearch" method="post">
+                    <div class="modal-body">
+                        <div class="fields">
+                            <div class="field-single">
+                                <span>Scan Blood ID</span>
+                                <input type="text" name="Blood_ID" id="Blood_ID"/>
+                            </div>
+                            <div class="field-single">
+                                <span>Type NIC</span>
+                                <input type="text" name="NIC" id="NIC"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-submit-button" style="padding-top: 0px;">
-                    <div class="buttons">
-                        <button type="submit" class="bottom-full">Next</button>
+                    <div class="modal-submit-button" style="padding-top: 0px;">
+                        <div class="buttons">
+                            <button type="submit" class="bottom-full">Next</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
             <% } %>
-        </form>
     </div>
 
     <div class="recent-grid">
@@ -55,7 +64,6 @@
                     <!-- <span class="las la-calendar-week"></span> -->
                     <input type="date" id="donation-date-search">
                 </div>
-
                 <div class="buttons">
                     <% if (!role.equals("admin")) { %>
                     <button id="newBtn">Edit</button>
@@ -163,80 +171,6 @@
         </div>
     </div>
 </main>
-
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Edit Donations Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <div class="field-single">
-                        <span>Donor ID</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Date</span>
-                        <input type="date" id="donation-date">
-                    </div>
-                    <div class="field-single">
-                        <span>Blood ID</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Time</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Donor Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Remark</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Donor NIC</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Status</span>
-                        <!-- <input type="text" /> -->
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="new">New</option>
-                                <option value="consulted">Consulted</option>
-                                <option value="completed">Completed</option>
-                                <option value="cancelled">Cancelled</option>
-                                <option value="deferred">Deferred</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
-</div>
 
 </body>
 
