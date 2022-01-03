@@ -517,7 +517,7 @@ header label span {
 /*  ------------------------------------------------------*/
 
 main {
-  margin-top: 75px;
+  margin-top: 60px;
   padding: 2rem 1.5rem;
   background: #f1f5f9;
   width: available;
@@ -653,6 +653,15 @@ main {
   border-radius: 2px;
 }
 
+.card-topic-red {
+  padding-top: 25px;
+  color: #750605;
+  text-align: center;
+}
+.card-topic-black {
+  text-align: center;
+}
+
 .card-bb {
   background: #fff;
   border-radius: 2px;
@@ -663,6 +672,11 @@ main {
 .card-header,
 .card-body {
   padding: 1rem;
+}
+
+.card-header-center {
+  display: block;
+  text-align: center;
 }
 
 .left-right-padding {

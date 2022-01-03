@@ -31,7 +31,7 @@ public class EmergencyInsert extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            insertUser(request, response);
+            insertEmergency(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
@@ -40,7 +40,7 @@ public class EmergencyInsert extends HttpServlet {
         }
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+    private void insertEmergency(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         SimpleDateFormat date_formatter = new SimpleDateFormat("yyyy/MM/dd");
         SimpleDateFormat time_formatter = new SimpleDateFormat("HH:mm");

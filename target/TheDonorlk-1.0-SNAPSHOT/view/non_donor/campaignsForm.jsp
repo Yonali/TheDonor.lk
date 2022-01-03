@@ -47,8 +47,7 @@
         <c:if test="${user != null}">
         <form action="campaignUpdate" method="post" onsubmit="return validate();"></c:if>
             <c:if test="${user == null}">
-            <form action="campaignInsert" method="post" onsubmit="return validate();">
-                </c:if>
+            <form action="campaignInsert" method="post" onsubmit="return validate();"></c:if>
                 <div class="fields">
                     <c:if test="${user != null}">
                         <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>

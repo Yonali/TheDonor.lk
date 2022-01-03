@@ -1,7 +1,7 @@
 package com.example.thedonorlk.Web.Forms;
 
-import com.example.thedonorlk.Bean.UserBloodBankBean;
-import com.example.thedonorlk.Database.UserBloodBankDAO;
+import com.example.thedonorlk.Bean.User.UserBloodBankBean;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

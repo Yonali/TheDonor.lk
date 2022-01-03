@@ -1,4 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
+<%@ page import="static sun.misc.MessageUtils.out" %>
+
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -14,44 +20,47 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
 <main>
-    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
     <%
-        String reg_msg = (String) request.getAttribute("error");
-        if (reg_msg == null)
-            reg_msg = "";
+        String reg_msg = "";
+        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        if (reg_msg != null) {
     %>
-
     <div id="error_message">
         <%= reg_msg %>
     </div>
+    <% } %>
+
     <div class="recent-grid">
-            <% if (role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
-            <div class="card">
-                <form action="<%=request.getContextPath()%>/donationSearch" method="post">
-                    <div class="modal-body">
-                        <div class="fields">
-                            <div class="field-single">
-                                <span>Scan Blood ID</span>
-                                <input type="text" name="Blood_ID" id="Blood_ID"/>
-                            </div>
-                            <div class="field-single">
-                                <span>Type NIC</span>
-                                <input type="text" name="NIC" id="NIC"/>
-                            </div>
+        <% if (role.equals("nurse") || role.equals("doctor")) { %>
+        <div class="card">
+            <form action="<%=request.getContextPath()%>/donationSearch" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="User_Role" value="<%= role %>"/>
+                    <div class="fields">
+                        <div class="field-single">
+                            <span>Scan Blood ID</span>
+                            <input type="text" name="Blood_Barcode" id="Blood_Barcode"/>
+                        </div>
+                        <div class="field-single">
+                            <span>Type NIC</span>
+                            <input type="text" name="NIC" id="NIC"/>
                         </div>
                     </div>
-                    <div class="modal-submit-button" style="padding-top: 0px;">
-                        <div class="buttons">
-                            <button type="submit" class="bottom-full">Next</button>
-                        </div>
+                </div>
+                <div class="modal-submit-button" style="padding-top: 0px;">
+                    <div class="buttons">
+                        <button type="submit" class="bottom-full">Next</button>
                     </div>
-                </form>
-            </div>
-            <% } %>
+                </div>
+            </form>
+        </div>
+        <% } %>
     </div>
 
     <div class="recent-grid">
@@ -65,9 +74,7 @@
                     <input type="date" id="donation-date-search">
                 </div>
                 <div class="buttons">
-                    <% if (!role.equals("admin")) { %>
-                    <button id="newBtn">Edit</button>
-                    <% } %>
+
                 </div>
             </div>
 
@@ -76,94 +83,72 @@
                     <table width="100%">
                         <thead>
                         <tr>
-                            <td>Donor ID</td>
+                            <td>Donation ID</td>
                             <td>Blood Bank</td>
-                            <td>Blood ID</td>
+                            <td>Blood Barcode</td>
                             <td>Donor Name</td>
                             <td>Donor NIC</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>Remark</td>
                             <td>
                                 <div class="dropdown">
                                     <button class="dropbtn">Status</button>
                                     <div id="myDropdown" class="dropdown-content">
                                         <a href="#new" class="card-drop-down">New</a>
-                                        <a href="#consulted" class="card-drop-down">Consulted</a>
+                                        <a href="#counselled" class="card-drop-down">Counselled</a>
                                         <a href="#completed" class="card-drop-down">Completed</a>
                                         <a href="#cancelled" class="card-drop-down">Cancelled</a>
                                         <a href="#deferred" class="card-drop-down">Deferred</a>
                                     </div>
                                 </div>
                             </td>
+                            <% if (role.equals("nurse") || role.equals("doctor")) { %>
+                            <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>NBTS</td>
-                            <td>#B101</td>
-                            <td>Jamie Stark</td>
-                            <td>64342388</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>Remark goes here</td>
-                            <td>
-                                <span class="status open">New</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>NBTS</td>
-                            <td>#B101</td>
-                            <td>Nick Jones</td>
-                            <td>64342388</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>Remark goes here</td>
-                            <td>
-                                <span class="status consulted">Consulted</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>NBTS</td>
-                            <td>#B101</td>
-                            <td>Timothy Cameron</td>
-                            <td>64342388</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>Remark goes here</td>
-                            <td>
-                                <span class="status progress">Completed</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>NBTS</td>
-                            <td>#B101</td>
-                            <td>Jake Clinton</td>
-                            <td>64342388</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>Remark goes here</td>
-                            <td>
-                                <span class="status cancelled">Cancelled</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#DC101</td>
-                            <td>NBTS</td>
-                            <td>#B101</td>
-                            <td>Anita Rosewell</td>
-                            <td>64342388</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>Remark goes here</td>
-                            <td>
-                                <span class="status close">Deferred</span>
-                            </td>
-                        </tr>
+                        <c:forEach var="donation" items="${listDonation}">
+                            <c:if test="${donation.bloodbank_code == bloodbank}">
+                                <tr>
+                                    <td><c:out value="${donation.id}"/></td>
+                                    <td><c:out value="${donation.bloodbank_code}"/></td>
+                                    <td><c:out value="${donation.blood_id}"/></td>
+                                    <td><c:out value="${donation.donor_name}"/></td>
+                                    <td><c:out value="${donation.donor_nic}"/></td>
+                                    <td><c:out value="${donation.date}"/></td>
+                                    <td><c:out value="${donation.time}"/></td>
+                                    <td>
+                                        <c:set var="status_new" value="New"/>
+                                        <c:set var="counselled" value="Counselled"/>
+                                        <c:set var="completed" value="Completed"/>
+                                        <c:set var="cancelled" value="Cancelled"/>
+                                        <c:set var="deferred" value="Deferred"/>
+
+                                        <c:if test="${donation.status == status_new}">
+                                            <span class="status open">New</span>
+                                        </c:if>
+                                        <c:if test="${donation.status == counselled}">
+                                            <span class="status consulted">Counselled</span>
+                                        </c:if>
+                                        <c:if test="${donation.status == completed}">
+                                            <span class="status progress">Completed</span>
+                                        </c:if>
+                                        <c:if test="${donation.status == cancelled}">
+                                            <span class="status cancelled">Cancelled</span>
+                                        </c:if>
+                                        <c:if test="${donation.status == deferred}">
+                                            <span class="status close">Deferred</span>
+                                        </c:if>
+                                    </td>
+                                    <% if (role.equals("nurse") || role.equals("doctor")) { %>
+                                    <td>
+                                        <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                    </td>
+                                    <% } %>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>

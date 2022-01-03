@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.*;
+import com.example.thedonorlk.Bean.User.*;
 import com.example.thedonorlk.Database.*;
+import com.example.thedonorlk.Database.User.*;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.ServletException;
@@ -38,7 +40,8 @@ public class LoginServlet extends HttpServlet {
             String role = loginDAO.getUserRole(loginBean);
             int id = loginDAO.getUserID(loginBean);
             HttpSession session = request.getSession();
-            session.setAttribute("username",loginBean.getUsername());
+            session.setAttribute("username", loginBean.getUsername());
+            session.setAttribute("user_id", id);
             session.setAttribute("role", role);
 
             // Check user role and redirect accordingly

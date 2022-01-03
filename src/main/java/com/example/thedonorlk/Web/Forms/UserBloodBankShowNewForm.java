@@ -1,8 +1,5 @@
 package com.example.thedonorlk.Web.Forms;
 
-import com.example.thedonorlk.Database.UserAdminDAO;
-import com.example.thedonorlk.Database.UserBloodBankDAO;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

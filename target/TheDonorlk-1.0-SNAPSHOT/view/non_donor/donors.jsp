@@ -24,13 +24,15 @@
 <body>
 <main>
     <%
-        String reg_msg = (String) request.getAttribute("error");
-        if (reg_msg == null)
-            reg_msg = "";
+        String reg_msg = "";
+        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        if (reg_msg != null) {
     %>
     <div id="error_message">
         <%= reg_msg %>
     </div>
+    <% } %>
+
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
@@ -122,6 +124,7 @@
                             <% if (!role.equals("admin")) { %>
                                 <td>
                                     <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                    <a href="<%=request.getContextPath()%>/donorShowDeferralHistory?id=<c:out value='${donor.id}' />">Deferral History</a>
                                 </td>
                             <% } %>
                         </tr>
@@ -134,94 +137,5 @@
     </div>
 </main>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Donor Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <% if (role.equals("nurse")) { %>
-                    <div class="field-single">
-                        <span>First Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>House Number</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Last Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Street</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>DOB</span>
-                        <input type="date" id="dob-date">
-                    </div>
-                    <div class="field-single">
-                        <span>City</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Contact Number</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Bank</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <% } %>
-
-                    <div class="field-single">
-                        <span>Status</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="clear">Normal</option>
-                                <option value="tdeferred">T Deferred</option>
-                                <option value="pdeferred">P Deferred</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
-</div>
-
 </body>
-
 </html>

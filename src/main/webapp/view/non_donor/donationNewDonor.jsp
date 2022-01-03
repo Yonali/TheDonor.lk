@@ -25,7 +25,7 @@
 <main>
     <div class="card-2col-right">
         <div class="big_num">
-            <h1>00</h1>
+            <h1>0</h1>
         </div>
         <h1>Donations</h1>
     </div>

@@ -1,5 +1,5 @@
-<%@ page import="com.example.thedonorlk.Database.UserBloodBankDAO" %>
-<%@ page import="com.example.thedonorlk.Bean.UserBloodBankBean" %>
+<%@ page import="com.example.thedonorlk.Database.User.UserBloodBankDAO" %>
+<%@ page import="com.example.thedonorlk.Bean.User.UserBloodBankBean" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>

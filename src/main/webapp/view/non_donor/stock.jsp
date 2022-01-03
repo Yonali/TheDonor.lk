@@ -65,7 +65,7 @@
 
             </div>
 
-            <div class="card-header" style="display: block; text-align: center;">
+            <div class="card-header card-header-center">
                 <% if (!role.equals("admin")) { %>
                 <div class="buttons">
                     <% if (role.equals("admin") || role.equals("bloodbank") ) { %>
