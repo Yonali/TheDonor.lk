@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
     <%--  <script src="<%=request.getContextPath()%>/public/css/scripts.js"></script>--%>
 
-    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 

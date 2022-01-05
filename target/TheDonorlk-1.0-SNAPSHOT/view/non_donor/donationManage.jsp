@@ -90,7 +90,7 @@
                     <h2 class="card-topic-red">Manage Donation</h2>
                     <div class="card-header card-header-center">
                         <div class="buttons">
-                            <a href="donationManagement?type=Complete&id=<%= request.getAttribute("donation_id") %>&user_id=<%= user_id %>">Complete
+                            <a href="donationManagement?type=Complete&id=<%= request.getAttribute("donation_id") %>&user_id=<%= user_id %>&barcode=<%= request.getAttribute("barcode") %>&bank=<%= bloodbank %>">Complete
                                 Donation</a>
                             <a href="donationManagement?type=Cancel&id=<%= request.getAttribute("donation_id") %>&user_id=<%= user_id %>">Cancel
                                 Donation</a>
@@ -163,25 +163,19 @@
                                 <td><c:out value="${donation.date}"/></td>
                                 <td><c:out value="${donation.time}"/></td>
                                 <td>
-                                    <c:set var="status_new" value="New"/>
-                                    <c:set var="counselled" value="Counselled"/>
-                                    <c:set var="completed" value="Completed"/>
-                                    <c:set var="cancelled" value="Cancelled"/>
-                                    <c:set var="deferred" value="Deferred"/>
-
-                                    <c:if test="${donation.status == status_new}">
+                                    <c:if test="${donation.status == 'New'}">
                                         <span class="status open">New</span>
                                     </c:if>
-                                    <c:if test="${donation.status == counselled}">
+                                    <c:if test="${donation.status == 'Counselled'}">
                                         <span class="status consulted">Counselled</span>
                                     </c:if>
-                                    <c:if test="${donation.status == completed}">
+                                    <c:if test="${donation.status == 'Completed'}">
                                         <span class="status progress">Completed</span>
                                     </c:if>
-                                    <c:if test="${donation.status == cancelled}">
+                                    <c:if test="${donation.status == 'Cancelled'}">
                                         <span class="status cancelled">Cancelled</span>
                                     </c:if>
-                                    <c:if test="${donation.status == deferred}">
+                                    <c:if test="${donation.status == 'Deferred'}">
                                         <span class="status close">Deferred</span>
                                     </c:if>
                                 </td>

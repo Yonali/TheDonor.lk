@@ -21,7 +21,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 
-    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
@@ -81,7 +81,7 @@
                     <table width="100%">
                         <thead>
                         <tr>
-                            <td>Appt. ID</td>
+                            <td>ID</td>
                             <td>Blood Bank</td>
                             <td>Donor Name</td>
                             <td>Donor NIC</td>
@@ -126,21 +126,16 @@
                                         <c:out value="${appointment.appointment_time}"/>
                                     </td>
                                     <td>
-                                        <c:set var="open" value="New"/>
-                                        <c:set var="accepted" value="Accepted"/>
-                                        <c:set var="rejected" value="Rejected"/>
-                                        <c:set var="completed" value="Completed"/>
-
-                                        <c:if test="${appointment.status == open}">
+                                        <c:if test="${appointment.status == 'New'}">
                                             <span class="status open">New</span>
                                         </c:if>
-                                        <c:if test="${appointment.status == accepted}">
+                                        <c:if test="${appointment.status == 'Accepted'}">
                                             <span class="status progress">Accepted</span>
                                         </c:if>
-                                        <c:if test="${appointment.status == rejected}">
+                                        <c:if test="${appointment.status == 'Rejected'}">
                                             <span class="status close">Rejected</span>
                                         </c:if>
-                                        <c:if test="${appointment.status == completed}">
+                                        <c:if test="${appointment.status == 'Completed'}">
                                             <span class="status consulted">Completed</span>
                                         </c:if>
                                     </td>

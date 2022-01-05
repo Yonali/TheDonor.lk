@@ -16,12 +16,12 @@ public class DonorDAO {
     private static final String INSERT_DONOR_SQL = "INSERT INTO user_donor (ID, First_Name, Last_Name, " +
             "Donor_NIC, Contact, DOB, Gender, Email, Address_Street, Address_City, BloodBank_Code, Status) " +
             "VALUES (?,?,?,?,?,?,?,?,?,?,?, 'Normal')";
-    private static final String SELECT_DONOR_BY_ID = "SELECT * FROM user_donor WHERE ID =?";
+    private static final String SELECT_DONOR_BY_ID = "SELECT * FROM user_donor WHERE ID =? ORDER BY ID DESC";
     private static final String SELECT_DONORCARD_BY_NIC = "SELECT *, (SELECT COUNT(*) FROM donation d, user_donor ud WHERE " +
             "d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status='Completed') AS Count " +
             "FROM user_donor WHERE Donor_NIC = ?";
     private static final String SELECT_DONOR_BY_EMAIL = "SELECT * FROM user_donor WHERE Email =?";
-    private static final String SELECT_ALL_DONORS = "SELECT * FROM user_donor";
+    private static final String SELECT_ALL_DONORS = "SELECT * FROM user_donor ORDER BY ID DESC";
     private static final String UPDATE_DONOR_SQL = "UPDATE user_donor SET " +
             "First_Name = ?, Last_Name = ?, Donor_NIC = ?, Blood_Group = ?, " +
             "Contact = ?, DOB = ?, Gender = ?, Status = ?, bloodbank_code = ? WHERE ID = ?";
@@ -36,11 +36,11 @@ public class DonorDAO {
     private static final String UPDATE_DEFERRAL_HISTORY_SQL = "UPDATE deferral_history SET " +
             "Deferral_Remark = ?, Start_Date = ?, End_Date = ?, Type = ? WHERE Donation_ID = ?";
     private static final String SELECT_DEFERRAL_HISTORY_BY_ID = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
-            "Donation_ID = ? AND dh.Doc_ID=doc.ID";
+            "Donation_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY_NIC = "SELECT * FROM deferral_history dh, user_donor don WHERE " +
-            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID";
+            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
-            "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID";
+            "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
 
     /*private static final String DELETE_DONOR_SQL = "DELETE FROM campaign WHERE Campaign_ID = ?";*/
 

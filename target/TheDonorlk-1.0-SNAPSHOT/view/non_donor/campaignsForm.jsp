@@ -36,13 +36,14 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
         <form action="campaignUpdate" method="post" onsubmit="return validate();"></c:if>
@@ -50,7 +51,7 @@
             <form action="campaignInsert" method="post" onsubmit="return validate();"></c:if>
                 <div class="fields">
                     <c:if test="${user != null}">
-                        <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>
+                        <input type="hidden" name="id" value="<c:out value='${user.id}'/>"/>
                     </c:if>
                     <div class="field-single">
                         <span>Campaign Name</span>

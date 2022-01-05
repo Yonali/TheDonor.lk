@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web;
 
+import com.example.thedonorlk.Bean.BloodStockBean;
 import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.DeferralHistoryBean;
+import com.example.thedonorlk.Database.BloodStockDAO;
 import com.example.thedonorlk.Database.CampaignDAO;
 import com.example.thedonorlk.Database.DonationDAO;
 import com.example.thedonorlk.Database.DonorDAO;
@@ -20,9 +22,11 @@ public class DonationManagement extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
     private DonationDAO donationDAO;
     private DonorDAO donorDAO;
+    private BloodStockDAO stockDAO;
     public void init() {
         donationDAO = new DonationDAO();
         donorDAO = new DonorDAO();
+        stockDAO = new BloodStockDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,11 +52,21 @@ public class DonationManagement extends HttpServlet {
                 donationDAO.updateStatus(id, "Cancelled");
                 response.sendRedirect("./donation");
             } else if (type.equals("Complete")) {
-                donationDAO.updateStatus(id, "Completed");
-                response.sendRedirect("./donation");
-
                 //Insert Blood Record here
+                String blood_barcode = request.getParameter("barcode");
+                String blood_product = "Whole Blood";
+                String blood_group = "";
+                String bloodbank_code = request.getParameter("bank");
+                String status = "Whole Blood";
+                String collected_date = "";
 
+                BloodStockBean newStock = new BloodStockBean(0, blood_barcode, blood_product, blood_group,
+                        bloodbank_code, status, collected_date, collected_date, collected_date);
+
+                if (stockDAO.insertStock(newStock)) {
+                    donationDAO.updateStatus(id, "Completed");
+                    response.sendRedirect("./donation");
+                }
             } else if (type.equals("Deferr")) {
                 int doc_id = Integer.parseInt(request.getParameter("user_id"));
                 String donor_id = request.getParameter("donor_id");
@@ -71,6 +85,8 @@ public class DonationManagement extends HttpServlet {
 
                 if (donorDAO.insertDeferralHistory(newDeferral)) {
                     response.sendRedirect("./donation");
+                } else {
+                    System.out.println("Something");
                 }
             } else if (type.equals("DeferrEdit")) {
                 int doc_id = Integer.parseInt(request.getParameter("user_id"));
@@ -103,9 +119,20 @@ public class DonationManagement extends HttpServlet {
         }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-        int id = Integer.parseInt(request.getParameter("donation_id"));
-        donationDAO.updateStatus(id, "Counselled");
-        response.sendRedirect("./donation");
+    private void insertBloodStock(HttpServletRequest request, HttpServletResponse response)
+            throws SQLException, IOException, ServletException {
+        String blood_barcode = request.getParameter("barcode");
+        String blood_product = "Whole Blood";
+        String blood_group = "";
+        String bloodbank_code = request.getParameter("bank");
+        String status = "Whole Blood";
+        String collected_date = "";
+
+        BloodStockBean newStock = new BloodStockBean(0, blood_barcode, blood_product, blood_group,
+                bloodbank_code, status, collected_date, collected_date, collected_date);
+
+        if (stockDAO.insertStock(newStock)) {
+            response.sendRedirect("./donation");
+        }
     }
 }

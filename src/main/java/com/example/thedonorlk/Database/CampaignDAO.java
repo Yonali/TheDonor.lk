@@ -13,8 +13,8 @@ public class CampaignDAO {
 
     private static final String INSERT_CAMPAIGN_SQL = "INSERT INTO campaign (Campaign_Name, Campaign_Date, Start_Time, End_Time, Address_Street, Address_City, BloodBank_Code) VALUES " +
             " (?, ?, ?, ?, ?, ?, ?)";
-    private static final String SELECT_CAMPAIGN_BY_ID = "SELECT * FROM campaign WHERE Campaign_ID =?";
-    private static final String SELECT_ALL_CAMPAIGNS = "SELECT * FROM campaign";
+    private static final String SELECT_CAMPAIGN_BY_ID = "SELECT * FROM campaign WHERE Campaign_ID =? ORDER BY Campaign_ID DESC";
+    private static final String SELECT_ALL_CAMPAIGNS = "SELECT * FROM campaign ORDER BY Campaign_ID DESC";
     private static final String DELETE_CAMPAIGN_SQL = "DELETE FROM campaign WHERE Campaign_ID = ?";
     private static final String UPDATE_CAMPAIGN_SQL = "UPDATE campaign SET " +
             "Campaign_Name = ?, Campaign_Date = ?, Start_Time = ?, End_Time = ?, " +

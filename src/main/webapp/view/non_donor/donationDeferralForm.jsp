@@ -58,9 +58,9 @@
             <%= reg_msg %>
         </div>
 
-        <c:if test="${user != null}">
+        <c:if test="${history == null}">
         <form action="donationManagement?type=Deferr" method="post" onchange="hideEndDate()"></c:if>
-            <c:if test="${user == null}">
+            <c:if test="${history != null}">
             <form action="donationManagement?type=DeferrEdit" method="post" onchange="hideEndDate()"></c:if>
 
             <div class="fields">

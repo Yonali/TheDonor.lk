@@ -21,7 +21,7 @@
     <script src="<%=request.getContextPath()%>/public/scripts/cardview_toggle.js"></script>
     <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
 
-    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 

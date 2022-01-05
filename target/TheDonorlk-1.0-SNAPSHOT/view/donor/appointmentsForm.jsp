@@ -106,7 +106,6 @@
                                     <c:if test="${bloodbank_code.code != appointment.bloodbank_code}">
                                         <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                     </c:if>
-
                                 </c:forEach>
                             </select>
                         </div>

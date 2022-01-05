@@ -14,8 +14,8 @@ public class EmergencyDAO {
 
     private static final String INSERT_SQL = "INSERT INTO emergency_requirement (Blood_Group, Date, Time, Status, BloodBank_Code) VALUES " +
             " (?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ?";
-    private static final String SELECT_ALL = "SELECT * FROM emergency_requirement";
+    private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ? ORDER BY Emg_ID DESC";
+    private static final String SELECT_ALL = "SELECT * FROM emergency_requirement ORDER BY Emg_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM emergency_requirement WHERE Emg_ID = ?";
     private static final String UPDATE_SQL = "UPDATE emergency_requirement SET " +
             "Blood_Group = ?, Date = ?, Time = ?, Status = ?, " +

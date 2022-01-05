@@ -103,15 +103,14 @@ public class DonationSearch extends HttpServlet {
                 request.setAttribute("status","Counselled");
             } else if (status.equals("Completed")) {
                 request.setAttribute("status","Completed");
-                request.setAttribute("barcode",blood_barcode);
             } else if (status.equals("Cancelled")) {
                 request.setAttribute("status","Cancelled");
-                request.setAttribute("barcode",blood_barcode);
             } else if (status.equals("Deferred")) {
                 request.setAttribute("status","Deferred");
                 request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistory(donation_id));
             }
 
+            request.setAttribute("barcode",blood_barcode);
             List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
             request.setAttribute("listDonation", listDonation);
             DonorCardBean donor = donorDAO.selectDonorCard(nic);

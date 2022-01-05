@@ -36,13 +36,14 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
             <form action="userDoctorUpdate" method="post" onsubmit="return validate();">

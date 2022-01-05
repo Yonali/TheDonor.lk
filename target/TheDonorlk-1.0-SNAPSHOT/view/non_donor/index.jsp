@@ -70,22 +70,22 @@
                     <span>Blood Stock Management</span></a>
                 <ul class="stock-show">
                     <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
-                    <li><a href="<%=request.getContextPath()%>/view/non_donor/stock.jsp" target="iframe"><span
+                    <li><a href="<%=request.getContextPath()%>/bloodStock?bank=all" target="iframe"><span
                             class="las la-angle-right"></span><span>Blood
                                     Stock</span></a></li>
                     <% } %>
                     <% if (role.equals("admin") || role.equals("bloodbank")) { %>
-                    <li><a href="<%=request.getContextPath()%>/view/non_donor/request_sent.jsp" target="iframe"><span
+                    <li><a href="<%=request.getContextPath()%>/bloodRequestSent" target="iframe"><span
                             class="las la-angle-right"></span><span>
                                     Request Sent</span></a></li>
                     <% } %>
                     <% if (role.equals("admin") || role.equals("bloodbank")) { %>
-                    <li><a href="<%=request.getContextPath()%>/view/non_donor/request_received.jsp"
+                    <li><a href="<%=request.getContextPath()%>/bloodRequestReceived"
                            target="iframe"><span class="las la-angle-right"></span><span>
                                         Request Received</span></a></li>
                     <% } %>
                     <% if (role.equals("admin") || role.equals("bloodbank")) { %>
-                    <li><a href="<%=request.getContextPath()%>/view/non_donor/transfer.jsp" target="iframe"><span
+                    <li><a href="<%=request.getContextPath()%>/bloodTransfer" target="iframe"><span
                             class="las la-angle-right"></span><span>
                                     Transfer History</span></a></li>
                     <% } %>

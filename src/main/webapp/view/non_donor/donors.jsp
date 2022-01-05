@@ -103,21 +103,16 @@
                                 <c:out value="${donor.gender}"/>
                             </td>
                             <td>
-                                <c:set var="normal" value="Normal"/>
-                                <c:set var="t_deferred" value="T_Deferred"/>
-                                <c:set var="p_deferred" value="P_Deferred"/>
-                                <c:set var="not_verified" value="Not_Verified"/>
-
-                                <c:if test="${donor.status == normal}">
+                                <c:if test="${donor.status == 'Normal'}">
                                     <span class="status progress">Normal</span>
                                 </c:if>
-                                <c:if test="${donor.status == t_deferred}">
+                                <c:if test="${donor.status == 'T_Deferred'}">
                                     <span class="status open">T_Deferred</span>
                                 </c:if>
-                                <c:if test="${donor.status == p_deferred}">
+                                <c:if test="${donor.status == 'P_Deferred'}">
                                     <span class="status close">P_Deferred</span>
                                 </c:if>
-                                <c:if test="${donor.status == not_verified}">
+                                <c:if test="${donor.status == 'Not_Verified'}">
                                     <span class="status cancelled">Not_Verified</span>
                                 </c:if>
                             </td>
