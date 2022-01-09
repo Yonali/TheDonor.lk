@@ -73,7 +73,11 @@ public class LoginServlet extends HttpServlet {
                     }
                 }
 
-                response.sendRedirect("./view/non_donor/index.jsp");
+                ProfileDAO profileDAO = new ProfileDAO();
+                ProfileBean profile = profileDAO.viewProfile(id);
+                request.setAttribute("profile", profile);
+                request.getRequestDispatcher("./view/non_donor/index.jsp").forward(request, response);
+                /*response.sendRedirect("./view/non_donor/index.jsp");*/
             }
         } else {
             request.setAttribute("error","Incorrect Username or Password");

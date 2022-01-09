@@ -21,6 +21,7 @@ public class UserDoctorDAO {
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
             "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=? WHERE id = ?;";
 
     public UserDoctorDAO() {}
 
@@ -145,6 +146,20 @@ public class UserDoctorDAO {
             statement.setString(8, user.getSection());
             statement.setString(9, user.getBloodbank_code());
             statement.setInt(10, user.getId());
+
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
+    }
+
+    public boolean updateDoctor2(UserDoctorBean user) throws SQLException {
+        boolean rowUpdated;
+        try (PreparedStatement statement = con.prepareStatement(UPDATE_USERS_SQL2);) {
+            statement.setString(1, user.getFirst_name());
+            statement.setString(2, user.getLast_name());
+            statement.setString(3, user.getContact());
+            statement.setString(4, user.getNic());
+            statement.setInt(5, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

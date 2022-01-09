@@ -1,9 +1,12 @@
+<%@ page import="com.example.thedonorlk.Bean.ProfileBean" %>
+<%@ page import="org.apache.commons.codec.binary.Base64" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%
     if (session.getAttribute("username") == null || session.getAttribute("role").equals("donor")) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     Object role = session.getAttribute("role");
+    Object user_id = session.getAttribute("user_id");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +36,7 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/dashboard.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/dashboard" target="iframe"><span
                         class="las la-tachometer-alt"></span>
                     <span>Dashboard</span></a>
             </li>
@@ -155,7 +158,18 @@
         <script src="<%=request.getContextPath()%>/public/scripts/sidebar_button.js"></script>
         <div class="dropdown">
             <div class="user-wrapper">
-                <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" width="40px" height="40px" alt="">
+                <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+                    String base64Encoded=null;
+                    if (profile.getImgBytes() != null) {
+                        byte[] bytes = profile.getImgBytes();
+                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                        base64Encoded = new String(encodeBase64, "UTF-8");
+                    }
+                %>
+                <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
+                     style="width:40px;height:40px;">
+
+                <%--<img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" width="40px" height="40px" alt="">--%>
                 <div>
                     <h4><%=session.getAttribute("username")%>
                     </h4>
@@ -164,7 +178,8 @@
                 </div>
             </div>
             <div class="dropdown-content">
-                <a href="#" id="newbtn">Settings</a>
+                <a href="<%=request.getContextPath()%>/nonDonorShowSettingForm?id=<%= user_id %>&role=<%= role %>"
+                   target="iframe">Settings</a>
                 <a href="<%=request.getContextPath()%>/logout">Logout</a>
             </div>
         </div>

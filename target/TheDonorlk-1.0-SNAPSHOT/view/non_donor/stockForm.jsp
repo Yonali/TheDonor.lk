@@ -75,7 +75,6 @@
                 </div>
             </div>
         </form>
-
     </div>
     <div class="modal-footer">
         <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">

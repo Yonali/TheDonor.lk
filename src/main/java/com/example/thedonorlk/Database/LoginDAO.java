@@ -25,7 +25,6 @@ public class LoginDAO {
             ps.setString(2, loginBean.getPassword());
             ResultSet rs = ps.executeQuery();
             status = rs.next();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

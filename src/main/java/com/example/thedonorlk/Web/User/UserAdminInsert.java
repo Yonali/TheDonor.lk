@@ -32,7 +32,7 @@ public class UserAdminInsert extends HttpServlet {
             request.setAttribute("error","Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("userAdmin");
             dispatcher.forward(request, response);
-//            throw new ServletException(ex);
+            //throw new ServletException(ex);
         }
     }
 

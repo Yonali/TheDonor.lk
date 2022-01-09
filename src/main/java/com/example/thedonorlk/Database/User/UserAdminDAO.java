@@ -1,5 +1,6 @@
 package com.example.thedonorlk.Database.User;
 
+import com.example.thedonorlk.Bean.ProfileBean;
 import com.example.thedonorlk.Bean.User.UserAdminBean;
 import com.example.thedonorlk.Database.DatabaseConnection;
 
@@ -14,7 +15,7 @@ public class UserAdminDAO {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user (Username, Password, Role) VALUES " +
             " (?, ?, ?)";
-    private static final String SELECT_USER_BY_ID = "SELECT id,username FROM user WHERE id =?";
+    private static final String SELECT_USER_BY_ID = "SELECT * FROM user WHERE id =?";
     private static final String SELECT_ALL_USERS = "SELECT * FROM user WHERE role='admin'";
     private static final String DELETE_USERS_SQL = "DELETE FROM user WHERE id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?";
