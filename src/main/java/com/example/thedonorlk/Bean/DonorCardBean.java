@@ -2,7 +2,8 @@ package com.example.thedonorlk.Bean;
 
 public class DonorCardBean {
     private int id;
-    private String name;
+    private String first_name;
+    private String last_name;
     private String nic;
     private String blood_group;
     private String contact;
@@ -11,13 +12,18 @@ public class DonorCardBean {
     private String status;
     private String donation_count;
     private String age;
+    private String add_street;
+    private String add_city;
+    private String about;
+
 
     public DonorCardBean() {
     }
 
-    public DonorCardBean(int id, String name, String nic, String blood_group, String contact, String gender, String email, String status, String donation_count, String age) {
+    public DonorCardBean(int id, String first_name, String last_name, String nic, String blood_group, String contact, String gender, String email, String status, String donation_count, String age, String add_street, String add_city, String about) {
         this.id = id;
-        this.name = name;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.nic = nic;
         this.blood_group = blood_group;
         this.contact = contact;
@@ -26,6 +32,9 @@ public class DonorCardBean {
         this.status = status;
         this.donation_count = donation_count;
         this.age = age;
+        this.add_street = add_street;
+        this.add_city = add_city;
+        this.about = about;
     }
 
     public int getId() {
@@ -36,12 +45,20 @@ public class DonorCardBean {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirst_name() {
+        return first_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
 
     public String getNic() {
@@ -106,5 +123,29 @@ public class DonorCardBean {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getAdd_street() {
+        return add_street;
+    }
+
+    public void setAdd_street(String add_street) {
+        this.add_street = add_street;
+    }
+
+    public String getAdd_city() {
+        return add_city;
+    }
+
+    public void setAdd_city(String add_city) {
+        this.add_city = add_city;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 }

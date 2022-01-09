@@ -168,8 +168,6 @@
                 %>
                 <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
                      style="width:40px;height:40px;">
-
-                <%--<img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" width="40px" height="40px" alt="">--%>
                 <div>
                     <h4><%=session.getAttribute("username")%>
                     </h4>

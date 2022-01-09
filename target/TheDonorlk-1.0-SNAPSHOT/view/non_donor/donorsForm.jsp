@@ -85,7 +85,7 @@
                         <input type="text" name="Contact" id="Contact" value="<c:out value='${donor.contact}'/>"/>
                     </div>
                     <div class="field-single">
-                        <span>Date</span>
+                        <span>DOB</span>
                         <input type="date" name="DOB" id="DOB" value="<c:out value='${donor.dob}'/>">
                     </div>
                     <div class="field-single">

@@ -50,7 +50,7 @@
         <% } %>
 
         <div class="modal-body">
-            <% if (role.equals("doctor") || role.equals("nurse")) { %>
+
             <div class="fields">
                 <div class="inter_fields">
                     <form action="profileUpdate" method="post" enctype="multipart/form-data">
@@ -66,10 +66,11 @@
                                         }
                                     %>
                                     <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
-                                         style="width:120px;height:120px;">
+                                         id="output" style="width:120px;height:120px;">
                                 </div>
 
                                 <input type="hidden" name="id" value="<%= id %>"/>
+                                <input type="hidden" name="role" value="<%= role %>"/>
                                 <div class="edit_div1">
                                     <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" <%--style="display: none;"--%>>
                                     <%--<p><label for="file" style="cursor: pointer;">Upload Image</label></p>--%>
@@ -83,6 +84,7 @@
                         </div>
                     </form>
 
+                    <% if (role.equals("doctor") || role.equals("nurse")) { %>
                     <form action="nonDonorSettingUpdate" method="post">
                         <input type="hidden" name="id" value="<%= id %>"/>
                         <input type="hidden" name="role" value="<%= role %>"/>
@@ -113,43 +115,8 @@
                             </div>
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <% } else if (role.equals("bloodbank")) { %>
-            <form action="nonDonorSettingUpdate" method="post">
-                <div class="fields">
-                    <div class="inter_fields">
-                        <form action="profileUpdate" method="post" enctype="multipart/form-data">
-                            <div class="A_container">
-                                <div class="main_edit_div">
-                                    <div class="edit_div1">
-                                        <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
-                                            String base64Encoded=null;
-                                            if (profile.getImgBytes() != null) {
-                                                byte[] bytes = profile.getImgBytes();
-                                                byte[] encodeBase64 = Base64.encodeBase64(bytes);
-                                                base64Encoded = new String(encodeBase64, "UTF-8");
-                                            }
-                                        %>
-                                        <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
-                                             id="output" style="width:120px;height:120px;">
-                                    </div>
-
-                                    <input type="hidden" name="id" value="<%= id %>"/>
-                                    <div class="edit_div1">
-                                        <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" <%--style="display: none;"--%>>
-                                        <%--<p><label for="file" style="cursor: pointer;">Upload Image</label></p>--%>
-                                    </div>
-                                    <div class="modal-submit-button" style="padding-top: 0px">
-                                        <div class="buttons">
-                                            <button type="submit">Change</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
+                    <% } else if (role.equals("bloodbank")) { %>
+                    <form action="nonDonorSettingUpdate" method="post">
                         <input type="hidden" name="id" value="<%= id %>"/>
                         <input type="hidden" name="role" value="<%= role %>"/>
                         <div class="B_container">
@@ -173,15 +140,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="modal-submit-button">
+                            <div class="buttons">
+                                <button type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                    <% } %>
                 </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Save</button>
-                    </div>
-                </div>
-            </form>
-            <% } %>
+            </div>
 
             <form action="passwordUpdate" method="post">
                 <div class="Change_pwd">
@@ -191,6 +158,7 @@
                         </div>
                         <input type="hidden" name="id" value="<%= id %>"/>
                         <input type="hidden" name="username" value="<%= username %>"/>
+                        <input type="hidden" name="role" value="<%= role %>"/>
                         <div class="Change_pwd_2">
                             <div class="field-single">
                                 <span>Current Password</span>
@@ -211,22 +179,6 @@
                     <button type="submit">Save</button>
                 </div>
             </form>
-
-            <%--<form>
-                <div class="dlt_act">
-                    <div class="inter_dlt_act">
-                        <div class="dlt_act_1">
-                            <h3>Delete this Account</h3>
-                        </div>
-                        <div class="dlt_act_2">
-                            <span>Once you delete an account, there is no going back. Please be certain.</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-submit-button-dlt">
-                    <button type="submit">Delete</button>
-                </div>
-            </form>--%>
         </div>
 
         <div class="modal-footer" style="margin-left: -50px; margin-right: -50px; margin-bottom: -50px ">

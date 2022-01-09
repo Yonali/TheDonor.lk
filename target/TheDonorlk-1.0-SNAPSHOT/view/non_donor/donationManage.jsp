@@ -36,7 +36,7 @@
     <div class="card card-details">
         <p>NIC: <c:out value='${donor.nic}'/></p>
         <div>
-            Name: <c:out value='${donor.name}'/><br>
+            Name: <c:out value='${donor.first_name}'/> <c:out value='${donor.last_name}'/><br>
             Contact: <c:out value='${donor.contact}'/><br>
             Email: <c:out value='${donor.email}'/><br>
             <pre>Age: <c:out value='${donor.age}'/>     Gender: <c:out value='${donor.gender}'/>    Blood Group: <c:out

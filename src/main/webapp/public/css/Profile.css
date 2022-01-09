@@ -62,11 +62,13 @@
   flex-direction: column;
   margin-top: 35px;
   font-weight: bold;
+  margin-left: -45px;
 }
 .dcount{
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   justify-content: left flex-end;
   margin-left: -380px;
   
@@ -116,7 +118,7 @@
 
 .optiondiv{
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 45% 10% 45%;
   grid-template-areas: "left right";
     
   margin-left: 300px;
@@ -131,30 +133,29 @@
   width: 100%;
   color: #750605; 
   background: #EAE5E5;
+
+  margin-left: 0px;
 }
 .optiondiv_1{
   display: flex;
   flex-direction: column;
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: repeat(1, 1fr);
-  align-items: center;
-  justify-content: right flex-start;
-  grid-area: "left";
+  align-items: flex-end;
+  padding: 15px;
+  font-weight: bold;
 }
 .optiondiv_2{
   display: flex;
   flex-direction: column;
   grid-template-rows: repeat(1, 1fr);
   grid-template-columns: repeat(1, 1fr);
-  align-items: center;
-  justify-content: left flex-start;
-  grid-area: "right";
+  //align-items: center;
+  //justify-content: left flex-start;
+  //grid-area: "right";
 }
-.optiondiv h6{
-  margin-top: 18px;
-  /* margin-left: 300px; */
-  font-weight: bold;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+.optiondiv p{
+  color: black;
   font-size: small;
 }
 /* -----------------------edit button-------------------------------------------- */
@@ -1219,15 +1220,8 @@ cursor: pointer;
   /* 
   here....................................
   } */
-  .optiondiv{
-    margin-left: 0px;
-    justify-content: left flex-start; 
-  }
   .dn_pp{
     margin-left: -360px;
-  }
-  .dnametl{
-   margin-left: -45px;
   }
   .dcount{
     margin-left: -80px;

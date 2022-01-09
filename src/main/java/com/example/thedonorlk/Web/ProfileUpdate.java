@@ -56,11 +56,16 @@ public class ProfileUpdate extends HttpServlet {
             profileBean.setProfile(filePart.getInputStream());
         }
 
+        String role = request.getParameter("role");
+        String redirect = "dashboard";
+        if (role.equals("Donor")) {
+            redirect = "donorShowProfile?id=" + id;
+        }
         if (profileDAO.updateProfile(profileBean)) {
-            response.sendRedirect("./dashboard");
+            response.sendRedirect("./" + redirect);
         } else {
             request.setAttribute("error", "Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
             dispatcher.forward(request, response);
         }
 

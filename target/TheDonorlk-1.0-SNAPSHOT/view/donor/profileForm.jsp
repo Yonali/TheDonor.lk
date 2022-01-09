@@ -32,7 +32,7 @@
 </head>
 
 <body>
-<div class="modal-content">
+<div class="modal-content"  style="top: 0px">
     <div class="modal-header">
         <span class="close-popup" onclick="history.back()">&times;</span>
         <h3>Edit Profile</h3>
@@ -50,7 +50,6 @@
         <% } %>
 
         <div class="modal-body">
-
             <div class="fields">
                 <div class="inter_fields">
                     <form action="profileUpdate" method="post" enctype="multipart/form-data">
@@ -70,7 +69,7 @@
                                 </div>
 
                                 <input type="hidden" name="id" value="<%= id %>"/>
-                                <input type="hidden" name="role" value="<%= role %>"/>
+                                <input type="hidden" name="role" value="Donor"/>
                                 <div class="edit_div1">
                                     <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" <%--style="display: none;"--%>>
                                     <%--<p><label for="file" style="cursor: pointer;">Upload Image</label></p>--%>
@@ -84,59 +83,36 @@
                         </div>
                     </form>
 
-                    <% if (role.equals("doctor") || role.equals("nurse")) { %>
-                    <form action="nonDonorSettingUpdate" method="post">
+                    <form action="donorProfileUpdate" method="post" id="profileForm">
                         <input type="hidden" name="id" value="<%= id %>"/>
                         <input type="hidden" name="role" value="<%= role %>"/>
                         <div class="B_container">
                             <div class="inter_B_container">
                                 <div class="field-single">
                                     <span>First Name</span>
-                                    <input type="text" name="First_Name" value="<c:out value='${user.first_name}'/>"/>
+                                    <input type="text" name="First_Name" value="<c:out value='${donor.first_name}'/>"/>
                                 </div>
                                 <div class="field-single">
                                     <span>Last Name</span>
-                                    <input type="text" name="Last_Name" value="<c:out value='${user.last_name}'/>"/>
+                                    <input type="text" name="Last_Name" value="<c:out value='${donor.last_name}'/>"/>
                                 </div>
 
                                 <div class="field-single">
                                     <span>Contact</span>
-                                    <input type="text" name="Contact" value="<c:out value='${user.contact}'/>"/>
-                                </div>
-                                <div class="field-single">
-                                    <span>NIC</span>
-                                    <input type="text" name="NIC" value="<c:out value='${user.nic}'/>"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-submit-button">
-                            <div class="buttons">
-                                <button type="submit">Save</button>
-                            </div>
-                        </div>
-                    </form>
-                    <% } else if (role.equals("bloodbank")) { %>
-                    <form action="nonDonorSettingUpdate" method="post">
-                        <input type="hidden" name="id" value="<%= id %>"/>
-                        <input type="hidden" name="role" value="<%= role %>"/>
-                        <div class="B_container">
-                            <div class="inter_B_container">
-                                <div class="field-single">
-                                    <span>Name</span>
-                                    <input type="text" name="Name" value="<c:out value='${user.name}'/>"/>
-                                </div>
-                                <div class="field-single">
-                                    <span>Contact</span>
-                                    <input type="text" name="Contact" value="<c:out value='${user.contact}'/>"/>
+                                    <input type="text" name="Contact" value="<c:out value='${donor.contact}'/>"/>
                                 </div>
                                 <div class="field-single">
                                     <span>Address Street</span>
-                                    <input type="text" name="Address_Street"
-                                           value="<c:out value='${user.add_street}'/>"/>
+                                    <input type="text" name="Add_Street" value="<c:out value='${donor.add_street}'/>"/>
                                 </div>
                                 <div class="field-single">
                                     <span>Address City</span>
-                                    <input type="text" name="Address_City" value="<c:out value='${user.add_city}'/>"/>
+                                    <input type="text" name="Add_City" value="<c:out value='${donor.add_city}'/>"/>
+                                </div>
+                                <div class="field-single">
+                                    <span>About you</span>
+                                    <%--<input type="text" name="About" value="<c:out value='${donor.about}'/>"/>--%>
+                                    <textarea name="About" form="profileForm" style="width: 50%; height: 50px;"><c:out value='${donor.about}'/></textarea>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +122,6 @@
                             </div>
                         </div>
                     </form>
-                    <% } %>
                 </div>
             </div>
 
@@ -158,7 +133,7 @@
                         </div>
                         <input type="hidden" name="id" value="<%= id %>"/>
                         <input type="hidden" name="username" value="<%= username %>"/>
-                        <input type="hidden" name="role" value="<%= role %>"/>
+                        <input type="hidden" name="role" value="Donor"/>
                         <div class="Change_pwd_2">
                             <div class="field-single">
                                 <span>Current Password</span>
@@ -177,6 +152,22 @@
                 </div>
                 <div class="modal-submit-button">
                     <button type="submit">Save</button>
+                </div>
+            </form>
+
+            <form>
+                <div class="dlt_act">
+                    <div class="inter_dlt_act">
+                        <div class="dlt_act_1">
+                            <h3>Delete this Account</h3>
+                        </div>
+                        <div class="dlt_act_2">
+                            <span>Once you delete an account, there is no going back. Please be certain.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-submit-button-dlt">
+                    <button type="submit">Delete</button>
                 </div>
             </form>
         </div>

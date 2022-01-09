@@ -56,24 +56,29 @@ public class PasswordUpdate extends HttpServlet {
         String hash_new_pwd = DigestUtils.sha256Hex(new_password);
         String hash_cnfrm_pwd = DigestUtils.sha256Hex(cnfrm_password);
 
+        String role = request.getParameter("role");
+        String redirect = "dashboard";
+        if (role.equals("Donor")) {
+            redirect = "donorShowProfile?id=" + id;
+        }
         if (!loginDAO.validate(login)) {
             request.setAttribute("error", "Incorrect Password, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
             dispatcher.forward(request, response);
         } else if (new_password.length() < 8) {
             request.setAttribute("error", "Password should be Minimum 8 Characters long, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
             dispatcher.forward(request, response);
         } else if (!hash_new_pwd.equals(hash_cnfrm_pwd)) {
             request.setAttribute("error", "Passwords do not match, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
             dispatcher.forward(request, response);
         } else {
             if (profileDAO.updatePassword(id, hash_new_pwd)) {
-                response.sendRedirect("./dashboard");
+                response.sendRedirect("./" + redirect);
             } else {
                 request.setAttribute("error", "Something went wrong, Please Try Again");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+                RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
                 dispatcher.forward(request, response);
             }
         }

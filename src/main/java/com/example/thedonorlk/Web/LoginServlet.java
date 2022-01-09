@@ -52,7 +52,11 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("name", userBean.getFname() + " " + userBean.getLname());
                 session.setAttribute("role", "donor");
 
-                response.sendRedirect("./view/donor/index.jsp");
+                ProfileDAO profileDAO = new ProfileDAO();
+                ProfileBean profile = profileDAO.viewProfile(id);
+                request.setAttribute("profile", profile);
+                request.getRequestDispatcher("./view/donor/index.jsp").forward(request, response);
+                //response.sendRedirect("./view/donor/index.jsp");
             } else {
                 if (role.equals("admin")) {
                     UserAdminDAO userDAO = new UserAdminDAO();
