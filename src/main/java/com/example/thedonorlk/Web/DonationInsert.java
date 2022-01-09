@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -40,9 +41,11 @@ public class DonationInsert extends HttpServlet {
 
     private void insertDonation(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        String bloodbank_code = request.getParameter("Bloodbank_Code");
-        String user_id = request.getParameter("User_ID");
-        String user_role = request.getParameter("User_Role");
+        HttpSession session = request.getSession(false);
+
+        String bloodbank_code = (String)session.getAttribute("bloodbank");
+        String user_id = String.valueOf(session.getAttribute("user_id"));
+        String user_role = (String)session.getAttribute("role");
         String donor_id = request.getParameter("Donor_ID");
         String blood_id = request.getParameter("Blood_Barcode");
 

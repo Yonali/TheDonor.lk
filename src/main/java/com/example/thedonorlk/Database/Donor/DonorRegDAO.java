@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class DonorRegDAO {
 
@@ -17,8 +18,10 @@ public class DonorRegDAO {
     boolean status = true;
     public boolean addDonorReg(DonorRegBean donorRegBean){
         String id = createUser(donorRegBean.getEmail(), donorRegBean.getPwd());
+        Date date = new Date();
+        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
-        String sql = "INSERT INTO user_donor (ID, First_Name, Last_Name, Contact, DOB, Gender, Email, Status) VALUES (?,?,?,?,?,?,?, 'Not Verified')";
+        String sql = "INSERT INTO user_donor (ID, First_Name, Last_Name, Contact, DOB, Gender, Email, Status, Join_Date) VALUES (?,?,?,?,?,?,?, 'Not Verified', ?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,id);
@@ -28,6 +31,7 @@ public class DonorRegDAO {
             ps.setString(5,donorRegBean.getDob());
             ps.setString(6,donorRegBean.getGender());
             ps.setString(7,donorRegBean.getEmail());
+            ps.setDate(8, sqlDate);
 
             ps.execute();
         } catch (SQLException e){

@@ -527,7 +527,8 @@ main {
 .chart {
   width: 500px;
   height: 300px;
-  margin-left: 320px;
+  //margin-left: 320px;
+
 }
 
 .card-details {
@@ -672,6 +673,8 @@ main {
 .card-header,
 .card-body {
   padding: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
 .card-header-center {

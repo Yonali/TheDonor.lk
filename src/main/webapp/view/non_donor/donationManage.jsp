@@ -56,9 +56,9 @@
                     <span class="las la-search"></span>
                     <form action="donationInsert" method="post" onsubmit="return validate();">
                         <input type="search" placeholder="Blood Barcode" name="Blood_Barcode" id="Blood_Barcode"/>
-                        <input type="hidden" name="Bloodbank_Code" value="<%= bloodbank %>"/>
+                        <%--<input type="hidden" name="Bloodbank_Code" value="<%= bloodbank %>"/>
                         <input type="hidden" name="User_ID" value="<%= user_id %>"/>
-                        <input type="hidden" name="User_Role" value="<%= role %>"/>
+                        <input type="hidden" name="User_Role" value="<%= role %>"/>--%>
                         <input type="hidden" name="Donor_ID" value="<c:out value='${donor.id}'/>"/>
                         <button type="submit">Enter</button>
                     </form>

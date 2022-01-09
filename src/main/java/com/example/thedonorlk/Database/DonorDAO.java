@@ -14,8 +14,8 @@ import java.util.List;
 public class DonorDAO {
 
     private static final String INSERT_DONOR_SQL = "INSERT INTO user_donor (ID, First_Name, Last_Name, " +
-            "Donor_NIC, Contact, DOB, Gender, Email, Address_Street, Address_City, BloodBank_Code, Status) " +
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?, 'Normal')";
+            "Donor_NIC, Contact, DOB, Gender, Email, Address_Street, Address_City, BloodBank_Code, Status, Join_Date) " +
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?, 'Normal', ?)";
     private static final String SELECT_DONOR_BY_ID = "SELECT * FROM user_donor WHERE ID =? ORDER BY ID DESC";
     private static final String SELECT_DONORCARD_BY_NIC = "SELECT *, (SELECT COUNT(*) FROM donation d, user_donor ud WHERE " +
             "d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status='Completed') AS Count " +
@@ -53,6 +53,8 @@ public class DonorDAO {
     boolean status = true;
     public boolean insertDonor(DonorBean donorBean){
         String id = createUser(donorBean.getEmail(), generatePassword());
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
         try{
             PreparedStatement ps = con.prepareStatement(INSERT_DONOR_SQL);
@@ -67,6 +69,7 @@ public class DonorDAO {
             ps.setString(9,donorBean.getAdd_street());
             ps.setString(10,donorBean.getAdd_city());
             ps.setString(11,donorBean.getBloodbank_code());
+            ps.setDate(12, sqlDate);
 
             ps.execute();
         } catch (SQLException e){

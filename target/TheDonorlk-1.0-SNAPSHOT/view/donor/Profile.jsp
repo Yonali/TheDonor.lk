@@ -18,6 +18,8 @@
     <title>Profile</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/Profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/scripts.js"></script>
 </head>
 
 <body>
@@ -86,22 +88,16 @@
                 <textarea name="textarea" class="textarea_responsive" id="textarea_responsive"
                           placeholder="write something..." cols="25" rows="3"></textarea>
                 <!-- --------------------------------responsive------------------------------------- -->
+                <img id="output" width="200"/>
             </div>
-
             <div class="media">
                 <div class="media_all">
                     <div class="Upload_pht">
-                        <h3>Photo</h3>
-                        <a href="upload_pht.jsp">
-                            <i class="fa fa-picture-o" aria-hidden="true"></i>
-                        </a>
+                        <input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;">
+                        <label for="file" style="cursor: pointer;"><h4>  Upload Media here  </h4></label>
+
                     </div>
-                    <div class="Upload_vedio">
-                        <h3>Video</h3>
-                        <a href="upload_video.jsp">
-                            <i class="fa fa-video-camera" aria-hidden="true"></i>
-                        </a>
-                    </div>
+                    <div></div>
                     <div class="SB">
                         <button id="sharebtn"><i class="fa fa-share" aria-hidden="true"></i>
                             Share
@@ -110,7 +106,49 @@
 
                 </div>
             </div>
+
             <div class="posts">
+                <div class="singlepost">
+                    <div class="Profilename">
+                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP"
+                             style="width:60px;height:60px;">
+                        <a href="#"><%=session.getAttribute("name")%>
+                        </a>
+                        <h6 id="postdate">2021/09/10</h6>
+                    </div>
+
+                    <div class="caption">
+                        <h6>Save lives. Donate Blood. </h6>
+                    </div>
+                    <div class="imgOrV">
+                        <img src="<%=request.getContextPath()%>/public/images/postpic.jpg" id="PP1"
+                             style="width:400px;height:300px;">
+                    </div>
+                    <!-- --------------------------------responsive------------------------------------- -->
+                    <div class="imgOrV_responsive">
+                        <img src="<%=request.getContextPath()%>/public/images/postpic.jpg" id="PP1_r"
+                             style="width:300px;height:250px;">
+                    </div>
+                    <!-- --------------------------------responsive------------------------------------- -->
+                    <div class="footer">
+                        <div class="sub_footer">
+                            <div class="like_div">
+                                <button id="likes_box"><i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>25
+                                    likes
+                                </button>
+                            </div>
+                            <div class="comment_div">
+                                <button id="comments_box2"><i onclick="myFunction(this)" class="fa fa-comment-o"
+                                                              aria-hidden="true"></i>9 Comments
+                                </button>
+                            </div>
+                            <div class="report_div">
+                                <button class="dlt">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="singlepost">
                     <div class="Profilename">
                         <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP"
@@ -153,6 +191,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
