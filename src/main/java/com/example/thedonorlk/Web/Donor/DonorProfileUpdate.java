@@ -1,4 +1,4 @@
-package com.example.thedonorlk.Web;
+package com.example.thedonorlk.Web.Donor;
 
 import com.example.thedonorlk.Bean.DonorBean;
 import com.example.thedonorlk.Bean.User.UserBloodBankBean;
@@ -66,7 +66,7 @@ public class DonorProfileUpdate extends HttpServlet {
                 email, add_street, add_city,profile,description,bloodbank_code, status);
 
             if (donorDAO.updateUserDonation(donor)) {
-                response.sendRedirect("donorShowProfile?id=" + id);
+                response.sendRedirect("donorProfile");
             }
     }
 }

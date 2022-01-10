@@ -59,7 +59,7 @@ public class ProfileUpdate extends HttpServlet {
         String role = request.getParameter("role");
         String redirect = "dashboard";
         if (role.equals("Donor")) {
-            redirect = "donorShowProfile?id=" + id;
+            redirect = "donorProfile";
         }
         if (profileDAO.updateProfile(profileBean)) {
             response.sendRedirect("./" + redirect);

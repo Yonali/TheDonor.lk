@@ -35,7 +35,7 @@
                     <div class="dropdown">
                         <button class="dropbtn tes" id="pageName">Timeline</button>
                         <div id="myDropdown" class="dropdown-content">
-                            <a href="<%=request.getContextPath()%>/view/donor/home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
+                            <a href="<%=request.getContextPath()%>/donorTimeline" target="mainframe" onclick="timelineSelect()">Timeline</a>
                             <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
                             <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
                             <a href="<%=request.getContextPath()%>/intructions.jsp" target="mainframe"
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                     <div class="dropdown-content">
-                        <a href="<%=request.getContextPath()%>/donorShowProfile?id=<%= user_id %>" target="mainframe" onclick="profileSelect()">Profile</a>
+                        <a href="<%=request.getContextPath()%>/donorProfile" target="mainframe" onclick="profileSelect()">Profile</a>
                         <a href="<%=request.getContextPath()%>/logout">Logout</a>
                     </div>
                 </div>
@@ -96,11 +96,11 @@
                     </div>
 
                     <div class="dropdown-content_responsive">
-                        <a href="<%=request.getContextPath()%>/view/donor/home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
+                        <a href="<%=request.getContextPath()%>/donorTimeline" target="mainframe" onclick="timelineSelect()">Timeline</a>
                         <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
                         <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
                         <a href="intructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
-                        <a href="<%=request.getContextPath()%>/donorShowProfile?id=<%= user_id %>" target="mainframe" onclick="profileSelect()">Profile</a>
+                        <a href="<%=request.getContextPath()%>/donorProfile" target="mainframe" onclick="profileSelect()">Profile</a>
                         <a href="<%=request.getContextPath()%>/logout">Logout</a>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
 
         function loadIframe() {
             var iframe = document.getElementById("icontent");
-            iframe.src = "<%=request.getContextPath()%>/view/donor/home.jsp"
+            iframe.src = "<%=request.getContextPath()%>/donorTimeline"
         };
         window.onload = loadIframe;
     </script>

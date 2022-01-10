@@ -129,7 +129,7 @@
             <% } %>
             <% if (role.equals("admin")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/view/non_donor/violation_Report.jsp" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/view/non_donor/violationReport.jsp" target="iframe"><span
                         class="fa fa-exclamation-triangle"></span>
                     <span>Violation Report</span></a>
             </li>

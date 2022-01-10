@@ -59,7 +59,7 @@ public class PasswordUpdate extends HttpServlet {
         String role = request.getParameter("role");
         String redirect = "dashboard";
         if (role.equals("Donor")) {
-            redirect = "donorShowProfile?id=" + id;
+            redirect = "donorProfile";
         }
         if (!loginDAO.validate(login)) {
             request.setAttribute("error", "Incorrect Password, Please Try Again");

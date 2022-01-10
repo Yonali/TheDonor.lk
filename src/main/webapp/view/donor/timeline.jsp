@@ -14,11 +14,12 @@
 %>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Timeline</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -26,47 +27,18 @@
 </head>
 
 <body>
-<%
-    String reg_msg = "";
-    reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
-    if (reg_msg != null) {
-%>
-<div id="error_message">
-    <%= reg_msg %>
-</div>
-<% } %>
-
 <div class="profile-container">
     <div class="profile-info">
-        <!---------------------- Profile -------------------------->
-        <div class="info-col">
-            <div class="profile-intro">
-                <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
-                    String base64Encoded = null;
-                    if (profile.getImgBytes() != null) {
-                        byte[] bytes = profile.getImgBytes();
-                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
-                        base64Encoded = new String(encodeBase64, "UTF-8");
-                    }
-                %>
+        <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+            String base64Encoded = null;
+            if (profile.getImgBytes() != null) {
+                byte[] bytes = profile.getImgBytes();
+                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                base64Encoded = new String(encodeBase64, "UTF-8");
+            }
+        %>
 
-                <img src="data:image/jpeg;base64,<%=base64Encoded%>"
-                     onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
-                     class="pd-image">
-                <h2><c:out value='${donor.first_name}'/> <c:out value='${donor.last_name}'/></h2>
-                <p class="intro-text"><c:out value='${donor.about}'/></p>
-                <br>
-                <a href="<%=request.getContextPath()%>/donorShowProfileForm">Edit</a>
-                <hr>
-                <div>
-                    <h1><c:out value='${donor.donation_count}'/></h1>
-                    <h3>Donations</h3>
-                </div>
-            </div>
-        </div>
-        <!---------------------- Profile -------------------------->
-
-        <div class="post-col">
+        <div class="post-col-timeline">
             <!---------------------- Create Post -------------------------->
             <div class="write-post-container">
                 <div class="user-profile">
@@ -104,7 +76,14 @@
             <div class="post-container">
                 <div class="post-row">
                     <div class="user-profile">
-                        <img src="data:image/jpeg;base64,<%=base64Encoded%>"
+                        <%  String base64EncodedProfile = null;
+                            if (post.getDonor_profile() != null) {
+                                byte[] bytes = post.getDonor_profile();
+                                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                                base64EncodedProfile = new String(encodeBase64, "UTF-8");
+                            }
+                        %>
+                        <img src="data:image/jpeg;base64,<%=base64EncodedProfile%>"
                              onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'">
                         <div>
                             <p><%=post.getDonor_name()%></p>
@@ -132,9 +111,9 @@
                     </div>
                     <div class="post-profile-icon">
                         <% if (post.getDonor_id().equals(String.valueOf(user_id))) { %>
-                            <a href="<%=request.getContextPath()%>/postDelete?id=<%=post.getId()%>"><i class="fa fa-trash"></i> Delete</a>
+                        <a href="<%=request.getContextPath()%>/postDelete?id=<%=post.getId()%>"><i class="fa fa-trash"></i> Delete</a>
                         <% } else { %>
-                            <a href="<%=request.getContextPath()%>/violationShowNewForm?id=<%=post.getId()%>"><i class="fa fa-flag"></i> Report</a>
+                        <a href="<%=request.getContextPath()%>/violationShowNewForm?id=<%=post.getId()%>"><i class="fa fa-flag"></i> Report</a>
                         <% } %>
                     </div>
                 </div>
@@ -147,15 +126,15 @@
     </div>
 </div>
 
-<!----------------------back to up-------------------------------------------------->
-<div>
-    <!-- <h4>Top</h4> -->
-    <a onclick="topFunction()" id="myBtn" title="Go to top">
-        <i class="fa fa-arrow-up" aria-hidden="true"></i>
-    </a>
-    <script src="<%=request.getContextPath()%>/public/scripts/backtotop.js"></script>
-</div>
-<!----------------------back to up-------------------------------------------------->
+    <!-- --------------------back to up------------------------------------------------ -->
+    <div>
+        <!-- <h4>Top</h4> -->
+        <a onclick="topFunction()" id="myBtn" title="Go to top">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
+        <script src="<%=request.getContextPath()%>/public/scripts/backtotop.js"></script>
+    </div>
+    <!-- --------------------back to up------------------------------------------------ -->
 
 </body>
 </html>
