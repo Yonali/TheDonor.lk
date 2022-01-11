@@ -15,6 +15,7 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/profile.css">
 
     <script src="<%=request.getContextPath()%>/public/scripts/validate_username_only.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

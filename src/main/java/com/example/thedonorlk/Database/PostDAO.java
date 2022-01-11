@@ -16,7 +16,7 @@ public class PostDAO {
 
     private static final String INSERT_SQL = "INSERT INTO post_timeline (Caption, Image_Video, Posted_Date, Posted_Time, Donor_ID) VALUES " +
             " (?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM post_timeline p, user_donor d, use u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND Post_ID =? ORDER BY Post_ID DESC";
+    private static final String SELECT_BY_ID = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND p.Post_ID =? ORDER BY p.Post_ID DESC";
     private static final String SELECT_ALL = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID ORDER BY Post_ID DESC";
     private static final String SELECT_ALL_BY_DONOR = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND Donor_ID =? ORDER BY Post_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM post_timeline WHERE Post_ID = ?";
@@ -54,7 +54,8 @@ public class PostDAO {
         PostBean post = null;
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_BY_ID);) {
             preparedStatement.setInt(1, id);
-            //System.out.println(preparedStatement);
+            System.out.println(preparedStatement);
+            System.out.println("Test DAO Post");
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

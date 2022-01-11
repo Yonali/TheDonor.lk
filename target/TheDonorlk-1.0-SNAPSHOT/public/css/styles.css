@@ -60,7 +60,7 @@
 }
 
 .modal-content {
-  position: fixed;
+  position: absolute;
   top: 80px;
   background-color: #fefefe;
   width: 100%;

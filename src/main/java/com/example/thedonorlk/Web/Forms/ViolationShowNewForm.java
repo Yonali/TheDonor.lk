@@ -35,7 +35,7 @@ public class ViolationShowNewForm extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("id", id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/violationReportForm.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/violationReportForm.jsp");
         dispatcher.forward(request, response);
     }
 }

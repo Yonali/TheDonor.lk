@@ -47,42 +47,34 @@ public class ViolationDAO {
         return status;
     }
 
-    public List < CampaignBean > selectAllViolation() {
-        List < CampaignBean > campaign = new ArrayList < > ();
+    public List < ViolationBean > selectAllViolation() {
+        List < ViolationBean > violation = new ArrayList < > ();
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL);) {
 //            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                int id = rs.getInt("Campaign_ID");
-                String campaign_name = rs.getString("Campaign_Name");
-                String campaign_date = rs.getString("Campaign_Date");
-                String start_time = rs.getString("Start_Time");
-                String end_time = rs.getString("End_Time");
-                String address_number = rs.getString("Address_Number");
-                String address_street = rs.getString("Address_Street");
-                String address_city = rs.getString("Address_City");
-                String bloodbank_code = rs.getString("BloodBank_Code");
+                int id = rs.getInt("ID");
+                int post_id = rs.getInt("Post_ID");
+                int donor_id = rs.getInt("Donor_ID");
+                String date = rs.getString("Reported_Date");
+                String time = rs.getString("Reported_Time");
+                String reason = rs.getString("Reason");
+                String status = rs.getString("Status");
 
-                campaign.add(new CampaignBean(id, campaign_name, campaign_date, start_time, end_time, address_number,address_street, address_city, bloodbank_code));
+                violation.add(new ViolationBean(id, post_id, donor_id, date, time, reason,status));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-        return campaign;
+        return violation;
     }
 
-    public boolean updateViolation(CampaignBean campaign) throws SQLException {
+    public boolean updateStatus(int id, String status) throws SQLException {
         boolean rowUpdated;
         try (PreparedStatement statement = con.prepareStatement(UPDATE_SQL);) {
-            statement.setString(1, campaign.getName());
-            statement.setString(2, campaign.getDate());
-            statement.setString(3, campaign.getStart_time());
-            statement.setString(4, campaign.getEnd_time());
-            statement.setString(5, campaign.getAddress_street());
-            statement.setString(6, campaign.getAddress_city());
-            statement.setString(7, campaign.getBloodbank_code());
-            statement.setInt(8, campaign.getId());
+            statement.setString(1, status);
+            statement.setInt(2, id);
 
             rowUpdated = statement.executeUpdate() > 0;
         }
