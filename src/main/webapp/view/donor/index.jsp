@@ -36,6 +36,7 @@
                         <button class="dropbtn tes" id="pageName">Timeline</button>
                         <div id="myDropdown" class="dropdown-content">
                             <a href="<%=request.getContextPath()%>/donorTimeline" target="mainframe" onclick="timelineSelect()">Timeline</a>
+                            <a href="<%=request.getContextPath()%>/emergency_donor" target="mainframe" onclick="emergencySelect()">Emergency</a>
                             <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
                             <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
                             <a href="<%=request.getContextPath()%>/intructions.jsp" target="mainframe"
@@ -97,6 +98,7 @@
 
                     <div class="dropdown-content_responsive">
                         <a href="<%=request.getContextPath()%>/donorTimeline" target="mainframe" onclick="timelineSelect()">Timeline</a>
+                        <a href="<%=request.getContextPath()%>/emergency_donor" target="mainframe" onclick="emergencySelect()">Emergency</a>
                         <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
                         <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
                         <a href="intructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
@@ -136,6 +138,10 @@
         function timelineSelect() {
             var x = document.getElementById("pageName");
             x.innerHTML = "Timeline";
+        }
+        function emergencySelect() {
+            var x = document.getElementById("pageName");
+            x.innerHTML = "Emergency";
         }
         function campaignSelect() {
             var x = document.getElementById("pageName");
