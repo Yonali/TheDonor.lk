@@ -106,7 +106,7 @@
                      onerror="this.style='display:none;'">
                 <div class="post-row">
                     <div class="activity-icons">
-                        <a href="#"><i class="fa fa-thumbs-up"></i> 120</a>
+                        <%--<a href="#"><i class="fa fa-thumbs-up"></i> 120</a>--%>
                         <%--<a href="#"><img src="<%=request.getContextPath()%>/public/images/comments.png">45</a>--%>
                     </div>
                     <div class="post-profile-icon">
