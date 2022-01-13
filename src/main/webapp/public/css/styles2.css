@@ -31,7 +31,6 @@
 
 .modal-content {
     position: relative;
-    /* top: 100px; */
     background-color: #fefefe;
     width: 100%;
     -webkit-animation-name: slideIn;
@@ -335,7 +334,7 @@
 .inter_dlt_act{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    /*grid-template-rows: repeat(3, 1fr);*/
     grid-gap: 15px;
     grid-column-gap: 100px;
     margin-top: 1rem;
