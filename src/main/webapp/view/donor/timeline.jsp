@@ -1,4 +1,7 @@
-
+<%@ page import="com.example.thedonorlk.Bean.ProfileBean" %>
+<%@ page import="org.apache.commons.codec.binary.Base64" %>
+<%@ page import="com.example.thedonorlk.Bean.PostBean" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -26,7 +29,14 @@
 <body>
 <div class="profile-container">
     <div class="profile-info">
-
+        <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+            String base64Encoded = null;
+            if (profile.getImgBytes() != null) {
+                byte[] bytes = profile.getImgBytes();
+                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                base64Encoded = new String(encodeBase64, "UTF-8");
+            }
+        %>
 
         <div class="post-col-timeline">
             <!---------------------- Create Post -------------------------->
@@ -66,7 +76,13 @@
             <div class="post-container">
                 <div class="post-row">
                     <div class="user-profile">
-
+                        <%  String base64EncodedProfile = null;
+                            if (post.getDonor_profile() != null) {
+                                byte[] bytes = post.getDonor_profile();
+                                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                                base64EncodedProfile = new String(encodeBase64, "UTF-8");
+                            }
+                        %>
                         <img src="data:image/jpeg;base64,<%=base64EncodedProfile%>"
                              onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'">
                         <div>
@@ -79,12 +95,18 @@
                 <p class="post-text">
                     <%=post.getCaption()%>
                 </p>
-
+                <%  String base64EncodedPost = null;
+                    if (post.getImgBytes() != null) {
+                        byte[] bytes = post.getImgBytes();
+                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                        base64EncodedPost = new String(encodeBase64, "UTF-8");
+                    }
+                %>
                 <img src="data:image/jpeg;base64,<%=base64EncodedPost%>" class="post-img"
                      onerror="this.style='display:none;'">
                 <div class="post-row">
                     <div class="activity-icons">
-                        <a href="#"><i class="fa fa-thumbs-up"></i> 120</a>
+                        <%--<a href="#"><i class="fa fa-thumbs-up"></i> 120</a>--%>
                         <%--<a href="#"><img src="<%=request.getContextPath()%>/public/images/comments.png">45</a>--%>
                     </div>
                     <div class="post-profile-icon">
