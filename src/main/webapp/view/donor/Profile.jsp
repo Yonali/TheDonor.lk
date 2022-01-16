@@ -1,4 +1,7 @@
-
+<%@ page import="com.example.thedonorlk.Bean.ProfileBean" %>
+<%@ page import="org.apache.commons.codec.binary.Base64" %>
+<%@ page import="com.example.thedonorlk.Bean.PostBean" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -38,7 +41,14 @@
         <!---------------------- Profile -------------------------->
         <div class="info-col">
             <div class="profile-intro">
-
+                <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+                    String base64Encoded = null;
+                    if (profile.getImgBytes() != null) {
+                        byte[] bytes = profile.getImgBytes();
+                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                        base64Encoded = new String(encodeBase64, "UTF-8");
+                    }
+                %>
 
                 <img src="data:image/jpeg;base64,<%=base64Encoded%>"
                      onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
@@ -106,19 +116,25 @@
                 <p class="post-text">
                     <%=post.getCaption()%>
                 </p>
-
+                <%  String base64EncodedPost = null;
+                    if (post.getImgBytes() != null) {
+                        byte[] bytes = post.getImgBytes();
+                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                        base64EncodedPost = new String(encodeBase64, "UTF-8");
+                    }
+                %>
                 <img src="data:image/jpeg;base64,<%=base64EncodedPost%>" class="post-img"
                      onerror="this.style='display:none;'">
                 <div class="post-row">
                     <div class="activity-icons">
-                        <a href="#"><i class="fa fa-thumbs-up"></i> 120</a>
+                        <%--<a href="#"><i class="fa fa-thumbs-up"></i> 120</a>--%>
                         <%--<a href="#"><img src="<%=request.getContextPath()%>/public/images/comments.png">45</a>--%>
                     </div>
                     <div class="post-profile-icon">
                         <% if (post.getDonor_id().equals(String.valueOf(user_id))) { %>
-                        <a href="<%=request.getContextPath()%>/postDelete?id=<%=post.getId()%>"><i class="fa fa-trash"></i> Delete</a>
+                            <a href="<%=request.getContextPath()%>/postDelete?id=<%=post.getId()%>"><i class="fa fa-trash"></i> Delete</a>
                         <% } else { %>
-                        <a href="<%=request.getContextPath()%>/violationShowNewForm?id=<%=post.getId()%>"><i class="fa fa-flag"></i> Report</a>
+                            <a href="<%=request.getContextPath()%>/violationShowNewForm?id=<%=post.getId()%>"><i class="fa fa-flag"></i> Report</a>
                         <% } %>
                     </div>
                 </div>
@@ -130,198 +146,16 @@
         </div>
     </div>
 </div>
-           
-    <!-- --------------------back to up------------------------------------------------ -->
-   
-    <div >
-        <!-- <h4>Top</h4> -->
-        <a onclick="topFunction()" id="myBtn" title="Go to top">
-            <i class="fa fa-arrow-up" aria-hidden="true"></i>
 
-        </a>
-        <script src="<%=request.getContextPath()%>/public/scripts/backtotop.js"></script>
-    </div>
-    
-    <!-- --------------------back to up------------------------------------------------ -->    
-<%--    </div>--%>
-   
-      
-         <!-- The Popup Modal1 -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close">&times;</span>
-                <h3>Edit Profile</h3>
-            </div>
+<!----------------------back to up-------------------------------------------------->
+<div>
+    <!-- <h4>Top</h4> -->
+    <a onclick="topFunction()" id="myBtn" title="Go to top">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+    <script src="<%=request.getContextPath()%>/public/scripts/backtotop.js"></script>
+</div>
+<!----------------------back to up-------------------------------------------------->
 
-            <div class="modal-body">
-                <!-- The form inside popup modal -->
-                <form>
-                    <div class="fields">
-                        <div class="inter_fields">
-                            <div class="A_container">
-                                <div class="main_edit_div">
-                                    <!-- <span>Upload Your Profile Picture</span> -->
-                                    <div class="edit_div1">
-                                       
-                                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="edit_PP" style="width:120px;height:120px;">
-                                    </div>
-                                   
-                                     <div class="edit_div2">
-                                        <div class="inter_edit_div2">
-                                            <h3>Change</h3>
-                                            <a href="upload.jsp">
-                                                <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                                            </a>
-                                            <!-- <button id="change"> <a href="./upload.jsp">Change</a></button>                               -->
-                                        </div>
-                                     </div>
-                                    
-                                    <div class="edit_div3">
-                                        <textarea name="textarea" class="about_textarea" id="about_textarea" placeholder="About You..." cols="6" rows="6"></textarea>
-                                    </div>                 
-                                </div>
-                            </div>
-                            <div class="B_container">
-                                <div class="inter_B_container">
-                                    <div class="field-single">
-                                        <span>Donor NIC</span>
-                                        <input type="text" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>First Name</span>
-                                        <input type="text" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>Last Name</span>
-                                        <input type="text" />
-                                    </div>
-            
-                                    <div class="field-single">
-                                        <span>DOB</span>
-                                        <input type="date" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>Email</span>
-                                        <input type="email" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>House No</span>
-                                        <input type="text" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>Street</span>
-                                        <input type="text" />
-                                    </div>
-                                    <div class="field-single">
-                                        <span>City</span>
-                                        <input type="text" />
-                                    </div>
-                                </div>     
-                            </div>
-                        </div>
-                     
-                       
-                    </div>
-                    <div class="modal-submit-button">
-                        <div class="buttons">
-                            <button type="submit">Save</button>
-                        </div>
-                    </div>
-                    <div class="Change_pwd">
-                        <div class="inter_Change_pwd">
-                            <div class="Change_pwd_1">
-                                <h3>Change Password</h3>
-                            </div>
-                            <div class="Change_pwd_2">
-                                <div class="field-single">
-                                    <span>Current Password</span>
-                                    <input type="password" />
-                                </div>
-                                <div class="field-single">
-                                    <span>New Password</span>
-                                    <input type="password" />
-                                </div>
-                                <div class="field-single">
-                                    <span>Confirm Password</span>
-                                    <input type="password" />
-                                </div>                              
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="modal-submit-button">
-                        <button type="submit">Save</button>
-                    </div>
-                    <div class="dlt_act">
-                        <div class="inter_dlt_act">
-                            <div class="dlt_act_1">
-                                <h3>Delete this Account</h3>
-                            </div>
-                            <div class="dlt_act_2">
-                                
-                                <span>Once you delete an account, there is no going back. Please be certain.</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-submit-button-dlt">
-                        <button type="submit">Delete</button>
-                    </div>
-                </form>
-            </div>
-
-            <div class="modal-footer">
-                <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-                <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                    Blood Makes a Big Difference in the Lives of Others.
-                </p>
-            </div>
-        </div>
-
-        <!-- IMPORTANT -->
-        <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-        <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
-    </div>
-
-
-         <!-- The Popup Modal2 --------Comment box------- -->
-         <div id="myModal2" class="modal2">
-            <div class="modal2-content">
-                <div class="modal2-header">
-                    <span class="close2">&times;</span>
-                    <h3>Comments box</h3>
-                </div>
-    
-                <div class="modal2-body">
-                    <!-- The form inside popup modal -->
-                    <form>
-                        <div class="comment_fields">
-                            <div class="comment_field-single">
-                                <input type="text" placeholder="Old comments here.."/>
-                            </div>
-
-                        </div>
-                        <div class="add_comment_fields">
-                            <div class="comment_field-single">
-                                <input type="text" placeholder="Add your comments here.."/>
-                            </div>
-                        </div>
-                        <div class="modal2-submit-button">
-                            <div class="buttons">
-                                <button type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-    
-                <div class="comment_modal-footer">
-                    <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-
-                </div>
-            </div>
-    
-            <!-- IMPORTANT -->
-            <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-            <script src="<%=request.getContextPath()%>/public/scripts/popup_modal.js"></script>
-        </div>
 </body>
 </html>
