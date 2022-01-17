@@ -8,6 +8,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -39,13 +40,14 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
         <form action="emergencyUpdate" method="post" onsubmit="return validate();"></c:if>
@@ -143,11 +145,12 @@
                             </c:forEach>
                         </select>
                     </div>--%>
+                    <input type="hidden" name="BloodBank_Code" value="<%= bloodbank %>"/>
                     <c:if test="${user != null}">
                         <div class="field-single" id="status">
                             <span>Status</span>
                             <div class="custom-select" style="width:200px">
-                                <select class="box" name="Status" id="Status">
+                                <select class="box" name="Status">
                                     <c:set var="open" value="Open"/>
                                     <c:if test="${user.status == open}">
                                         <option value="Open" selected>Open</option>

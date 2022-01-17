@@ -30,10 +30,10 @@ public class EmergencyUpdate extends HttpServlet {
         try {
             updateUser(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error","Something went wrong, Please Try Again");
+            /*request.setAttribute("error","Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
-            dispatcher.forward(request, response);
-            //throw new ServletException(ex);
+            dispatcher.forward(request, response);*/
+            throw new ServletException(ex);
         }
     }
 
@@ -49,10 +49,10 @@ public class EmergencyUpdate extends HttpServlet {
 
             if (emergencyDAO.updateUser(newEmergency)) {
                 response.sendRedirect("./emergency");
-            } else {
+            } /*else {
                 request.setAttribute("error","Something went wrong, Please Try Again");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
                 dispatcher.forward(request, response);
-            }
+            }*/
     }
 }

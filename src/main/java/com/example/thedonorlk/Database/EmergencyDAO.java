@@ -14,12 +14,12 @@ public class EmergencyDAO {
 
     private static final String INSERT_SQL = "INSERT INTO emergency_requirement (Blood_Group, Date, Time, Status, BloodBank_Code) VALUES " +
             " (?, ?, ?, ?, ?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ?";
-    private static final String SELECT_ALL = "SELECT * FROM emergency_requirement";
+    private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ? ORDER BY Emg_ID DESC";
+    private static final String SELECT_ALL = "SELECT * FROM emergency_requirement ORDER BY Emg_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM emergency_requirement WHERE Emg_ID = ?";
     private static final String UPDATE_SQL = "UPDATE emergency_requirement SET " +
-            "Blood_Group = ?, Date = ?, Time = ?, Status = ?, " +
-            "BloodBank_Code = ? WHERE Emg_ID = ?";
+            "Blood_Group = ?, Status = ? " +
+            "WHERE Emg_ID = ?";
 
     public EmergencyDAO() {}
 
@@ -100,11 +100,8 @@ public class EmergencyDAO {
         boolean rowUpdated = false;
         try (PreparedStatement statement = con.prepareStatement(UPDATE_SQL);) {
             statement.setString(1, emergency.getBlood_group());
-            statement.setString(2, emergency.getDate());
-            statement.setString(3, emergency.getTime());
-            statement.setString(4, emergency.getStatus());
-            statement.setString(5, emergency.getBloodbank_code());
-            statement.setInt(6, emergency.getId());
+            statement.setString(2, emergency.getStatus());
+            statement.setInt(3, emergency.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

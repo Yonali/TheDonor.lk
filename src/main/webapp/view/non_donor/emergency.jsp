@@ -21,7 +21,7 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 
-    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
@@ -95,13 +95,10 @@
                                     <c:out value="${emergency.bloodbank_code}"/>
                                 </td>
                                 <td>
-                                    <c:set var="open" value="Open"/>
-                                    <c:set var="closed" value="Closed"/>
-
-                                    <c:if test="${emergency.status == open}">
+                                    <c:if test="${emergency.status == 'Open'}">
                                         <span class="status open">Open</span>
                                     </c:if>
-                                    <c:if test="${emergency.status == closed}">
+                                    <c:if test="${emergency.status == 'Closed'}">
                                         <span class="status close">Closed</span>
                                     </c:if>
                                 </td>
