@@ -14,21 +14,23 @@ import java.util.List;
 public class DonorDAO {
 
     private static final String INSERT_DONOR_SQL = "INSERT INTO user_donor (ID, First_Name, Last_Name, " +
-            "Donor_NIC, Contact, DOB, Gender, Email, Address_Street, Address_City, BloodBank_Code, Status) " +
-            "VALUES (?,?,?,?,?,?,?,?,?,?,?, 'Normal')";
-    private static final String SELECT_DONOR_BY_ID = "SELECT * FROM user_donor WHERE ID =?";
+            "Donor_NIC, Contact, DOB, Gender, Email, Address_Street, Address_City, BloodBank_Code, Status, Join_Date) " +
+            "VALUES (?,?,?,?,?,?,?,?,?,?,?, 'Normal', ?)";
+    private static final String SELECT_DONOR_BY_ID = "SELECT * FROM user_donor WHERE ID =? ORDER BY ID DESC";
     private static final String SELECT_DONORCARD_BY_NIC = "SELECT *, (SELECT COUNT(*) FROM donation d, user_donor ud WHERE " +
             "d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status='Completed') AS Count " +
             "FROM user_donor WHERE Donor_NIC = ?";
+    private static final String SELECT_DONORCARD_BY_ID = "SELECT *, (SELECT COUNT(*) FROM donation WHERE Donor_ID = ? AND Donation_Status='Completed') AS Count " +
+            "FROM user_donor WHERE ID = ?";
     private static final String SELECT_DONOR_BY_EMAIL = "SELECT * FROM user_donor WHERE Email =?";
-    private static final String SELECT_ALL_DONORS = "SELECT * FROM user_donor";
+    private static final String SELECT_ALL_DONORS = "SELECT * FROM user_donor ORDER BY ID DESC";
     private static final String UPDATE_DONOR_SQL = "UPDATE user_donor SET " +
             "First_Name = ?, Last_Name = ?, Donor_NIC = ?, Blood_Group = ?, " +
             "Contact = ?, DOB = ?, Gender = ?, Status = ?, bloodbank_code = ? WHERE ID = ?";
     private static final String UPDATE_DONOR_SQL_ALL = "UPDATE user_donor SET " +
             "First_Name = ?, Last_Name = ?, Donor_NIC = ?, Blood_Group = ?, " +
             "Contact = ?, DOB = ?, Gender = ?, Status = ?, bloodbank_code = ?, " +
-            "Address_Street = ?, Address_City = ?, Status = ? WHERE Email = ?";
+            "Address_Street = ?, Address_City = ?, Status = ?, About_Description = ? WHERE Email = ?";
 
     private static final String INSERT_DEFERRAL_HISTORY_SQL = "INSERT INTO deferral_history (Donation_ID, Donor_ID , Doc_ID, Deferral_Remark, " +
             "Start_Date, End_Date, Type) " +
@@ -36,11 +38,11 @@ public class DonorDAO {
     private static final String UPDATE_DEFERRAL_HISTORY_SQL = "UPDATE deferral_history SET " +
             "Deferral_Remark = ?, Start_Date = ?, End_Date = ?, Type = ? WHERE Donation_ID = ?";
     private static final String SELECT_DEFERRAL_HISTORY_BY_ID = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
-            "Donation_ID = ? AND dh.Doc_ID=doc.ID";
+            "Donation_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY_NIC = "SELECT * FROM deferral_history dh, user_donor don WHERE " +
-            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID";
+            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
-            "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID";
+            "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
 
     /*private static final String DELETE_DONOR_SQL = "DELETE FROM campaign WHERE Campaign_ID = ?";*/
 
@@ -51,6 +53,8 @@ public class DonorDAO {
     boolean status = true;
     public boolean insertDonor(DonorBean donorBean){
         String id = createUser(donorBean.getEmail(), generatePassword());
+        java.util.Date date = new java.util.Date();
+        java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
         try{
             PreparedStatement ps = con.prepareStatement(INSERT_DONOR_SQL);
@@ -65,6 +69,7 @@ public class DonorDAO {
             ps.setString(9,donorBean.getAdd_street());
             ps.setString(10,donorBean.getAdd_city());
             ps.setString(11,donorBean.getBloodbank_code());
+            ps.setDate(12, sqlDate);
 
             ps.execute();
         } catch (SQLException e){
@@ -225,7 +230,8 @@ public class DonorDAO {
 
             while (rs.next()) {
                 int id_1 = rs.getInt("ID");
-                String name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
+                String f_name = rs.getString("First_Name");
+                String l_name = rs.getString("Last_Name");
                 String blood_group = rs.getString("Blood_Group");
                 String contact = rs.getString("Contact");
                 Date dob = rs.getDate("DOB");
@@ -239,7 +245,42 @@ public class DonorDAO {
                 Period p = Period.between(birthday, today);
                 String age = p.getYears() + "Y " + p.getMonths() + "M " + p.getDays() + "D ";
 
-                donor = new DonorCardBean(id_1, name, nic, blood_group, contact, gender, email, status, count, age);
+                donor = new DonorCardBean(id_1, f_name, l_name, nic, blood_group, contact, gender, email, status, count, age, "", "", "");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return donor;
+    }
+    public DonorCardBean selectDonorCardByID (int id) {
+        DonorCardBean donor = null;
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONORCARD_BY_ID);) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(2, id);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id_1 = rs.getInt("ID");
+                String f_name = rs.getString("First_Name");
+                String l_name = rs.getString("Last_Name");
+                String blood_group = rs.getString("Blood_Group");
+                String contact = rs.getString("Contact");
+                Date dob = rs.getDate("DOB");
+                String nic = rs.getString("Donor_NIC");
+                String gender = rs.getString("Gender");
+                String email = rs.getString("Email");
+                String status = rs.getString("Status");
+                String count = rs.getString("Count");
+                String add_street = rs.getString("Address_Street");
+                String add_city = rs.getString("Address_City");
+                String about = rs.getString("About_Description");
+
+                LocalDate today = LocalDate.now();
+                LocalDate birthday = LocalDate.parse(new SimpleDateFormat("yyyy-MM-dd").format(dob));
+                Period p = Period.between(birthday, today);
+                String age = p.getYears() + "Y " + p.getMonths() + "M " + p.getDays() + "D ";
+
+                donor = new DonorCardBean(id_1, f_name, l_name, nic, blood_group, contact, gender, email, status, count, age, add_street, add_city, about);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -388,7 +429,8 @@ public class DonorDAO {
             statement.setString(10, donor.getAdd_street());
             statement.setString(11, donor.getAdd_city());
             statement.setString(12, donor.getStatus());
-            statement.setString(13, donor.getEmail());
+            statement.setString(13, donor.getDescription());
+            statement.setString(14, donor.getEmail());
 
             rowUpdated = statement.executeUpdate() > 0;
         }
