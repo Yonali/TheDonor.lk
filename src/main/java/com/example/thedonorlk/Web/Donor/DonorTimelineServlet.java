@@ -2,10 +2,10 @@ package com.example.thedonorlk.Web.Donor;
 
 import com.example.thedonorlk.Bean.DonorCardBean;
 import com.example.thedonorlk.Bean.PostBean;
-
+import com.example.thedonorlk.Bean.ProfileBean;
 import com.example.thedonorlk.Database.DonorDAO;
 import com.example.thedonorlk.Database.PostDAO;
-
+import com.example.thedonorlk.Database.ProfileDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,11 +21,11 @@ import java.util.List;
 @WebServlet("/donorTimeline")
 public class DonorTimelineServlet extends HttpServlet {
 
-
+    private ProfileDAO profileDAO;
     private DonorDAO donorDAO;
     private PostDAO postDAO;
     public void init() {
-
+        profileDAO = new ProfileDAO();
         donorDAO = new DonorDAO();
         postDAO = new PostDAO();
     }
@@ -48,7 +48,10 @@ public class DonorTimelineServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         int id = (Integer) session.getAttribute("user_id");
 
-
+        DonorCardBean donor = donorDAO.selectDonorCardByID(id);
+        request.setAttribute("donor", donor);
+        ProfileBean profile = profileDAO.viewProfile(id);
+        request.setAttribute("profile", profile);
         List<PostBean> posts = postDAO.selectAllPosts();
         request.setAttribute("posts", posts);
         RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/timeline.jsp");
