@@ -25,6 +25,24 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <% if (request.getAttribute("SendTo") != null) {
+        System.out.println("Test"); %>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://meghaduta.dhahas.com/sms/sendSMS",
+                type: "POST",
+                data: JSON.stringify({"senders": [ "+94<%=request.getAttribute("SendTo")%>" ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"}),
+                dataType:'json',
+                contentType: 'application/json',
+                success: function (response) {console.log(response); },
+                error: function(error){ console.log("Something went wrong", error); }
+            });
+        });
+    </script>
+    <% } %>
 </head>
 
 <body>

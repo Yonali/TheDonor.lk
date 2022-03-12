@@ -18,10 +18,11 @@ public class DonationDAO {
             "Nurse_ID, Doctor_ID, Donor_ID, Blood_Barcode) " +
             "VALUES ('New', ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_DONATION_BY_ID = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Donation_ID =? ORDER BY d.Donation_ID DESC";
+    private static final String SELECT_DONATION_BY_BARCODE = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Blood_Barcode =?";
     private static final String SELECT_ALL_DONATIONS = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID ORDER BY d.Donation_ID DESC";
     private static final String SELECT_DONATION_BY_DONOR = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC =? ORDER BY d.Donation_ID DESC";
 
-
+    private static final String COUNT_DONATION = "SELECT COUNT(*) AS count FROM donation WHERE BloodBank_Code=? AND Donation_Status=?";
 
     private static final String UPDATE_DONATION_STATUS_SQL = "UPDATE donation SET " +
             "Donation_Status = ?  WHERE Donation_ID = ?";
@@ -37,6 +38,24 @@ public class DonationDAO {
     public DonationDAO() {}
 
     private Connection con = DatabaseConnection.initializeDatabase();
+
+    public int countDonations(String bloodbank, String status) {
+        int count = 0;
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(COUNT_DONATION)) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, status);
+            //System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return count;
+    }
 
     public boolean insertDonation(DonationBean donation) throws SQLException {
         boolean status = true;
@@ -65,7 +84,37 @@ public class DonationDAO {
         DonationBean donation = null;
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONATION_BY_ID);) {
             preparedStatement.setInt(1, id);
-//            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id_1 = rs.getInt("Donation_ID");
+                String status = rs.getString("Donation_Status");
+                String date = rs.getString("Donation_Date");
+                String time = rs.getString("Donation_Time");
+                String bloodbank_code = rs.getString("BloodBank_Code");
+                String nurse_id = rs.getString("Nurse_ID");
+                String doctor_id = rs.getString("Doctor_ID");
+                String donor_id = rs.getString("Donor_ID");
+                String blood_id = rs.getString("Blood_Barcode");
+                String campaign_id = rs.getString("Campaign_ID");
+                String appointment_id = rs.getString("Appointment_ID");
+                String donor_name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
+                String donor_nic = rs.getString("Donor_NIC");
+
+                donation = new DonationBean(id_1, status, date, time, bloodbank_code, nurse_id, doctor_id,
+                        donor_id, blood_id, campaign_id, appointment_id, donor_name, donor_nic);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return donation;
+    }
+    public DonationBean selectDonationByBloodBarcode(String barcode) {
+        DonationBean donation = null;
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONATION_BY_BARCODE);) {
+            preparedStatement.setString(1, barcode);
+            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

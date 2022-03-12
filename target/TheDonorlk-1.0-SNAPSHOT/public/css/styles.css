@@ -468,6 +468,38 @@ header label span {
   padding-right: 1rem;
 }
 
+.header-right-flex {
+  display: flex;
+  position: relative;
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
+
+.notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  position: relative;
+  display: inline-block;
+  border-radius: 50px;
+  margin-right: 25px;
+}
+
+.notification:hover {
+  background: #3f0404;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: #750605;
+  color: white;
+}
+
 .user-wrapper {
   display: flex;
   align-items: center;

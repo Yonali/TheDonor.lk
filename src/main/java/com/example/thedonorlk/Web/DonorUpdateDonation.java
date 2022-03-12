@@ -17,7 +17,6 @@ import java.util.List;
 
 @WebServlet("/donorUpdateDonation")
 public class DonorUpdateDonation extends HttpServlet {
-    //private static final long serialVersionUID = 1 L;
     private DonorDAO donorDAO;
     private UserBloodBankDAO bloodbankDAO;
     public void init() {
@@ -58,8 +57,8 @@ public class DonorUpdateDonation extends HttpServlet {
                 email, add_street, add_city, "profile", "description", bloodbank_code.equals("NULL") ? null: bloodbank_code, status);
 
             if (donorDAO.updateUserDonation(newDonor)) {
-                //response.sendRedirect("./donor");
                 //Redirect to next page
+                response.sendRedirect("./donation");
             } else {
                 request.setAttribute("error","Something went wrong, Please Try Again");
 

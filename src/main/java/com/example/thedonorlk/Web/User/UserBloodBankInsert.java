@@ -1,7 +1,9 @@
 package com.example.thedonorlk.Web.User;
 
+import Controller.PasswordEmailGenerator;
 import com.example.thedonorlk.Bean.User.UserBloodBankBean;
 import com.example.thedonorlk.Database.User.UserBloodBankDAO;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -46,9 +48,24 @@ public class UserBloodBankInsert extends HttpServlet {
         String add_city = request.getParameter("add_city");
         UserBloodBankBean newUser = new UserBloodBankBean(0, username, username, name, contact, email, add_street, add_city);
 
+        //Auto generate user password here
+        PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();
+        String password = passwordEmailGenerator.generatePassword();
+        String hash_pwd = DigestUtils.sha256Hex(password);
+
         if (!userBloodBankDAO.validateUsername(newUser)) {
-            if (userBloodBankDAO.insertUser(newUser)) {
-                response.sendRedirect("./userBloodBank");
+            if (userBloodBankDAO.insertUser(newUser, hash_pwd)) {
+                //Send Email with credentials
+                PasswordEmailGenerator mailDAO = new PasswordEmailGenerator();
+                String message = "Dear " + name + ",\n\n"
+                        + "Your new Blood Bank account credentials are as below.\n\n"
+                        + "Username - " + username + "\n"
+                        + "Password - " + password + "\n\n"
+                        + "Thank you\nThedonor.lk";
+                mailDAO.sendMail(email, "New Blood Bank Account | TheDonor.lk", message);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userBloodBank");
+                dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");

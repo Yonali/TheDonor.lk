@@ -1,8 +1,10 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.DonorBean;
 import com.example.thedonorlk.Bean.EmergencyBean;
 import com.example.thedonorlk.Database.CampaignDAO;
+import com.example.thedonorlk.Database.DonorDAO;
 import com.example.thedonorlk.Database.EmergencyDAO;
 
 import javax.servlet.RequestDispatcher;
@@ -15,14 +17,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @WebServlet("/emergencyInsert")
 public class EmergencyInsert extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
 
     private EmergencyDAO emergencyDAO;
+    private DonorDAO donorDAO;
     public void init() {
         emergencyDAO = new EmergencyDAO();
+        donorDAO = new DonorDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +61,16 @@ public class EmergencyInsert extends HttpServlet {
         EmergencyBean newEmergency = new EmergencyBean(0, blood_group, date, time, status, bloodbank_code);
 
             if (emergencyDAO.insertUser(newEmergency)) {
-                response.sendRedirect("./emergency");
+                String message = blood_group + " blood is required urgently at your nearest blood bank '" + bloodbank_code + "'. " +
+                        "Please visit and join with us to donate blood. " +
+                        "#Your precious blood at this critical time can save more lives #TheDonor.lk";
+
+                List<DonorBean> donor = donorDAO.selectAllDonorsByBloodbankAndGroup(bloodbank_code, blood_group);
+                request.setAttribute("SendToDonorList", donor);
+                request.setAttribute("Message", message);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
+                dispatcher.forward(request, response);
             }
     }
 }

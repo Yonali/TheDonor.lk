@@ -27,11 +27,11 @@ public class UserDoctorDAO {
 
     private Connection con = DatabaseConnection.initializeDatabase();
 
-    public boolean insertUser(UserDoctorBean user) throws SQLException {
+    public boolean insertUser(UserDoctorBean user, String hash_pwd) throws SQLException {
         boolean status = true;
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, "Test");
+            preparedStatement.setString(2, hash_pwd);
             preparedStatement.setString(3, "doctor");
 //            System.out.println(preparedStatement);
 

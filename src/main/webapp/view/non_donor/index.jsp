@@ -24,10 +24,43 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles2.css">
 
     <script src="<%=request.getContextPath()%>/public/scripts/scripts.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        /*$(document).ready(function () {
+            $.ajax({
+                url: "https://meghaduta.dhahas.com/sms/sendSMS",
+                type: "POST",
+                data: JSON.stringify({"senders": [ "+94767642072", ], "message": "Hi", "apiKey": "61df3f8b36fe65003089ed1b"}),
+                dataType:'json',
+                contentType: 'application/json',
+                success: function (response) {console.log(response); },
+                error: function(error){ console.log("Something went wrong", error); }
+            });
+        });*/
+
+        $(document).ready(function () {
+            var myvar = setInterval(function () {
+                $.ajax({
+                    url: "<%=request.getContextPath()%>/notificationCount",
+                    type: "POST",
+                    success: function (data) {
+                        if (data[0] == 0) {
+                            document.getElementById("badge").style.display = "none";
+                        } else {
+                            document.getElementById("badge").style.display = "block";
+                            document.getElementById("badge").innerHTML = data[0];
+                        }
+                    }
+                });
+            }, 3000);
+        });
+
+
+    </script>
 </head>
 
 <body>
-<!-- <input type="checkbox" id="nav-toggle"> -->
 
 <div class="sidebar" id="sidebar">
     <div class="logo">
@@ -157,31 +190,38 @@
             <% } %>
         </h2>
         <script src="<%=request.getContextPath()%>/public/scripts/sidebar_button.js"></script>
-        <div class="dropdown">
-            <div class="user-wrapper">
-                <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
-                    String base64Encoded=null;
-                    if (profile.getImgBytes() != null) {
-                        byte[] bytes = profile.getImgBytes();
-                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
-                        base64Encoded = new String(encodeBase64, "UTF-8");
-                    }
-                %>
-                <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
-                     style="width:40px;height:40px;">
-                <div>
-                    <h4><%=session.getAttribute("username")%>
-                    </h4>
-                    <small><%=role%>
-                    </small>
+        <div class="header-right-flex">
+            <a href="<%=request.getContextPath()%>/notification" class="notification" target="iframe">
+                <i class="fa fa-bell"></i>
+                <span class="badge" id="badge" style="display: none">0</span>
+            </a>
+            <div class="dropdown">
+                <div class="user-wrapper">
+                    <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+                        String base64Encoded=null;
+                        if (profile.getImgBytes() != null) {
+                            byte[] bytes = profile.getImgBytes();
+                            byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                            base64Encoded = new String(encodeBase64, "UTF-8");
+                        }
+                    %>
+                    <img src="data:image/jpeg;base64,<%=base64Encoded%>" onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'"
+                         style="width:40px;height:40px;">
+                    <div>
+                        <h4><%=session.getAttribute("username")%>
+                        </h4>
+                        <small><%=role%>
+                        </small>
+                    </div>
+                </div>
+                <div class="dropdown-content">
+                    <a href="<%=request.getContextPath()%>/nonDonorShowSettingForm?id=<%= user_id %>&role=<%= role %>"
+                       target="iframe">Settings</a>
+                    <a href="<%=request.getContextPath()%>/logout">Logout</a>
                 </div>
             </div>
-            <div class="dropdown-content">
-                <a href="<%=request.getContextPath()%>/nonDonorShowSettingForm?id=<%= user_id %>&role=<%= role %>"
-                   target="iframe">Settings</a>
-                <a href="<%=request.getContextPath()%>/logout">Logout</a>
-            </div>
         </div>
+
     </header>
 
     <div class="content">

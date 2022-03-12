@@ -1,5 +1,6 @@
 package com.example.thedonorlk.Web;
 
+import Controller.PasswordEmailGenerator;
 import com.example.thedonorlk.Bean.DonationBean;
 import com.example.thedonorlk.Bean.DonorBean;
 import com.example.thedonorlk.Bean.DonorCardBean;
@@ -7,6 +8,7 @@ import com.example.thedonorlk.Bean.User.UserBloodBankBean;
 import com.example.thedonorlk.Database.DonationDAO;
 import com.example.thedonorlk.Database.DonorDAO;
 import com.example.thedonorlk.Database.User.UserBloodBankDAO;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,8 +55,22 @@ public class DonorInsert extends HttpServlet {
         DonorBean newDonor = new DonorBean(0, fname, lname, nic, blood_group, contact,dob, gender.equals("NULL") ? null: gender,
                 email, add_street, add_city, "profile", "description", bloodbank_code.equals("NULL") ? null: bloodbank_code, status);
 
+        //Auto generate user password here
+        PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();
+        String password = passwordEmailGenerator.generatePassword();
+        String hash_pwd = DigestUtils.sha256Hex(password);
+
         if (!donorDAO.validateEmail(email)) {
-            if (donorDAO.insertDonor(newDonor)) {
+            if (donorDAO.insertDonor(newDonor, hash_pwd)) {
+                //Send Email with credentials
+                PasswordEmailGenerator mailDAO = new PasswordEmailGenerator();
+                String message = "Dear " + fname + ",\n\n"
+                        + "Your new thedonor.lk account credentials are as below.\n\n"
+                        + "Email - " + email + "\n"
+                        + "Password - " + password + "\n\n"
+                        + "Thank you\nThedonor.lk";
+                mailDAO.sendMail(email, "New Donor Account | TheDonor.lk", message);
+
                 //Redirect to donation start page
                 List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
                 request.setAttribute("listDonation", listDonation);

@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.example.thedonorlk.Bean.DonorBean" %>
 
 <%
     if (session.getAttribute("username") == null) {
@@ -10,6 +11,8 @@
     }
     Object role = session.getAttribute("role");
     Object bloodbank = session.getAttribute("bloodbank");
+
+    List<DonorBean> sendToDonorList = (List<DonorBean>) request.getAttribute("SendToDonorList");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +26,27 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <% if (request.getAttribute("Message") != null) { %>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://meghaduta.dhahas.com/sms/sendSMS",
+                type: "POST",
+                data: JSON.stringify({"senders": [
+                        <% for (DonorBean sendToDonor : sendToDonorList) { %>
+                        "+94<%=sendToDonor.getContact()%>",
+                        <% } %>
+                    ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"}),
+                dataType:'json',
+                contentType: 'application/json',
+                success: function (response) {console.log(response); },
+                error: function(error){ console.log("Something went wrong", error); }
+            });
+        });
+    </script>
+    <% } %>
 </head>
 
 <body>

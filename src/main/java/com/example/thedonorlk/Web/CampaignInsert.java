@@ -1,7 +1,10 @@
 package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.DonorBean;
+import com.example.thedonorlk.Bean.NotificationBean;
 import com.example.thedonorlk.Database.CampaignDAO;
+import com.example.thedonorlk.Database.DonorDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,14 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/campaignInsert")
 public class CampaignInsert extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
 
     private CampaignDAO campaignDAO;
+    private DonorDAO donorDAO;
     public void init() {
         campaignDAO = new CampaignDAO();
+        donorDAO = new DonorDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,7 +55,18 @@ public class CampaignInsert extends HttpServlet {
         CampaignBean newCampaign = new CampaignBean(0, campaign_name, campaign_date, start_time, end_time, address_number,address_street, address_city, bloodbank_code);
 
             if (campaignDAO.insertUser(newCampaign)) {
-                response.sendRedirect("./campaign");
+                String message = "An upcoming blood donation camp '" + campaign_name +
+                        "' is organized by your nearest blood bank '" + bloodbank_code + "'. " +
+                        "Date - " + campaign_date + ", Time - " + start_time + " to " + end_time + ". " +
+                        "At - " + address_street + ", " + address_city + ". " +
+                        "Please come and join with us to save lives";
+
+                List<DonorBean> donor = donorDAO.selectAllDonorsByBloodbank(bloodbank_code);
+                request.setAttribute("SendToDonorList", donor);
+                request.setAttribute("Message", message);
+
+                RequestDispatcher dispatcher = request.getRequestDispatcher("campaign");
+                dispatcher.forward(request, response);
             }
     }
 }

@@ -2,8 +2,11 @@ package com.example.thedonorlk.Web.Donor;
 
 import com.example.thedonorlk.Bean.AppointmentBean;
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.DonorBean;
+import com.example.thedonorlk.Bean.DonorCardBean;
 import com.example.thedonorlk.Database.Donor.AppointmentDAO;
 import com.example.thedonorlk.Database.CampaignDAO;
+import com.example.thedonorlk.Database.DonorDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,8 +22,10 @@ public class AppointmentInsert extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
 
     private AppointmentDAO appointmentDAO;
+    public DonorDAO donorDAO;
     public void init() {
         appointmentDAO = new AppointmentDAO();
+        donorDAO = new DonorDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,16 +34,16 @@ public class AppointmentInsert extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            insertUser(request, response);
+            insertAppointment(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error","Something went wrong, Please Try Again");
+            request.setAttribute("error", "Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
             dispatcher.forward(request, response);
 //            throw new ServletException(ex);
         }
     }
 
-    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+    private void insertAppointment(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
 
         String bloodbank_code = request.getParameter("BloodBank_Code");
@@ -47,8 +52,15 @@ public class AppointmentInsert extends HttpServlet {
         String donor_id = request.getParameter("Donor_ID");
         AppointmentBean newAppointment = new AppointmentBean(Integer.parseInt(donor_id), bloodbank_code, appointment_time, appointment_date, donor_id, "New");
 
-            if (appointmentDAO.insertUser(newAppointment)) {
-                response.sendRedirect("./appointment_donor");
-            }
+        DonorCardBean donor = donorDAO.selectDonorCardByID(Integer.parseInt(donor_id));
+        String message = "Dear " + donor.getFirst_name() + ", Your below appointment is recorded, Date - " +
+                appointment_date + ", Time - " + appointment_time + ". You will be notified with the appointment confirmation very soon, Thank you";
+
+        if (appointmentDAO.insertUser(newAppointment)) {
+            request.setAttribute("SendTo", donor.getContact());
+            request.setAttribute("Message", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
+            dispatcher.forward(request, response);
+        }
     }
 }
