@@ -52,7 +52,7 @@ public class UserBloodBankInsert extends HttpServlet {
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/bloodbankForm.jsp");
             dispatcher.forward(request, response);
         }
     }
