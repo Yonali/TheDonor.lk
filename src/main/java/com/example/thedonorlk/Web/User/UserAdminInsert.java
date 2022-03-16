@@ -63,7 +63,7 @@ public class UserAdminInsert extends HttpServlet {
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/adminForm.jsp");
             dispatcher.forward(request, response);
         }
     }

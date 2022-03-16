@@ -70,7 +70,7 @@ public class UserDoctorInsert extends HttpServlet {
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctorForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/doctorForm.jsp");
             dispatcher.forward(request, response);
         }
     }

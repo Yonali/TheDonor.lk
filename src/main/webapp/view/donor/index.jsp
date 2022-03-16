@@ -63,7 +63,7 @@
                            onclick="campaignSelect()">Campaigns</a>
                         <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe"
                            onclick="appSelect()">Appointment</a>
-                        <a href="<%=request.getContextPath()%>/intructions.jsp" target="mainframe"
+                        <a href="<%=request.getContextPath()%>/view/donor/instructions.jsp" target="mainframe"
                            onclick="instructionSelect()">Instructions</a>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe"
                        onclick="campaignSelect()">Campaigns</a>
                     <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
-                    <a href="intructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
+                    <a href="instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
                     <a href="<%=request.getContextPath()%>/donorProfile" target="mainframe" onclick="profileSelect()">Profile</a>
                     <a href="<%=request.getContextPath()%>/logout">Logout</a>
                 </div>

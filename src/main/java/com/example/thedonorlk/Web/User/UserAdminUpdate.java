@@ -52,7 +52,7 @@ public class UserAdminUpdate extends HttpServlet {
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
             UserAdminBean existingUser = userDAO.selectUser(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/adminForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/adminForm.jsp");
             request.setAttribute("user", existingUser);
             dispatcher.forward(request, response);
         }

@@ -57,7 +57,7 @@ public class UserBloodBankUpdate extends HttpServlet {
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
             UserBloodBankBean existingUser = userBloodBankDAO.selectUser(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/bloodbankForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/bloodbankForm.jsp");
             request.setAttribute("user", existingUser);
             dispatcher.forward(request, response);
         }

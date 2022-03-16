@@ -66,7 +66,7 @@ public class UserDoctorUpdate extends HttpServlet {
             request.setAttribute("user", existingUser);
             List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
             request.setAttribute("listBloodBank", listBloodBank);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/doctorForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/doctorForm.jsp");
             dispatcher.forward(request, response);
         }
     }
