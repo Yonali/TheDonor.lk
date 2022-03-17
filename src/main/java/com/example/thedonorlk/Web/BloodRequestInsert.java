@@ -2,8 +2,11 @@ package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.BloodRequestBean;
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.NotificationBean;
 import com.example.thedonorlk.Database.BloodRequestDAO;
 import com.example.thedonorlk.Database.CampaignDAO;
+import com.example.thedonorlk.Database.NotificationDAO;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,9 +22,12 @@ public class BloodRequestInsert extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
 
     private BloodRequestDAO requestDAO;
-
+    private UserBloodBankDAO bloodBankDAO;
+    private NotificationDAO notificationDAO;
     public void init() {
         requestDAO = new BloodRequestDAO();
+        bloodBankDAO = new UserBloodBankDAO();
+        notificationDAO = new NotificationDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,6 +56,13 @@ public class BloodRequestInsert extends HttpServlet {
 
         BloodRequestBean newRequest = new BloodRequestBean(0, from_bloodbank_code, bloodbank_code,
                 blood_group, blood_product, required_count, remark, "request_date", "request_time", "New");
+
+        String message = from_bloodbank_code + " is urgently requesting " + blood_group + " type " + blood_product + " Blood product. " +
+                "Required count is " + required_count + ". Please respond at the earliest. " +
+                "#TheDonor.lk";
+
+        NotificationBean notification = new NotificationBean(0, bloodBankDAO.selectIDFromBloodBankCode(bloodbank_code), bloodBankDAO.selectIDFromBloodBankCode(from_bloodbank_code),"New Blood Request",message,"","");
+        notificationDAO.insertNotificaion(notification);
 
         if (requestDAO.insertRequest(newRequest)) {
             response.sendRedirect("./bloodRequestSent");

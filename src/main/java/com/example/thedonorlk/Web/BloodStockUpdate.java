@@ -3,10 +3,8 @@ package com.example.thedonorlk.Web;
 import com.example.thedonorlk.Bean.BloodStockBean;
 import com.example.thedonorlk.Bean.DonationBean;
 import com.example.thedonorlk.Bean.DonorCardBean;
-import com.example.thedonorlk.Database.BloodRequestDAO;
-import com.example.thedonorlk.Database.BloodStockDAO;
-import com.example.thedonorlk.Database.DonationDAO;
-import com.example.thedonorlk.Database.DonorDAO;
+import com.example.thedonorlk.Bean.NotificationBean;
+import com.example.thedonorlk.Database.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -23,10 +22,12 @@ public class BloodStockUpdate extends HttpServlet {
     private BloodStockDAO stockDAO;
     private DonationDAO donationDAO;
     private DonorDAO donorDAO;
+    private NotificationDAO notificationDAO;
     public void init() {
         stockDAO = new BloodStockDAO();
         donationDAO = new DonationDAO();
         donorDAO = new DonorDAO();
+        notificationDAO = new NotificationDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,15 +51,21 @@ public class BloodStockUpdate extends HttpServlet {
         String status = request.getParameter("status");
         String bank = request.getParameter("bank");
 
+        HttpSession session = request.getSession(false);
+        int notifier_id = (Integer) session.getAttribute("user_id");
+
         if (stockDAO.updateStockStatus(id, status)) {
             if (status.equals("Transfused")) {
                 BloodStockBean stock = stockDAO.selectStock(id);
                 DonationBean donation = donationDAO.selectDonationByBloodBarcode(stock.getBlood_barcode());
                 DonorCardBean donor = donorDAO.selectDonorCardByID(Integer.parseInt(donation.getDonor_id()));
 
-                String message = "Thank you, your precious blood donation helped save a life today, " +
+                String message = "Thank you, your precious blood helped save a life today, " +
                         "Thank you for your generosity, It means a lot for the patient and the family. " +
                         "#Donating Blood Makes a Big Difference in the Lives of Others #TheDonor.lk";
+
+                NotificationBean notification = new NotificationBean(0,Integer.parseInt(donation.getDonor_id()), notifier_id,"You saved a life!",message,"","");
+                notificationDAO.insertNotificaion(notification);
 
                 request.setAttribute("SendTo", donor.getContact());
                 request.setAttribute("Message", message);
