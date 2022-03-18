@@ -41,6 +41,7 @@ public class EmergencyUpdate extends HttpServlet {
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
         String blood_group = request.getParameter("Blood_Group");
+        int req_amount = Integer.parseInt(request.getParameter("Req_Amount"));
         String date = request.getParameter("Date");
         String time = request.getParameter("Time");
         String status = request.getParameter("Status");

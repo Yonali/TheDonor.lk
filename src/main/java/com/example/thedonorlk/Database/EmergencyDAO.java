@@ -12,8 +12,8 @@ import java.util.List;
 
 public class EmergencyDAO {
 
-    private static final String INSERT_SQL = "INSERT INTO emergency_requirement (Blood_Group, Date, Time, Status, BloodBank_Code) VALUES " +
-            " (?, ?, ?, ?, ?)";
+    private static final String INSERT_SQL = "INSERT INTO emergency_requirement (Blood_Group,Req_Amount, Date, Time, Status, BloodBank_Code) VALUES " +
+            " (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ? ORDER BY Emg_ID DESC";
     private static final String SELECT_ALL = "SELECT * FROM emergency_requirement ORDER BY Emg_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM emergency_requirement WHERE Emg_ID = ?";
@@ -29,10 +29,10 @@ public class EmergencyDAO {
         boolean status = true;
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_SQL)) {
             preparedStatement.setString(1, emergency.getBlood_group());
-            preparedStatement.setString(2, emergency.getDate());
-            preparedStatement.setString(3, emergency.getTime());
-            preparedStatement.setString(4, emergency.getStatus());
-            preparedStatement.setString(5, emergency.getBloodbank_code());
+            preparedStatement.setString(3, emergency.getDate());
+            preparedStatement.setString(4, emergency.getTime());
+            preparedStatement.setString(5, emergency.getStatus());
+            preparedStatement.setString(6, emergency.getBloodbank_code());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -52,12 +52,13 @@ public class EmergencyDAO {
             while (rs.next()) {
                 int id_1 = rs.getInt("Emg_ID");
                 String blood_group = rs.getString("Blood_Group");
+                int req_amount = rs.getInt("Req_Amount");
                 String date = rs.getString("Date");
                 String time = rs.getString("Time");
                 String status = rs.getString("Status");
                 String bloodbank_code = rs.getString("BloodBank_Code");
 
-                emergency = new EmergencyBean(id_1, blood_group, date, time, status, bloodbank_code);
+                emergency = new EmergencyBean(id, blood_group, req_amount, date, time, status, bloodbank_code);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -74,6 +75,7 @@ public class EmergencyDAO {
             while (rs.next()) {
                 int id = rs.getInt("Emg_ID");
                 String blood_group = rs.getString("Blood_Group");
+                int req_amount = rs.getInt("Req_Amount");
                 String date = rs.getString("Date");
                 String time = rs.getString("Time");
                 String status = rs.getString("Status");
