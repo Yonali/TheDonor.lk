@@ -56,7 +56,7 @@
 <body>
 <main>
     <%----------------------------calendar----------------------------------------%>
-    <div class="container">
+    <%--<div class="container">
         <div class="calendar">
             <div class="month">
                 <i class="fa fa-angle-left prev"></i>
@@ -78,7 +78,7 @@
             </div>
             <div class="days"></div>
         </div>
-    </div>
+    </div>--%>
     <%---------------------------------------------------------------------------------%>
 
     <%
@@ -95,11 +95,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Appointments</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
 
                 </div>
@@ -115,17 +115,7 @@
                             <td>Donor NIC</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#accepted" class="card-drop-down">New</a>
-                                        <a href="#accepted" class="card-drop-down">Accepted</a>
-                                        <a href="#declined" class="card-drop-down">Declined</a>
-                                        <a href="#declined" class="card-drop-down">Completed</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("bloodbank")) { %>
                             <td>Actions</td>
                             <% } %>

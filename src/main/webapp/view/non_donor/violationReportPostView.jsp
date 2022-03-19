@@ -28,7 +28,7 @@
     <div class="modal-header">
         <span class="close-popup" onclick="history.back()">&times;</span>
         <h3>
-            Report a Post
+            Reported Post View
         </h3>
     </div>
 

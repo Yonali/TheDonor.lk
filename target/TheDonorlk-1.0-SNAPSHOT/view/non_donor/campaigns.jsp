@@ -28,6 +28,16 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
     <% if (request.getAttribute("Message") != null) { %>
     <script>
         $(document).ready(function () {
@@ -65,11 +75,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Campaigns</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="campaign-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
                     <% if (role.equals("bloodbank")) { %>
                     <a href="<%=request.getContextPath()%>/campaignShowNewForm">New</a>
@@ -79,7 +89,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
@@ -89,16 +99,7 @@
                             <td>Start Time</td>
                             <td>End Time</td>
                             <td>Blood Bank</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#open" class="card-drop-down">Upcoming</a>
-                                        <a href="#progress" class="card-drop-down">In Progress</a>
-                                        <a href="#close" class="card-drop-down">Closed</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("bloodbank")) { %>
                             <td>Actions</td>
                             <% } %>
@@ -159,13 +160,13 @@
                                 <% } %>--%>
 
                                 <% if (role.equals("bloodbank")) { %>
-                                <c:if test="${campaign.bloodbank_code == bloodbank}">
                                 <td>
+                                <c:if test="${campaign.bloodbank_code == bloodbank}">
                                     <a href="<%=request.getContextPath()%>/campaignShowEditForm?id=<c:out value='${campaign.id}' />">Edit</a>
                                     &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                 href="campaignDelete?id=<c:out value='${campaign.id}' />">Delete</a>
-                                </td>
                                 </c:if>
+                                </td>
                                 <% } %>
                             </tr>
                         </c:forEach>

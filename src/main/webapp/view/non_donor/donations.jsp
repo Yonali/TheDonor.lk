@@ -24,6 +24,16 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
     <% if (request.getAttribute("SendTo") != null) {
         System.out.println("Test"); %>
     <script>
@@ -85,12 +95,12 @@
         <div class="card">
             <div class="card-header">
                 <h3>Donations</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <!-- <span class="las la-calendar-week"></span> -->
                     <input type="date" id="donation-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
 
                 </div>
@@ -98,7 +108,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Donation ID</td>
@@ -108,18 +118,7 @@
                             <td>Donor NIC</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#new" class="card-drop-down">New</a>
-                                        <a href="#counselled" class="card-drop-down">Counselled</a>
-                                        <a href="#completed" class="card-drop-down">Completed</a>
-                                        <a href="#cancelled" class="card-drop-down">Cancelled</a>
-                                        <a href="#deferred" class="card-drop-down">Deferred</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("nurse") || role.equals("doctor")) { %>
                             <td>Actions</td>
                             <% } %>
