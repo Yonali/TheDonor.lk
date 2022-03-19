@@ -29,7 +29,7 @@ public class EmergencyDelete extends HttpServlet {
             deleteUser(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("campaign");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
             dispatcher.forward(request, response);
 //            throw new ServletException(ex);
         }

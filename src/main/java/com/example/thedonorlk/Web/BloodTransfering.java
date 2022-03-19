@@ -2,8 +2,11 @@ package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.BloodStockBean;
 import com.example.thedonorlk.Bean.BloodTransferBean;
+import com.example.thedonorlk.Bean.NotificationBean;
 import com.example.thedonorlk.Database.BloodStockDAO;
 import com.example.thedonorlk.Database.BloodTransferDAO;
+import com.example.thedonorlk.Database.NotificationDAO;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,9 +21,13 @@ import java.sql.SQLException;
 public class BloodTransfering extends HttpServlet {
     private BloodStockDAO stockDAO;
     private BloodTransferDAO transferDAO;
+    private UserBloodBankDAO bloodBankDAO;
+    private NotificationDAO notificationDAO;
     public void init() {
         stockDAO = new BloodStockDAO();
         transferDAO = new BloodTransferDAO();
+        bloodBankDAO = new UserBloodBankDAO();
+        notificationDAO = new NotificationDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +59,12 @@ public class BloodTransfering extends HttpServlet {
         BloodTransferBean transfer = new BloodTransferBean(0, blood_barcode,
                 from_bloodbank_code, to_bloodbank_code, blood_group, blood_product, "", "");
 
+        String message = from_bloodbank_code + " has transferred " + blood_group + " type " + blood_product + " blood product to you. " +
+                "Thank you";
+        NotificationBean notification = new NotificationBean(0, bloodBankDAO.selectIDFromBloodBankCode(to_bloodbank_code), bloodBankDAO.selectIDFromBloodBankCode(from_bloodbank_code),"Blood Transfer",message,"","");
+
         if (transferDAO.insertTransfer(transfer) && stockDAO.updateStockBank(id, to_bloodbank_code)) {
+            notificationDAO.insertNotificaion(notification);
             response.sendRedirect("./bloodStock?bank=" + to_bloodbank_code);
         } else {
             request.setAttribute("error", "Something went wrong, Please Try Again");

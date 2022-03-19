@@ -57,14 +57,13 @@ public class BloodRequestInsert extends HttpServlet {
         BloodRequestBean newRequest = new BloodRequestBean(0, from_bloodbank_code, bloodbank_code,
                 blood_group, blood_product, required_count, remark, "request_date", "request_time", "New");
 
-        String message = from_bloodbank_code + " is urgently requesting " + blood_group + " type " + blood_product + " Blood product. " +
+        String message = from_bloodbank_code + " is urgently requesting " + blood_group + " type " + blood_product + " blood product. " +
                 "Required count is " + required_count + ". Please respond at the earliest. " +
                 "#TheDonor.lk";
-
         NotificationBean notification = new NotificationBean(0, bloodBankDAO.selectIDFromBloodBankCode(bloodbank_code), bloodBankDAO.selectIDFromBloodBankCode(from_bloodbank_code),"New Blood Request",message,"","");
-        notificationDAO.insertNotificaion(notification);
 
         if (requestDAO.insertRequest(newRequest)) {
+            notificationDAO.insertNotificaion(notification);
             response.sendRedirect("./bloodRequestSent");
         } else {
             request.setAttribute("error", "Something went wrong, Please Try Again");

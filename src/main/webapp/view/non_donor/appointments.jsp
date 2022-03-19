@@ -25,6 +25,16 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
     <% if (request.getAttribute("SendTo") != null) {
         System.out.println("Test"); %>
     <script>
@@ -85,18 +95,18 @@
         <div class="card">
             <div class="card-header">
                 <h3>Appointments</h3>
-                <diiiiiiiv class="search-wrapper">
+                <div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
-                </diiiiiiiv>
+                </div>
                 <div class="buttons">
 
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>

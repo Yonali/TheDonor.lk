@@ -28,21 +28,37 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
     <% if (request.getAttribute("Message") != null) { %>
     <script>
         $(document).ready(function () {
             $.ajax({
                 url: "https://meghaduta.dhahas.com/sms/sendSMS",
                 type: "POST",
-                data: JSON.stringify({"senders": [
+                data: JSON.stringify({
+                    "senders": [
                         <% for (DonorBean sendToDonor : sendToDonorList) { %>
                         "+94<%=sendToDonor.getContact()%>",
                         <% } %>
-                    ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"}),
-                dataType:'json',
+                    ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"
+                }),
+                dataType: 'json',
                 contentType: 'application/json',
-                success: function (response) {console.log(response); },
-                error: function(error){ console.log("Something went wrong", error); }
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log("Something went wrong", error);
+                }
             });
         });
     </script>
@@ -53,7 +69,7 @@
 <main>
     <%
         String reg_msg = "";
-        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
         if (reg_msg != null) {
     %>
     <div id="error_message">
@@ -64,12 +80,12 @@
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
-                <h3>Emergency Blood <br>Requirements</h3>
-                <div class="search-wrapper">
+                <h3>Emergency Blood Requirements</h3>
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="emergency-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
                     <% if (role.equals("bloodbank")) { %>
                     <a href="<%=request.getContextPath()%>/emergencyShowNewForm">New</a>
@@ -78,7 +94,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
@@ -86,15 +102,7 @@
                             <td>Date</td>
                             <td>Time</td>
                             <td>Blood Bank</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#open" class="card-drop-down">Open</a>
-                                        <a href="#closed" class="card-drop-down">Closed</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("bloodbank")) { %>
                             <td>Action</td>
                             <% } %>
@@ -126,27 +134,23 @@
                                         <span class="status close">Closed</span>
                                     </c:if>
                                 </td>
-                                <%--<% if (role.equals("admin")) { %>
-                                <td>
-                                    <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
-                                                                href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
-                                </td>
-                                <% } %>--%>
 
                                 <% if (role.equals("bloodbank")) { %>
-                                <c:if test="${emergency.bloodbank_code == bloodbank}">
-                                    <td>
+                                <td>
+                                    <c:if test="${emergency.bloodbank_code == bloodbank}">
+
                                         <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
                                         &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
                                                                     href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
-                                    </td>
-                                </c:if>
+
+                                    </c:if>
+                                </td>
                                 <% } %>
                             </tr>
                         </c:forEach>
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
