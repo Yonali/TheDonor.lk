@@ -28,7 +28,9 @@
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function () {
-            $('#table_id').DataTable();
+            $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
         });
     </script>
 </head>
