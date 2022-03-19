@@ -23,6 +23,17 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
 </head>
 
 <body>
@@ -41,11 +52,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Blood Request - Received</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="request-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
 
                 </div>
@@ -53,7 +64,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
@@ -64,17 +75,7 @@
                             <td>Remark</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#requested" class="card-drop-down">New</a>
-                                        <a href="#accepted" class="card-drop-down">Accepted</a>
-                                        <a href="#declined" class="card-drop-down">Declined</a>
-                                        <a href="#cancelled" class="card-drop-down">Cancelled</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (!role.equals("admin")) { %>
                             <td>Actions</td>
                             <% } %>
@@ -108,10 +109,12 @@
                                     </td>
                                     <% if (!role.equals("admin")) { %>
                                     <td>
-                                        <a onclick="request_confirmation(event)"
-                                           href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Accepted">Accept</a>
-                                        <a onclick="request_confirmation(event)"
-                                           href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Declined">Decline</a>
+                                        <c:if test="${request.status != 'Cancelled'}">
+                                            <a onclick="request_confirmation(event)"
+                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Accepted">Accept</a>
+                                            <a onclick="request_confirmation(event)"
+                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Declined">Decline</a>
+                                        </c:if>
                                     </td>
                                     <% } %>
                                 </tr>

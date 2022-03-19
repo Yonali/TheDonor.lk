@@ -20,6 +20,17 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
 </head>
 
 <body>
@@ -38,11 +49,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Blood Transfer History</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="request-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
 
                 </div>
@@ -50,7 +61,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
@@ -61,7 +72,6 @@
                             <td>Blood Product</td>
                             <td>Date</td>
                             <td>Time</td>
-
                         </tr>
                         </thead>
                         <tbody>

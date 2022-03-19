@@ -27,6 +27,16 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+
     <% if (request.getAttribute("SendTo") != null) {
         System.out.println("Test"); %>
     <script>
@@ -34,11 +44,19 @@
             $.ajax({
                 url: "https://meghaduta.dhahas.com/sms/sendSMS",
                 type: "POST",
-                data: JSON.stringify({"senders": [ "+94<%=request.getAttribute("SendTo")%>" ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"}),
-                dataType:'json',
+                data: JSON.stringify({
+                    "senders": ["+94<%=request.getAttribute("SendTo")%>"],
+                    "message": "<%=request.getAttribute("Message")%>",
+                    "apiKey": "61df3f8b36fe65003089ed1b"
+                }),
+                dataType: 'json',
                 contentType: 'application/json',
-                success: function (response) {console.log(response); },
-                error: function(error){ console.log("Something went wrong", error); }
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log("Something went wrong", error);
+                }
             });
         });
     </script>
@@ -66,9 +84,10 @@
                             <span style="padding: 10px;">Select Blood Bank</span>
                             <select class="box" name="bank" id="bank_switch">
                                 <option value="all">All</option>
-                                <c:set var = "s_bank" value = "<%= selected_bank %>" />
+                                <c:set var="s_bank" value="<%= selected_bank %>"/>
                                 <c:forEach var="bank" items="${listBloodBank}">
-                                    <option value="<c:out value='${bank.code}'/>" ${bank.code == s_bank ? 'selected': ''}><c:out value="${bank.name}"/></option>
+                                    <option value="<c:out value='${bank.code}'/>" ${bank.code == s_bank ? 'selected': ''}>
+                                        <c:out value="${bank.name}"/></option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -87,11 +106,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Blood Stock</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <span class="las la-calendar-week"></span>
-                </div>
+                </div>--%>
                 <div class="buttons">
                 </div>
                 <div></div>
@@ -99,7 +118,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Blood ID</td>
@@ -110,18 +129,7 @@
                             <td>Col Date</td>
                             <td>Pro Date</td>
                             <td>Exp Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#consulted" class="card-drop-down">Processed</a>
-                                        <a href="#completed" class="card-drop-down">NOT_Processed</a>
-                                        <a href="#cancelled" class="card-drop-down">Active</a>
-                                        <a href="#consulted" class="card-drop-down">Transfused</a>
-                                        <a href="#deferred" class="card-drop-down">Discarded</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("admin") || role.equals("bloodbank")) { %>
                             <td>Actions</td>
                             <% } %>
@@ -155,26 +163,29 @@
                                         <span class="status close">Discarded</span>
                                     </c:if>
                                 </td>
+                                <% if (role.equals("bloodbank")) { %>
                                 <td>
-                                    <% if (role.equals("bloodbank")) { %>
                                     <c:choose>
                                         <c:when test="${stock.status == 'NOT_Processed' && stock.bloodbank_code == bloodbank}">
-                                            <a href="bloodProcessingShowForm?id=<c:out value='${stock.id}'/>&barcode=<c:out value='${stock.blood_barcode}'/>&colDate=<c:out value='${stock.collected_date}'/>">Blood Processing</a>
-                                            <a href="bloodTransferingShowForm?id=<c:out value='${stock.id}'/>">Internal Blood Transfer</a>
+                                            <a href="bloodProcessingShowForm?id=<c:out value='${stock.id}'/>&barcode=<c:out value='${stock.blood_barcode}'/>&colDate=<c:out value='${stock.collected_date}'/>">Blood
+                                                Processing</a>
+                                            <a href="bloodTransferingShowForm?id=<c:out value='${stock.id}'/>">Internal
+                                                Blood Transfer</a>
                                         </c:when>
                                         <c:when test="${stock.status == 'Active' && stock.bloodbank_code == bloodbank}">
                                             <a onclick="stock_confirmation(event)"
                                                href="bloodStockUpdate?id=<c:out value='${stock.id}'/>&status=Transfused&bank=<%= selected_bank %>">Transfuse</a>
                                             <a onclick="stock_confirmation(event)"
                                                href="bloodStockUpdate?id=<c:out value='${stock.id}'/>&status=Discarded&bank=<%= selected_bank %>">Discard</a>
-                                            <a href="bloodTransferingShowForm?id=<c:out value='${stock.id}'/>">Internal Blood Transfer</a>
+                                            <a href="bloodTransferingShowForm?id=<c:out value='${stock.id}'/>">Internal
+                                                Blood Transfer</a>
                                         </c:when>
                                     </c:choose>
                                     <% } %>
                                     <% if (role.equals("admin")) { %>
                                     <a href="bloodShowEditForm?id=<c:out value='${stock.id}'/>">Edit</a>
-                                    <% } %>
                                 </td>
+                                <% } %>
                             </tr>
                         </c:forEach>
                         </tbody>

@@ -23,13 +23,24 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
 </head>
 
 <body>
 <main>
     <%
         String reg_msg = "";
-        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
         if (reg_msg != null) {
     %>
     <div id="error_message">
@@ -41,12 +52,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Blood Request - Sent</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here" />
                     <input type="date" id="request-date-search">
-                </div>
-
+                </div>--%>
                 <div class="buttons">
                     <% if (!role.equals("admin")) { %>
                     <a href="<%=request.getContextPath()%>/requestShowNewForm">New</a>
@@ -56,7 +66,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
@@ -67,17 +77,7 @@
                             <td>Remark</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#requested" class="card-drop-down">New</a>
-                                        <a href="#accepted" class="card-drop-down">Accepted</a>
-                                        <a href="#declined" class="card-drop-down">Declined</a>
-                                        <a href="#cancelled" class="card-drop-down">Cancelled</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (!role.equals("admin")) { %>
                             <td>Actions</td>
                             <% } %>
@@ -86,38 +86,38 @@
                         <tbody>
                         <c:forEach var="request" items="${listRequest}">
                             <c:if test="${request.from_bloodbank_code == bloodbank}">
-                        <tr>
-                            <td><c:out value="${request.id}"/></td>
-                            <td><c:out value="${request.to_bloodbank_code}"/></td>
-                            <td><c:out value="${request.blood_group}"/></td>
-                            <td><c:out value="${request.blood_product}"/></td>
-                            <td><c:out value="${request.required_count}"/></td>
-                            <td><c:out value="${request.remark}"/></td>
-                            <td><c:out value="${request.request_date}"/></td>
-                            <td><c:out value="${request.request_time}"/></td>
-                            <td>
-                                <c:if test="${request.status == 'New'}">
-                                    <span class="status open">New</span>
-                                </c:if>
-                                <c:if test="${request.status == 'Accepted'}">
-                                    <span class="status progress">Accepted</span>
-                                </c:if>
-                                <c:if test="${request.status == 'Declined'}">
-                                    <span class="status close">Declined</span>
-                                </c:if>
-                                <c:if test="${request.status == 'Cancelled'}">
-                                    <span class="status cancelled">Cancelled</span>
-                                </c:if>
-                            </td>
-                            <% if (!role.equals("admin")) { %>
-
-                                <td>
-                                    <a onclick="request_confirmation(event)"
-                                       href="bloodRequestUpdate?id=<c:out value='${request.id}' />&status=Cancelled">Cancel</a>
-                                </td>
-
-                            <% } %>
-                        </tr>
+                                <tr>
+                                    <td><c:out value="${request.id}"/></td>
+                                    <td><c:out value="${request.to_bloodbank_code}"/></td>
+                                    <td><c:out value="${request.blood_group}"/></td>
+                                    <td><c:out value="${request.blood_product}"/></td>
+                                    <td><c:out value="${request.required_count}"/></td>
+                                    <td><c:out value="${request.remark}"/></td>
+                                    <td><c:out value="${request.request_date}"/></td>
+                                    <td><c:out value="${request.request_time}"/></td>
+                                    <td>
+                                        <c:if test="${request.status == 'New'}">
+                                            <span class="status open">New</span>
+                                        </c:if>
+                                        <c:if test="${request.status == 'Accepted'}">
+                                            <span class="status progress">Accepted</span>
+                                        </c:if>
+                                        <c:if test="${request.status == 'Declined'}">
+                                            <span class="status close">Declined</span>
+                                        </c:if>
+                                        <c:if test="${request.status == 'Cancelled'}">
+                                            <span class="status cancelled">Cancelled</span>
+                                        </c:if>
+                                    </td>
+                                    <% if (!role.equals("admin")) { %>
+                                    <td>
+                                        <c:if test="${request.status != 'Cancelled'}">
+                                            <a onclick="request_confirmation(event)"
+                                               href="bloodRequestUpdate?id=<c:out value='${request.id}' />&status=Cancelled">Cancel</a>
+                                        </c:if>
+                                    </td>
+                                    <% } %>
+                                </tr>
                             </c:if>
                         </c:forEach>
                         </tbody>
