@@ -60,14 +60,15 @@ public class ViolationManagement extends HttpServlet {
                 violationDAO.updateStatus(id, "Declined");
                 response.sendRedirect("./violation");
             } else if (type.equals("Remove")) {
-                String message = "Your violation report number " + id + ". " +
+                String message = "Your violation report number " + id + " " +
                         "is accepted by the admin as against the community guidelines. " +
                         "Hence the post is removed. Thank you for reporting to us.";
                 NotificationBean notification = new NotificationBean(0, 0, notifier_id, "Violation Report", message, "", "");
 
                 int post_id = Integer.parseInt(request.getParameter("post_id"));
-                System.out.println(post_id);
-                postDAO.deletePost(post_id);
+                //System.out.println(post_id);
+                //postDAO.deletePost(post_id);
+                postDAO.updatePostStatus(post_id, "Removed");
                 violationDAO.updateStatus(id, "Removed");
 
                 notificationDAO.insertNotificaionWithDonorBeanList(notification, donor);

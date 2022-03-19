@@ -113,12 +113,11 @@
                                 </td>
                                 <% if (role.equals("admin")) { %>
                                 <td>
-                                    <c:if test="${violation.status != 'Removed'}">
                                     <a href="<%=request.getContextPath()%>/violationPostView?id=<c:out value='${violation.post_id}'/>">View</a>
-
-                                    <c:if test="${violation.status != 'Declined'}">
+                                    <c:if test="${violation.status == 'Pending'}">
                                     <a href="<%=request.getContextPath()%>/violationManagement?id=<c:out value='${violation.id}'/>&type=Decline">Decline</a>
                                     </c:if>
+                                    <c:if test="${violation.status != 'Removed'}">
                                     <a onclick="confirmation(event)"
                                        href="<%=request.getContextPath()%>/violationManagement?id=<c:out value='${violation.id}'/>&type=Remove&post_id=<c:out value='${violation.post_id}'/>">Remove</a>
                                     </c:if>

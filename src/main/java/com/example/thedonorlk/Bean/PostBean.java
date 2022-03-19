@@ -12,10 +12,11 @@ public class PostBean {
     protected String donor_id;
     protected String donor_name;
     private byte[] donor_profile;
+    protected String status;
 
     public PostBean() {}
 
-    public PostBean(int id, String caption, InputStream image_video, byte[] imgBytes, String date, String time, String donor_id, String donor_name, byte[] donor_profile) {
+    public PostBean(int id, String caption, InputStream image_video, byte[] imgBytes, String date, String time, String donor_id, String donor_name, byte[] donor_profile, String status) {
         this.id = id;
         this.caption = caption;
         this.image_video = image_video;
@@ -25,6 +26,7 @@ public class PostBean {
         this.donor_id = donor_id;
         this.donor_name = donor_name;
         this.donor_profile = donor_profile;
+        this.status = status;
     }
 
     public int getId() {
@@ -97,5 +99,13 @@ public class PostBean {
 
     public void setDonor_profile(byte[] donor_profile) {
         this.donor_profile = donor_profile;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
