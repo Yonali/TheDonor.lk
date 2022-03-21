@@ -45,7 +45,7 @@ public class UserAdminInsert extends HttpServlet {
 
         //Auto generate user password here
         PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();
-        String password = "Admin1234*";
+        String password = passwordEmailGenerator.generatePassword();
         String hash_pwd = DigestUtils.sha256Hex(password);
 
         if (!userDAO.validateUsername(newUser)) {

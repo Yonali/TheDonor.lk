@@ -20,6 +20,14 @@ public class PasswordEmailGenerator {
         return pass;
     }
 
+    public String generateOTP() {
+        String characters = "0123456789";
+        String pass = RandomStringUtils.random( 4, characters);
+        String hash_pwd = DigestUtils.sha256Hex(pass);
+
+        return pass;
+    }
+
     public void sendMail(String email, String subject, String msg) {
 
         final String username = "2019cs043@stu.ucsc.cmb.ac.lk";
@@ -60,4 +68,3 @@ public class PasswordEmailGenerator {
         }
     }
 }
-

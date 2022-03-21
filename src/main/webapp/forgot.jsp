@@ -32,7 +32,7 @@
                     <%= login_msg %>
                 </div>
 
-                <form action="<%=request.getContextPath()%>/login" class="form-section" method="post">
+                <form action="<%=request.getContextPath()%>/forgotPassword" class="form-section" method="post">
                     <div id="login_form" class="input-fields">
                         <div class="bottom">
                             <p>Please enter your registered email address below</p>
