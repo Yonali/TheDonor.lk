@@ -5,18 +5,21 @@ public class UserBloodBankBean {
     protected String code;
     protected String username;
     protected String name;
+    protected String bg;
     protected String contact;
     protected String email;
     protected String add_street;
     protected String add_city;
 
-    public UserBloodBankBean() {}
+    public UserBloodBankBean() {
+    }
 
-    public UserBloodBankBean(int id, String code, String username, String name, String contact, String email, String add_street, String add_city) {
+    public UserBloodBankBean(int id, String code, String username, String name, String bg, String contact, String email, String add_street, String add_city) {
         this.id = id;
         this.code = code;
         this.username = username;
         this.name = name;
+        this.bg = bg;
         this.contact = contact;
         this.email = email;
         this.add_street = add_street;
@@ -55,6 +58,14 @@ public class UserBloodBankBean {
         this.name = name;
     }
 
+    public String getBg() {
+        return bg;
+    }
+
+    public void setBg(String bg) {
+        this.bg = bg;
+    }
+
     public String getContact() {
         return contact;
     }
@@ -86,4 +97,6 @@ public class UserBloodBankBean {
     public void setAdd_city(String add_city) {
         this.add_city = add_city;
     }
+
+
 }

@@ -8,6 +8,11 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+
 
 @WebServlet("/register")
 public class DonorRegServlet extends HttpServlet {
@@ -41,11 +46,25 @@ public class DonorRegServlet extends HttpServlet {
         donorRegBean.setPwd(hash_pwd);
         donorRegBean.setCnfrm_pwd(hash_cnfrm_pwd);
 
+        LocalDate today = LocalDate.now(); // Today's date here
+        Period p = Period.between(LocalDate.parse(dob), today);
+
+        // Now access the values as below
+        System.out.println(p.getDays());
+        System.out.println(p.getMonths());
+        System.out.println(p.getYears());
+
+//        int age = p.getYears();
+//        System.out.println(age);
+
         if (pwd.length() < 8) {
-            request.setAttribute("error","Password should be Minimum 8 Characters long");
+            request.setAttribute("error", "Password should be Minimum 8 Characters long");
             request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
         } else if (!hash_pwd.equals(hash_cnfrm_pwd)) {
-            request.setAttribute("error","Passwords do not match, Please try again");
+            request.setAttribute("error", "Passwords do not match, Please try again");
+            request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
+        } else if(p.getYears() < 18) {
+            request.setAttribute("error", "Error msg here. Age<18");
             request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
         } else {
             if (!donorRegDAO.validateEmail(email)) {
@@ -60,14 +79,18 @@ public class DonorRegServlet extends HttpServlet {
 
                     response.sendRedirect("./login.jsp");
                 } else {
-                    request.setAttribute("error","Something went wrong, Please Try Again");
+                    request.setAttribute("error", "Something went wrong, Please Try Again");
                     request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
                 }
             } else {
-                request.setAttribute("error","Email already registered, Please try Login");
+                request.setAttribute("error", "Email already registered, Please try Login");
                 request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
             }
 
         }
+
+
+
+
     }
 }

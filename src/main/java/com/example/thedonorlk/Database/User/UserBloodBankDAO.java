@@ -14,8 +14,8 @@ public class UserBloodBankDAO {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user (Username, Password, Role) " +
             "VALUES (?, ?, ?); ";
-    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_bloodbank (ID, Code, Name, Contact, Email, Address_Number, Address_Street, Address_City) " +
-            "VALUES (?, ?, ?, ?, ?, null, ?, ?)";
+    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_bloodbank (ID, Code, Name, Blood_Group, Contact, Email, Address_Number, Address_Street, Address_City) " +
+            "VALUES (?, ?, ?, ?, ?, ?, null, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user, user_bloodbank WHERE user.id =? AND user.id=user_bloodbank.id";
     private static final String SELECT_ALL_USERS = "SELECT * FROM user, user_bloodbank WHERE role='bloodbank' AND user.id=user_bloodbank.id";
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
@@ -58,10 +58,11 @@ public class UserBloodBankDAO {
             preparedStatement.setString(1, id);
             preparedStatement.setString(2, user.getCode());
             preparedStatement.setString(3, user.getName());
-            preparedStatement.setString(4, user.getContact());
-            preparedStatement.setString(5, user.getEmail());
-            preparedStatement.setString(6, user.getAdd_street());
-            preparedStatement.setString(7, user.getAdd_city());
+            preparedStatement.setString(4, user.getBg());
+            preparedStatement.setString(5, user.getContact());
+            preparedStatement.setString(6, user.getEmail());
+            preparedStatement.setString(7, user.getAdd_street());
+            preparedStatement.setString(8, user.getAdd_city());
 //            System.out.println(preparedStatement);
 
             preparedStatement.execute();
@@ -85,11 +86,12 @@ public class UserBloodBankDAO {
                 String code = rs.getString("code");
                 String username = rs.getString("username");
                 String name = rs.getString("name");
+                String bg = rs.getString("bg");
                 String contact = rs.getString("contact");
                 String email = rs.getString("email");
                 String address_street = rs.getString("address_street");
                 String address_city = rs.getString("address_city");
-                user = new UserBloodBankBean(id_1, code, username, name, contact, email, address_street, address_city);
+                user = new UserBloodBankBean(id_1, code, username, name, bg, contact, email, address_street, address_city);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -124,11 +126,12 @@ public class UserBloodBankDAO {
                 String code = rs.getString("code");
                 String username = rs.getString("username");
                 String name = rs.getString("name");
+                String bg = rs.getString("bg");
                 String contact = rs.getString("contact");
                 String email = rs.getString("email");
                 String address_street = rs.getString("address_street");
                 String address_city = rs.getString("address_city");
-                users.add(new UserBloodBankBean(id, code, username, name, contact, email, address_street, address_city));
+                users.add(new UserBloodBankBean(id, code, username, name, bg, contact, email, address_street, address_city));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -154,11 +157,12 @@ public class UserBloodBankDAO {
             statement.setInt(2, user.getId());
             statement.setString(3, user.getCode());
             statement.setString(4, user.getName());
-            statement.setString(5, user.getContact());
-            statement.setString(6, user.getEmail());
-            statement.setString(7, user.getAdd_street());
-            statement.setString(8, user.getAdd_city());
-            statement.setInt(9, user.getId());
+            statement.setString(5, user.getBg());
+            statement.setString(6, user.getContact());
+            statement.setString(7, user.getEmail());
+            statement.setString(8, user.getAdd_street());
+            statement.setString(9, user.getAdd_city());
+            statement.setInt(10, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

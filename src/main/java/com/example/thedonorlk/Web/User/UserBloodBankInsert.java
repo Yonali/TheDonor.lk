@@ -42,11 +42,12 @@ public class UserBloodBankInsert extends HttpServlet {
             throws SQLException, IOException, ServletException {
         String username = request.getParameter("username");
         String name = request.getParameter("name");
+        String bg = request.getParameter("bg");
         String email = request.getParameter("email");
         String contact = request.getParameter("contact");
         String add_street = request.getParameter("add_street");
         String add_city = request.getParameter("add_city");
-        UserBloodBankBean newUser = new UserBloodBankBean(0, username, username, name, contact, email, add_street, add_city);
+        UserBloodBankBean newUser = new UserBloodBankBean(0, username, username, name, bg, contact, email, add_street, add_city);
 
         //Auto generate user password here
         PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();

@@ -63,6 +63,10 @@
                         <input type="text" name="name" id="name" value="<c:out value='${user.name}' />"/>
                     </div>
                     <div class="field-single">
+                        <span>Blood Group</span>
+                        <input type="text" name="bg" id="bg" value="<c:out value='${user.bg}' />"/>
+                    </div>
+                    <div class="field-single">
                         <span>Email</span>
                         <input type="text" name="email" id="email" value="<c:out value='${user.email}' />"/>
                     </div>

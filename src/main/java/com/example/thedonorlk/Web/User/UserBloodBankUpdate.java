@@ -40,11 +40,12 @@ public class UserBloodBankUpdate extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String username = request.getParameter("username");
         String name = request.getParameter("name");
+        String bg = request.getParameter("bg");
         String email = request.getParameter("email");
         String contact = request.getParameter("contact");
         String add_street = request.getParameter("add_street");
         String add_city = request.getParameter("add_city");
-        UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, contact, email, add_street, add_city);
+        UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, bg, contact, email, add_street, add_city);
 
         if (!userBloodBankDAO.validateUsername(user)) {
             if (userBloodBankDAO.updateUser(user)) {

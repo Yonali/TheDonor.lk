@@ -97,11 +97,12 @@ public class NonDonorSettingUpdate extends HttpServlet {
 
         String username = bloodBankBean.getUsername();
         String name = request.getParameter("Name");
+        String bg = request.getParameter("bg");
         String email = bloodBankBean.getEmail();
         String contact = request.getParameter("Contact");
         String add_street = request.getParameter("Address_Street");
         String add_city = request.getParameter("Address_City");
-        UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, contact, email, add_street, add_city);
+        UserBloodBankBean user = new UserBloodBankBean(id, username, username, name, bg, contact, email, add_street, add_city);
 
         if (bloodBankDAO.updateBloodBank2(user)) {
             response.sendRedirect("dashboard");

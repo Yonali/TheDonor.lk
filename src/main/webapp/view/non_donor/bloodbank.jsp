@@ -68,6 +68,7 @@
                             <td>Username/<br>BloodBank Code</td>
                             <%--              <td>Username</td>--%>
                             <td>Name</td>
+                            <td>Blood Group</td>
                             <td>Email</td>
                             <td>Contact</td>
                             <td>Address</td>
@@ -85,6 +86,9 @@
                                 </td>
                                 <td>
                                     <c:out value="${user.name}" />
+                                </td>
+                                <td>
+                                    <c:out value="${user.bg}" />
                                 </td>
                                 <td>
                                     <c:out value="${user.email}" />
