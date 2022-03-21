@@ -1,5 +1,8 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String email = (String) request.getAttribute("email");
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -38,25 +41,24 @@
                     <%= login_msg %>
                 </div>
 
-                <form action="<%=request.getContextPath()%>/login" class="form-section" method="post">
+                <form action="<%=request.getContextPath()%>/passwordUpdateForgot" class="form-section" method="post">
                     <div id="login_form" class="input-fields">
                         <div class="bottom">
-                            <p>Email: </p>
+                            <p>Email: <%= email %></p>
                             <br>
-                            <p>Please enter the OTP received new Password below</p>
+                            <p>Please enter the OTP received and the new password below</p>
                         </div>
                         <br>
 
+                        <input type="hidden" name="email" value="<%= email %>"/>
                         <div class="inputf1">
                             <i class="fa fa-key"></i>
                             <input type="text" name="otp" id="otp" class="uname"  placeholder="OTP" required/>
                         </div>
-
                         <div class="inputf1">
                             <i class="fa fa-lock"></i>
                             <input type="password" name="pwd" id="pwd" class="uname" placeholder="Password" required/>
                         </div>
-
                         <div class="inputf1">
                             <i class="fa fa-lock"></i>
                             <input type="password" name="cnfrm_pwd" id="cnfrm_pwd" class="uname"

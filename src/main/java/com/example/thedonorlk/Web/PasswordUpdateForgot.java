@@ -3,6 +3,7 @@ package com.example.thedonorlk.Web;
 import com.example.thedonorlk.Bean.LoginBean;
 import com.example.thedonorlk.Database.LoginDAO;
 import com.example.thedonorlk.Database.ProfileDAO;
+import com.example.thedonorlk.Database.User.ForgotPasswordDAO;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.RequestDispatcher;
@@ -16,12 +17,14 @@ import java.sql.SQLException;
 
 @WebServlet("/passwordUpdateForgot")
 public class PasswordUpdateForgot extends HttpServlet {
-    //private static final long serialVersionUID = 1 L;
+
     private ProfileDAO profileDAO;
     private LoginDAO loginDAO;
+    private ForgotPasswordDAO forgotDAO;
     public void init() {
         profileDAO = new ProfileDAO();
         loginDAO = new LoginDAO();
+        forgotDAO = new ForgotPasswordDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +36,7 @@ public class PasswordUpdateForgot extends HttpServlet {
             passwordChange(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./forgot.jsp");
             dispatcher.forward(request, response);
             //throw new ServletException(ex);
         }
@@ -41,44 +44,48 @@ public class PasswordUpdateForgot extends HttpServlet {
 
     private void passwordChange(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String username = request.getParameter("username");
-        String password = request.getParameter("Cur_Password");
-        String hash_pwd = DigestUtils.sha256Hex(password);
-        LoginBean login = new LoginBean();
-        login.setUsername(username);
-        login.setPassword(hash_pwd);
 
-        String new_password = request.getParameter("New_Password");
-        String cnfrm_password = request.getParameter("Cnfrm_Password");
+        String email = request.getParameter("email");
+        String otp = request.getParameter("otp");
+        String hash_otp = DigestUtils.sha256Hex(otp);
+
+        int id = forgotDAO.selectUserID(email);
+
+        String new_password = request.getParameter("pwd");
+        String cnfrm_password = request.getParameter("cnfrm_pwd");
         String hash_new_pwd = DigestUtils.sha256Hex(new_password);
         String hash_cnfrm_pwd = DigestUtils.sha256Hex(cnfrm_password);
 
-        String role = request.getParameter("role");
-        String redirect = "dashboard";
-        if (role.equals("Donor")) {
-            redirect = "donorProfile";
-        }
-        if (!loginDAO.validate(login)) {
-            request.setAttribute("error", "Incorrect Password, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
-            dispatcher.forward(request, response);
-        } else if (new_password.length() < 8) {
-            request.setAttribute("error", "Password should be Minimum 8 Characters long, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
-            dispatcher.forward(request, response);
-        } else if (!hash_new_pwd.equals(hash_cnfrm_pwd)) {
-            request.setAttribute("error", "Passwords do not match, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
-            dispatcher.forward(request, response);
-        } else {
-            if (profileDAO.updatePassword(id, hash_new_pwd)) {
-                response.sendRedirect("./" + redirect);
-            } else {
-                request.setAttribute("error", "Something went wrong, Please Try Again");
-                RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
+        if (forgotDAO.validateOTP(email, hash_otp)) {
+            if (new_password.length() < 8) {
+                request.setAttribute("error", "Password should be Minimum 8 Characters long, Please Try Again");
+                request.setAttribute("email", email);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./passwordChange.jsp");
                 dispatcher.forward(request, response);
+            } else if (!hash_new_pwd.equals(hash_cnfrm_pwd)) {
+                request.setAttribute("error", "Passwords do not match, Please Try Again");
+                request.setAttribute("email", email);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./passwordChange.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                if (profileDAO.updatePassword(id, hash_new_pwd)) {
+                    forgotDAO.deleteOTPRecord(email);
+
+                    request.setAttribute("error","Password successfully changed");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("./login.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    request.setAttribute("error", "Something went wrong, Please Try Again");
+                    request.setAttribute("email", email);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("./passwordChange.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
+        } else {
+            request.setAttribute("error", "Incorrect OTP, Please Try Again");
+            request.setAttribute("email", email);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./passwordChange.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }

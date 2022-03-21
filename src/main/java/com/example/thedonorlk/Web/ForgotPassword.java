@@ -33,7 +33,7 @@ public class ForgotPassword extends HttpServlet {
             forgot(request, response);
         } catch (SQLException ex) {
             request.setAttribute("error","Something went wrong, Please Try Again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./forgot.jsp");
             dispatcher.forward(request, response);
             //throw new ServletException(ex);
         }
@@ -60,12 +60,13 @@ public class ForgotPassword extends HttpServlet {
                         + "Thank you\nThedonor.lk";
                 mailDAO.sendMail(email, "Password Reset | TheDonor.lk", message);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/login.jsp");
+                request.setAttribute("email", email);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./passwordChange.jsp");
                 dispatcher.forward(request, response);
             }
         } else {
             request.setAttribute("error","Email is not registered with any account, Please try again");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/forgot.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./forgot.jsp");
             dispatcher.forward(request, response);
         }
     }

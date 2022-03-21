@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @WebServlet("/donorInsert")
@@ -60,32 +62,44 @@ public class DonorInsert extends HttpServlet {
         String password = passwordEmailGenerator.generatePassword();
         String hash_pwd = DigestUtils.sha256Hex(password);
 
-        if (!donorDAO.validateEmail(email)) {
-            if (donorDAO.insertDonor(newDonor, hash_pwd)) {
-                //Send Email with credentials
-                PasswordEmailGenerator mailDAO = new PasswordEmailGenerator();
-                String message = "Dear " + fname + ",\n\n"
-                        + "Your new thedonor.lk account credentials are as below.\n\n"
-                        + "Email - " + email + "\n"
-                        + "Password - " + password + "\n\n"
-                        + "Thank you\nThedonor.lk";
-                mailDAO.sendMail(email, "New Donor Account | TheDonor.lk", message);
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(LocalDate.parse(dob), today);
 
-                //Redirect to donation start page
-                List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
-                request.setAttribute("listDonation", listDonation);
-                DonorCardBean donor = donorDAO.selectDonorCard(nic);
-                request.setAttribute("donor", donor);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
-                dispatcher.forward(request, response);
-            } else {
-                //Redirect to same page with error msg
-                request.setAttribute("error", "Something went wrong, Please Try Again");
+        if (!donorDAO.validateEmail(email)) {
+            if (period.getYears() < 18) {
+                request.setAttribute("error", "Sorry the donor is not 18 years old to register as a blood donor.");
                 List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
                 request.setAttribute("listBloodBank", listBloodBank);
                 request.setAttribute("donor_NIC", nic);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationNewDonor.jsp");
                 dispatcher.forward(request, response);
+            } else {
+                if (donorDAO.insertDonor(newDonor, hash_pwd)) {
+                    //Send Email with credentials
+                    PasswordEmailGenerator mailDAO = new PasswordEmailGenerator();
+                    String message = "Dear " + fname + ",\n\n"
+                            + "Your new thedonor.lk account credentials are as below.\n\n"
+                            + "Email - " + email + "\n"
+                            + "Password - " + password + "\n\n"
+                            + "Thank you\nThedonor.lk";
+                    mailDAO.sendMail(email, "New Donor Account | TheDonor.lk", message);
+
+                    //Redirect to donation start page
+                    List<DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
+                    request.setAttribute("listDonation", listDonation);
+                    DonorCardBean donor = donorDAO.selectDonorCard(nic);
+                    request.setAttribute("donor", donor);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
+                    dispatcher.forward(request, response);
+                } else {
+                    //Redirect to same page with error msg
+                    request.setAttribute("error", "Something went wrong, Please Try Again");
+                    List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
+                    request.setAttribute("listBloodBank", listBloodBank);
+                    request.setAttribute("donor_NIC", nic);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationNewDonor.jsp");
+                    dispatcher.forward(request, response);
+                }
             }
         } else {
             //Redirect to same page with error msg
