@@ -21,6 +21,7 @@ public class DonationDAO {
     private static final String SELECT_DONATION_BY_BARCODE = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Blood_Barcode =?";
     private static final String SELECT_ALL_DONATIONS = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID ORDER BY d.Donation_ID DESC";
     private static final String SELECT_DONATION_BY_DONOR = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC =? ORDER BY d.Donation_ID DESC";
+    private static final String SELECT_LAST_DONATION = "SELECT Donation_Date FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status = 'Completed' ORDER BY d.Donation_Date DESC LIMIT 1;";
 
     private static final String COUNT_DONATION = "SELECT COUNT(*) AS count FROM donation WHERE BloodBank_Code=? AND Donation_Status=?";
 
@@ -80,6 +81,21 @@ public class DonationDAO {
         return status;
     }
 
+    public String selectLastDonationDate(String nic) {
+        String last = "";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_LAST_DONATION);) {
+            preparedStatement.setString(1, nic);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                last = rs.getString("Donation_Date");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return last;
+    }
+
     public DonationBean selectDonation(int id) {
         DonationBean donation = null;
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONATION_BY_ID);) {
@@ -110,6 +126,7 @@ public class DonationDAO {
         }
         return donation;
     }
+
     public DonationBean selectDonationByBloodBarcode(String barcode) {
         DonationBean donation = null;
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONATION_BY_BARCODE);) {

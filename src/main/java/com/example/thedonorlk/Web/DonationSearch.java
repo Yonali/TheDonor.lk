@@ -18,6 +18,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @WebServlet("/donationSearch")
@@ -54,6 +56,13 @@ public class DonationSearch extends HttpServlet {
         String blood_barcode = request.getParameter("Blood_Barcode");
         String nic = request.getParameter("NIC");
         String user_role = request.getParameter("User_Role");
+
+        String last_date = donationDAO.selectLastDonationDate(nic);
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(LocalDate.parse(last_date), today);
+
+        LocalDate next_date = LocalDate.parse(last_date).plusDays(121);
+
         if (blood_barcode.equals("")) {
             //response.sendRedirect("./donation");
             if (checkNIC(nic) == 0) {
@@ -66,18 +75,21 @@ public class DonationSearch extends HttpServlet {
             } else {
                 String status = checkDonorStatus(nic);
 
-                if (status.equals("T_Deferred") || status.equals("P_Deferred")) {
+                if (period.getYears() == 0 && period.getMonths() < 4) {
+                    request.setAttribute("status","RecentlyDonated");
+                    request.setAttribute("next_date", next_date);
+                } else if (status.equals("T_Deferred") || status.equals("P_Deferred")) {
                     request.setAttribute("status","Deferred");
                     request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistoryByNIC(nic));
 
-                    List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
+                    /*List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
                     request.setAttribute("listDonation", listDonation);
                     DonorCardBean donor = donorDAO.selectDonorCard(nic);
                     request.setAttribute("donor", donor);
                     //request.setAttribute("donation_id", donation_id);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
-                    dispatcher.forward(request, response);
-                } else {
+                    dispatcher.forward(request, response);*/
+                } /*else {
                     //Redirect to donation start page
                     List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
                     request.setAttribute("listDonation", listDonation);
@@ -85,7 +97,13 @@ public class DonationSearch extends HttpServlet {
                     request.setAttribute("donor", donor);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
                     dispatcher.forward(request, response);
-                }
+                }*/
+                List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
+                request.setAttribute("listDonation", listDonation);
+                DonorCardBean donor = donorDAO.selectDonorCard(nic);
+                request.setAttribute("donor", donor);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
+                dispatcher.forward(request, response);
             }
         } else {
             //Redirect to relevant

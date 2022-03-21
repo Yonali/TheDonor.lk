@@ -73,6 +73,10 @@
                     <h2 class="card-topic-red">Doctor Counsel PENDING</h2>
                     <h3 class="card-topic-black">Please ask donor to counsel the Doctor</h3>
                 </c:when>
+                <c:when test="${status == 'RecentlyDonated'}">
+                    <h2 class="card-topic-red">Donor has recently donated within last 4 months.</h2>
+                    <h3 class="card-topic-black">Please ask donor to donate after <%= request.getAttribute("next_date") %></h3>
+                </c:when>
                 <c:when test="${status == 'New_Doctor'}">
                     <h3 class="card-topic-red">Counsel the Donor</h3>
                     <div class="card-header card-header-center">
