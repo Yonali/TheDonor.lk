@@ -44,7 +44,7 @@ public class PostInsert extends HttpServlet {
         String donor_id = String.valueOf(session.getAttribute("user_id"));
         String caption = request.getParameter("caption");
 
-        PostBean post = new PostBean(0, caption, null, null, "", "", donor_id, "", null);
+        PostBean post = new PostBean(0, caption, null, null, "", "", donor_id, "", null, null);
 
         Part filePart = request.getPart("image");
         if (filePart != null) {

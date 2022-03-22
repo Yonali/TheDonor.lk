@@ -61,7 +61,7 @@ public class BloodRequestDAO {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                int id_1 = rs.getInt("Blood_Request_ID ");
+                int id_1 = rs.getInt("Blood_Request_ID");
                 String from_bloodbank_code = rs.getString("From_BloodBank_Code");
                 String to_bloodbank_code = rs.getString("To_BloodBank_Code");
                 String blood_group = rs.getString("Blood_Group");

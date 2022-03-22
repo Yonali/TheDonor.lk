@@ -17,6 +17,19 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -35,10 +48,10 @@
         <div class="card">
             <div class="card-header">
                 <h3>System Admins</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here" />
-                </div>
+                </div>--%>
                 <div class="buttons">
                     <a href="<%=request.getContextPath()%>/userAdminShowNewForm">New</a>
                 </div>
@@ -46,7 +59,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Admin ID</td>

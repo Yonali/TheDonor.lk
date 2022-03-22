@@ -724,6 +724,7 @@ main {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
+  padding: 25px;
 }
 
 .card-header-center {
@@ -760,6 +761,10 @@ td a {
 
 table {
   border-collapse: collapse;
+}
+
+#table_id {
+  padding-top: 20px;
 }
 
 thead tr {

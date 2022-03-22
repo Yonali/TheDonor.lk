@@ -23,6 +23,19 @@
 
     <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -41,11 +54,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Violation Report</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here" />
                     <input type="date" id="campaign-date-search">
-                </div>
+                </div>--%>
                 <div class="buttons">
 
                 </div>
@@ -53,24 +66,16 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>ID</td>
                             <td>Post ID</td>
                             <td>Donor ID</td>
                             <td>Reported Date</td>
+                            <td>Time</td>
                             <td>Reason</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#Decline" class="card-drop-down">Decline</a>
-                                        <a href="#Removed" class="card-drop-down">Removed</a>
-                                        <a href="#Pending" class="card-drop-down">Pending</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
                             <% if (role.equals("admin")) { %>
                             <td>Action</td>
                             <% } %>
@@ -110,12 +115,11 @@
                                 </td>
                                 <% if (role.equals("admin")) { %>
                                 <td>
-                                    <c:if test="${violation.status != 'Removed'}">
                                     <a href="<%=request.getContextPath()%>/violationPostView?id=<c:out value='${violation.post_id}'/>">View</a>
-
-                                    <c:if test="${violation.status != 'Declined'}">
+                                    <c:if test="${violation.status == 'Pending'}">
                                     <a href="<%=request.getContextPath()%>/violationManagement?id=<c:out value='${violation.id}'/>&type=Decline">Decline</a>
                                     </c:if>
+                                    <c:if test="${violation.status != 'Removed'}">
                                     <a onclick="confirmation(event)"
                                        href="<%=request.getContextPath()%>/violationManagement?id=<c:out value='${violation.id}'/>&type=Remove&post_id=<c:out value='${violation.post_id}'/>">Remove</a>
                                     </c:if>

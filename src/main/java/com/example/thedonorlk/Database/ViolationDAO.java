@@ -1,6 +1,7 @@
 package com.example.thedonorlk.Database;
 
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.DonorBean;
 import com.example.thedonorlk.Bean.ViolationBean;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class ViolationDAO {
 
     private static final String INSERT_SQL = "INSERT INTO post_reports (Post_ID, Donor_ID, Reported_Date, Reported_Time, Reason, Status) VALUES " +
             " (?, ?, ?, ?, ?, 'Pending')";
-    //private static final String SELECT_BY_ID = "SELECT * FROM post_reports WHERE Campaign_ID =? ORDER BY Campaign_ID DESC";
+    private static final String SELECT_BY_ID = "SELECT * FROM post_reports WHERE ID =?";
     private static final String SELECT_ALL = "SELECT * FROM post_reports ORDER BY Post_ID DESC";
     //private static final String DELETE_SQL = "DELETE FROM campaign WHERE Campaign_ID = ?";
     private static final String UPDATE_SQL = "UPDATE post_reports SET " +
@@ -45,6 +46,30 @@ public class ViolationDAO {
             printSQLException(e);
         }
         return status;
+    }
+
+    public ViolationBean selectViolation(int id) {
+        ViolationBean violation = null;
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_BY_ID);) {
+            preparedStatement.setInt(1, id);
+//            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id1 = rs.getInt("ID");
+                int post_id = rs.getInt("Post_ID");
+                int donor_id = rs.getInt("Donor_ID");
+                String date = rs.getString("Reported_Date");
+                String time = rs.getString("Reported_Time");
+                String reason = rs.getString("Reason");
+                String status = rs.getString("Status");
+
+                violation = new ViolationBean(id1, post_id, donor_id, date, time, reason,status);
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return violation;
     }
 
     public List < ViolationBean > selectAllViolation() {

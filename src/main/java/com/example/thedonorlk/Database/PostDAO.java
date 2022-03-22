@@ -17,9 +17,11 @@ public class PostDAO {
     private static final String INSERT_SQL = "INSERT INTO post_timeline (Caption, Image_Video, Posted_Date, Posted_Time, Donor_ID) VALUES " +
             " (?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND p.Post_ID =? ORDER BY p.Post_ID DESC";
-    private static final String SELECT_ALL = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID ORDER BY Post_ID DESC";
-    private static final String SELECT_ALL_BY_DONOR = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND Donor_ID =? ORDER BY Post_ID DESC";
+    private static final String SELECT_ALL = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND p.Status='Viewable' ORDER BY Post_ID DESC";
+    private static final String SELECT_ALL_BY_DONOR = "SELECT * FROM post_timeline p, user_donor d, user u WHERE u.ID=d.ID AND p.Donor_ID=d.ID AND Donor_ID =? AND p.Status='Viewable' ORDER BY Post_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM post_timeline WHERE Post_ID = ?";
+    private static final String UPDATE_STATUS_SQL = "UPDATE post_timeline SET " +
+            "Status = ? WHERE Post_ID = ?";
     private static final String UPDATE_SQL = "UPDATE post_timeline SET " +
             "Caption = ?, Image_Video = ?, Posted_Date = ?, Posted_Time = ?, " +
             "Donor_ID = ? WHERE Post_ID = ?";
@@ -67,8 +69,9 @@ public class PostDAO {
                 String donor_id = rs.getString("Donor_ID");
                 String donor_name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
                 byte[] donor_profile = rs.getBytes("Profile");
+                String status = rs.getString("Status");
 
-                post = new PostBean(id_1, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile);
+                post = new PostBean(id_1, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile, status);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -92,8 +95,9 @@ public class PostDAO {
                 String donor_id = rs.getString("Donor_ID");
                 String donor_name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
                 byte[] donor_profile = rs.getBytes("Profile");
+                String status = rs.getString("Status");
 
-                post.add(new PostBean(id, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile));
+                post.add(new PostBean(id, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile, status));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -117,8 +121,9 @@ public class PostDAO {
                 String donor_id = rs.getString("Donor_ID");
                 String donor_name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
                 byte[] donor_profile = rs.getBytes("Profile");
+                String status = rs.getString("Status");
 
-                post.add(new PostBean(id, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile));
+                post.add(new PostBean(id, caption, null, image_video, posted_date, posted_time, donor_id, donor_name, donor_profile, status));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -134,6 +139,17 @@ public class PostDAO {
             rowDeleted = statement.executeUpdate() > 0;
         }
         return rowDeleted;
+    }
+
+    public boolean updatePostStatus(int id, String status) throws SQLException {
+        boolean rowUpdated;
+        try (PreparedStatement statement = con.prepareStatement(UPDATE_STATUS_SQL);) {
+            statement.setString(1, status);
+            statement.setInt(2, id);
+
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
     }
 
     public boolean updatePost(PostBean post) throws SQLException {
