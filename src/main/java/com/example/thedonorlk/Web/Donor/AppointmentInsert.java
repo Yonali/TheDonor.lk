@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 @WebServlet("/appointmentInsert")
 public class AppointmentInsert extends HttpServlet {
@@ -38,7 +42,7 @@ public class AppointmentInsert extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             insertAppointment(request, response);
-        } catch (SQLException ex) {
+        } catch (SQLException | ParseException ex) {
             request.setAttribute("error", "Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
             dispatcher.forward(request, response);
@@ -47,13 +51,28 @@ public class AppointmentInsert extends HttpServlet {
     }
 
     private void insertAppointment(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, IOException, ServletException {
+            throws SQLException, IOException, ServletException, ParseException {
 
         String bloodbank_code = request.getParameter("BloodBank_Code");
         String appointment_time = request.getParameter("Appointment_Time");
         String appointment_date = request.getParameter("Appointment_Date");
         String donor_id = request.getParameter("Donor_ID");
         AppointmentBean newAppointment = new AppointmentBean(Integer.parseInt(donor_id), bloodbank_code, appointment_time, appointment_date, donor_id, "New");
+
+
+        //  LocalDate today = LocalDate.now(); // Today's date here
+        LocalDate now = LocalDate.now(); // Today's date here
+        //object of SimpleDateFormat class
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//dates to be compare
+        Date date1 = sdf.parse("appointment_date");
+        Date today = sdf.parse(String.valueOf(now));
+//prints dates
+        System.out.println("Date 1: " + sdf.format(date1));
+        System.out.println("Date 2: " + sdf.format(today));
+//comparing dates
+
+
 
         DonorCardBean donor = donorDAO.selectDonorCardByID(Integer.parseInt(donor_id));
         String message = "Dear " + donor.getFirst_name() + ", Your below appointment is recorded, Date - " +
@@ -69,6 +88,24 @@ public class AppointmentInsert extends HttpServlet {
 
             request.setAttribute("SendTo", donor.getContact());
             request.setAttribute("Message", message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
+            dispatcher.forward(request, response);
+        }
+        else if(date1.compareTo(today) > 0)
+        {
+            System.out.println("Date 1 comes after Date 2");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
+            dispatcher.forward(request, response);
+        }
+        else if(date1.compareTo(today) < 0)
+        {
+            System.out.println("Date 1 comes before Date 2");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
+            dispatcher.forward(request, response);
+        }
+        else if(date1.compareTo(today) == 0)
+        {
+            System.out.println("Both dates are equal");
             RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
             dispatcher.forward(request, response);
         }

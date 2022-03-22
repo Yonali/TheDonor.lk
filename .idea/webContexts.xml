@@ -4,6 +4,8 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/donor/Profile.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/donor" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/donor/appointments.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/donor" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/view/donor/campaign.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/donor" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/donor/timeline.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/donor" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/mainlogin.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/view/non_donor/dashboard_index.jsp" value="file://$PROJECT_DIR$/src/main/webapp/view/non_donor" />
