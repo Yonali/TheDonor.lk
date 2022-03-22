@@ -167,6 +167,8 @@
                                            href="<%=request.getContextPath()%>/appointmentStatus?type=Rejected&id=<c:out value='${appointment.id}'/>">Reject</a>
                                         <a onclick="appointment_confirmation(event)"
                                            href="<%=request.getContextPath()%>/appointmentStatus?type=Completed&id=<c:out value='${appointment.id}'/>">Complete</a>
+                                        <a onclick="appointment_confirmation(event)"
+                                           href="<%=request.getContextPath()%>/appointmentStatus?type=Deleted&id=<c:out value="${appointment.id}" />">Delete</a>
                                     </td>
                                     <% } %>
                                 </tr>

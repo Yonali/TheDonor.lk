@@ -46,7 +46,7 @@ public class EmergencyUpdate extends HttpServlet {
         String time = request.getParameter("Time");
         String status = request.getParameter("Status");
         String bloodbank_code = request.getParameter("BloodBank_Code");
-        EmergencyBean newEmergency = new EmergencyBean(id, blood_group, date, time, status, bloodbank_code);
+        EmergencyBean newEmergency = new EmergencyBean(id, blood_group,req_amount, date, time, status, bloodbank_code);
 
             if (emergencyDAO.updateUser(newEmergency)) {
                 response.sendRedirect("./emergency");

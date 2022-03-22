@@ -63,11 +63,12 @@ public class EmergencyInsert extends HttpServlet {
 
 
         String blood_group = request.getParameter("Blood_Group");
+        int req_amount = Integer.parseInt(request.getParameter("Required_Amount"));
         /*String date = request.getParameter("Date");
         String time = request.getParameter("Time");*/
         String status = "Open";
         String bloodbank_code = request.getParameter("BloodBank_Code");
-        EmergencyBean newEmergency = new EmergencyBean(0, blood_group, date, time, status, bloodbank_code);
+        EmergencyBean newEmergency = new EmergencyBean(0, blood_group, req_amount, date, time, status, bloodbank_code);
 
             if (emergencyDAO.insertUser(newEmergency)) {
                 String message = blood_group + " blood is required urgently at your nearest blood bank '" + bloodbank_code + "'. " +

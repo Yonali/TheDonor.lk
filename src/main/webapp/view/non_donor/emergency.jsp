@@ -101,6 +101,7 @@
                         <tr>
                             <td>ID</td>
                             <td>Blood Group</td>
+                            <td>Required Amount</td>
                             <td>Date</td>
                             <td>Time</td>
                             <td>Blood Bank</td>
@@ -118,6 +119,9 @@
                                 </td>
                                 <td>
                                     <c:out value="${emergency.blood_group}"/>
+                                </td>
+                                <td>
+                                    <c:out value="${emergency.req_amount}"/>
                                 </td>
                                 <td>
                                     <c:out value="${emergency.date}"/>

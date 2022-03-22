@@ -80,10 +80,11 @@ public class NonDonorSettingUpdate extends HttpServlet {
         String first_name = request.getParameter("First_Name");
         String last_name = request.getParameter("Last_Name");
         String contact = request.getParameter("Contact");
+        String bloodgroup = request.getParameter("Blood_Group");
         String nic = request.getParameter("NIC");
         String section = nurseBean.getSection();
         String bloodbank_code = nurseBean.getBloodbank_code();
-        UserNurseBean user = new UserNurseBean(id, username, first_name, last_name, contact, nic, username, section, bloodbank_code);
+        UserNurseBean user = new UserNurseBean(id, username, first_name, last_name, contact, bloodgroup, nic, username, section, bloodbank_code);
 
         if (nurseDAO.updateNurse2(user)) {
             response.sendRedirect("dashboard");

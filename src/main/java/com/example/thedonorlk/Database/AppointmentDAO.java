@@ -19,6 +19,9 @@ public class AppointmentDAO {
     private static final String UPDATE_APPOINTMENT_STATUS_SQL = "UPDATE appointment SET " +
             "STATUS  = ? " +
             "WHERE Appointment_ID = ?";
+    private static final String DELETE_APPOINTMENT_STATUS_SQL = "DELETE appointment SET" +
+            "STATUS = ?" +
+            "WHERE  Appointment_ID = ?";
     /*private static final String SELECT_APPOINTMENT_BY_ID = "SELECT * FROM appointment WHERE Appointment_ID =?";
     private static final String UPDATE_APPOINTMENT_SQL = "UPDATE appointment SET " +
             "BloodBank_Code  = ?, Appointment_Time  = ?, Appointment_Date  = ? " +
@@ -88,6 +91,16 @@ public class AppointmentDAO {
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+
+    public boolean deleteAppointment (int id, String status) throws SQLException {
+        boolean rowDeleted;
+        try (PreparedStatement statement = con.prepareStatement(DELETE_APPOINTMENT_STATUS_SQL);){
+            statement.setInt(1, id);
+
+            rowDeleted = statement.executeUpdate() >0;
+        }
+        return rowDeleted;
     }
 
     private void printSQLException(SQLException ex) {

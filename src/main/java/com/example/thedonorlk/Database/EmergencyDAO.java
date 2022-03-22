@@ -81,7 +81,7 @@ public class EmergencyDAO {
                 String status = rs.getString("Status");
                 String bloodbank_code = rs.getString("BloodBank_Code");
 
-                emergency.add(new EmergencyBean(id, blood_group, date, time, status, bloodbank_code));
+                emergency.add(new EmergencyBean(id, blood_group, req_amount, date, time, status, bloodbank_code));
             }
         } catch (SQLException e) {
             printSQLException(e);

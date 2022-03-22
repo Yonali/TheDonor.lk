@@ -120,6 +120,7 @@
                                 </c:if>
                             </select>
                         </div>
+                        
                     </div>
 <%--                    <c:if test="${user != null}">
                         <div class="field-single">
@@ -145,6 +146,13 @@
                             </c:forEach>
                         </select>
                     </div>--%>
+                    <c:if test="${user == null}">
+                        <div class="field-single">
+                            <span>Required Amount</span>
+                            <input type="text" name="req_amount" id="req_amount" value="<c:out value="${user.req_amount}" />">
+                        </div>
+                    </c:if>
+
                     <input type="hidden" name="BloodBank_Code" value="<%= bloodbank %>"/>
                     <c:if test="${user != null}">
                         <div class="field-single" id="status">
