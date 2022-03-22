@@ -44,10 +44,11 @@ public class UserNurseInsert extends HttpServlet {
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String contact = request.getParameter("contact");
+        String blooodgroup = request.getParameter("bloodgroup");
         String nic = request.getParameter("nic");
         String section = request.getParameter("section");
         String bloodbank_code = request.getParameter("bloodbank_code");
-        UserNurseBean newUser = new UserNurseBean(0, username, first_name, last_name, contact, nic, username, section, bloodbank_code);
+        UserNurseBean newUser = new UserNurseBean(0, username, first_name, last_name, contact, blooodgroup, nic, username, section, bloodbank_code);
 
         //Auto generate user password here
         PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();

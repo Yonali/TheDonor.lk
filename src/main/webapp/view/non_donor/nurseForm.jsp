@@ -60,6 +60,10 @@
                         <input type="text" name="username" id="username" value="<c:out value='${user.username}' />"/>
                     </div>
                     <div class="field-single">
+                        <span>Blood Group</span>
+                        <input type="text" name="bloodgroup" id="bloodgroup" value="<c:out value="${user.bloodgroup}"/>">
+                    </div>
+                    <div class="field-single">
                         <span>NIC</span>
                         <input type="text" name="nic" id="nic" value="<c:out value='${user.nic}' />"/>
                     </div>

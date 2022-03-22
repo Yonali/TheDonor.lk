@@ -6,6 +6,7 @@ public class UserNurseBean {
     protected String first_name;
     protected String last_name;
     protected String contact;
+    protected String bloodgroup;
     protected String nic;
     protected String email;
     protected String section;
@@ -13,12 +14,13 @@ public class UserNurseBean {
 
     public UserNurseBean() {}
 
-    public UserNurseBean(int id, String username, String first_name, String last_name, String contact, String nic, String email, String section, String bloodbank_code) {
+    public UserNurseBean(int id, String username, String first_name, String last_name, String contact,String bloodgroup, String nic, String email, String section, String bloodbank_code) {
         this.id = id;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.contact = contact;
+        this.bloodgroup = bloodgroup;
         this.nic = nic;
         this.email = email;
         this.section = section;
@@ -64,6 +66,10 @@ public class UserNurseBean {
     public void setContact(String contact) {
         this.contact = contact;
     }
+
+    public String getBloodgroup() { return bloodgroup; }
+
+    public void setBloodgroup(String bloodgroup) { this.bloodgroup = bloodgroup; }
 
     public String getNic() {
         return nic;

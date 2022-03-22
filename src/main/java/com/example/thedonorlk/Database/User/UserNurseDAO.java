@@ -15,14 +15,14 @@ public class UserNurseDAO {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user (Username, Password, Role) " +
             "VALUES (?, ?, ?); ";
-    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_nurse (ID, First_Name, Last_Name, Contact, NIC, Email, Section, BloodBank_Code) " +
+    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_nurse (ID, First_Name, Last_Name, Contact, Blood_Group, NIC, Email, Section, BloodBank_Code) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user, user_nurse WHERE user.id =? AND user.id=user_nurse.id";
     private static final String SELECT_ALL_USERS = "SELECT * FROM user, user_nurse WHERE role='nurse' AND user.id=user_nurse.id";
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
-            "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
-    private static final String UPDATE_USERS_SQL2 = "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, NIC=? WHERE id = ?;";
+            "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, Blood_Group=?, NIC=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, Blood_Group=?, NIC=? WHERE id = ?;";
 
     public UserNurseDAO() {}
 
@@ -59,10 +59,11 @@ public class UserNurseDAO {
             preparedStatement.setString(2, user.getFirst_name());
             preparedStatement.setString(3, user.getLast_name());
             preparedStatement.setString(4, user.getContact());
-            preparedStatement.setString(5, user.getNic());
-            preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getSection());
-            preparedStatement.setString(8, user.getBloodbank_code());
+            preparedStatement.setString(5, user.getBloodgroup());
+            preparedStatement.setString(6, user.getNic());
+            preparedStatement.setString(7, user.getEmail());
+            preparedStatement.setString(8, user.getSection());
+            preparedStatement.setString(9, user.getBloodbank_code());
 //            System.out.println(preparedStatement);
 
             preparedStatement.execute();
@@ -87,11 +88,12 @@ public class UserNurseDAO {
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
+                String bloodgroup = rs.getString("bloodgroup");
                 String nic = rs.getString("nic");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                user = new UserNurseBean(id_1, username, first_name, last_name, contact, nic, email, section, bloodbank_code);
+                user = new UserNurseBean(id_1, username, first_name, last_name, contact, bloodgroup, nic, email, section, bloodbank_code);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -111,11 +113,12 @@ public class UserNurseDAO {
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
+                String bloodgroup = rs.getString("bloodgroup");
                 String nic = rs.getString("nic");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                users.add(new UserNurseBean(id, username, first_name, last_name, contact, nic, email, section, bloodbank_code));
+                users.add(new UserNurseBean(id, username, first_name, last_name, contact, bloodgroup, nic, email, section, bloodbank_code));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -142,11 +145,12 @@ public class UserNurseDAO {
             statement.setString(3, user.getFirst_name());
             statement.setString(4, user.getLast_name());
             statement.setString(5, user.getContact());
-            statement.setString(6, user.getNic());
-            statement.setString(7, user.getEmail());
-            statement.setString(8, user.getSection());
-            statement.setString(9, user.getBloodbank_code());
-            statement.setInt(10, user.getId());
+            statement.setString(6, user.getBloodgroup());
+            statement.setString(7, user.getNic());
+            statement.setString(8, user.getEmail());
+            statement.setString(9, user.getSection());
+            statement.setString(10, user.getBloodbank_code());
+            statement.setInt(11, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }
@@ -158,8 +162,9 @@ public class UserNurseDAO {
             statement.setString(1, user.getFirst_name());
             statement.setString(2, user.getLast_name());
             statement.setString(3, user.getContact());
-            statement.setString(4, user.getNic());
-            statement.setInt(5, user.getId());
+            statement.setString(4, user.getBloodgroup());
+            statement.setString(5, user.getNic());
+            statement.setInt(6, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

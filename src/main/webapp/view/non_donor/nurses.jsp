@@ -66,6 +66,7 @@
                         <tr>
                             <td>Nurse ID</td>
                             <td>Username</td>
+                            <td>Blood Group</td>
                             <td>NIC</td>
                             <td>Name</td>
                             <td>Contact Number</td>
@@ -84,6 +85,9 @@
                                 </td>
                                 <td>
                                     <c:out value="${user.username}" />
+                                </td>
+                                <td>
+                                    <c:out value="${user.bloodgroup}" />
                                 </td>
                                 <td>
                                     <c:out value="${user.nic}" />
