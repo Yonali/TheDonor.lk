@@ -36,13 +36,14 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
             <form action="userDoctorUpdate" method="post" onsubmit="return validate();">
@@ -59,24 +60,87 @@
                         <input type="text" name="username" id="username" value="<c:out value='${user.username}' />"/>
                     </div>
                     <div class="field-single">
+                        <span>Blood Group</span>
+                        <div class="custom-select" style="width:200px">
+                            <select class="box" name="blood_group" id="blood_group">
+                                <c:set var="a_p" value="A+"/>
+                                <c:if test="${user.blood_group == a_p}">
+                                    <option value="A+" selected>A+</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != a_p}">
+                                    <option value="A+">A+</option>
+                                </c:if>
+                                <c:set var="a_n" value="A-"/>
+                                <c:if test="${user.blood_group == a_n}">
+                                    <option value="A-" selected>A-</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != a_n}">
+                                    <option value="A-">A-</option>
+                                </c:if>
+                                <c:set var="b_p" value="B+"/>
+                                <c:if test="${user.blood_group == b_p}">
+                                    <option value="B+" selected>B+</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != b_p}">
+                                    <option value="B+">B+</option>
+                                </c:if>
+                                <c:set var="b_n" value="B-"/>
+                                <c:if test="${user.blood_group == b_n}">
+                                    <option value="B-" selected>B-</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != b_n}">
+                                    <option value="B-">B-</option>
+                                </c:if>
+                                <c:set var="ab_p" value="AB+"/>
+                                <c:if test="${user.blood_group == ab_p}">
+                                    <option value="AB+" selected>AB+</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != ab_p}">
+                                    <option value="AB+">AB+</option>
+                                </c:if>
+                                <c:set var="ab_n" value="AB-"/>
+                                <c:if test="${user.blood_group == ab_n}">
+                                    <option value="AB-" selected>AB-</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != ab_n}">
+                                    <option value="AB-">AB-</option>
+                                </c:if>
+                                <c:set var="o_p" value="O+"/>
+                                <c:if test="${user.blood_group == o_p}">
+                                    <option value="O+" selected>O+</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != o_p}">
+                                    <option value="O+">O+</option>
+                                </c:if>
+                                <c:set var="o_n" value="O-"/>
+                                <c:if test="${user.blood_group == o_n}">
+                                    <option value="O-" selected>O-</option>
+                                </c:if>
+                                <c:if test="${user.blood_group != o_n}">
+                                    <option value="O-">O-</option>
+                                </c:if>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="field-single">
                         <span>NIC</span>
                         <input type="text" name="nic" id="nic" value="<c:out value='${user.nic}' />"/>
-                    </div>
-                    <div class="field-single">
-                        <span>First Name</span>
-                        <input type="text" name="first_name" id="first_name" value="<c:out value='${user.first_name}' />"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Last Name</span>
-                        <input type="text" name="last_name" id="last_name" value="<c:out value='${user.last_name}' />"/>
                     </div>
                     <div class="field-single">
                         <span>Contact Number</span>
                         <input type="text" name="contact" id="contact" value="<c:out value='${user.contact}' />"/>
                     </div>
                     <div class="field-single">
+                        <span>First Name</span>
+                        <input type="text" name="first_name" id="first_name" value="<c:out value='${user.first_name}' />"/>
+                    </div>
+                    <div class="field-single">
                         <span>Section</span>
                         <input type="text" name="section" id="section" value="<c:out value='${user.section}' />"/>
+                    </div>
+                    <div class="field-single">
+                        <span>Last Name</span>
+                        <input type="text" name="last_name" id="last_name" value="<c:out value='${user.last_name}' />"/>
                     </div>
                     <div class="field-single">
                         <span>BloodBank Code</span>
