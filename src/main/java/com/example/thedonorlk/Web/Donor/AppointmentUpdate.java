@@ -46,10 +46,6 @@ public class AppointmentUpdate extends HttpServlet {
 
             if (appointmentDAO.updateAppointment(appointment)) {
                 response.sendRedirect("./appointment_donor");
-            } else {
-                request.setAttribute("error","Something went wrong, Please Try Again");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("appointment_donor");
-                dispatcher.forward(request, response);
             }
     }
 }

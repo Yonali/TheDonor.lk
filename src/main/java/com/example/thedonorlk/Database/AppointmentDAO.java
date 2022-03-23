@@ -1,6 +1,7 @@
 package com.example.thedonorlk.Database;
 
 import com.example.thedonorlk.Bean.AppointmentDonorBean;
+import com.example.thedonorlk.Bean.CampaignBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,8 @@ public class AppointmentDAO {
 
     private static final String SELECT_ALL_APPOINTMENTS = "SELECT * FROM appointment a, user_donor d " +
             "WHERE d.ID=a.Donor_ID ORDER BY Appointment_ID DESC";
+    private static final String SELECT_APPOINTMENT_BY_ID = "SELECT * FROM appointment a, user_donor d " +
+            "WHERE d.ID=a.Donor_ID AND Appointment_ID=? ORDER BY Appointment_ID DESC";
     private static final String UPDATE_APPOINTMENT_STATUS_SQL = "UPDATE appointment SET " +
             "STATUS  = ? " +
             "WHERE Appointment_ID = ?";
@@ -43,6 +46,32 @@ public class AppointmentDAO {
 
                 appointment.add(new AppointmentDonorBean(id, bloodbank_code, appointment_time, appointment_date, donor_id, status,
                         donor_name, donor_contact));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return appointment;
+    }
+
+    public AppointmentDonorBean selectAppointment(int id) {
+        AppointmentDonorBean appointment = null;
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_APPOINTMENT_BY_ID);) {
+            preparedStatement.setInt(1, id);
+//            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id_1 = rs.getInt("Appointment_ID");
+                String bloodbank_code = rs.getString("BloodBank_Code");
+                String appointment_time = rs.getString("Appointment_Time");
+                String appointment_date = rs.getString("Appointment_Date");
+                String donor_id = rs.getString("Donor_ID");
+                String status = rs.getString("Status");
+                String donor_name = rs.getString("First_Name") + " " + rs.getString("Last_Name");
+                String donor_contact = rs.getString("Contact");
+
+                appointment = new AppointmentDonorBean(id, bloodbank_code, appointment_time, appointment_date, donor_id, status,
+                        donor_name, donor_contact);
             }
         } catch (SQLException e) {
             printSQLException(e);
