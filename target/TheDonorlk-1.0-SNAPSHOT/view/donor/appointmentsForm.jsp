@@ -87,12 +87,12 @@
                     <input type="hidden" name="Donor_ID" value="<%= session.getAttribute("id") %>"/>
                     <div class="field-single">
                         <span>Date</span>
-                        <input type="date" name="Appointment_Date" id="Appointment_Date"
+                        <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Appointment_Date" id="Appointment_Date"
                                value="<c:out value='${appointment.appointment_date}' />"/>
                     </div>
                     <div class="field-single">
                         <span>Start Time</span>
-                        <input type="time" step="any" name="Appointment_Time" id="Appointment_Time"
+                        <input type="time" min="08:00" max="17:00" name="Appointment_Time" id="Appointment_Time"
                                value="<c:out value='${appointment.appointment_time}' />"/>
                     </div>
                     <div class="field-single">
