@@ -37,7 +37,7 @@
     <div class="recent-grid">
         <div class="card">
             <h2 class="card-topic-red">Deferral History</h2>
-            <h3 class="card-topic-black"><%= request.getAttribute("donor_name") %><br><%= request.getAttribute("donor_nic") %></h3>
+            <h4 class="card-topic-black"><%= request.getAttribute("donor_name") %><br><%= request.getAttribute("donor_nic") %></h4>
 
             <div class="card-body">
                 <div class="table-responsive">
