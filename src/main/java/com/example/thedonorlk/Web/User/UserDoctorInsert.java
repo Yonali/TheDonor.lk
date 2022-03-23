@@ -45,9 +45,10 @@ public class UserDoctorInsert extends HttpServlet {
         String last_name = request.getParameter("last_name");
         String contact = request.getParameter("contact");
         String nic = request.getParameter("nic");
+        String blood_group = request.getParameter("blood_group");
         String section = request.getParameter("section");
         String bloodbank_code = request.getParameter("bloodbank_code");
-        UserDoctorBean newUser = new UserDoctorBean(0, username, first_name, last_name, contact, nic, username, section, bloodbank_code);
+        UserDoctorBean newUser = new UserDoctorBean(0, username, first_name, last_name, contact, nic, blood_group, username, section, bloodbank_code);
 
         //Auto generate user password here
         PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();

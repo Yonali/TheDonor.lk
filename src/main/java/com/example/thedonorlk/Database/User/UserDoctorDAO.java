@@ -14,14 +14,14 @@ public class UserDoctorDAO {
 
     private static final String INSERT_USERS_SQL = "INSERT INTO user (Username, Password, Role) " +
             "VALUES (?, ?, ?); ";
-    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_doctor (ID, First_Name, Last_Name, Contact, NIC, Email, Section, BloodBank_Code) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_USERS_SQL2 = "INSERT INTO user_doctor (ID, First_Name, Last_Name, Contact, NIC, Blood_Group, Email, Section, BloodBank_Code) " +
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user, user_doctor WHERE user.id =? AND user.id=user_doctor.id";
     private static final String SELECT_ALL_USERS = "SELECT * FROM user, user_doctor WHERE role='doctor' AND user.id=user_doctor.id";
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
-            "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
-    private static final String UPDATE_USERS_SQL2 = "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=? WHERE id = ?;";
+            "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Blood_Group=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Blood_Group=? WHERE id = ?;";
 
     public UserDoctorDAO() {}
 
@@ -59,9 +59,10 @@ public class UserDoctorDAO {
             preparedStatement.setString(3, user.getLast_name());
             preparedStatement.setString(4, user.getContact());
             preparedStatement.setString(5, user.getNic());
-            preparedStatement.setString(6, user.getEmail());
-            preparedStatement.setString(7, user.getSection());
-            preparedStatement.setString(8, user.getBloodbank_code());
+            preparedStatement.setString(6, user.getBlood_group());
+            preparedStatement.setString(7, user.getEmail());
+            preparedStatement.setString(8, user.getSection());
+            preparedStatement.setString(9, user.getBloodbank_code());
 //            System.out.println(preparedStatement);
 
             preparedStatement.execute();
@@ -87,10 +88,11 @@ public class UserDoctorDAO {
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
                 String nic = rs.getString("nic");
+                String blood_group = rs.getString("blood_group");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                user = new UserDoctorBean(id_1, username, first_name, last_name, contact, nic, email, section, bloodbank_code);
+                user = new UserDoctorBean(id_1, username, first_name, last_name, contact, nic, blood_group, email, section, bloodbank_code);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -111,10 +113,11 @@ public class UserDoctorDAO {
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
                 String nic = rs.getString("nic");
+                String blood_group = rs.getString("blood_group");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                users.add(new UserDoctorBean(id, username, first_name, last_name, contact, nic, email, section, bloodbank_code));
+                users.add(new UserDoctorBean(id, username, first_name, last_name, contact, nic, blood_group, email, section, bloodbank_code));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -142,10 +145,11 @@ public class UserDoctorDAO {
             statement.setString(4, user.getLast_name());
             statement.setString(5, user.getContact());
             statement.setString(6, user.getNic());
-            statement.setString(7, user.getEmail());
-            statement.setString(8, user.getSection());
-            statement.setString(9, user.getBloodbank_code());
-            statement.setInt(10, user.getId());
+            statement.setString(7, user.getBlood_group());
+            statement.setString(8, user.getEmail());
+            statement.setString(9, user.getSection());
+            statement.setString(10, user.getBloodbank_code());
+            statement.setInt(11, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }
@@ -159,7 +163,8 @@ public class UserDoctorDAO {
             statement.setString(2, user.getLast_name());
             statement.setString(3, user.getContact());
             statement.setString(4, user.getNic());
-            statement.setInt(5, user.getId());
+            statement.setString(5, user.getBlood_group());
+            statement.setInt(6, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

@@ -69,6 +69,7 @@
                             <td>Doctor ID</td>
                             <td>Username</td>
                             <td>NIC</td>
+                            <td>Blood Group</td>
                             <td>Name</td>
                             <td>Contact Number</td>
                             <td>Section</td>
@@ -89,6 +90,9 @@
                             </td>
                             <td>
                                 <c:out value="${user.nic}" />
+                            </td>
+                            <td>
+                                <c:out value="${user.blood_group}"/>
                             </td>
                             <td>
                                 <c:out value="${user.first_name} ${user.last_name}" />

@@ -7,19 +7,22 @@ public class UserDoctorBean {
     protected String last_name;
     protected String contact;
     protected String nic;
+    protected String blood_group;
     protected String email;
     protected String section;
     protected String bloodbank_code;
 
-    public UserDoctorBean() {}
+    public UserDoctorBean() {
+    }
 
-    public UserDoctorBean(int id, String username, String first_name, String last_name, String contact, String nic, String email, String section, String bloodbank_code) {
+    public UserDoctorBean(int id, String username, String first_name, String last_name, String contact, String nic, String blood_group, String email, String section, String bloodbank_code) {
         this.id = id;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.contact = contact;
         this.nic = nic;
+        this.blood_group = blood_group;
         this.email = email;
         this.section = section;
         this.bloodbank_code = bloodbank_code;
@@ -71,6 +74,14 @@ public class UserDoctorBean {
 
     public void setNic(String nic) {
         this.nic = nic;
+    }
+
+    public String getBlood_group() {
+        return blood_group;
+    }
+
+    public void setBlood_group(String blood_group) {
+        this.blood_group = blood_group;
     }
 
     public String getEmail() {
