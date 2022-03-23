@@ -36,13 +36,14 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${donor != null}">
         <form action="donorUpdate" method="post" onsubmit="return validate();"></c:if>
@@ -84,7 +85,7 @@
                         <input type="text" name="Contact" id="Contact" value="<c:out value='${donor.contact}'/>"/>
                     </div>
                     <div class="field-single">
-                        <span>Date</span>
+                        <span>DOB</span>
                         <input type="date" name="DOB" id="DOB" value="<c:out value='${donor.dob}'/>">
                     </div>
                     <div class="field-single">
