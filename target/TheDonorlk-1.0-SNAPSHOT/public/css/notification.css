@@ -1,0 +1,40 @@
+.post-container {
+  padding: 5px;
+}
+
+.post-col-timeline {
+  flex-basis: 50%;
+  text-align: center;
+  color: white;
+}
+
+.profile-info {
+  justify-content: center;
+}
+
+.post-row {
+  justify-content: center;
+}
+
+.user-profile {
+  text-align: center;
+}
+
+.user-profile p {
+  margin-bottom: -1px;
+  color: black;
+}
+.user-profile span {
+  color: black;
+}
+
+.post-text {
+  color: black;
+  margin: 12px 0;
+  font-size: 15px;
+  text-align: center;
+}
+
+.new {
+  background-color: lightpink;
+}
