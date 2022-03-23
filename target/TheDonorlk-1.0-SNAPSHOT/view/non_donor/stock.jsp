@@ -29,69 +29,45 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/2.0.0/css/searchPanes.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/fixedheader/3.2.2/js/dataTables.fixedHeader.min.js"></script>
+            src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/searchpanes/2.0.0/js/dataTables.searchPanes.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script>
-        $(document).ready(function () {
-            // Setup - add a text input to each footer cell
-            $('#one thead tr')
-                .clone(true)
-                .addClass('filters ')
-                .appendTo('#one thead');
+        $(document).ready(function() {
+            /*$('#one tfoot th').each(function() {
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });*/
 
-            var table = $('#one').DataTable({
-                orderCellsTop: true,
-                fixedHeader: true,
-                initComplete: function () {
-                    var api = this.api();
-
-                    // For each column
-                    api
-                        .columns()
-                        .eq(0)
-                        .each(function (colIdx) {
-                            // Set the header cell to contain the input element
-                            var cell = $('.filters th').eq(
-                                $(api.column(colIdx).header()).index()
-                            );
-                            var title = $(cell).text();
-                            $(cell).html('<input type="text" placeholder="' + title + '" />');
-
-                            // On every keypress in this input
-                            $(
-                                'input',
-                                $('.filters th').eq($(api.column(colIdx).header()).index())
-                            )
-                                .off('keyup change')
-                                .on('keyup change', function (e) {
-                                    e.stopPropagation();
-
-                                    // Get the search value
-                                    $(this).attr('title', $(this).val());
-                                    var regexr = '({search})'; //$(this).parents('th').find('select').val();
-
-                                    var cursorPosition = this.selectionStart;
-                                    // Search the column for that value
-                                    api
-                                        .column(colIdx)
-                                        .search(
-                                            this.value != ''
-                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
-                                                : '',
-                                            this.value != '',
-                                            this.value == ''
-                                        )
-                                        .draw();
-
-                                    $(this)
-                                        .focus()[0]
-                                        .setSelectionRange(cursorPosition, cursorPosition);
-                                });
-                        });
+            var table = $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]],
+                searchPanes: {
+                    columns: [3,2,4]
                 },
+                dom: 'Plfrtip'
             });
+
+            /*table.columns().every( function() {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function() {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });*/
+
         });
     </script>
 
@@ -133,7 +109,8 @@
     </div>
     <% } %>
 
-    <div class="recent-grid">
+    <%--Custom Blood bank filter--%>
+    <%--<div class="recent-grid">
         <form action="bloodStock" method="post">
             <div class="card">
                 <div class="modal-body">
@@ -158,7 +135,7 @@
                 </div>
             </div>
         </form>
-    </div>
+    </div>--%>
 
     <div class="recent-grid">
         <div class="card">
@@ -176,7 +153,7 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%" id="one">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Blood ID</td>
