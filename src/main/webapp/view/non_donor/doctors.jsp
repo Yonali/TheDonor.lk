@@ -18,8 +18,21 @@
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
 
-    <script src="<%=request.getContextPath()%>/public/scripts/delete_confirmation.js"></script>
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -38,11 +51,11 @@
         <div class="card">
             <div class="card-header">
                 <h3>Doctors</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <!-- <span class="las la-calendar-week"></span> -->
-                </div>
+                </div>--%>
                 <div class="buttons">
                     <a href="<%=request.getContextPath()%>/userDoctorShowNewForm">New</a>
                 </div>
@@ -50,12 +63,13 @@
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Doctor ID</td>
                             <td>Username</td>
                             <td>NIC</td>
+                            <td>Blood Group</td>
                             <td>Name</td>
                             <td>Contact Number</td>
                             <td>Section</td>
@@ -78,6 +92,9 @@
                                 <c:out value="${user.nic}" />
                             </td>
                             <td>
+                                <c:out value="${user.blood_group}"/>
+                            </td>
+                            <td>
                                 <c:out value="${user.first_name} ${user.last_name}" />
                             </td>
                             <td>
@@ -97,11 +114,13 @@
                             <% } %>
 
                             <% if (role.equals("bloodbank")) { %>
+                            <td>
                             <c:if test="${emergency.bloodbank_code == bloodbank}">
-                                <td>
+
                                     <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a>
                             </c:if>
+                            </td>
                             <% } %>
                         </tr>
                         </c:forEach>
