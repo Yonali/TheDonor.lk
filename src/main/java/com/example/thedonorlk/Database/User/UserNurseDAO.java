@@ -1,5 +1,6 @@
 package com.example.thedonorlk.Database.User;
 
+import com.example.thedonorlk.Bean.User.UserDoctorBean;
 import com.example.thedonorlk.Bean.User.UserNurseBean;
 import com.example.thedonorlk.Database.DatabaseConnection;
 
@@ -21,6 +22,7 @@ public class UserNurseDAO {
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
             "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_nurse SET First_Name=?, Last_Name=?, Contact=?, NIC=? WHERE id = ?;";
 
     public UserNurseDAO() {}
 
@@ -76,7 +78,7 @@ public class UserNurseDAO {
         UserNurseBean user = null;
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_USER_BY_ID);) {
             preparedStatement.setInt(1, id);
-//            System.out.println(preparedStatement);
+            System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
@@ -145,6 +147,19 @@ public class UserNurseDAO {
             statement.setString(8, user.getSection());
             statement.setString(9, user.getBloodbank_code());
             statement.setInt(10, user.getId());
+
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
+    }
+    public boolean updateNurse2(UserNurseBean user) throws SQLException {
+        boolean rowUpdated;
+        try (PreparedStatement statement = con.prepareStatement(UPDATE_USERS_SQL2);) {
+            statement.setString(1, user.getFirst_name());
+            statement.setString(2, user.getLast_name());
+            statement.setString(3, user.getContact());
+            statement.setString(4, user.getNic());
+            statement.setInt(5, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

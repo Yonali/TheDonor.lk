@@ -1,11 +1,20 @@
 package com.example.thedonorlk.Web.Donor;
 
+import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.DonorCardBean;
 import com.example.thedonorlk.Bean.PostBean;
 import com.example.thedonorlk.Bean.ProfileBean;
+import com.example.thedonorlk.Bean.User.UserBloodBankBean;
+import com.example.thedonorlk.Bean.User.UserDoctorBean;
+import com.example.thedonorlk.Bean.User.UserDonorBean;
+import com.example.thedonorlk.Bean.User.UserNurseBean;
 import com.example.thedonorlk.Database.DonorDAO;
 import com.example.thedonorlk.Database.PostDAO;
 import com.example.thedonorlk.Database.ProfileDAO;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
+import com.example.thedonorlk.Database.User.UserDoctorDAO;
+import com.example.thedonorlk.Database.User.UserDonorDAO;
+import com.example.thedonorlk.Database.User.UserNurseDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,8 +27,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/donorTimeline")
-public class DonorTimelineServlet extends HttpServlet {
+@WebServlet("/donorProfile")
+public class DonorProfileServlet extends HttpServlet {
 
     private ProfileDAO profileDAO;
     private DonorDAO donorDAO;
@@ -52,9 +61,9 @@ public class DonorTimelineServlet extends HttpServlet {
         request.setAttribute("donor", donor);
         ProfileBean profile = profileDAO.viewProfile(id);
         request.setAttribute("profile", profile);
-        List<PostBean> posts = postDAO.selectAllPosts();
+        List<PostBean> posts = postDAO.selectAllPostsByDonor(id);
         request.setAttribute("posts", posts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/timeline.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/profile.jsp");
         dispatcher.forward(request, response);
     }
 }

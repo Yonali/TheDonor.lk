@@ -21,7 +21,7 @@ public class UserBloodBankDAO {
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
             "UPDATE user_bloodbank SET code=?, name=?, contact=?, email=?, Address_Street=?, Address_City=? WHERE id = ?;";
-
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_bloodbank SET name=?, contact=?, Address_Street=?, Address_City=? WHERE id = ?";
     public UserBloodBankDAO() {}
 
     private Connection con = DatabaseConnection.initializeDatabase();
@@ -141,6 +141,19 @@ public class UserBloodBankDAO {
             statement.setString(7, user.getAdd_street());
             statement.setString(8, user.getAdd_city());
             statement.setInt(9, user.getId());
+
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
+    }
+    public boolean updateBloodBank2(UserBloodBankBean user) throws SQLException {
+        boolean rowUpdated;
+        try (PreparedStatement statement = con.prepareStatement(UPDATE_USERS_SQL2);) {
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getContact());
+            statement.setString(3, user.getAdd_street());
+            statement.setString(4, user.getAdd_city());
+            statement.setInt(5, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }

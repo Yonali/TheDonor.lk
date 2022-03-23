@@ -1,4 +1,4 @@
-package com.example.thedonorlk.Web.Donor;
+package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.DonorCardBean;
 import com.example.thedonorlk.Bean.PostBean;
@@ -18,15 +18,11 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/donorTimeline")
-public class DonorTimelineServlet extends HttpServlet {
+@WebServlet("/violationPostView")
+public class ViolationPostViewServlet extends HttpServlet {
 
-    private ProfileDAO profileDAO;
-    private DonorDAO donorDAO;
     private PostDAO postDAO;
     public void init() {
-        profileDAO = new ProfileDAO();
-        donorDAO = new DonorDAO();
         postDAO = new PostDAO();
     }
 
@@ -45,16 +41,13 @@ public class DonorTimelineServlet extends HttpServlet {
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        int id = (Integer) session.getAttribute("user_id");
+        int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("Test View Servlet");
 
-        DonorCardBean donor = donorDAO.selectDonorCardByID(id);
-        request.setAttribute("donor", donor);
-        ProfileBean profile = profileDAO.viewProfile(id);
-        request.setAttribute("profile", profile);
-        List<PostBean> posts = postDAO.selectAllPosts();
+        PostBean posts = postDAO.selectPost(id);
+        //System.out.println(posts);
         request.setAttribute("posts", posts);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/donor/timeline.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/violationReportPostView.jsp");
         dispatcher.forward(request, response);
     }
 }

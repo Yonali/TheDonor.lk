@@ -53,7 +53,7 @@ public class UserNurseInsert extends HttpServlet {
             }
         } else {
             request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/nurseForm.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/nurseForm.jsp");
             dispatcher.forward(request, response);
         }
     }
