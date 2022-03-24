@@ -44,7 +44,11 @@ public class DashboardServlet extends HttpServlet {
         DashboardBean count = dashboardDAO.count(bloodbank);
         request.setAttribute("count", count);
         DashboardBean stock = dashboardDAO.stock(bloodbank);
-        request.setAttribute("stock", stock);
+        request.setAttribute("RBC_stock", stock.getRbc());
+        request.setAttribute("WBC_stock", stock.getWbc());
+        request.setAttribute("Platelets_stock", stock.getPlatelets());
+        request.setAttribute("Plasma_stock", stock.getPlasma());
+        System.out.println(stock.getRbc());
         RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/dashboard.jsp");
         dispatcher.forward(request, response);
     }

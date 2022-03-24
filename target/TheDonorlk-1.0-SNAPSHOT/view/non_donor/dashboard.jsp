@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.thedonorlk.Bean.DashboardBean" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -5,6 +7,12 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+
+    List<Integer> RBC_stock = (List<Integer>) request.getAttribute("RBC_stock");
+    List<Integer> WBC_stock = (List<Integer>) request.getAttribute("WBC_stock");
+    List<Integer> Platelets_stock = (List<Integer>) request.getAttribute("Platelets_stock");
+    List<Integer> Plasma_stock = (List<Integer>) request.getAttribute("Plasma_stock");
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,29 +56,44 @@
                             data: {
                                 labels: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
                                 datasets: [{
-                                    label: 'Blood Stock',
-                                    data: [<c:out value="${stock.a_pos}"/>, <c:out value="${stock.a_neg}"/>,
-                                        <c:out value="${stock.b_pos}"/>, <c:out value="${stock.b_neg}"/>,
-                                        <c:out value="${stock.ab_pos}"/>, <c:out value="${stock.ab_neg}"/>,
-                                        <c:out value="${stock.o_pos}"/>, <c:out value="${stock.o_neg}"/>],
-                                    backgroundColor: [
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)',
-                                        'rgb(85, 20, 20)'
-                                    ],
-                                    borderWidth: 1
-                                }]
+                                        label: 'RBC',
+                                        data: [<c:out value="${RBC_stock[0]}"/>, <c:out value="${RBC_stock[1]}"/>, <c:out value="${RBC_stock[2]}"/>,
+                                            <c:out value="${RBC_stock[3]}"/>, <c:out value="${RBC_stock[4]}"/>, <c:out value="${RBC_stock[5]}"/>,
+                                            <c:out value="${RBC_stock[6]}"/>, <c:out value="${RBC_stock[7]}"/>],
+                                        backgroundColor: '#dc3545'
+                                    }, {
+                                        label: 'WBC',
+                                    data: [<c:out value="${WBC_stock[0]}"/>, <c:out value="${WBC_stock[1]}"/>, <c:out value="${WBC_stock[2]}"/>,
+                                        <c:out value="${WBC_stock[3]}"/>, <c:out value="${WBC_stock[4]}"/>, <c:out value="${WBC_stock[5]}"/>,
+                                        <c:out value="${WBC_stock[6]}"/>, <c:out value="${WBC_stock[7]}"/>],
+                                        backgroundColor: '#0d6efd'
+                                    }, {
+                                        label: 'Platelets',
+                                    data: [<c:out value="${Platelets_stock[0]}"/>, <c:out value="${Platelets_stock[1]}"/>, <c:out value="${Platelets_stock[2]}"/>,
+                                        <c:out value="${Platelets_stock[3]}"/>, <c:out value="${Platelets_stock[4]}"/>, <c:out value="${Platelets_stock[5]}"/>,
+                                        <c:out value="${Platelets_stock[6]}"/>, <c:out value="${Platelets_stock[7]}"/>],
+                                        backgroundColor: '#fd7e14'
+                                    }, {
+                                        label: 'Plasma',
+                                    data: [<c:out value="${Plasma_stock[0]}"/>, <c:out value="${Plasma_stock[1]}"/>, <c:out value="${Plasma_stock[2]}"/>,
+                                        <c:out value="${Plasma_stock[3]}"/>, <c:out value="${Plasma_stock[4]}"/>, <c:out value="${Plasma_stock[5]}"/>,
+                                        <c:out value="${Plasma_stock[6]}"/>, <c:out value="${Plasma_stock[7]}"/>],
+                                        backgroundColor: '#198754'
+                                    }]
                             },
                             options: {
+                                responsive: true,
+                                legend: {
+                                    position: 'right' // place legend on the right side of chart
+                                },
                                 scales: {
-                                    y: {
+                                    x: [{
+                                        stacked: true // this should be set to make the bars stacked
+                                    }],
+                                    y: [{
+                                        stacked: true, // this also..
                                         beginAtZero: true
-                                    }
+                                    }]
                                 }
                             }
                         });
