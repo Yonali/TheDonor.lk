@@ -21,7 +21,7 @@ public class UserDoctorDAO {
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
             "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Blood_Group=?, Email=?, Section=?, BloodBank_Code=? WHERE id = ?;";
-    private static final String UPDATE_USERS_SQL2 = "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Blood_Group=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_doctor SET First_Name=?, Last_Name=?, Contact=?, NIC=? WHERE id = ?;";
 
     public UserDoctorDAO() {}
 
@@ -163,8 +163,7 @@ public class UserDoctorDAO {
             statement.setString(2, user.getLast_name());
             statement.setString(3, user.getContact());
             statement.setString(4, user.getNic());
-            statement.setString(5, user.getBlood_group());
-            statement.setInt(6, user.getId());
+            statement.setInt(5, user.getId());
 
             rowUpdated = statement.executeUpdate() > 0;
         }
@@ -175,7 +174,7 @@ public class UserDoctorDAO {
         boolean status = false;
 
         // Initialize the database
-        Connection con = DatabaseConnection.initializeDatabase();
+//        Connection con = DatabaseConnection.initializeDatabase();
 
         String sql = "select * from user where username = ? AND id != ?";
         PreparedStatement ps;

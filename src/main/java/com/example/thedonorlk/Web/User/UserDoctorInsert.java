@@ -55,7 +55,7 @@ public class UserDoctorInsert extends HttpServlet {
         String password = passwordEmailGenerator.generatePassword();
         String hash_pwd = DigestUtils.sha256Hex(password);
 
-        if (!userDAO.validateUsername(newUser)) {
+        if (userDAO.validateUsername(newUser)) {
             System.out.println("1 if");
             if (userDAO.insertUser(newUser, hash_pwd)) {
                 System.out.println("2 if");
