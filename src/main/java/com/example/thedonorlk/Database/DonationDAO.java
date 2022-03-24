@@ -21,7 +21,7 @@ public class DonationDAO {
     private static final String SELECT_DONATION_BY_BARCODE = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Blood_Barcode =?";
     private static final String SELECT_ALL_DONATIONS = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID ORDER BY d.Donation_ID DESC";
     private static final String SELECT_DONATION_BY_DONOR = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC =? ORDER BY d.Donation_ID DESC";
-    private static final String SELECT_LAST_DONATION = "SELECT Donation_Date FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status = 'Completed' ORDER BY d.Donation_Date DESC LIMIT 1;";
+    private static final String SELECT_LAST_DONATION = "SELECT Donation_Date FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND ud.Donor_NIC = ? AND d.Donation_Status = 'Completed' ORDER BY d.Donation_Date DESC LIMIT 1";
 
     private static final String COUNT_DONATION = "SELECT COUNT(*) AS count FROM donation WHERE BloodBank_Code=? AND Donation_Status=?";
 

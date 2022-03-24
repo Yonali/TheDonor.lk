@@ -57,14 +57,7 @@ public class DonationSearch extends HttpServlet {
         String nic = request.getParameter("NIC");
         String user_role = request.getParameter("User_Role");
 
-        String last_date = donationDAO.selectLastDonationDate(nic);
-        LocalDate today = LocalDate.now();
-        Period period = Period.between(LocalDate.parse(last_date), today);
-
-        LocalDate next_date = LocalDate.parse(last_date).plusDays(121);
-
         if (blood_barcode.equals("")) {
-            //response.sendRedirect("./donation");
             if (checkNIC(nic) == 0) {
                 //Redirect to new donor registration page
                 List<UserBloodBankBean> listBloodBank = bloodbankDAO.selectAllUsers();
@@ -75,9 +68,17 @@ public class DonationSearch extends HttpServlet {
             } else {
                 String status = checkDonorStatus(nic);
 
+                String last_date = donationDAO.selectLastDonationDate(nic);
+                LocalDate today = LocalDate.now();
+                Period period = Period.ofMonths(5);
+                if (!last_date.equals("")) {
+                    period = Period.between(LocalDate.parse(last_date), today);
+                }
+
+
                 if (period.getYears() == 0 && period.getMonths() < 4) {
                     request.setAttribute("status","RecentlyDonated");
-                    request.setAttribute("next_date", next_date);
+                    request.setAttribute("next_date", LocalDate.parse(last_date).plusDays(121));
                 } else if (status.equals("T_Deferred") || status.equals("P_Deferred")) {
                     request.setAttribute("status","Deferred");
                     request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistoryByNIC(nic));
