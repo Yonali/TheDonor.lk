@@ -22,6 +22,6 @@
     </error-page>
     <error-page>
         <error-code>503</error-code>
-        <location>/view/error/503.jsp</location>
+        <location>/view/error/503.jsp</location>x
     </error-page>
 </web-app>

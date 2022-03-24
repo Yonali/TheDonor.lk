@@ -47,11 +47,11 @@ public class UserNurseUpdate extends HttpServlet {
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String contact = request.getParameter("contact");
-        String bloodgroup = request.getParameter("bloodgroup");
+        String blood_group = request.getParameter("blood_group");
         String nic = request.getParameter("nic");
         String section = request.getParameter("section");
         String bloodbank_code = request.getParameter("bloodbank_code");
-        UserNurseBean user = new UserNurseBean(id, username, first_name, last_name, contact, bloodgroup, nic, username, section, bloodbank_code);
+        UserNurseBean user = new UserNurseBean(id, username, first_name, last_name, contact, blood_group, nic, username, section, bloodbank_code);
 
         if (!userDAO.validateUsername(user)) {
             if (userDAO.updateUser(user)) {

@@ -44,11 +44,11 @@ public class UserNurseInsert extends HttpServlet {
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String contact = request.getParameter("contact");
-        String blooodgroup = request.getParameter("bloodgroup");
+        String blood_group = request.getParameter("blood_group");
         String nic = request.getParameter("nic");
         String section = request.getParameter("section");
         String bloodbank_code = request.getParameter("bloodbank_code");
-        UserNurseBean newUser = new UserNurseBean(0, username, first_name, last_name, contact, blooodgroup, nic, username, section, bloodbank_code);
+        UserNurseBean newUser = new UserNurseBean(0, username, first_name, last_name, contact, blood_group, nic, username, section, bloodbank_code);
 
         //Auto generate user password here
         PasswordEmailGenerator passwordEmailGenerator = new PasswordEmailGenerator();
@@ -66,13 +66,14 @@ public class UserNurseInsert extends HttpServlet {
                         + "Thank you\nThedonor.lk";
                 mailDAO.sendMail(username, "New Nurse Account | TheDonor.lk", message);
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("userNurse");
+                response.sendRedirect("./userNurse");
+                /*RequestDispatcher dispatcher = request.getRequestDispatcher("userNurse");
+                dispatcher.forward(request, response);*/
+            } else {
+                request.setAttribute("error", "Username already registered, Try a new username");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/nurseForm.jsp");
                 dispatcher.forward(request, response);
             }
-        } else {
-            request.setAttribute("error","Username already registered, Try a new username");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/nurseForm.jsp");
-            dispatcher.forward(request, response);
         }
     }
 }

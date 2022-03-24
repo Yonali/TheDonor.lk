@@ -87,7 +87,7 @@
                                     <c:out value="${user.username}" />
                                 </td>
                                 <td>
-                                    <c:out value="${user.bloodgroup}" />
+                                    <c:out value="${user.blood_group}" />
                                 </td>
                                 <td>
                                     <c:out value="${user.nic}" />

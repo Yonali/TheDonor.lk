@@ -61,7 +61,7 @@
                     </div>
                     <div class="field-single">
                         <span>Blood Group</span>
-                        <input type="text" name="bloodgroup" id="bloodgroup" value="<c:out value="${user.bloodgroup}"/>">
+                        <input type="text" name="blood_group" id="blood_group" value="<c:out value="${user.blood_group}"/>">
                     </div>
                     <div class="field-single">
                         <span>NIC</span>

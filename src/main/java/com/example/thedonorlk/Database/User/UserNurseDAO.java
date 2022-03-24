@@ -16,7 +16,7 @@ public class UserNurseDAO {
     private static final String INSERT_USERS_SQL = "INSERT INTO user (Username, Password, Role) " +
             "VALUES (?, ?, ?); ";
     private static final String INSERT_USERS_SQL2 = "INSERT INTO user_nurse (ID, First_Name, Last_Name, Contact, Blood_Group, NIC, Email, Section, BloodBank_Code) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM user, user_nurse WHERE user.id =? AND user.id=user_nurse.id";
     private static final String SELECT_ALL_USERS = "SELECT * FROM user, user_nurse WHERE role='nurse' AND user.id=user_nurse.id";
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
@@ -59,7 +59,7 @@ public class UserNurseDAO {
             preparedStatement.setString(2, user.getFirst_name());
             preparedStatement.setString(3, user.getLast_name());
             preparedStatement.setString(4, user.getContact());
-            preparedStatement.setString(5, user.getBloodgroup());
+            preparedStatement.setString(5, user.getBlood_group());
             preparedStatement.setString(6, user.getNic());
             preparedStatement.setString(7, user.getEmail());
             preparedStatement.setString(8, user.getSection());
@@ -88,12 +88,12 @@ public class UserNurseDAO {
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
-                String bloodgroup = rs.getString("bloodgroup");
+                String blood_group = rs.getString("blood_group");
                 String nic = rs.getString("nic");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                user = new UserNurseBean(id_1, username, first_name, last_name, contact, bloodgroup, nic, email, section, bloodbank_code);
+                user = new UserNurseBean(id_1, username, first_name, last_name, contact, blood_group, nic, email, section, bloodbank_code);
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -113,12 +113,12 @@ public class UserNurseDAO {
                 String first_name = rs.getString("first_name");
                 String last_name = rs.getString("last_name");
                 String contact = rs.getString("contact");
-                String bloodgroup = rs.getString("bloodgroup");
+                String blood_group = rs.getString("blood_group");
                 String nic = rs.getString("nic");
                 String email = rs.getString("email");
                 String section = rs.getString("section");
                 String bloodbank_code = rs.getString("bloodbank_code");
-                users.add(new UserNurseBean(id, username, first_name, last_name, contact, bloodgroup, nic, email, section, bloodbank_code));
+                users.add(new UserNurseBean(id, username, first_name, last_name, contact, blood_group, nic, email, section, bloodbank_code));
             }
         } catch (SQLException e) {
             printSQLException(e);
@@ -137,7 +137,7 @@ public class UserNurseDAO {
 
     public boolean updateUser(UserNurseBean user) throws SQLException {
         /*"UPDATE user SET username = ? WHERE id = ?; " +
-                "UPDATE user_bloodbank SET First_Name=?, Last_Name=?, Contact=?, NIC=?, Email=?, Section=?, BloodBank_ID=? WHERE id = ?;"*/
+                "UPDATE user_bloodbank SET First_Name=?, Last_Name=?, Contact=?, Blood_Group=?, NIC=?, Email=?, Section=?, BloodBank_ID=? WHERE id = ?;"*/
         boolean rowUpdated;
         try (PreparedStatement statement = con.prepareStatement(UPDATE_USERS_SQL);) {
             statement.setString(1, user.getUsername());
@@ -145,7 +145,7 @@ public class UserNurseDAO {
             statement.setString(3, user.getFirst_name());
             statement.setString(4, user.getLast_name());
             statement.setString(5, user.getContact());
-            statement.setString(6, user.getBloodgroup());
+            statement.setString(6, user.getBlood_group());
             statement.setString(7, user.getNic());
             statement.setString(8, user.getEmail());
             statement.setString(9, user.getSection());
@@ -162,7 +162,7 @@ public class UserNurseDAO {
             statement.setString(1, user.getFirst_name());
             statement.setString(2, user.getLast_name());
             statement.setString(3, user.getContact());
-            statement.setString(4, user.getBloodgroup());
+            statement.setString(4, user.getBlood_group());
             statement.setString(5, user.getNic());
             statement.setInt(6, user.getId());
 
