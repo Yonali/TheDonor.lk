@@ -74,7 +74,7 @@
                     <input type="hidden" name="User_Role" value="<%= role %>"/>
                     <div class="fields">
                         <div class="field-single">
-                            <span>Scan Blood ID</span>
+                            <span>Scan Blood Barcode</span>
                             <input type="text" name="Blood_Barcode" id="Blood_Barcode"/>
                         </div>
                         <div class="field-single">

@@ -52,10 +52,11 @@ public class DonationInsert extends HttpServlet {
         String user_role = (String) session.getAttribute("role");
         String donor_id = request.getParameter("Donor_ID");
         String blood_id = request.getParameter("Blood_Barcode");
+        String campaign_id = request.getParameter("Campaign_ID");
 
         DonationBean newDonation = new DonationBean(0, "New", "date", "time",
                 bloodbank_code, user_role.equals("nurse") ? user_id : null, null, donor_id, blood_id,
-                "campaign_id", "appointment_id", "donor_name", "donor_nic");
+                campaign_id.equals("null") ? null : campaign_id, "appointment_id", "donor_name", "donor_nic");
 
         DonorCardBean donor = donorDAO.selectDonorCardByID(Integer.parseInt(donor_id));
         int queue = donationDAO.countDonations(bloodbank_code, "New") + 1;

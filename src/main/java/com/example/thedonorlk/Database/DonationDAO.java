@@ -15,8 +15,8 @@ public class DonationDAO {
 
     private static final String INSERT_DONATION_SQL = "INSERT INTO donation " +
             "(Donation_Status, Donation_Date, Donation_Time, BloodBank_Code, " +
-            "Nurse_ID, Doctor_ID, Donor_ID, Blood_Barcode) " +
-            "VALUES ('New', ?, ?, ?, ?, ?, ?, ?)";
+            "Nurse_ID, Doctor_ID, Donor_ID, Blood_Barcode, Campaign_ID) " +
+            "VALUES ('New', ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_DONATION_BY_ID = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Donation_ID =? ORDER BY d.Donation_ID DESC";
     private static final String SELECT_DONATION_BY_BARCODE = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID AND d.Blood_Barcode =?";
     private static final String SELECT_ALL_DONATIONS = "SELECT * FROM donation d, user_donor ud WHERE d.Donor_ID = ud.ID ORDER BY d.Donation_ID DESC";
@@ -72,6 +72,7 @@ public class DonationDAO {
             preparedStatement.setString(5, donation.getDoctor_id());
             preparedStatement.setString(6, donation.getDonor_id());
             preparedStatement.setString(7, donation.getBlood_id());
+            preparedStatement.setString(8, donation.getCampaign_id());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

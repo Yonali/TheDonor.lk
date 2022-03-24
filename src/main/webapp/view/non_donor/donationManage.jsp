@@ -32,7 +32,7 @@
     <script>
         $(document).ready(function () {
             $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]]
+                "order": [[0, "desc"]]
             });
         });
     </script>
@@ -64,20 +64,44 @@
             <div class="card-header">
 
                 <% if (role.equals("nurse")) { %>
-                <h3>Scan to start new Donation</h3>
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <form action="donationInsert" method="post" onsubmit="return validate();">
+
+                    <h3>Scan to start new Donation</h3>
+                    <div class="field-single">
+                        <form action="donationInsert" method="post" onsubmit="return validate();">
+                        <span style="padding-left: 15px">Campaign ID</span>
+                        <select name="Campaign_ID" id="Campaign_ID" style="width: 50px; height: 40px;">
+                            <%--<option value="null"></option>--%>
+                            <c:forEach items="${campaign}" var="campaign">
+                                <jsp:useBean id="now" class="java.util.Date"/>
+
+                                <c:set var = "start" value = "${campaign.date} ${campaign.start_time}" />
+                                <c:set var = "end" value = "${campaign.date} ${campaign.end_time}" />
+
+                                <fmt:parseDate value = "${start}" var = "parsedStartDate" pattern = "yyyy-MM-dd HH:mm:ss" />
+                                <fmt:parseDate value = "${end}" var = "parsedEndDate" pattern = "yyy-MM-dd HH:mm:ss" />
+
+                                <c:if test="${(parsedStartDate le now) && (parsedEndDate ge now)}">
+                                    <option value="${campaign.id}">${campaign.id}</option>
+                                </c:if>
+
+                            </c:forEach>
+                                <option value="null">Appointment/Regular</option>
+                        </select>
+                    </div>
+                    <div class="search-wrapper">
+                        <span class="las la-search"></span>
+
+
                         <input type="search" placeholder="Blood Barcode" name="Blood_Barcode" id="Blood_Barcode"/>
                         <%--<input type="hidden" name="Bloodbank_Code" value="<%= bloodbank %>"/>
                         <input type="hidden" name="User_ID" value="<%= user_id %>"/>
                         <input type="hidden" name="User_Role" value="<%= role %>"/>--%>
                         <input type="hidden" name="Donor_ID" value="<c:out value='${donor.id}'/>"/>
                         <button type="submit">Enter</button>
-                    </form>
-                </div>
-                <div></div>
-                <div></div>
+                        </form>
+
+                    </div>
+
                 <% } %>
             </div>
             <% } else { %>
@@ -92,7 +116,9 @@
                 </c:when>
                 <c:when test="${status == 'RecentlyDonated'}">
                     <h2 class="card-topic-red">Donor has recently donated within last 4 months.</h2>
-                    <h3 class="card-topic-black">Please ask donor to donate after <%= request.getAttribute("next_date") %></h3>
+                    <h3 class="card-topic-black">Please ask donor to donate
+                        after <%= request.getAttribute("next_date") %>
+                    </h3>
                 </c:when>
                 <c:when test="${status == 'New_Doctor'}">
                     <h3 class="card-topic-red">Counsel the Donor</h3>

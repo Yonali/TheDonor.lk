@@ -2,6 +2,7 @@ package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.*;
 import com.example.thedonorlk.Bean.User.UserBloodBankBean;
+import com.example.thedonorlk.Database.CampaignDAO;
 import com.example.thedonorlk.Database.DatabaseConnection;
 import com.example.thedonorlk.Database.DonationDAO;
 import com.example.thedonorlk.Database.DonorDAO;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,11 +30,12 @@ public class DonationSearch extends HttpServlet {
     private DonorDAO donorDAO;
     private UserBloodBankDAO bloodbankDAO;
     private DonationDAO donationDAO;
-
+    private CampaignDAO campaignDAO;
     public void init() {
         donorDAO = new DonorDAO();
         bloodbankDAO = new UserBloodBankDAO();
         donationDAO = new DonationDAO();
+        campaignDAO = new CampaignDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,10 +101,15 @@ public class DonationSearch extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
                     dispatcher.forward(request, response);
                 }*/
+                HttpSession session = request.getSession();
+                String bloodbank = (String) session.getAttribute("bloodbank");
+
                 List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
                 request.setAttribute("listDonation", listDonation);
                 DonorCardBean donor = donorDAO.selectDonorCard(nic);
                 request.setAttribute("donor", donor);
+                List<CampaignBean> campaign = campaignDAO.selectAllCampaignsByBloodBank(bloodbank);
+                request.setAttribute("campaign", campaign);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
                 dispatcher.forward(request, response);
             }

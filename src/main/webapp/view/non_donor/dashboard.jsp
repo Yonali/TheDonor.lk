@@ -56,30 +56,30 @@
                             data: {
                                 labels: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'],
                                 datasets: [{
-                                        label: 'RBC',
-                                        data: [<c:out value="${RBC_stock[0]}"/>, <c:out value="${RBC_stock[1]}"/>, <c:out value="${RBC_stock[2]}"/>,
-                                            <c:out value="${RBC_stock[3]}"/>, <c:out value="${RBC_stock[4]}"/>, <c:out value="${RBC_stock[5]}"/>,
-                                            <c:out value="${RBC_stock[6]}"/>, <c:out value="${RBC_stock[7]}"/>],
-                                        backgroundColor: '#dc3545'
-                                    }, {
-                                        label: 'WBC',
+                                    label: 'RBC',
+                                    data: [<c:out value="${RBC_stock[0]}"/>, <c:out value="${RBC_stock[1]}"/>, <c:out value="${RBC_stock[2]}"/>,
+                                        <c:out value="${RBC_stock[3]}"/>, <c:out value="${RBC_stock[4]}"/>, <c:out value="${RBC_stock[5]}"/>,
+                                        <c:out value="${RBC_stock[6]}"/>, <c:out value="${RBC_stock[7]}"/>],
+                                    backgroundColor: '#dc3545'
+                                }, {
+                                    label: 'WBC',
                                     data: [<c:out value="${WBC_stock[0]}"/>, <c:out value="${WBC_stock[1]}"/>, <c:out value="${WBC_stock[2]}"/>,
                                         <c:out value="${WBC_stock[3]}"/>, <c:out value="${WBC_stock[4]}"/>, <c:out value="${WBC_stock[5]}"/>,
                                         <c:out value="${WBC_stock[6]}"/>, <c:out value="${WBC_stock[7]}"/>],
-                                        backgroundColor: '#0d6efd'
-                                    }, {
-                                        label: 'Platelets',
+                                    backgroundColor: '#0d6efd'
+                                }, {
+                                    label: 'Platelets',
                                     data: [<c:out value="${Platelets_stock[0]}"/>, <c:out value="${Platelets_stock[1]}"/>, <c:out value="${Platelets_stock[2]}"/>,
                                         <c:out value="${Platelets_stock[3]}"/>, <c:out value="${Platelets_stock[4]}"/>, <c:out value="${Platelets_stock[5]}"/>,
                                         <c:out value="${Platelets_stock[6]}"/>, <c:out value="${Platelets_stock[7]}"/>],
-                                        backgroundColor: '#fd7e14'
-                                    }, {
-                                        label: 'Plasma',
+                                    backgroundColor: '#fd7e14'
+                                }, {
+                                    label: 'Plasma',
                                     data: [<c:out value="${Plasma_stock[0]}"/>, <c:out value="${Plasma_stock[1]}"/>, <c:out value="${Plasma_stock[2]}"/>,
                                         <c:out value="${Plasma_stock[3]}"/>, <c:out value="${Plasma_stock[4]}"/>, <c:out value="${Plasma_stock[5]}"/>,
                                         <c:out value="${Plasma_stock[6]}"/>, <c:out value="${Plasma_stock[7]}"/>],
-                                        backgroundColor: '#198754'
-                                    }]
+                                    backgroundColor: '#198754'
+                                }]
                             },
                             options: {
                                 responsive: true,
@@ -104,7 +104,9 @@
     </div>
 
     <div class="card-2col-centered">
-        <h1>Total Donors Registered</h1>
+        <h1>Total Donors Registered with <% if (!session.getAttribute("role").equals("admin")) { %>
+            <%=session.getAttribute("bloodbank")%>
+            <% } %></h1>
         <div class="big_num">
             <h1><c:out value="${count.total_donors}"/></h1>
         </div>
@@ -144,6 +146,31 @@
             </div>
         </div>
     </div>
+
+    <div class="card-2col-centered" style="padding-top: 25px">
+        <h1>Detailed Report</h1>
+    </div>
+
+    <form action="<%=request.getContextPath()%>/reportView" method="post">
+        <div class="cards">
+            <div></div>
+            <div class="card-single">
+                <h5 style="padding-right: 15px; background-color: #f1f5f9">From</h5>
+                <input type="date" name="from" id="from" class="input" required>
+            </div>
+            <div class="card-single">
+                <h5 style="padding-right: 15px; background-color: #f1f5f9">To</h5>
+                <input type="date" name="to" id="to" class="input" required>
+            </div>
+            <div></div>
+        </div>
+        <div class="modal-submit-button" style="padding-top: 20px;">
+            <div class="buttons">
+                <button type="submit" class="bottom-full">Next</button>
+            </div>
+        </div>
+    </form>
+
 </main>
 </body>
 
