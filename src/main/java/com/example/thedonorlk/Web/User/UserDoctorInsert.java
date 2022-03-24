@@ -55,7 +55,7 @@ public class UserDoctorInsert extends HttpServlet {
         String password = passwordEmailGenerator.generatePassword();
         String hash_pwd = DigestUtils.sha256Hex(password);
 
-        if (userDAO.validateUsername(newUser)) {
+        if (!userDAO.validateUsername(newUser)) {
             System.out.println("1 if");
             if (userDAO.insertUser(newUser, hash_pwd)) {
                 System.out.println("2 if");
@@ -67,13 +67,14 @@ public class UserDoctorInsert extends HttpServlet {
                         + "Password - " + password + "\n\n"
                         + "Thank you\nThedonor.lk";
                 mailDAO.sendMail(username, "New Doctor Account | TheDonor.lk", message);
-                response.sendRedirect("./userDoctor");
-            }else{
+                RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
+                dispatcher.forward(request, response);
+            }/*else{
                 System.out.println("1 else");
                 request.setAttribute("error","Something went wrong, Please Try Again");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("userDoctor");
                 dispatcher.forward(request, response);
-            }
+            }*/
         } else {
             System.out.println("testtest");
             request.setAttribute("error","Username already registered, Try a new username");
