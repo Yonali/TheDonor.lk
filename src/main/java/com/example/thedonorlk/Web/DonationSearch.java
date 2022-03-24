@@ -75,7 +75,6 @@ public class DonationSearch extends HttpServlet {
                     period = Period.between(LocalDate.parse(last_date), today);
                 }
 
-
                 if (period.getYears() == 0 && period.getMonths() < 4) {
                     request.setAttribute("status","RecentlyDonated");
                     request.setAttribute("next_date", LocalDate.parse(last_date).plusDays(121));
@@ -112,31 +111,37 @@ public class DonationSearch extends HttpServlet {
             String donation_id = getDonationID(blood_barcode);
             nic = getDonorNIC(blood_barcode);
 
-            if (status.equals("New")) {
-                if (user_role.equals("nurse")) {
-                    request.setAttribute("status","New_Nurse");
-                } else if (user_role.equals("doctor")) {
-                    request.setAttribute("status","New_Doctor");
+            if (!donation_id.equals("")) {
+                if (status.equals("New")) {
+                    if (user_role.equals("nurse")) {
+                        request.setAttribute("status", "New_Nurse");
+                    } else if (user_role.equals("doctor")) {
+                        request.setAttribute("status", "New_Doctor");
+                    }
+                } else if (status.equals("Counselled")) {
+                    request.setAttribute("status", "Counselled");
+                } else if (status.equals("Completed")) {
+                    request.setAttribute("status", "Completed");
+                } else if (status.equals("Cancelled")) {
+                    request.setAttribute("status", "Cancelled");
+                } else if (status.equals("Deferred")) {
+                    request.setAttribute("status", "Deferred");
+                    request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistory(donation_id));
                 }
-            } else if (status.equals("Counselled")) {
-                request.setAttribute("status","Counselled");
-            } else if (status.equals("Completed")) {
-                request.setAttribute("status","Completed");
-            } else if (status.equals("Cancelled")) {
-                request.setAttribute("status","Cancelled");
-            } else if (status.equals("Deferred")) {
-                request.setAttribute("status","Deferred");
-                request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistory(donation_id));
-            }
 
-            request.setAttribute("barcode",blood_barcode);
-            List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
-            request.setAttribute("listDonation", listDonation);
-            DonorCardBean donor = donorDAO.selectDonorCard(nic);
-            request.setAttribute("donor", donor);
-            request.setAttribute("donation_id", donation_id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
-            dispatcher.forward(request, response);
+                request.setAttribute("barcode", blood_barcode);
+                List<DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);
+                request.setAttribute("listDonation", listDonation);
+                DonorCardBean donor = donorDAO.selectDonorCard(nic);
+                request.setAttribute("donor", donor);
+                request.setAttribute("donation_id", donation_id);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("status","IncorrectBloodID");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
 

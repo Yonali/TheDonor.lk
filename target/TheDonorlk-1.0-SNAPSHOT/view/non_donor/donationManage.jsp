@@ -82,6 +82,10 @@
             </div>
             <% } else { %>
             <c:choose>
+                <c:when test="${status == 'IncorrectBloodID'}">
+                    <h2 class="card-topic-red">Invalid Blood ID</h2>
+                    <h3 class="card-topic-black">Please try again</h3>
+                </c:when>
                 <c:when test="${status == 'New_Nurse'}">
                     <h2 class="card-topic-red">Doctor Counsel PENDING</h2>
                     <h3 class="card-topic-black">Please ask donor to counsel the Doctor</h3>
