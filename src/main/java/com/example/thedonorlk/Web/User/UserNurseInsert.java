@@ -64,7 +64,7 @@ public class UserNurseInsert extends HttpServlet {
                         + "Username - " + username + "\n"
                         + "Password - " + password + "\n\n"
                         + "Thank you\nThedonor.lk";
-                mailDAO.sendMail(username, "New Nurse Account | TheDonor.lk", message);
+                //mailDAO.sendMail(username, "New Nurse Account | TheDonor.lk", message);
 
                 response.sendRedirect("./userNurse");
                 /*RequestDispatcher dispatcher = request.getRequestDispatcher("userNurse");
