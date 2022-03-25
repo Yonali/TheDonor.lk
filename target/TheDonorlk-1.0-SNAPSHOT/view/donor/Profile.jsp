@@ -38,8 +38,12 @@
 
 <div class="profile-container">
     <div class="profile-info">
+<%--        <div class="main-container">--%>
+        <div class="main">
+
         <!---------------------- Profile -------------------------->
-        <div class="info-col">
+            <div class="left">
+           <div class="info-col">
             <div class="profile-intro">
                 <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
                     String base64Encoded = null;
@@ -64,8 +68,9 @@
                 </div>
             </div>
         </div>
+            </div>
         <!---------------------- Profile -------------------------->
-
+            <div class="right">
         <div class="post-col">
             <!---------------------- Create Post -------------------------->
             <div class="write-post-container">
@@ -144,6 +149,9 @@
 
             <button type="button" class="load-more-btn">Loadmore</button>
         </div>
+            </div>
+    </div>
+<%--    </div>--%>
     </div>
 </div>
 
