@@ -78,10 +78,7 @@ public class DonationSearch extends HttpServlet {
                     period = Period.between(LocalDate.parse(last_date), today);
                 }
 
-                if (period.getYears() == 0 && period.getMonths() < 4) {
-                    request.setAttribute("status","RecentlyDonated");
-                    request.setAttribute("next_date", LocalDate.parse(last_date).plusDays(121));
-                } else if (status.equals("T_Deferred") || status.equals("P_Deferred")) {
+                if (status.equals("T_Deferred") || status.equals("P_Deferred")) {
                     request.setAttribute("status","Deferred");
                     request.setAttribute("deferral_history", donorDAO.selectLastDeferralHistoryByNIC(nic));
 
@@ -92,6 +89,9 @@ public class DonationSearch extends HttpServlet {
                     //request.setAttribute("donation_id", donation_id);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/donationManage.jsp");
                     dispatcher.forward(request, response);*/
+                } else if (period.getYears() == 0 && period.getMonths() < 4) {
+                    request.setAttribute("status","RecentlyDonated");
+                    request.setAttribute("next_date", LocalDate.parse(last_date).plusDays(121));
                 } /*else {
                     //Redirect to donation start page
                     List <DonationBean> listDonation = donationDAO.selectAllDonationsByDonor(nic);

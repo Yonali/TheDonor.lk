@@ -32,13 +32,29 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <%--<script>
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]]
-            });
-        });
-    </script>--%>
+
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+    <%--<script type="text/javascript" src="<%=request.getContextPath()%>/public/scripts/save-pdf.js"></script>--%>
+    <script>
+        function Popup(divID) {
+            var mywindow = window.open('', 'new div', '');
+            mywindow.document.write('<html><head><title></title>');
+            mywindow.document.write('<link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css" type="text/css"/>');
+            mywindow.document.write('</head><body >');
+            mywindow.document.write(document.getElementById(divID).innerHTML);
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            //mywindow.focus();
+            //setTimeout(function(){mywindow.print();},1000);
+            //mywindow.close();
+
+            setTimeout(function () { mywindow.print(); }, 100);
+            window.onfocus = function () { setTimeout(function () { mywindow.close(); }, 100); }
+
+            return true;
+        }
+    </script>
 </head>
 
 <body>
@@ -54,11 +70,11 @@
     <% } %>
 
     <div class="recent-grid">
-        <div class="card">
+        <div class="card" id="reportCard">
             <div class="card-header" style="justify-content: space-around">
                 <div style="text-align: center"><h2><%= bloodbank %>
                 </h2>
-                    <h3>Detailed Report from to</h3></div>
+                    <h3>Detailed Report from <span style="color: #750605"><%= request.getAttribute("from")%></span> to <span style="color: #750605"><%= request.getAttribute("to")%></span></h3></div>
                 <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
@@ -130,12 +146,51 @@
                 </div>
             </div>
 
+            <div class="card">
+                <div class="card-header-center">
+                    <h3>This Month</h3>
+                </div>
+
+                <div class="card-body">
+                    <div class="cards">
+                        <div class="card-single">
+                            <div class="big_num">
+                                <h1><c:out value="${count.new_donors}"/></h1>
+                                <span>New Donors</span>
+                            </div>
+                        </div>
+                        <div class="card-single">
+                            <div class="big_num">
+                                <h1><c:out value="${count.campaigns}"/></h1>
+                                <span>Campaigns</span>
+                            </div>
+                        </div>
+                        <div class="card-single">
+                            <div class="big_num">
+                                <h1><c:out value="${count.appointment}"/></h1>
+                                <span>Appointments</span>
+                            </div>
+                        </div>
+                        <div class="card-single">
+                            <div class="big_num">
+                                <h1><c:out value="${count.donation}"/></h1>
+                                <span>Donations</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-submit-button" style="padding-top: 20px;">
+        <div class="buttons">
+            <button class="bottom-full" id="export" onclick="Popup('reportCard')">Export PDF</button>
         </div>
     </div>
 </main>
 
 </div>
-
 </body>
-
 </html>

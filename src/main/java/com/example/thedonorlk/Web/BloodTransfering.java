@@ -65,7 +65,8 @@ public class BloodTransfering extends HttpServlet {
 
         if (transferDAO.insertTransfer(transfer) && stockDAO.updateStockBank(id, to_bloodbank_code)) {
             notificationDAO.insertNotificaion(notification);
-            response.sendRedirect("./bloodStock?bank=" + to_bloodbank_code);
+            /*response.sendRedirect("./bloodStock?bank=" + to_bloodbank_code);*/
+            response.sendRedirect("./bloodStock?bank=all");
         } else {
             request.setAttribute("error", "Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=all");

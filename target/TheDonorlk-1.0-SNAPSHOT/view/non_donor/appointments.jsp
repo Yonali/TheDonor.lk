@@ -114,7 +114,7 @@
                             <td>ID</td>
                             <td>Blood Bank</td>
                             <td>Donor Name</td>
-                            <td>Donor NIC</td>
+                            <td>Contact</td>
                             <td>Date</td>
                             <td>Time</td>
                             <td>Status</td>
@@ -125,7 +125,7 @@
                         </thead>
                         <tbody>
                         <c:forEach var="appointment" items="${listAppointment}">
-                            <c:if test="${appointment.bloodbank_code == bloodbank}">
+                            <c:if test="${appointment.bloodbank_code == bloodbank || role == 'admin'}">
                                 <tr>
                                     <td>
                                         <c:out value="${appointment.id}"/>

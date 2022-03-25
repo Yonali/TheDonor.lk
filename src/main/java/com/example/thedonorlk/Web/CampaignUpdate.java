@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -38,6 +39,9 @@ public class CampaignUpdate extends HttpServlet {
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
+        HttpSession session = request.getSession(false);
+        String bloodbank = (String) session.getAttribute("bloodbank");
+
         String campaign_name = request.getParameter("Campaign_Name");
         String campaign_date = request.getParameter("Campaign_Date");
         String start_time = request.getParameter("Start_Time");
@@ -45,7 +49,7 @@ public class CampaignUpdate extends HttpServlet {
         String address_number = request.getParameter("Address_Number");
         String address_street = request.getParameter("Address_Street");
         String address_city = request.getParameter("Address_City");
-        String bloodbank_code = request.getParameter("BloodBank_Code");
+        String bloodbank_code = bloodbank;
         CampaignBean newCampaign = new CampaignBean(id, campaign_name, campaign_date, start_time, end_time, address_number,address_street, address_city, bloodbank_code);
 
             if (campaignDAO.updateUser(newCampaign)) {

@@ -50,6 +50,7 @@ public class CampaignInsert extends HttpServlet {
             throws SQLException, IOException, ServletException {
         HttpSession session = request.getSession(false);
         int notifier_id = (Integer) session.getAttribute("user_id");
+        String bloodbank = (String) session.getAttribute("bloodbank");
 
         String campaign_name = request.getParameter("Campaign_Name");
         String campaign_date = request.getParameter("Campaign_Date");
@@ -58,7 +59,7 @@ public class CampaignInsert extends HttpServlet {
         String address_number = request.getParameter("Address_Number");
         String address_street = request.getParameter("Address_Street");
         String address_city = request.getParameter("Address_City");
-        String bloodbank_code = request.getParameter("BloodBank_Code");
+        String bloodbank_code = bloodbank;
         CampaignBean newCampaign = new CampaignBean(0, campaign_name, campaign_date, start_time, end_time, address_number,address_street, address_city, bloodbank_code);
 
             if (campaignDAO.insertUser(newCampaign)) {

@@ -46,10 +46,10 @@
                         <span>BloodBank Code</span>
                         <select name="BloodBank_Code" id="BloodBank_Code" >
                             <c:forEach items="${listBloodBank}" var="bloodbank_code">
-                                <c:if test="${bloodbank_code.code == user.bloodbank_code}">
+                                <%--<c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
-                                </c:if>
-                                <c:if test="${bloodbank_code.code != user.bloodbank_code}">
+                                </c:if>--%>
+                                <c:if test="${bloodbank_code.code != bloodbank}">
                                     <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                 </c:if>
 

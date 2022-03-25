@@ -156,12 +156,16 @@
             <div></div>
             <div class="card-single">
                 <h5 style="padding-right: 15px; background-color: #f1f5f9">From</h5>
-                <input type="date" name="from" id="from" class="input" required>
+                <input type="date" name="from" id="from" class="input" value="fsd" required>
             </div>
             <div class="card-single">
                 <h5 style="padding-right: 15px; background-color: #f1f5f9">To</h5>
-                <input type="date" name="to" id="to" class="input" required>
+                <input type="date" name="to" id="to" class="input" value="fsd" required>
             </div>
+            <script>
+                document.getElementById('to').valueAsDate = new Date();
+                document.getElementById('from').valueAsDate = new Date(new Date().setDate(new Date().getDate() - 30));
+            </script>
             <div></div>
         </div>
         <div class="modal-submit-button" style="padding-top: 20px;">

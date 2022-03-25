@@ -75,12 +75,13 @@
                     </div>
                     <div class="field-single">
                         <span>Date</span>
-                        <input type="date"  name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
+                        <input type="date"  onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
                     </div>
-                    <div class="field-single">
+                    <%--<div class="field-single">
                         <span>BloodBank Code</span>
                         <select name="BloodBank_Code" id="BloodBank_Code" >
-                            <c:forEach items="${listBloodBank}" var="bloodbank_code">
+                            <option value="${user.bloodbank_code}">${user.bloodbank_code}</option>
+                            &lt;%&ndash;<c:forEach items="${listBloodBank}" var="bloodbank_code">
                                 <c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
                                 </c:if>
@@ -88,9 +89,9 @@
                                     <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                 </c:if>
 
-                            </c:forEach>
+                            </c:forEach>&ndash;%&gt;
                         </select>
-                    </div>
+                    </div>--%>
                     <%--<c:if test="${user != null}">
                     <div class="field-single" id="status">
                         <span>Status</span>

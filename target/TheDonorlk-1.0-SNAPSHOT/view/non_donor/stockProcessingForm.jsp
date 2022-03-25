@@ -63,6 +63,9 @@
                 <div class="field-single">
                     <span>Processed Date</span>
                     <input type="date" name="Processed_Date" id="Processed_Date">
+                    <script>
+                        document.getElementById('Processed_Date').valueAsDate = new Date();
+                    </script>
                 </div>
                 <div></div>
                 <div></div>
@@ -70,19 +73,19 @@
                 <div></div>
                 <div class="field-single" id="rbc">
                     <span>RBC Expiry Date</span>
-                    <input type="date" name="RBC_Expiry_Date" id="RBC_Expiry_Date">
+                    <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="RBC_Expiry_Date" id="RBC_Expiry_Date">
                 </div>
                 <div class="field-single" id="wbc">
                     <span>WBC Expiry Date</span>
-                    <input type="date" name="WBC_Expiry_Date" id="WBC_Expiry_Date">
+                    <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="WBC_Expiry_Date" id="WBC_Expiry_Date">
                 </div>
                 <div class="field-single" id="plasma">
                     <span>Plasma Expiry Date</span>
-                    <input type="date" name="Plasma_Expiry_Date" id="Plasma_Expiry_Date">
+                    <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Plasma_Expiry_Date" id="Plasma_Expiry_Date">
                 </div>
                 <div class="field-single" id="platelets">
                     <span>Platelets Expiry Date</span>
-                    <input type="date" name="Platelets_Expiry_Date" id="Platelets_Expiry_Date">
+                    <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Platelets_Expiry_Date" id="Platelets_Expiry_Date">
                 </div>
             </div>
             <div class="modal-submit-button">
