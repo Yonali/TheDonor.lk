@@ -8,6 +8,8 @@
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
 
+    Object role = session.getAttribute("role");
+
     List<Integer> RBC_stock = (List<Integer>) request.getAttribute("RBC_stock");
     List<Integer> WBC_stock = (List<Integer>) request.getAttribute("WBC_stock");
     List<Integer> Platelets_stock = (List<Integer>) request.getAttribute("Platelets_stock");
@@ -46,6 +48,7 @@
                 <h3>Dashboard</h3>
             </div>
 
+            <% if (!role.equals("admin")) { %>
             <div class="card-body">
                 <div class="chart">
                     <canvas id="myChart" width="400" height="200"></canvas>
@@ -100,6 +103,7 @@
                     </script>
                 </div>
             </div>
+            <% } %>
         </div>
     </div>
 
@@ -147,6 +151,7 @@
         </div>
     </div>
 
+    <% if (!role.equals("admin")) { %>
     <div class="card-2col-centered" style="padding-top: 25px">
         <h1>Detailed Report</h1>
     </div>
@@ -174,6 +179,7 @@
             </div>
         </div>
     </form>
+    <% } %>
 
 </main>
 </body>

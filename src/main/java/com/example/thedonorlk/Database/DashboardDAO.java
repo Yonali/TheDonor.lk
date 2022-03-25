@@ -511,6 +511,80 @@ public class DashboardDAO {
         return new DashboardBean(null, null, null, null, total_donor_count, new_donor_count, campaigns_count, appointments_count, donations_count);
     }
 
+    public DashboardBean countAll() {
+        int total_donor_count = 0;
+        int new_donor_count = 0;
+        int campaigns_count = 0;
+        int appointments_count = 0;
+        int donations_count = 0;
+
+        String SQL = "SELECT COUNT(*) AS count FROM user_donor";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                total_donor_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE MONTH(Join_Date)=? AND YEAR(Join_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+            System.out.println(preparedStatement);
+
+            while (rs.next()) {
+                new_donor_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM campaign WHERE MONTH(Campaign_Date)=? AND YEAR(Campaign_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                campaigns_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM appointment WHERE MONTH(Appointment_Date)=? AND YEAR(Appointment_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                appointments_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM donation WHERE MONTH(Donation_Date)=? AND YEAR(Donation_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                donations_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return new DashboardBean(null, null, null, null, total_donor_count, new_donor_count, campaigns_count, appointments_count, donations_count);
+    }
+
     private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {
             if (e instanceof SQLException) {

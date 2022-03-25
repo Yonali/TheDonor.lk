@@ -40,8 +40,12 @@ public class DashboardServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         HttpSession session = request.getSession(false);
         String bloodbank = (String)session.getAttribute("bloodbank");
+        String role = (String)session.getAttribute("role");
 
         DashboardBean count = dashboardDAO.count(bloodbank);
+        if (role.equals("admin")) {
+            count = dashboardDAO.countAll();
+        }
         request.setAttribute("count", count);
         DashboardBean stock = dashboardDAO.stock(bloodbank);
         request.setAttribute("RBC_stock", stock.getRbc());
