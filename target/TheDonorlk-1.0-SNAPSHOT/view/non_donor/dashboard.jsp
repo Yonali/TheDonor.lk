@@ -161,11 +161,11 @@
             <div></div>
             <div class="card-single">
                 <h5 style="padding-right: 15px; background-color: #f1f5f9">From</h5>
-                <input type="date" name="from" id="from" class="input" value="fsd" required>
+                <input type="date" onfocus="this.max=new Date().toISOString().split('T')[0]" step="1" name="from" id="from" class="input" required>
             </div>
             <div class="card-single">
                 <h5 style="padding-right: 15px; background-color: #f1f5f9">To</h5>
-                <input type="date" name="to" id="to" class="input" value="fsd" required>
+                <input type="date" onfocus="this.max=new Date().toISOString().split('T')[0]" step="1" name="to" id="to" class="input" required>
             </div>
             <script>
                 document.getElementById('to').valueAsDate = new Date();

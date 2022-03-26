@@ -2,8 +2,11 @@ package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.DashboardBean;
+import com.example.thedonorlk.Bean.ReportCampaignBean;
+import com.example.thedonorlk.Bean.ReportStockBean;
 import com.example.thedonorlk.Database.CampaignDAO;
 import com.example.thedonorlk.Database.DashboardDAO;
+import com.example.thedonorlk.Database.ReportDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +20,13 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/reportView")
-public class ReportView extends HttpServlet {
+public class ReportViewServlet extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
     private DashboardDAO dashboardDAO;
+    private ReportDAO reportDAO;
     public void init() {
         dashboardDAO = new DashboardDAO();
+        reportDAO = new ReportDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,9 +49,15 @@ public class ReportView extends HttpServlet {
         String from = request.getParameter("from");
         String to = request.getParameter("to");
 
-        /*List <CampaignBean> listCampaign = campaignDAO.selectAllCampaigns();
-        request.setAttribute("listCampaign", listCampaign);*/
+        List <ReportCampaignBean> listCampaign = reportDAO.selectAllCampaignsByBloodBank(bloodbank);
+        request.setAttribute("listCampaign", listCampaign);
+        ReportStockBean stock = reportDAO.selectBloodStock(bloodbank);
+        request.setAttribute("stockRemaining", stock.getRemaining());
+
+        List<Integer> remaining;
+
         DashboardBean count = dashboardDAO.count(bloodbank);
+
         request.setAttribute("count", count);
         request.setAttribute("from", from);
         request.setAttribute("to", to);

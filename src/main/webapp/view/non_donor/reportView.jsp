@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.example.thedonorlk.Bean.DonorBean" %>
+<%@ page import="com.example.thedonorlk.Bean.ReportCampaignBean" %>
 
 <%
     if (session.getAttribute("username") == null) {
@@ -12,7 +13,7 @@
     Object role = session.getAttribute("role");
     Object bloodbank = session.getAttribute("bloodbank");
 
-    List<DonorBean> sendToDonorList = (List<DonorBean>) request.getAttribute("SendToDonorList");
+    List<ReportCampaignBean> listCampaign = (List<ReportCampaignBean>) request.getAttribute("listCampaign");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +50,14 @@
             //setTimeout(function(){mywindow.print();},1000);
             //mywindow.close();
 
-            setTimeout(function () { mywindow.print(); }, 100);
-            window.onfocus = function () { setTimeout(function () { mywindow.close(); }, 100); }
+            setTimeout(function () {
+                mywindow.print();
+            }, 100);
+            window.onfocus = function () {
+                setTimeout(function () {
+                    mywindow.close();
+                }, 100);
+            }
 
             return true;
         }
@@ -74,7 +81,8 @@
             <div class="card-header" style="justify-content: space-around">
                 <div style="text-align: center"><h2><%= bloodbank %>
                 </h2>
-                    <h3>Detailed Report from <span style="color: #750605"><%= request.getAttribute("from")%></span> to <span style="color: #750605"><%= request.getAttribute("to")%></span></h3></div>
+                    <h3>Detailed Report from <span style="color: #750605"><%= request.getAttribute("from")%></span> to
+                        <span style="color: #750605"><%= request.getAttribute("to")%></span></h3></div>
                 <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
@@ -88,10 +96,14 @@
                         <thead>
                         <tr>
                             <td>Blood Stock Flow</td>
-                            <td>Type A</td>
-                            <td>Type B</td>
-                            <td>Type AB</td>
-                            <td>Type O</td>
+                            <td>A+</td>
+                            <td>A-</td>
+                            <td>B+</td>
+                            <td>B-</td>
+                            <td>AB+</td>
+                            <td>AB-</td>
+                            <td>O+</td>
+                            <td>O-</td>
                             <td>Total</td>
                         </tr>
                         </thead>
@@ -113,6 +125,15 @@
                         </tr>
                         <tr style="font-weight: bold;">
                             <td>Remaining Blood Stock</td>
+                            <td><c:out value="${stockRemaining[0]}"/></td>
+                            <td><c:out value="${stockRemaining[1]}"/></td>
+                            <td><c:out value="${stockRemaining[2]}"/></td>
+                            <td><c:out value="${stockRemaining[3]}"/></td>
+                            <td><c:out value="${stockRemaining[4]}"/></td>
+                            <td><c:out value="${stockRemaining[5]}"/></td>
+                            <td><c:out value="${stockRemaining[6]}"/></td>
+                            <td><c:out value="${stockRemaining[7]}"/></td>
+                            <td><c:out value="${stockRemaining[8]}"/></td>
                         </tr>
                         </tbody>
                     </table>
@@ -124,23 +145,37 @@
                     <table width="100%" id="table_two">
                         <thead>
                         <tr>
-                            <td>Blood Donation Campaign</td>
+                            <td>Blood Donation<br>Campaign</td>
                             <td>Campaign Date</td>
                             <td>Location</td>
-                            <td>Type A</td>
-                            <td>Type B</td>
-                            <td>Type AB</td>
-                            <td>Type O</td>
+                            <td>A+</td>
+                            <td>A-</td>
+                            <td>B+</td>
+                            <td>B-</td>
+                            <td>AB+</td>
+                            <td>AB-</td>
+                            <td>O+</td>
+                            <td>O-</td>
                             <td>Total</td>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Campaign 1</td>
-                        </tr>
-                        <tr>
-                            <td>Campaign 2</td>
-                        </tr>
+                        <c:forEach var="campaign" items="${listCampaign}">
+                            <tr>
+                                <td><c:out value="${campaign.name}"/></td>
+                                <td><c:out value="${campaign.date}"/></td>
+                                <td><c:out value="${campaign.address_street}"/>, <c:out value="${campaign.address_city}"/></td>
+                                <td><c:out value="${campaign.a_pos}"/></td>
+                                <td><c:out value="${campaign.a_neg}"/></td>
+                                <td><c:out value="${campaign.b_pos}"/></td>
+                                <td><c:out value="${campaign.b_neg}"/></td>
+                                <td><c:out value="${campaign.ab_pos}"/></td>
+                                <td><c:out value="${campaign.ab_neg}"/></td>
+                                <td><c:out value="${campaign.o_pos}"/></td>
+                                <td><c:out value="${campaign.o_neg}"/></td>
+                                <td><c:out value="${campaign.total}"/></td>
+                            </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
