@@ -54,7 +54,46 @@ public class BloodStockUpdate extends HttpServlet {
         HttpSession session = request.getSession(false);
         int notifier_id = (Integer) session.getAttribute("user_id");
 
-        if (stockDAO.updateStockStatus(id, status)) {
+        if (status.equals("Transfused")) {
+            if (stockDAO.validate(id)) {
+                if (stockDAO.updateStockStatus(id, status)) {
+                    BloodStockBean stock = stockDAO.selectStock(id);
+                    DonationBean donation = donationDAO.selectDonationByBloodBarcode(stock.getBlood_barcode());
+                    DonorCardBean donor = donorDAO.selectDonorCardByID(Integer.parseInt(donation.getDonor_id()));
+
+                    String message = "Thank you, your precious blood helped save a life today, " +
+                            "Thank you for your generosity, It means a lot for the patient and the family. " +
+                            "#Donating Blood Makes a Big Difference in the Lives of Others #TheDonor.lk";
+
+                    NotificationBean notification = new NotificationBean(0,Integer.parseInt(donation.getDonor_id()), notifier_id,"You saved a life!",message,"","");
+                    notificationDAO.insertNotificaion(notification);
+
+                    request.setAttribute("SendTo", donor.getContact());
+                    request.setAttribute("Message", message);
+
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
+                    dispatcher.forward(request, response);
+                } else {
+                    request.setAttribute("error", "Something went wrong, Please Try Again");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
+                    dispatcher.forward(request, response);
+                }
+            } else {
+                request.setAttribute("error", "Blood product is expired, Please check");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
+                dispatcher.forward(request, response);
+            }
+        } else {
+            if (stockDAO.updateStockStatus(id, status)) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
+                dispatcher.forward(request, response);
+            } else {
+                request.setAttribute("error", "Something went wrong, Please Try Again");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
+                dispatcher.forward(request, response);
+            }
+        }
+        /*if (stockDAO.updateStockStatus(id, status)) {
             if (status.equals("Transfused")) {
                 BloodStockBean stock = stockDAO.selectStock(id);
                 DonationBean donation = donationDAO.selectDonationByBloodBarcode(stock.getBlood_barcode());
@@ -77,6 +116,6 @@ public class BloodStockUpdate extends HttpServlet {
             request.setAttribute("error", "Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("bloodStock?bank=" + bank);
             dispatcher.forward(request, response);
-        }
+        }*/
     }
 }

@@ -31,6 +31,24 @@ public class BloodStockDAO {
 
     private Connection con = DatabaseConnection.initializeDatabase();
 
+    public boolean validate(int id) {
+        boolean status = false;
+        Connection con = DatabaseConnection.initializeDatabase();
+
+        String sql = "select * from blood where Blood_ID = ? AND Expiry_Date >= now()";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            //ps.setString(2, sqlDate + "");
+            ResultSet rs = ps.executeQuery();
+            status = rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
     public boolean insertStock(BloodStockBean stock) throws SQLException {
         boolean status = true;
         Date date = new Date();

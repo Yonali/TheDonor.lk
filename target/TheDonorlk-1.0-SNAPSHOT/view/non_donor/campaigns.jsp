@@ -132,8 +132,6 @@
                                     <c:out value="${campaign.bloodbank_code}"/>
                                 </td>
                                 <td>
-
-
                                     <jsp:useBean id="now" class="java.util.Date"/>
 
                                     <c:set var = "start" value = "${campaign.date} ${campaign.start_time}" />

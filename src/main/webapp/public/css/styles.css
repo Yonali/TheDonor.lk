@@ -849,7 +849,7 @@ tr td:last-child {
  }
 .status.Pending {
    background: #e8e535;
-   color: white;
+   color: black;
  }
 
 .red-text {

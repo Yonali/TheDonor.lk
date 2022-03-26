@@ -29,7 +29,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/searchpanes/2.0.0/css/searchPanes.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://cdn.datatables.net/searchpanes/2.0.0/css/searchPanes.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
@@ -42,16 +43,16 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             /*$('#one tfoot th').each(function() {
                 var title = $(this).text();
                 $(this).html('<input type="text" placeholder="Search ' + title + '" />');
             });*/
 
             var table = $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]],
+                "order": [[0, "desc"]],
                 searchPanes: {
-                    columns: [3,2,4]
+                    columns: [3, 2, 4]
                 },
                 dom: 'Plfrtip'
             });
@@ -180,7 +181,19 @@
                                 <td><c:out value="${stock.bloodbank_code}"/></td>
                                 <td><c:out value="${stock.collected_date}"/></td>
                                 <td><c:out value="${stock.processed_date}"/></td>
-                                <td><c:out value="${stock.expiry_date}"/></td>
+                                <td>
+                                    <c:out value="${stock.expiry_date}"/>
+
+                                    <jsp:useBean id="now" class="java.util.Date"/>
+
+                                    <c:set var="expiry" value="${stock.expiry_date}"/>
+                                    <fmt:parseDate value="${expiry}" var="parsedExpiryDate"
+                                                   pattern="yyyy-MM-dd"/>
+
+                                    <c:if test="${parsedExpiryDate ge now && stock.status == 'Active'}">
+                                        <span class="status Removed">Expired</span>
+                                    </c:if>
+                                </td>
                                 <td>
                                     <c:if test="${stock.status == 'NOT_Processed'}">
                                         <span class="status open">NOT_Processed</span>
@@ -202,8 +215,8 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${stock.status == 'NOT_Processed' && stock.bloodbank_code == bloodbank}">
-                                            <a href="bloodProcessingShowForm?id=<c:out value='${stock.id}'/>&barcode=<c:out value='${stock.blood_barcode}'/>&colDate=<c:out value='${stock.collected_date}'/>">Blood
-                                                Processing</a>
+                                            <a href="bloodProcessingShowForm?id=<c:out value='${stock.id}'/>&barcode=<c:out value='${stock.blood_barcode}'/>&colDate=<c:out value='${stock.collected_date}'/>">
+                                                Blood Processing</a>
                                             <a href="bloodTransferingShowForm?id=<c:out value='${stock.id}'/>">Internal
                                                 Blood Transfer</a>
                                         </c:when>
