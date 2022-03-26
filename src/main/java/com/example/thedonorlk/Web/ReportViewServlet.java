@@ -51,8 +51,10 @@ public class ReportViewServlet extends HttpServlet {
 
         List <ReportCampaignBean> listCampaign = reportDAO.selectAllCampaignsByBloodBank(bloodbank);
         request.setAttribute("listCampaign", listCampaign);
-        ReportStockBean stock = reportDAO.selectBloodStock(bloodbank);
-        request.setAttribute("stockRemaining", stock.getRemaining());
+        /*ReportStockBean stock = reportDAO.selectBloodStock(bloodbank, from, to);
+        request.setAttribute("stockRemaining", stock.getRemaining());*/
+        DashboardBean count2 = reportDAO.count(bloodbank, from, to);
+        request.setAttribute("count", count2);
 
         List<Integer> remaining;
 

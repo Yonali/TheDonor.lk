@@ -74,7 +74,7 @@
                         class="las la-tachometer-alt"></span>
                     <span>Dashboard</span></a>
             </li>
-            <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
+            <% if (role.equals("bloodbank") || role.equals("nurse") || role.equals("doctor")) { %>
             <li>
                 <a href="<%=request.getContextPath()%>/donation" target="iframe"><span
                         class="las la-tint"></span>
@@ -111,12 +111,12 @@
                             class="las la-angle-right"></span><span>Blood
                                     Stock</span></a></li>
                     <% } %>
-                    <% if (role.equals("admin") || role.equals("bloodbank")) { %>
+                    <% if (role.equals("bloodbank")) { %>
                     <li><a href="<%=request.getContextPath()%>/bloodRequestSent" target="iframe"><span
                             class="las la-angle-right"></span><span>
                                     Request Sent</span></a></li>
                     <% } %>
-                    <% if (role.equals("admin") || role.equals("bloodbank")) { %>
+                    <% if (role.equals("bloodbank")) { %>
                     <li><a href="<%=request.getContextPath()%>/bloodRequestReceived"
                            target="iframe"><span class="las la-angle-right"></span><span>
                                         Request Received</span></a></li>

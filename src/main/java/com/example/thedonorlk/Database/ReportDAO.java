@@ -1,6 +1,7 @@
 package com.example.thedonorlk.Database;
 
 import com.example.thedonorlk.Bean.CampaignBean;
+import com.example.thedonorlk.Bean.DashboardBean;
 import com.example.thedonorlk.Bean.ReportCampaignBean;
 import com.example.thedonorlk.Bean.ReportStockBean;
 
@@ -23,14 +24,74 @@ public class ReportDAO {
 
     private Connection con = DatabaseConnection.initializeDatabase();
 
-    public ReportStockBean selectBloodStock(String bloodbank) {
-        ReportStockBean stock = new ReportStockBean();
-        List<Integer> beginning;
-        List<Integer> campaigns;
-        List<Integer> appointments;
-        List<Integer> transfuse;
-        List<Integer> transfered;
+    public DashboardBean count(String bloodbank, String from, String to) {
+        int new_donor_count = 0;
+        int campaigns_count = 0;
+        int appointments_count = 0;
+        int donations_count = 0;
 
+        String SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE BloodBank_Code=? AND Join_Date BETWEEN (? AND ?)";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, from);
+            preparedStatement.setString(3, to);
+            ResultSet rs = preparedStatement.executeQuery();
+            System.out.println(preparedStatement);
+
+            while (rs.next()) {
+                new_donor_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM campaign WHERE BloodBank_Code=? AND Campaign_Date BETWEEN (? AND ?)";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, from);
+            preparedStatement.setString(3, to);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                campaigns_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM appointment WHERE BloodBank_Code=? AND Appointment_Date BETWEEN (? AND ?)";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, from);
+            preparedStatement.setString(3, to);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                appointments_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM donation WHERE BloodBank_Code=? AND Donation_Date BETWEEN (? AND ?)";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, from);
+            preparedStatement.setString(3, to);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                donations_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return new DashboardBean(null, null, null, null, 0, new_donor_count, campaigns_count, appointments_count, donations_count);
+    }
+
+    /*public ReportStockBean selectBloodStock(String bloodbank, String from, String to) {
+        ReportStockBean stock = new ReportStockBean();
         stock.setRemaining(remainingStock(bloodbank));
 
         return stock;
@@ -39,123 +100,61 @@ public class ReportDAO {
     private List<Integer> remainingStock(String bloodbank) {
         List<Integer> remaining = new ArrayList<Integer>();
         int total_remaining = 0;
+        int a_pos = 0;
+        int a_neg = 0;
+        int b_pos = 0;
+        int b_neg = 0;
+        int ab_pos = 0;
+        int ab_neg = 0;
+        int o_pos = 0;
+        int o_neg = 0;
 
-        String SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='A+' AND Status='Active'";
+        String SQL = "SELECT Blood_Group, COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Status='Active' GROUP BY Blood_Group";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
                 int count = rs.getInt("count");
-                remaining.add(count);
                 total_remaining += count;
+                switch (rs.getString("Blood_Group")) {
+                    case "A+":
+                        a_pos += count;
+                        break;
+                    case "A-":
+                        a_neg += count;
+                        break;
+                    case "B+":
+                        b_pos += count;
+                        break;
+                    case "B-":
+                        b_neg += count;
+                        break;
+                    case "AB+":
+                        ab_pos += count;
+                        break;
+                    case "AB-":
+                        ab_neg += count;
+                        break;
+                    case "O+":
+                        o_pos += count;
+                        break;
+                    case "O-":
+                        o_neg += count;
+                        break;
+                }
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='A-' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
 
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='B+' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='B-' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='AB+' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='AB-' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='O+' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
-        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='O-' AND Status='Active'";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
-            preparedStatement.setString(1, bloodbank);
-            ResultSet rs = preparedStatement.executeQuery();
-
-            while (rs.next()) {
-                int count = rs.getInt("count");
-                remaining.add(count);
-                total_remaining += count;
-            }
-        } catch (SQLException e) {
-            printSQLException(e);
-        }
+        remaining.add(a_pos); remaining.add(a_neg); remaining.add(b_pos);remaining.add(b_neg);
+        remaining.add(ab_pos); remaining.add(ab_neg); remaining.add(o_pos);remaining.add(o_neg);
         remaining.add(total_remaining);
 
         return remaining;
-    }
+    }*/
 
     public List <ReportCampaignBean> selectAllCampaignsByBloodBank(String BloodBank) {
         List < ReportCampaignBean > campaign = new ArrayList < > ();

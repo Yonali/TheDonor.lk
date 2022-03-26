@@ -112,10 +112,16 @@
                                     <% if (!role.equals("admin")) { %>
                                     <td>
                                         <c:if test="${request.status != 'Cancelled'}">
+                                            <c:if test="${request.status != 'Accepted'}">
                                             <a onclick="request_confirmation(event)"
-                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Accepted">Accept</a>
+                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Accepted">
+                                                Accept</a>
+                                            </c:if>
+                                            <c:if test="${request.status != 'Declined'}">
                                             <a onclick="request_confirmation(event)"
-                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Declined">Decline</a>
+                                               href="bloodRequestUpdate?id=<c:out value='${request.id}'/>&status=Declined">
+                                                Decline</a>
+                                            </c:if>
                                         </c:if>
                                     </td>
                                     <% } %>

@@ -29,6 +29,7 @@ public class EmergencyInsert extends HttpServlet {
     private EmergencyDAO emergencyDAO;
     private DonorDAO donorDAO;
     private NotificationDAO notificationDAO;
+
     public void init() {
         emergencyDAO = new EmergencyDAO();
         donorDAO = new DonorDAO();
@@ -43,10 +44,10 @@ public class EmergencyInsert extends HttpServlet {
         try {
             insertEmergency(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error","Something went wrong, Please Try Again");
+            request.setAttribute("error", "Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
             dispatcher.forward(request, response);
-//            throw new ServletException(ex);
+            //throw new ServletException(ex);
         }
     }
 
@@ -69,13 +70,14 @@ public class EmergencyInsert extends HttpServlet {
         String bloodbank_code = request.getParameter("BloodBank_Code");
         EmergencyBean newEmergency = new EmergencyBean(0, blood_group, date, time, status, bloodbank_code);
 
+        if (!emergencyDAO.validate(blood_group, bloodbank_code)) {
             if (emergencyDAO.insertUser(newEmergency)) {
                 String message = blood_group + " blood is required urgently at your nearest blood bank '" + bloodbank_code + "'. " +
                         "Please visit and join with us to donate blood. " +
                         "#Your precious blood at this critical time can save more lives #TheDonor.lk";
 
                 List<DonorBean> donor = donorDAO.selectAllDonorsByBloodbankAndGroup(bloodbank_code, blood_group);
-                NotificationBean notification = new NotificationBean(0,0, notifier_id,"Emergency Blood Requirement",message,"","");
+                NotificationBean notification = new NotificationBean(0, 0, notifier_id, "Emergency Blood Requirement", message, "", "");
                 notificationDAO.insertNotificaionWithDonorBeanList(notification, donor);
 
                 request.setAttribute("SendToDonorList", donor);
@@ -84,5 +86,10 @@ public class EmergencyInsert extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
                 dispatcher.forward(request, response);
             }
+        } else {
+            request.setAttribute("error", "An emergency requirement is already open, Please check");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("emergency");
+            dispatcher.forward(request, response);
+        }
     }
 }

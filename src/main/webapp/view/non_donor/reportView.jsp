@@ -42,6 +42,7 @@
             var mywindow = window.open('', 'new div', '');
             mywindow.document.write('<html><head><title></title>');
             mywindow.document.write('<link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css" type="text/css"/>');
+
             mywindow.document.write('</head><body >');
             mywindow.document.write(document.getElementById(divID).innerHTML);
             mywindow.document.write('</body></html>');
@@ -90,40 +91,11 @@
                 </div>--%>
             </div>
 
-            <div class="card-body">
+            <%--<div class="card-body">
                 <div class="table-responsive">
                     <table width="100%" id="table_one">
                         <thead>
                         <tr>
-                            <td>Blood Stock Flow</td>
-                            <td>A+</td>
-                            <td>A-</td>
-                            <td>B+</td>
-                            <td>B-</td>
-                            <td>AB+</td>
-                            <td>AB-</td>
-                            <td>O+</td>
-                            <td>O-</td>
-                            <td>Total</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Blood Stock at the beginning</td>
-                        </tr>
-                        <tr>
-                            <td>Blood collected from campaigns</td>
-                        </tr>
-                        <tr>
-                            <td>Blood collected through appointments</td>
-                        </tr>
-                        <tr>
-                            <td>Blood Transfused</td>
-                        </tr>
-                        <tr>
-                            <td>Blood Transferred</td>
-                        </tr>
-                        <tr style="font-weight: bold;">
                             <td>Remaining Blood Stock</td>
                             <td><c:out value="${stockRemaining[0]}"/></td>
                             <td><c:out value="${stockRemaining[1]}"/></td>
@@ -134,6 +106,37 @@
                             <td><c:out value="${stockRemaining[6]}"/></td>
                             <td><c:out value="${stockRemaining[7]}"/></td>
                             <td><c:out value="${stockRemaining[8]}"/></td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>--%>
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table width="100%" id="table_three">
+                        <thead>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Number of new Donors</td>
+                            <td><c:out value="${count.new_donors}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Campaigns</td>
+                            <td><c:out value="${count.campaigns}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Appointments</td>
+                            <td><c:out value="${count.appointment}"/></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Donations</td>
+                            <td><c:out value="${count.donation}"/></td>
                         </tr>
                         </tbody>
                     </table>

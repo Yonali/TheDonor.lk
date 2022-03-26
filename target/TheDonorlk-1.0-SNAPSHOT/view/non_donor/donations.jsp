@@ -121,9 +121,9 @@
                             <td>Date</td>
                             <td>Time</td>
                             <td>Status</td>
-                            <% if (role.equals("nurse") || role.equals("doctor")) { %>
+                            <%--<% if (role.equals("nurse") || role.equals("doctor")) { %>
                             <td>Actions</td>
-                            <% } %>
+                            <% } %>--%>
                         </tr>
                         </thead>
                         <tbody>
@@ -154,11 +154,11 @@
                                             <span class="status close">Deferred</span>
                                         </c:if>
                                     </td>
-                                    <% if (role.equals("nurse") || role.equals("doctor")) { %>
+                                    <%--<% if (role.equals("nurse") || role.equals("doctor")) { %>
                                     <td>
-                                        <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                        <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donation.id}'/>">Edit</a>
                                     </td>
-                                    <% } %>
+                                    <% } %>--%>
                                 </tr>
                             </c:if>
                         </c:forEach>

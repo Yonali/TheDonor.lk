@@ -63,25 +63,25 @@
                                     data: [<c:out value="${RBC_stock[0]}"/>, <c:out value="${RBC_stock[1]}"/>, <c:out value="${RBC_stock[2]}"/>,
                                         <c:out value="${RBC_stock[3]}"/>, <c:out value="${RBC_stock[4]}"/>, <c:out value="${RBC_stock[5]}"/>,
                                         <c:out value="${RBC_stock[6]}"/>, <c:out value="${RBC_stock[7]}"/>],
-                                    backgroundColor: '#dc3545'
+                                    backgroundColor: '#be1919'
                                 }, {
                                     label: 'WBC',
                                     data: [<c:out value="${WBC_stock[0]}"/>, <c:out value="${WBC_stock[1]}"/>, <c:out value="${WBC_stock[2]}"/>,
                                         <c:out value="${WBC_stock[3]}"/>, <c:out value="${WBC_stock[4]}"/>, <c:out value="${WBC_stock[5]}"/>,
                                         <c:out value="${WBC_stock[6]}"/>, <c:out value="${WBC_stock[7]}"/>],
-                                    backgroundColor: '#0d6efd'
+                                    backgroundColor: '#2471a3'
                                 }, {
                                     label: 'Platelets',
                                     data: [<c:out value="${Platelets_stock[0]}"/>, <c:out value="${Platelets_stock[1]}"/>, <c:out value="${Platelets_stock[2]}"/>,
                                         <c:out value="${Platelets_stock[3]}"/>, <c:out value="${Platelets_stock[4]}"/>, <c:out value="${Platelets_stock[5]}"/>,
                                         <c:out value="${Platelets_stock[6]}"/>, <c:out value="${Platelets_stock[7]}"/>],
-                                    backgroundColor: '#fd7e14'
+                                    backgroundColor: '#e67e22'
                                 }, {
                                     label: 'Plasma',
                                     data: [<c:out value="${Plasma_stock[0]}"/>, <c:out value="${Plasma_stock[1]}"/>, <c:out value="${Plasma_stock[2]}"/>,
                                         <c:out value="${Plasma_stock[3]}"/>, <c:out value="${Plasma_stock[4]}"/>, <c:out value="${Plasma_stock[5]}"/>,
                                         <c:out value="${Plasma_stock[6]}"/>, <c:out value="${Plasma_stock[7]}"/>],
-                                    backgroundColor: '#198754'
+                                    backgroundColor: '#18720f'
                                 }]
                             },
                             options: {

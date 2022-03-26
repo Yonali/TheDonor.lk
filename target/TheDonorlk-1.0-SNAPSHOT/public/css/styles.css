@@ -16,6 +16,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+@media print {
+  body {transform: scale(.8);}
+  table {page-break-inside: avoid;}
+}
+
 #sidebar_btn, .user-wrapper {
   cursor: pointer;
 }
