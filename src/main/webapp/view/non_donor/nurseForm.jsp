@@ -5,6 +5,8 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +84,7 @@
                     <div class="field-single">
                         <span>BloodBank Code</span>
                         <select name="bloodbank_code" id="bloodbank_code" >
+                            <% if (role.equals("admin")) { %>
                             <c:forEach items="${listBloodBank}" var="bloodbank_code">
                                 <c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
@@ -89,8 +92,10 @@
                                 <c:if test="${bloodbank_code.code != user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                 </c:if>
-
                             </c:forEach>
+                            <% } else { %>
+                            <option value="<%= bloodbank %>" selected><%= bloodbank %></option>
+                            <% } %>
                         </select>
 <%--                        <input type="text" name="bloodbank_code" id="bloodbank_code" value="<c:out value='${user.bloodbank_code}' />"/>--%>
                     </div>

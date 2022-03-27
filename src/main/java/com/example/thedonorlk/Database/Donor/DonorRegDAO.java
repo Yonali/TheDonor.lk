@@ -21,7 +21,7 @@ public class DonorRegDAO {
         Date date = new Date();
         java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
-        String sql = "INSERT INTO user_donor (ID, First_Name, Last_Name, Contact, DOB, Gender, Email, Status, Join_Date) VALUES (?,?,?,?,?,?,?, 'Not Verified', ?)";
+        String sql = "INSERT INTO user_donor (ID, First_Name, Last_Name, Contact, DOB, Gender, Email, Status, Join_Date) VALUES (?,?,?,?,?,?,?, 'Not_Verified', ?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1,id);

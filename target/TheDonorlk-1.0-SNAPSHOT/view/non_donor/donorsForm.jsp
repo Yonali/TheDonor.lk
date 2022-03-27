@@ -5,6 +5,7 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object role = session.getAttribute("role");
 %>
 <!DOCTYPE html>
 <html lang="en">

@@ -120,12 +120,14 @@
                                     <span class="status cancelled">Not_Verified</span>
                                 </c:if>
                             </td>
-                            <% if (!role.equals("admin")) { %>
                                 <td>
+                                    <% if (!(role.equals("admin")) && !(role.equals("bloodbank"))) { %>
                                     <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                    <% } %>
+                                    <% if (!role.equals("admin")) { %>
                                     <a href="<%=request.getContextPath()%>/donorShowDeferralHistory?id=<c:out value='${donor.id}' />">Deferral History</a>
+                                    <% } %>
                                 </td>
-                            <% } %>
                         </tr>
                         </c:forEach>
                         </tbody>
