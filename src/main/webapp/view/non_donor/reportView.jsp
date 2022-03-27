@@ -36,7 +36,6 @@
 
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-    <%--<script type="text/javascript" src="<%=request.getContextPath()%>/public/scripts/save-pdf.js"></script>--%>
     <script>
         function Popup(divID) {
             var mywindow = window.open('', 'new div', '');

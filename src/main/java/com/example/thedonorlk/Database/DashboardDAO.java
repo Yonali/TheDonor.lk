@@ -530,7 +530,7 @@ public class DashboardDAO {
         }
 
         SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE MONTH(Join_Date)=? AND YEAR(Join_Date)=?";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setInt(1, today.getMonthValue());
             preparedStatement.setInt(2, today.getYear());
             ResultSet rs = preparedStatement.executeQuery();
@@ -544,7 +544,7 @@ public class DashboardDAO {
         }
 
         SQL = "SELECT COUNT(*) AS count FROM campaign WHERE MONTH(Campaign_Date)=? AND YEAR(Campaign_Date)=?";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setInt(1, today.getMonthValue());
             preparedStatement.setInt(2, today.getYear());
             ResultSet rs = preparedStatement.executeQuery();

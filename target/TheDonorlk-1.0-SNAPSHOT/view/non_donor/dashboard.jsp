@@ -108,7 +108,7 @@
     </div>
 
     <div class="card-2col-centered">
-        <h1>Total Donors Registered with <% if (!session.getAttribute("role").equals("admin")) { %>
+        <h1>Total Donors Registered <% if (!session.getAttribute("role").equals("admin")) { %> with
             <%=session.getAttribute("bloodbank")%>
             <% } %></h1>
         <div class="big_num">

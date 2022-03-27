@@ -75,7 +75,7 @@
                     </div>
                     <div class="field-single">
                         <span>Date</span>
-                        <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
+                        <input type="date" onfocus="this.min=new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().split('T')[0]" step="1" name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
                     </div>
                     <%--<div class="field-single">
                         <span>BloodBank Code</span>

@@ -31,7 +31,7 @@ public class ReportDAO {
         int donations_count = 0;
 
         String SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE BloodBank_Code=? AND Join_Date BETWEEN (? AND ?)";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setString(1, bloodbank);
             preparedStatement.setString(2, from);
             preparedStatement.setString(3, to);
@@ -46,7 +46,7 @@ public class ReportDAO {
         }
 
         SQL = "SELECT COUNT(*) AS count FROM campaign WHERE BloodBank_Code=? AND Campaign_Date BETWEEN (? AND ?)";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setString(1, bloodbank);
             preparedStatement.setString(2, from);
             preparedStatement.setString(3, to);
@@ -60,7 +60,7 @@ public class ReportDAO {
         }
 
         SQL = "SELECT COUNT(*) AS count FROM appointment WHERE BloodBank_Code=? AND Appointment_Date BETWEEN (? AND ?)";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setString(1, bloodbank);
             preparedStatement.setString(2, from);
             preparedStatement.setString(3, to);
@@ -74,7 +74,7 @@ public class ReportDAO {
         }
 
         SQL = "SELECT COUNT(*) AS count FROM donation WHERE BloodBank_Code=? AND Donation_Date BETWEEN (? AND ?)";
-        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
             preparedStatement.setString(1, bloodbank);
             preparedStatement.setString(2, from);
             preparedStatement.setString(3, to);

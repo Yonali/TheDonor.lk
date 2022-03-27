@@ -190,7 +190,7 @@
                                     <fmt:parseDate value="${expiry}" var="parsedExpiryDate"
                                                    pattern="yyyy-MM-dd"/>
 
-                                    <c:if test="${parsedExpiryDate ge now && stock.status == 'Active'}">
+                                    <c:if test="${parsedExpiryDate le now && stock.status == 'Active'}">
                                         <span class="status Removed">Expired</span>
                                     </c:if>
                                 </td>
