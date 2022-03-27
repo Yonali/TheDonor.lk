@@ -111,13 +111,13 @@
                                     <span class="status progress">Normal</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'T_Deferred'}">
-                                    <span class="status open">T_Deferred</span>
+                                    <span class="status cancelled">T_Deferred</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'P_Deferred'}">
                                     <span class="status close">P_Deferred</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'Not_Verified'}">
-                                    <span class="status cancelled">Not_Verified</span>
+                                    <span class="status open">Not_Verified</span>
                                 </c:if>
                             </td>
                                 <td>

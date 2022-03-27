@@ -38,7 +38,7 @@
     <div class="modal-body">
         <%
             String reg_msg = "";
-            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
             if (reg_msg != null) {
         %>
         <div id="error_message">
@@ -46,6 +46,59 @@
         </div>
         <% } %>
 
+        <% if (role.equals("doctor")) { %>
+        <form action="donorUpdate" method="post" onsubmit="return validate();">
+            <div class="fields">
+                <c:if test="${donor != null}">
+                    <input type="hidden" name="id" value="<c:out value='${donor.id}' />"/>
+                    <input type="hidden" name="First_Name" id="First_Name" value="<c:out value='${donor.fname}'/>"/>
+                    <input type="hidden" name="Last_Name" id="Last_Name" value="<c:out value='${donor.lname}'/>"/>
+                    <input type="hidden" name="NIC" id="NIC" value="<c:out value='${donor.nic}'/>"/>
+                    <input type="hidden" name="Contact" id="Contact" value="<c:out value='${donor.contact}'/>"/>
+                    <input type="hidden" name="DOB" id="DOB" value="<c:out value='${donor.dob}'/>">
+                    <select style="visibility: hidden" name="Blood_Group" id="Blood_Group">
+                        <option value="NULL"></option>
+                        <option value="A+" ${donor.blood_group == 'A+' ? 'selected': ''}>A+</option>
+                        <option value="A-" ${donor.blood_group == 'A-' ? 'selected': ''}>A-</option>
+                        <option value="B+" ${donor.blood_group == 'B+' ? 'selected': ''}>B+</option>
+                        <option value="B-" ${donor.blood_group == 'B-' ? 'selected': ''}>B-</option>
+                        <option value="AB+" ${donor.blood_group == 'AB+' ? 'selected': ''}>AB+</option>
+                        <option value="AB-" ${donor.blood_group == 'AB-' ? 'selected': ''}>AB-</option>
+                        <option value="O+" ${donor.blood_group == 'O+' ? 'selected': ''}>O+</option>
+                        <option value="O-" ${donor.blood_group == 'O-' ? 'selected': ''}>O-</option>
+                    </select>
+                    <select style="visibility: hidden" name="BloodBank_Code" id="BloodBank_Code">
+                        <option value="NULL"></option>
+                        <c:forEach items="${listBloodBank}" var="bloodbank_code">
+                            <option value="${bloodbank_code.code}" ${bloodbank_code.code == donor.bloodbank_code ? 'selected': ''}>${bloodbank_code.code}</option>
+                        </c:forEach>
+                    </select>
+                </c:if>
+                <div class="field-single">
+                    <span>Status</span>
+                    <select name="Status" id="Status">
+                        <option value="Normal" ${donor.status == 'Normal' ? 'selected': ''}>Normal</option>
+                        <option value="T_Deferred" ${donor.status == 'T_Deferred' ? 'selected': ''}>T_Deferred</option>
+                        <option value="P_Deferred" ${donor.status == 'P_Deferred' ? 'selected': ''}>P_Deferred</option>
+                        <option value="Not_Verified" ${donor.status == 'Not_Verified' ? 'selected': ''}>Not_Verified
+                        </option>
+                    </select>
+                </div>
+                <c:if test="${donor != null}">
+                    <select style="visibility: hidden" name="Gender" id="Gender">
+                        <option value="Male" ${donor.gender == 'Male' ? 'selected': ''}>Male</option>
+                        <option value="Female" ${donor.gender == 'Female' ? 'selected': ''}>Female</option>
+                        <option value="Other" ${donor.gender == 'Other' ? 'selected': ''}>Other</option>
+                    </select>
+                </c:if>
+            </div>
+            <div class="modal-submit-button">
+                <div class="buttons">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+        <% } else { %>
         <c:if test="${donor != null}">
         <form action="donorUpdate" method="post" onsubmit="return validate();"></c:if>
             <c:if test="${donor == null}">
@@ -69,17 +122,17 @@
                     </div>
                     <div class="field-single">
                         <span>Blood Group</span>
-                            <select name="Blood_Group" id="Blood_Group">
-                                <option value="NULL"></option>
-                                <option value="A+" ${donor.blood_group == 'A+' ? 'selected': ''}>A+</option>
-                                <option value="A-" ${donor.blood_group == 'A-' ? 'selected': ''}>A-</option>
-                                <option value="B+" ${donor.blood_group == 'B+' ? 'selected': ''}>B+</option>
-                                <option value="B-" ${donor.blood_group == 'B-' ? 'selected': ''}>B-</option>
-                                <option value="AB+" ${donor.blood_group == 'AB+' ? 'selected': ''}>AB+</option>
-                                <option value="AB-" ${donor.blood_group == 'AB-' ? 'selected': ''}>AB-</option>
-                                <option value="O+" ${donor.blood_group == 'O+' ? 'selected': ''}>O+</option>
-                                <option value="O-" ${donor.blood_group == 'O-' ? 'selected': ''}>O-</option>
-                            </select>
+                        <select name="Blood_Group" id="Blood_Group">
+                            <option value="NULL"></option>
+                            <option value="A+" ${donor.blood_group == 'A+' ? 'selected': ''}>A+</option>
+                            <option value="A-" ${donor.blood_group == 'A-' ? 'selected': ''}>A-</option>
+                            <option value="B+" ${donor.blood_group == 'B+' ? 'selected': ''}>B+</option>
+                            <option value="B-" ${donor.blood_group == 'B-' ? 'selected': ''}>B-</option>
+                            <option value="AB+" ${donor.blood_group == 'AB+' ? 'selected': ''}>AB+</option>
+                            <option value="AB-" ${donor.blood_group == 'AB-' ? 'selected': ''}>AB-</option>
+                            <option value="O+" ${donor.blood_group == 'O+' ? 'selected': ''}>O+</option>
+                            <option value="O-" ${donor.blood_group == 'O-' ? 'selected': ''}>O-</option>
+                        </select>
                     </div>
                     <div class="field-single">
                         <span>Contact</span>
@@ -91,11 +144,11 @@
                     </div>
                     <div class="field-single">
                         <span>Gender</span>
-                            <select name="Gender" id="Gender">
-                                <option value="Male" ${donor.gender == 'Male' ? 'selected': ''}>Male</option>
-                                <option value="Female" ${donor.gender == 'Female' ? 'selected': ''}>Female</option>
-                                <option value="Other" ${donor.gender == 'Other' ? 'selected': ''}>Other</option>
-                            </select>
+                        <select name="Gender" id="Gender">
+                            <option value="Male" ${donor.gender == 'Male' ? 'selected': ''}>Male</option>
+                            <option value="Female" ${donor.gender == 'Female' ? 'selected': ''}>Female</option>
+                            <option value="Other" ${donor.gender == 'Other' ? 'selected': ''}>Other</option>
+                        </select>
                     </div>
                     <div class="field-single">
                         <span>BloodBank Code</span>
@@ -108,12 +161,16 @@
                     </div>
                     <div class="field-single">
                         <span>Status</span>
-                            <select name="Status" id="Status">
-                                <option value="Normal" ${donor.status == 'Normal' ? 'selected': ''}>Normal</option>
-                                <option value="T_Deferred" ${donor.status == 'T_Deferred' ? 'selected': ''}>T_Deferred</option>
-                                <option value="P_Deferred" ${donor.status == 'P_Deferred' ? 'selected': ''}>P_Deferred</option>
-                                <option value="Not_Verified" ${donor.status == 'Not_Verified' ? 'selected': ''}>Not_Verified</option>
-                            </select>
+                        <select name="Status" id="Status">
+                            <option value="Normal" ${donor.status == 'Normal' ? 'selected': ''}>Normal</option>
+                            <option value="T_Deferred" ${donor.status == 'T_Deferred' ? 'selected': ''}>T_Deferred
+                            </option>
+                            <option value="P_Deferred" ${donor.status == 'P_Deferred' ? 'selected': ''}>P_Deferred
+                            </option>
+                            <option value="Not_Verified" ${donor.status == 'Not_Verified' ? 'selected': ''}>
+                                Not_Verified
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-submit-button">
@@ -122,6 +179,7 @@
                     </div>
                 </div>
             </form>
+                <% } %>
     </div>
 
     <div class="modal-footer">
