@@ -19,7 +19,7 @@
 }
 /* --------------------part1-------------------------- */
 body{
-  //background: #efefef;
+//background: #efefef;
 }
 .write-post-container{
   width: 100%;
@@ -153,13 +153,14 @@ body{
   background: transparent;
   border-radius: 4px;
 }
+/* -------------------part2--------------------------- */
 .footer{
   text-align: center;
   color: #9a9a9a;
   padding: 10px 0 20px;
   font-size: 13px;
 }
-/* -------------------part2--------------------------- */
+
 .profile-container{
   padding: 0px 15%;
   color: #626262;
@@ -179,6 +180,9 @@ body{
   justify-content: space-between;
 
 }
+
+
+/*-----------------------------------------------------------------------------*/
 .pd-row{
   display: flex;
   align-items: flex-start;
@@ -238,18 +242,48 @@ body{
 .pd-right a img{
   width: 20px;
 }
+/*-----------------------------------------------------------------------------*/
+
 .profile-info{
   display: flex;
-  align-self: flex-start;
+  /*align-self: flex-start;*/
   justify-content: space-between;
   margin-top: 20px;
 }
+.main{
+
+  align-content: center;
+  display: grid;
+  grid-template-areas: "left right";
+}
+.left{
+
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 50vh;
+}
+.right{
+  grid-area: right;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100vh;
+  margin-left: 14px;
+  /*flex-basis: 100vh;*/
+
+}
 .info-col{
-  flex-basis: 33%;
+  /*flex-basis: 33%;*/
+  /*display: flex;*/
+  align-content: center;
 }
 
 .post-col{
-  flex-basis: 65%;
+  /*flex-basis: 65%;*/
+  /*display: flex;*/
+  align-content: center;
 }
 .post-col-timeline{
   flex-basis: 100%;
@@ -283,11 +317,11 @@ body{
   margin-top: 0px;
   color: #750605;
 }
-.profile-intro h2 {
+.profile-intro h2{
   color: #3f0404;
   margin-bottom: 0px;
 }
-.profile-intro h3 {
+.profile-intro h3{
   font-weight: 400;
   margin: 0px;
   margin-bottom: 20px;
@@ -361,4 +395,162 @@ body{
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+
+
+/*.left{*/
+
+/*    grid-area: left;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-content: center;*/
+/*    flex-basis: 33%;*/
+/*}*/
+/*.right{*/
+/*    grid-area: right;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-content: center;*/
+/*    width: 100%;*/
+/*    flex-basis: 65%;*/
+
+/*}*/
+
+
+
+
+
+
+
+
+/*------------------------------------------------------------------
+[ Mobile Responsive ] */
+
+/* @media (max-width: 768px) {
+
+
+}
+
+@media (max-width:600px){
+
+} */
+
+/*@media (max-width: 768px) {*/
+
+
+/*}*/
+
+/*@media (max-width:600px){*/
+
+/*}*/
+
+
+
+/*------------------------------------------------------------------
+[ Mobile Responsive ] */
+
+/* @media (max-width: 768px) {*/
+
+
+/*}*/
+
+/*@media (max-width:600px){*/
+
+/*} */
+
+/*@media (max-width: 768px) {*/
+
+
+/*}*/
+
+@media (max-width:768px){
+  /*.info-col{*/
+  /*  background: #006efe;*/
+  /*}*/
+
+
+  .main-container{
+
+    align-content: center;
+
+  }
+
+  .info-col{
+    flex-basis: 65%;
+    align-content: center;
+    justify-content: center;
+    /*background: #006efe;*/
+  }
+
+  .post-col{
+    flex-basis: 70%;
+    align-content: center;
+    justify-content: center;
+  }
+  /*.left{*/
+  /*    align-content: center;*/
+  /*    display: flex;*/
+  /*}*/
+
+  .right{
+    width: 100%;
+    margin-left: 0px;
+    /*flex-basis: 100vh;*/
+    align-content: center;
+    display: flex;
+  }
+
+  /*body{*/
+  /*margin-left: 0px;*/
+  /*}*/
+  .post-container{
+    margin: 5px 0;
+  }
+
+  .left{
+
+    /*grid-area: left;*/
+    display: flex;
+    /*flex-direction: column;*/
+    align-content: center;
+    justify-content: center;
+    width: 40vh;
+  }
+
+  .add-post-links a, .add-post-links label {
+    /*text-decoration: none;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*color: #626262;*/
+    margin-right: 30px;
+    /*font-size: 13px;*/
+  }
+  .add-post-links a img, .add-post-links label img{
+    width: 20px;
+    margin-right: 10px;
+  }
+
+}
+
+
+@media (max-width: 1000px) {
+  body{
+    margin-left: 0px;
+  }
+  .post-container{
+    margin-left: 0px;
+  }
+  .main{
+    /*display: grid;*/
+    grid-template-areas: "left""right";
+  }
+
+  .right{
+    color: #7d3c98;
+    width: 100%;
+    margin-left: 0px;
+    /*flex-basis: 100vh;*/
+
+  }
 }
