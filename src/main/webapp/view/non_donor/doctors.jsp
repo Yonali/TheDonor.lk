@@ -111,7 +111,7 @@
 
                             <% if (role.equals("bloodbank")) { %>
                             <td>
-                            <c:if test="${emergency.bloodbank_code == bloodbank}">
+                            <c:if test="${user.bloodbank_code == bloodbank}">
 
                                     <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
                                     <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a>
