@@ -49,18 +49,18 @@ public class ReportViewServlet extends HttpServlet {
         String from = request.getParameter("from");
         String to = request.getParameter("to");
 
-        List <ReportCampaignBean> listCampaign = reportDAO.selectAllCampaignsByBloodBank(bloodbank);
+        List <ReportCampaignBean> listCampaign = reportDAO.selectAllCampaignsByBloodBank(bloodbank, from, to);
         request.setAttribute("listCampaign", listCampaign);
         /*ReportStockBean stock = reportDAO.selectBloodStock(bloodbank, from, to);
         request.setAttribute("stockRemaining", stock.getRemaining());*/
-        DashboardBean count2 = reportDAO.count(bloodbank, from, to);
-        request.setAttribute("count", count2);
+        DashboardBean count = reportDAO.count(bloodbank, from, to);
+        request.setAttribute("count", count);
 
         List<Integer> remaining;
 
-        DashboardBean count = dashboardDAO.count(bloodbank);
+        DashboardBean count_month = dashboardDAO.count(bloodbank);
 
-        request.setAttribute("count", count);
+        request.setAttribute("count_month", count_month);
         request.setAttribute("from", from);
         request.setAttribute("to", to);
 

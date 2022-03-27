@@ -29,7 +29,7 @@
     <script>
         $(document).ready(function () {
             $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]]
+                "order": [[0, "desc"]]
             });
         });
     </script>
@@ -39,7 +39,7 @@
 <main>
     <%
         String reg_msg = "";
-        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
         if (reg_msg != null) {
     %>
     <div id="error_message">
@@ -78,45 +78,50 @@
                         </thead>
                         <tbody>
                         <c:forEach var="user" items="${listUser}">
-                        <tr>
-                            <td>
-                                <c:out value="${user.id}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.username}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.nic}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.first_name} ${user.last_name}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.contact}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.section}" />
-                            </td>
-                            <td>
-                                <c:out value="${user.bloodbank_code}" />
-                            </td>
+                            <c:if test="${user.bloodbank_code == bloodbank || role == 'admin'}">
+                                <tr>
+                                    <td>
+                                        <c:out value="${user.id}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.username}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.nic}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.first_name} ${user.last_name}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.contact}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.section}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${user.bloodbank_code}"/>
+                                    </td>
 
-                            <% if (role.equals("admin")) { %>
-                                <td>
-                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
-                            <% } %>
+                                    <% if (role.equals("admin")) { %>
+                                    <td>
+                                        <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a onclick="confirmation(event)"
+                                           href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                    <% } %>
 
-                            <% if (role.equals("bloodbank")) { %>
-                            <td>
-                            <c:if test="${user.bloodbank_code == bloodbank}">
+                                    <% if (role.equals("bloodbank")) { %>
+                                    <td>
+                                        <c:if test="${user.bloodbank_code == bloodbank}">
 
-                                    <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a onclick="confirmation(event)" href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a>
+                                            <a href="<%=request.getContextPath()%>/userDoctorShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a onclick="confirmation(event)"
+                                               href="userDoctorDelete?id=<c:out value='${user.id}' />">Delete</a>
+                                        </c:if>
+                                    </td>
+                                    <% } %>
+                                </tr>
                             </c:if>
-                            </td>
-                            <% } %>
-                        </tr>
                         </c:forEach>
                         </tbody>
                     </table>

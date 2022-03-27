@@ -25,9 +25,10 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+    <%--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
             integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body>
@@ -46,6 +47,9 @@
         <div class="card">
             <div class="card-header-center">
                 <h3>Dashboard</h3>
+                <% if (session.getAttribute("role").equals("admin")) { %>
+                <h5>All Blood Bank</h5>
+                <% } %>
             </div>
 
             <% if (!role.equals("admin")) { %>
@@ -85,19 +89,20 @@
                                 }]
                             },
                             options: {
-                                responsive: true,
-                                legend: {
-                                    position: 'right' // place legend on the right side of chart
-                                },
                                 scales: {
                                     x: [{
-                                        stacked: true // this should be set to make the bars stacked
+                                        stacked: true,
                                     }],
                                     y: [{
-                                        stacked: true, // this also..
+                                        ticks: {
+                                            precision: 0
+                                        },
+                                        stacked: true,
                                         beginAtZero: true
-                                    }]
-                                }
+                                    }],
+                                },
+                                responsive: true,
+
                             }
                         });
                     </script>
@@ -165,10 +170,10 @@
             </div>
             <div class="card-single">
                 <h5 style="padding-right: 15px; background-color: #f1f5f9">To</h5>
-                <input type="date" onfocus="this.max=new Date().toISOString().split('T')[0]" step="1" name="to" id="to" class="input" required>
+                <input type="date" onfocus="this.max=new Date(new Date().setDate(new Date().getDate() + 1)).toISOString().split('T')[0]" step="1" name="to" id="to" class="input" required>
             </div>
             <script>
-                document.getElementById('to').valueAsDate = new Date();
+                document.getElementById('to').valueAsDate = new Date(new Date().setDate(new Date().getDate() + 1));
                 document.getElementById('from').valueAsDate = new Date(new Date().setDate(new Date().getDate() - 30));
             </script>
             <div></div>

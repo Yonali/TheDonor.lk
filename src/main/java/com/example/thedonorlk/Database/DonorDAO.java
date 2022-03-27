@@ -44,7 +44,7 @@ public class DonorDAO {
     private static final String SELECT_DEFERRAL_HISTORY_BY_ID = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
             "Donation_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY_NIC = "SELECT * FROM deferral_history dh, user_donor don WHERE " +
-            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC";
+            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC LIMIT 1";
     private static final String SELECT_DEFERRAL_HISTORY_BY = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
             "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
 

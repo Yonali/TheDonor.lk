@@ -192,25 +192,25 @@
                     <div class="cards">
                         <div class="card-single">
                             <div class="big_num">
-                                <h1><c:out value="${count.new_donors}"/></h1>
+                                <h1><c:out value="${count_month.new_donors}"/></h1>
                                 <span>New Donors</span>
                             </div>
                         </div>
                         <div class="card-single">
                             <div class="big_num">
-                                <h1><c:out value="${count.campaigns}"/></h1>
+                                <h1><c:out value="${count_month.campaigns}"/></h1>
                                 <span>Campaigns</span>
                             </div>
                         </div>
                         <div class="card-single">
                             <div class="big_num">
-                                <h1><c:out value="${count.appointment}"/></h1>
+                                <h1><c:out value="${count_month.appointment}"/></h1>
                                 <span>Appointments</span>
                             </div>
                         </div>
                         <div class="card-single">
                             <div class="big_num">
-                                <h1><c:out value="${count.donation}"/></h1>
+                                <h1><c:out value="${count_month.donation}"/></h1>
                                 <span>Donations</span>
                             </div>
                         </div>

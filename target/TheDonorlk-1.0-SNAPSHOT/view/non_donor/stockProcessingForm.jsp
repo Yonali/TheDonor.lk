@@ -87,6 +87,12 @@
                     <span>Platelets Expiry Date</span>
                     <input type="date" onfocus="this.min=new Date().toISOString().split('T')[0]" step="1" name="Platelets_Expiry_Date" id="Platelets_Expiry_Date">
                 </div>
+                <script>
+                    document.getElementById('RBC_Expiry_Date').valueAsDate = new Date(new Date().setDate(new Date().getDate() + 35));
+                    document.getElementById('WBC_Expiry_Date').valueAsDate = new Date(new Date().setDate(new Date().getDate() + 3));
+                    document.getElementById('Plasma_Expiry_Date').valueAsDate = new Date(new Date().setDate(new Date().getDate() + 365));
+                    document.getElementById('Platelets_Expiry_Date').valueAsDate = new Date(new Date().setDate(new Date().getDate() + 7));
+                </script>
             </div>
             <div class="modal-submit-button">
                 <div class="buttons">
