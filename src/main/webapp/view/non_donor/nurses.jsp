@@ -71,9 +71,7 @@
                             <td>Contact Number</td>
                             <td>Section</td>
                             <td>BloodBank</td>
-                            <% if (role.equals("admin")) { %>
                             <td>Actions</td>
-                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
@@ -102,13 +100,15 @@
                                 </td>
 
                                 <% if (role.equals("admin")) { %>
-                                    <td><a href="<%=request.getContextPath()%>/userNurseShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userNurseDelete?id=<c:out value='${user.id}' />">Delete</a></td>
+                                    <td><a href="<%=request.getContextPath()%>/userNurseShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a onclick="confirmation(event)" href="userNurseDelete?id=<c:out value='${user.id}' />">Delete</a></td>
                                 <% } %>
 
                                 <% if (role.equals("bloodbank")) { %>
                                 <td>
                                 <c:if test="${user.bloodbank_code == bloodbank}">
-                                    <a href="<%=request.getContextPath()%>/userNurseShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)" href="userNurseDelete?id=<c:out value='${user.id}' />">Delete</a>
+                                    <a href="<%=request.getContextPath()%>/userNurseShowEditForm?id=<c:out value='${user.id}' />">Edit</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a onclick="confirmation(event)" href="userNurseDelete?id=<c:out value='${user.id}' />">Delete</a>
                                 </c:if>
                                 </td>
                                 <% } %>

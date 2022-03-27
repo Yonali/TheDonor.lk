@@ -73,9 +73,7 @@
                             <td>Contact Number</td>
                             <td>Section</td>
                             <td>BloodBank</td>
-                            <% if (role.equals("admin")) { %>
                             <td>Actions</td>
-                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
