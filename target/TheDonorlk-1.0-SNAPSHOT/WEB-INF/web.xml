@@ -16,10 +16,10 @@
         <error-code>403</error-code>
         <location>/view/error/403.jsp</location>
     </error-page>
-<!--    <error-page>-->
-<!--        <error-code>500</error-code>-->
-<!--        <location>/view/error/500.jsp</location>-->
-<!--    </error-page>-->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/view/error/500.jsp</location>
+    </error-page>
     <error-page>
         <error-code>503</error-code>
         <location>/view/error/503.jsp</location>

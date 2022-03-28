@@ -32,13 +32,13 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]]
-            });
-        });
-    </script>
+<%--    <script>--%>
+<%--        $(document).ready(function () {--%>
+<%--            $('#table_id').DataTable({--%>
+<%--                "order": [[ 0, "desc" ]]--%>
+<%--            });--%>
+<%--        });--%>
+<%--    </script>--%>
 
     <% if (request.getAttribute("Message") != null) { %>
     <script>
@@ -88,6 +88,23 @@
                     <% } %>
                 </div>
             </div>
+            <form action="campaign" method="post">
+
+            <div class="card-header">
+                <span>BloodBank</span>
+                <select name="BloodBank_Code" id="BloodBank_Code" >
+                    <c:forEach items="${listBloodBank}" var="bloodbank_code">
+                        <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
+                    </c:forEach>
+                </select>
+
+            </div>
+                <div class="modal-submit-button" style="padding-top: 0px;">
+                    <div class="buttons">
+                        <button type="submit" class="bottom-full">Next</button>
+                    </div>
+                </div>
+            </form>
 
             <div class="card-body">
                 <div class="table-responsive">

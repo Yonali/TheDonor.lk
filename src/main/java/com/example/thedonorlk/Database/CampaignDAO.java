@@ -15,6 +15,7 @@ public class CampaignDAO {
             " (?, ?, ?, ?, ?, ?, ?)";
     private static final String SELECT_CAMPAIGN_BY_ID = "SELECT * FROM campaign WHERE Campaign_ID =? ORDER BY Campaign_ID DESC";
     private static final String SELECT_ALL_CAMPAIGNS = "SELECT * FROM campaign ORDER BY Campaign_ID DESC";
+    private static final String SELECT_ALL_CAMPAIGNS_BB = "SELECT * FROM campaign WHERE BloodBank_Code = ? ORDER BY Campaign_ID DESC";
     private static final String DELETE_CAMPAIGN_SQL = "DELETE FROM campaign WHERE Campaign_ID = ?";
     private static final String UPDATE_CAMPAIGN_SQL = "UPDATE campaign SET " +
             "Campaign_Name = ?, Campaign_Date = ?, Start_Time = ?, End_Time = ?, " +
@@ -92,6 +93,32 @@ public class CampaignDAO {
         } catch (SQLException e) {
             printSQLException(e);
         }
+        return campaign;
+    }
+
+    public List < CampaignBean > selectCampaignByBB(String bb_code) {
+        List < CampaignBean > campaign = new ArrayList < > ();
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_CAMPAIGNS_BB);) {
+            preparedStatement.setString(1, bb_code);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("Campaign_ID");
+                String campaign_name = rs.getString("Campaign_Name");
+                String campaign_date = rs.getString("Campaign_Date");
+                String start_time = rs.getString("Start_Time");
+                String end_time = rs.getString("End_Time");
+                String address_number = rs.getString("Address_Number");
+                String address_street = rs.getString("Address_Street");
+                String address_city = rs.getString("Address_City");
+                String bloodbank_code = rs.getString("BloodBank_Code");
+
+                campaign.add(new CampaignBean(id, campaign_name, campaign_date, start_time, end_time, address_number,address_street, address_city, bloodbank_code));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        System.out.println(campaign);
         return campaign;
     }
 
