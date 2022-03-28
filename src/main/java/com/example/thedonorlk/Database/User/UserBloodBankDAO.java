@@ -20,8 +20,8 @@ public class UserBloodBankDAO {
     private static final String SELECT_ALL_USERS = "SELECT * FROM user, user_bloodbank WHERE role='bloodbank' AND user.id=user_bloodbank.id";
     private static final String DELETE_USERS_SQL = "DElETE FROM user where id = ?";
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
-            "UPDATE user_bloodbank SET code=?, name=?, contact=?, email=?, Address_Street=?, Address_City=? WHERE id = ?;";
-    private static final String UPDATE_USERS_SQL2 = "UPDATE user_bloodbank SET name=?, contact=?, Address_Street=?, Address_City=? WHERE id = ?";
+            "UPDATE user_bloodbank SET code=?, name=?, Blood_Group=?, contact=?, email=?, Address_Street=?, Address_City=? WHERE id = ?;";
+    private static final String UPDATE_USERS_SQL2 = "UPDATE user_bloodbank SET name=?, Blood_Group=?, contact=?, Address_Street=?, Address_City=? WHERE id = ?";
     private static final String SELECT_ID_FROM_BLOODBANK_CODE = "SELECT ID FROM user_bloodbank WHERE Code =?";
 
     public UserBloodBankDAO() {}
@@ -86,7 +86,7 @@ public class UserBloodBankDAO {
                 String code = rs.getString("code");
                 String username = rs.getString("username");
                 String name = rs.getString("name");
-                String bg = rs.getString("bg");
+                String bg = rs.getString("Blood_Group");
                 String contact = rs.getString("contact");
                 String email = rs.getString("email");
                 String address_street = rs.getString("address_street");
@@ -126,7 +126,7 @@ public class UserBloodBankDAO {
                 String code = rs.getString("code");
                 String username = rs.getString("username");
                 String name = rs.getString("name");
-                String bg = rs.getString("bg");
+                String bg = rs.getString("Blood_Group");
                 String contact = rs.getString("contact");
                 String email = rs.getString("email");
                 String address_street = rs.getString("address_street");

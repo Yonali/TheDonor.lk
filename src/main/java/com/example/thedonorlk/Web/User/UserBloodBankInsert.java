@@ -63,7 +63,7 @@ public class UserBloodBankInsert extends HttpServlet {
                         + "Username - " + username + "\n"
                         + "Password - " + password + "\n\n"
                         + "Thank you\nThedonor.lk";
-                mailDAO.sendMail(email, "New Blood Bank Account | TheDonor.lk", message);
+//                mailDAO.sendMail(email, "New Blood Bank Account | TheDonor.lk", message);
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("userBloodBank");
                 dispatcher.forward(request, response);
