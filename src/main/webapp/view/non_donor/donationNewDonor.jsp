@@ -41,13 +41,15 @@
 
     <%
         String dEmail = (String) request.getAttribute("donor_Email");
-        String reg_msg = (String) request.getAttribute("error");
-        if (reg_msg == null)
-            reg_msg = "";
+        String reg_msg = "";
+        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        if (reg_msg != null) {
     %>
     <div id="error_message">
         <%= reg_msg %>
     </div>
+    <% } %>
+
     <div class="recent-grid">
         <div class="card">
             <div class="card-header center left-right-padding">
@@ -133,7 +135,6 @@
                                 <div class="field-single">
                                     <span>Nearby Blood Bank</span>
                                     <select name="BloodBank_Code" id="BloodBank_Code">
-                                        <option value="NULL"></option>
                                         <c:forEach items="${listBloodBank}" var="bloodbank_code">
                                             <option value="${bloodbank_code.code}" ${bloodbank_code.code == donor.bloodbank_code ? 'selected': ''}>${bloodbank_code.code}</option>
                                         </c:forEach>

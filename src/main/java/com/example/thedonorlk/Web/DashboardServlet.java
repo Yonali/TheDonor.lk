@@ -40,11 +40,19 @@ public class DashboardServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         HttpSession session = request.getSession(false);
         String bloodbank = (String)session.getAttribute("bloodbank");
+        String role = (String)session.getAttribute("role");
 
         DashboardBean count = dashboardDAO.count(bloodbank);
+        if (role.equals("admin")) {
+            count = dashboardDAO.countAll();
+        }
         request.setAttribute("count", count);
         DashboardBean stock = dashboardDAO.stock(bloodbank);
-        request.setAttribute("stock", stock);
+        request.setAttribute("RBC_stock", stock.getRbc());
+        request.setAttribute("WBC_stock", stock.getWbc());
+        request.setAttribute("Platelets_stock", stock.getPlatelets());
+        request.setAttribute("Plasma_stock", stock.getPlasma());
+        System.out.println(stock.getRbc());
         RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/dashboard.jsp");
         dispatcher.forward(request, response);
     }

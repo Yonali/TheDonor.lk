@@ -8,6 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
 
 @WebServlet("/register")
 public class DonorRegServlet extends HttpServlet {
@@ -41,7 +43,13 @@ public class DonorRegServlet extends HttpServlet {
         donorRegBean.setPwd(hash_pwd);
         donorRegBean.setCnfrm_pwd(hash_cnfrm_pwd);
 
-        if (pwd.length() < 8) {
+        LocalDate today = LocalDate.now();
+        Period period = Period.between(LocalDate.parse(dob), today);
+
+        if (period.getYears() < 18) {
+            request.setAttribute("error","Sorry you have to be minimum 18 years old to register as a blood donor.");
+            request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
+        } else if (pwd.length() < 8) {
             request.setAttribute("error","Password should be Minimum 8 Characters long");
             request.getRequestDispatcher("./DonorRegister.jsp").forward(request, response);
         } else if (!hash_pwd.equals(hash_cnfrm_pwd)) {

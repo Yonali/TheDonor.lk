@@ -1,9 +1,11 @@
 package com.example.thedonorlk.Database;
 
+import Controller.PasswordEmailGenerator;
 import com.example.thedonorlk.Bean.DeferralHistoryBean;
 import com.example.thedonorlk.Bean.DonorBean;
 import com.example.thedonorlk.Bean.DonorCardBean;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -23,6 +25,8 @@ public class DonorDAO {
     private static final String SELECT_DONORCARD_BY_ID = "SELECT *, (SELECT COUNT(*) FROM donation WHERE Donor_ID = ? AND Donation_Status='Completed') AS Count " +
             "FROM user_donor WHERE ID = ?";
     private static final String SELECT_DONOR_BY_EMAIL = "SELECT * FROM user_donor WHERE Email =?";
+    private static final String SELECT_DONOR_BY_BLOODBANK = "SELECT * FROM user_donor WHERE BloodBank_Code =?";
+    private static final String SELECT_DONOR_BY_BLOODBANK_AND_GROUP = "SELECT * FROM user_donor WHERE BloodBank_Code =? AND Blood_Group =?";
     private static final String SELECT_ALL_DONORS = "SELECT * FROM user_donor ORDER BY ID DESC";
     private static final String UPDATE_DONOR_SQL = "UPDATE user_donor SET " +
             "First_Name = ?, Last_Name = ?, Donor_NIC = ?, Blood_Group = ?, " +
@@ -40,7 +44,7 @@ public class DonorDAO {
     private static final String SELECT_DEFERRAL_HISTORY_BY_ID = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
             "Donation_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
     private static final String SELECT_DEFERRAL_HISTORY_BY_NIC = "SELECT * FROM deferral_history dh, user_donor don WHERE " +
-            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC";
+            "don.Donor_NIC = ? AND dh.Donor_ID=don.ID ORDER BY Donation_ID DESC LIMIT 1";
     private static final String SELECT_DEFERRAL_HISTORY_BY = "SELECT * FROM deferral_history dh, user_doctor doc WHERE " +
             "dh.Donor_ID = ? AND dh.Doc_ID=doc.ID ORDER BY Donation_ID DESC";
 
@@ -51,8 +55,9 @@ public class DonorDAO {
     private Connection con = DatabaseConnection.initializeDatabase();
 
     boolean status = true;
-    public boolean insertDonor(DonorBean donorBean){
-        String id = createUser(donorBean.getEmail(), generatePassword());
+    public boolean insertDonor(DonorBean donorBean, String hash_pwd){
+        String id = createUser(donorBean.getEmail(), hash_pwd);
+
         java.util.Date date = new java.util.Date();
         java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
@@ -107,14 +112,6 @@ public class DonorDAO {
         return id;
     }
 
-    //Auto generate user password here
-    //Send email to the user with the password
-    private String generatePassword() {
-        String pass = "123456789";
-        String hash_pwd = DigestUtils.sha256Hex(pass);
-
-        return pass;
-    }
 
     //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -358,6 +355,72 @@ public class DonorDAO {
         List < DonorBean > donor = new ArrayList < > ();
         try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_DONORS);) {
 //            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id_1 = rs.getInt("ID");
+                String fname = rs.getString("First_Name");
+                String lname = rs.getString("Last_Name");
+                String nic = rs.getString("Donor_NIC");
+                String blood_group = rs.getString("Blood_Group");
+                String contact = rs.getString("Contact");
+                String dob = rs.getString("DOB");
+                String gender = rs.getString("Gender");
+                String email = rs.getString("Email");
+                String add_street = rs.getString("Address_Street");
+                String add_city = rs.getString("Address_City");
+                String profile = rs.getString("Profile_Picture");
+                String description = rs.getString("About_Description");
+                String bloodbank_code = rs.getString("bloodbank_code");
+                String status = rs.getString("Status");
+
+                donor.add(new DonorBean(id_1, fname, lname, nic, blood_group, contact,dob, gender,
+                        email, add_street, add_city,profile,description,bloodbank_code, status));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return donor;
+    }
+
+    public List < DonorBean > selectAllDonorsByBloodbank(String bloodbank) {
+        List < DonorBean > donor = new ArrayList < > ();
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONOR_BY_BLOODBANK);) {
+            preparedStatement.setString(1, bloodbank);
+            //System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id_1 = rs.getInt("ID");
+                String fname = rs.getString("First_Name");
+                String lname = rs.getString("Last_Name");
+                String nic = rs.getString("Donor_NIC");
+                String blood_group = rs.getString("Blood_Group");
+                String contact = rs.getString("Contact");
+                String dob = rs.getString("DOB");
+                String gender = rs.getString("Gender");
+                String email = rs.getString("Email");
+                String add_street = rs.getString("Address_Street");
+                String add_city = rs.getString("Address_City");
+                String profile = rs.getString("Profile_Picture");
+                String description = rs.getString("About_Description");
+                String bloodbank_code = rs.getString("bloodbank_code");
+                String status = rs.getString("Status");
+
+                donor.add(new DonorBean(id_1, fname, lname, nic, blood_group, contact,dob, gender,
+                        email, add_street, add_city,profile,description,bloodbank_code, status));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return donor;
+    }
+    public List < DonorBean > selectAllDonorsByBloodbankAndGroup(String bloodbank, String group) {
+        List < DonorBean > donor = new ArrayList < > ();
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_DONOR_BY_BLOODBANK_AND_GROUP);) {
+            preparedStatement.setString(1, bloodbank);
+            preparedStatement.setString(2, group);
+            //System.out.println(preparedStatement);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

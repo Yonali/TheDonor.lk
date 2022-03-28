@@ -70,10 +70,10 @@
             </div>
         </div>
         <div class="col-2">
-            <div class="d2">
-                <button><i class="fa fa-search" aria-hidden="true"></i></button>
-                <input type="text" name="search" id="search" class="search" placeholder="Search">
-            </div>
+<%--            <div class="d2">--%>
+<%--                <button><i class="fa fa-search" aria-hidden="true"></i></button>--%>
+<%--                <input type="text" name="search" id="search" class="search" placeholder="Search">--%>
+<%--            </div>--%>
 
         </div>
         <div class="col-3">
@@ -136,7 +136,7 @@
                     <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe"
                        onclick="campaignSelect()">Campaigns</a>
                     <a href="<%=request.getContextPath()%>/appointment_donor" target="mainframe" onclick="appSelect()">Appointment</a>
-                    <a href="instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
+                    <a href="<%=request.getContextPath()%>/view/donor/instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
                     <a href="<%=request.getContextPath()%>/donorProfile" target="mainframe" onclick="profileSelect()">Profile</a>
                     <a href="<%=request.getContextPath()%>/logout">Logout</a>
                 </div>
@@ -149,12 +149,12 @@
         <div class="inter_nav_res">
             <div class="col">
                 <div class="d2">
-                    <div class="inter_nav_res-l">
-                        <button>Search</button>
-                    </div>
-                    <div class="inter_nav_res-r">
-                        <input type="text" name="search" class="search" placeholder="Enter here">
-                    </div>
+<%--                    <div class="inter_nav_res-l">--%>
+<%--                        <button>Search</button>--%>
+<%--                    </div>--%>
+<%--                    <div class="inter_nav_res-r">--%>
+<%--                        <input type="text" name="search" class="search" placeholder="Enter here">--%>
+<%--                    </div>--%>
 
                 </div>
             </div>

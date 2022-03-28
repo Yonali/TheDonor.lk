@@ -5,6 +5,9 @@
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+
+    Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,23 +39,24 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
-            <form action="userDoctorUpdate" method="post" onsubmit="return validate();">
-        </c:if>
-        <c:if test="${user == null}">
+        <form action="userDoctorUpdate" method="post" onsubmit="return validate();">
+            </c:if>
+            <c:if test="${user == null}">
             <form action="userDoctorInsert" method="post" onsubmit="return validate();">
-        </c:if>
+                </c:if>
                 <div class="fields">
                     <c:if test="${user != null}">
-                        <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
+                        <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>
                     </c:if>
                     <div class="field-single">
                         <span>Username (Valid Email address)</span>
@@ -64,7 +68,8 @@
                     </div>
                     <div class="field-single">
                         <span>First Name</span>
-                        <input type="text" name="first_name" id="first_name" value="<c:out value='${user.first_name}' />"/>
+                        <input type="text" name="first_name" id="first_name"
+                               value="<c:out value='${user.first_name}' />"/>
                     </div>
                     <div class="field-single">
                         <span>Last Name</span>
@@ -80,7 +85,8 @@
                     </div>
                     <div class="field-single">
                         <span>BloodBank Code</span>
-                        <select name="bloodbank_code" id="bloodbank_code" >
+                        <select name="bloodbank_code" id="bloodbank_code">
+                            <% if (role.equals("admin")) { %>
                             <c:forEach items="${listBloodBank}" var="bloodbank_code">
                                 <c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
@@ -88,10 +94,12 @@
                                 <c:if test="${bloodbank_code.code != user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                 </c:if>
-
                             </c:forEach>
+                            <% } else { %>
+                            <option value="<%= bloodbank %>" selected><%= bloodbank %></option>
+                            <% } %>
                         </select>
-<%--                        <input type="text" name="bloodbank_code" id="bloodbank_code" value="<c:out value='${user.bloodbank_code}' />"/>--%>
+                        <%--                        <input type="text" name="bloodbank_code" id="bloodbank_code" value="<c:out value='${user.bloodbank_code}' />"/>--%>
                     </div>
                 </div>
                 <div class="modal-submit-button">

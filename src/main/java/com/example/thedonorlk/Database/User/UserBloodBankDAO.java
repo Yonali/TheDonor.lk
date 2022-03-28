@@ -22,17 +22,19 @@ public class UserBloodBankDAO {
     private static final String UPDATE_USERS_SQL = "UPDATE user SET username = ? WHERE id = ?; " +
             "UPDATE user_bloodbank SET code=?, name=?, contact=?, email=?, Address_Street=?, Address_City=? WHERE id = ?;";
     private static final String UPDATE_USERS_SQL2 = "UPDATE user_bloodbank SET name=?, contact=?, Address_Street=?, Address_City=? WHERE id = ?";
+    private static final String SELECT_ID_FROM_BLOODBANK_CODE = "SELECT ID FROM user_bloodbank WHERE Code =?";
+
     public UserBloodBankDAO() {}
 
     private Connection con = DatabaseConnection.initializeDatabase();
 
-    public boolean insertUser(UserBloodBankBean user) throws SQLException {
+    public boolean insertUser(UserBloodBankBean user, String hash_pwd) throws SQLException {
         boolean status = true;
         try (PreparedStatement preparedStatement = con.prepareStatement(INSERT_USERS_SQL)) {
             preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, "Test");
+            preparedStatement.setString(2, hash_pwd);
             preparedStatement.setString(3, "bloodbank");
-//            System.out.println(preparedStatement);
+            //System.out.println(preparedStatement);
 
             preparedStatement.execute();
         } catch (SQLException e) {
@@ -93,6 +95,22 @@ public class UserBloodBankDAO {
             printSQLException(e);
         }
         return user;
+    }
+
+    public int selectIDFromBloodBankCode(String code) {
+        int id = 0;
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_ID_FROM_BLOODBANK_CODE);) {
+            preparedStatement.setString(1, code);
+//            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return id;
     }
 
     public List < UserBloodBankBean > selectAllUsers() {

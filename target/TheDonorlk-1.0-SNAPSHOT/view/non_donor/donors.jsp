@@ -1,4 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
@@ -14,126 +18,118 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "order": [[ 0, "desc" ]]
+            });
+        });
+    </script>
+
 </head>
 
 <body>
 <main>
-    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>
+    <%
+        String reg_msg = "";
+        reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+        if (reg_msg != null) {
+    %>
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
+    <% } %>
+
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
                 <h3>Donors</h3>
-                <div class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <!-- <input type="date" id="request-date-search"> -->
-                </div>
+                </div>--%>
                 <div class="buttons">
-                    <% if (!role.equals("admin")) { %>
-                    <button id="newBtn">Edit</button>
-                    <% } %>
+
                 </div>
             </div>
 
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
                             <td>Donor ID</td>
+                            <td>Nearby</td>
                             <td>Donor Name</td>
                             <td>Donor NIC</td>
                             <td>Blood Group</td>
                             <td>Contact Number</td>
                             <td>DOB</td>
                             <td>Gender</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#normal" class="card-drop-down">Normal</a>
-                                        <a href="#Tdeferred" class="card-drop-down">T_Deferred</a>
-                                        <a href="#Pdeferred" class="card-drop-down">P_Deferred</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
+                            <% if (!role.equals("admin")) { %>
+                            <td>Action</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
+                        <c:forEach var="donor" items="${listDonor}">
                         <tr>
-                            <td>#D101</td>
-                            <td>Jake Clinton</td>
-                            <td>112344</td>
-                            <td>O+</td>
-                            <td>0714342388</td>
-                            <td>22/08/1988</td>
-                            <td>Male</td>
                             <td>
-                                <span class="status progress">Normal</span>
+                                <c:out value="${donor.id}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D102</td>
-                            <td>Anita Rosewell</td>
-                            <td>112356</td>
-                            <td>O-</td>
-                            <td>0714342399</td>
-                            <td>22/11/1988</td>
-                            <td>Female</td>
                             <td>
-                                <span class="status open">T_Deferred</span>
-
+                                <c:out value="${donor.bloodbank_code}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D103</td>
-                            <td>Nick Jones</td>
-                            <td>476536</td>
-                            <td>B-</td>
-                            <td>0714342399</td>
-                            <td>03/01/1995</td>
-                            <td>Male</td>
                             <td>
-                                <span class="status open">T_Deferred</span>
-
+                                <c:out value="${donor.fname}"/> <c:out value="${donor.lname}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D104</td>
-                            <td>Timothy Cameron</td>
-                            <td>234489</td>
-                            <td>B+</td>
-                            <td>0714300199</td>
-                            <td>30/03/1995</td>
-                            <td>Male</td>
                             <td>
-                                <span class="status close">P_Deferred</span>
+                                <c:out value="${donor.nic}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D105</td>
-                            <td>Brendon Mack</td>
-                            <td>476532</td>
-                            <td>AB+</td>
-                            <td>0714300195</td>
-                            <td>28/02/1994</td>
-                            <td>Male</td>
                             <td>
-                                <span class="status progress">Normal</span>
+                                <c:out value="${donor.blood_group}"/>
                             </td>
-                        </tr>
-                        <tr>
-                            <td>#D107</td>
-                            <td>Sara Ellies</td>
-                            <td>787855</td>
-                            <td>A+</td>
-                            <td>0714342195</td>
-                            <td>28/05/1994</td>
-                            <td>Female</td>
                             <td>
-                                <span class="status progress">Normal</span>
+                                <c:out value="${donor.contact}"/>
                             </td>
+                            <td>
+                                <c:out value="${donor.dob}"/>
+                            </td>
+                            <td>
+                                <c:out value="${donor.gender}"/>
+                            </td>
+                            <td>
+                                <c:if test="${donor.status == 'Normal'}">
+                                    <span class="status progress">Normal</span>
+                                </c:if>
+                                <c:if test="${donor.status == 'T_Deferred'}">
+                                    <span class="status cancelled">T_Deferred</span>
+                                </c:if>
+                                <c:if test="${donor.status == 'P_Deferred'}">
+                                    <span class="status close">P_Deferred</span>
+                                </c:if>
+                                <c:if test="${donor.status == 'Not_Verified'}">
+                                    <span class="status open">Not_Verified</span>
+                                </c:if>
+                            </td>
+                                <td>
+                                    <% if (!(role.equals("admin")) && !(role.equals("bloodbank"))) { %>
+                                    <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                    <% } %>
+                                    <% if (!role.equals("admin")) { %>
+                                    <a href="<%=request.getContextPath()%>/donorShowDeferralHistory?id=<c:out value='${donor.id}' />">Deferral History</a>
+                                    <% } %>
+                                </td>
                         </tr>
+                        </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -142,94 +138,5 @@
     </div>
 </main>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <span class="close-popup">&times;</span>
-            <h3>Enter Donor Details</h3>
-        </div>
-
-        <div class="modal-body">
-            <!-- The form inside popup modal -->
-            <form>
-                <div class="fields">
-                    <% if (role.equals("nurse")) { %>
-                    <div class="field-single">
-                        <span>First Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>House Number</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Last Name</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Street</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>DOB</span>
-                        <input type="date" id="dob-date">
-                    </div>
-                    <div class="field-single">
-                        <span>City</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Contact Number</span>
-                        <input type="text"/>
-                    </div>
-                    <div class="field-single">
-                        <span>Blood Bank</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="GH">General Hospital, Matara</option>
-                                <option value="LHS">LHS, Colombo</option>
-                                <option value="NHC">Nawaloka Hospitals, Colombo</option>
-                                <option value="NK">NBTS, Kalmunai</option>
-                                <option value="NM">NBTS, Matale</option>
-                            </select>
-                        </div>
-                    </div>
-                    <% } %>
-
-                    <div class="field-single">
-                        <span>Status</span>
-                        <div class="custom-select" style="width:200px">
-                            <select class="box">
-                                <option value="clear">Normal</option>
-                                <option value="tdeferred">T Deferred</option>
-                                <option value="pdeferred">P Deferred</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="modal-submit-button">
-                    <div class="buttons">
-                        <button type="submit">Submit</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div class="modal-footer">
-            <img src="<%=request.getContextPath()%>/public/images/Logo%20-%20White.png" height="100px">
-            <p>Many people would not be alive today if it wasn't for the generosity of our donors. <br>Donating
-                Blood Makes a Big Difference in the Lives of Others.
-            </p>
-        </div>
-    </div>
-
-    <!-- IMPORTANT -->
-    <!-- Javascript file with popup modal function should be called here just after the popup modal -->
-    <script src="<%=request.getContextPath()%>/public/scripts/popup_modal_dashboard.js"></script>
-</div>
-
 </body>
-
 </html>

@@ -2,6 +2,7 @@ package com.example.thedonorlk.Database;
 
 import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.EmergencyBean;
+import com.example.thedonorlk.Bean.User.UserAdminBean;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -24,6 +25,25 @@ public class EmergencyDAO {
     public EmergencyDAO() {}
 
     private Connection con = DatabaseConnection.initializeDatabase();
+
+    public boolean validate(String bloodGroup, String bloodBank) {
+        boolean status = false;
+
+        Connection con = DatabaseConnection.initializeDatabase();
+
+        String sql = "select * from emergency_requirement where Blood_Group = ? AND BloodBank_Code = ? AND Status = 'Open'";
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, bloodGroup);
+            ps.setString(2, bloodBank);
+            ResultSet rs = ps.executeQuery();
+            status = rs.next();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
     public boolean insertUser(EmergencyBean emergency) throws SQLException {
         boolean status = true;

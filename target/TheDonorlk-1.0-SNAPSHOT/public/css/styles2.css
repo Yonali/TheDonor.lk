@@ -31,7 +31,6 @@
 
 .modal-content {
     position: relative;
-    /* top: 100px; */
     background-color: #fefefe;
     width: 100%;
     -webkit-animation-name: slideIn;
@@ -161,6 +160,86 @@
 
 /* ---------------------------------Popup Modal --(Edit Profile)----end-------------- */
 /*------------------------------------- form ----------------------------------*/
+.main1{
+
+    align-content: center;
+    display: grid;
+    grid-template-areas: "left right";
+}
+.left1{
+
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+}
+.right1{
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-left: 250px;
+    /*width: 100vh;*/
+    /*margin-left: 14px;*/
+    /*flex-basis: 100vh;*/
+}
+
+.main2{
+
+    align-content: center;
+    display: grid;
+    grid-template-areas: "left right";
+}
+.left2{
+
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    /*width: 50vh;*/
+}
+.right2{
+    /*margin-left: 450px;*/
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-left: 400px;
+    /*width: 100vh;*/
+    /*margin-left: 14px;*/
+    /*flex-basis: 100vh;*/
+}
+/*-------------------------------*/
+.main3{
+
+    align-content: center;
+    display: grid;
+    grid-template-areas: "left right";
+}
+.left3{
+
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    /*width: 50vh;*/
+}
+.right3{
+    grid-area: right;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    margin-left: 450px;
+    width: 300px;
+    /*margin-left: 60px;*/
+    /*width: 100vh;*/
+    /*margin-left: 14px;*/
+    /*flex-basis: 100vh;*/
+}
+
+
+
 .fields input {
     width: 180px;
 }
@@ -179,6 +258,7 @@
     width: 100%;
 }
 .inter_B_container{
+    /*margin-left: ;*/
     display: grid;
     /* grid-template-columns: 40% 60%; */
     grid-template-columns: repeat(2, 1fr);
@@ -219,6 +299,7 @@
     justify-content: center;
     padding: 15px;
 }
+
 .edit_div1{
     display: flex;
     width: 100%;
@@ -293,6 +374,7 @@
     align-content: center;
     justify-content: center;
     width: 100%;
+
 }
 .inter_Change_pwd{
     display: grid;
@@ -309,6 +391,7 @@
 
 .Change_pwd_1{
     /* background: #d4d1d1; */
+    padding: 15px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -328,14 +411,14 @@
 }
 /*----------------------- form -----------delete account-----------------------*/
 .dlt_act{
-    padding: 15px;
+
     display: flex;
     border-top: 5px solid #EAE5E5;
 }
 .inter_dlt_act{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    /*grid-template-rows: repeat(3, 1fr);*/
     grid-gap: 15px;
     grid-column-gap: 100px;
     margin-top: 1rem;
@@ -642,6 +725,7 @@
         padding: 10px 40px;
     }
 
+
 }
 
 @media (max-width: 768px) {
@@ -710,6 +794,24 @@
     .comment_fields input, .add_comment_fields input  {
         width: 200px;
     }
+    .right3  {
+        font-size: x-small;
+        margin-left: 90px;
+        width: 120px;
+    }
+    .right2  {
+        /*font-size: x-small;*/
+        margin-left: 60px;
+    }
+
+    .right1 .field-single, .right2 .field-single {
+        font-size: small;
+    }
+
+    .right2>span{
+        width: 100px;
+    }
+
     /* .fields {
       grid-template-columns: repeat(1, 1fr);
 
@@ -718,6 +820,9 @@
     .inter_fields{
         /* grid-area: "right" "left"; */
         grid-template-columns: repeat(1, 1fr);
+    }
+    .right2 .field-single input{
+        width: 120px;
     }
 }
 
@@ -746,6 +851,50 @@
     .modal2-body {
         padding: 20px 20px;
     }
+    .main1{
+        /*display: grid;*/
+        grid-template-areas: "left""right";
+    }
+    .left1{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+    }
+    .right1{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+        margin-left: 50px;
+    }
+    .main2{
+        /*display: grid;*/
+        grid-template-areas: "left""right";
+        margin-left: 150px;
+    }
+    .left2{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+    }
+    .right2{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+    }
+    .main3{
+        /*display: grid;*/
+        grid-template-areas: "left""right";
+    }
+    .left3{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+    }
+    .right3{
+        display: flex;
+        /*flex-direction: column;*/
+        align-content: center;
+    }
 }
 
 @media (max-width: 1300px) {
@@ -764,4 +913,6 @@
     .main_edit_div{
         background: #d4d1d1;
     }
+
+
 }

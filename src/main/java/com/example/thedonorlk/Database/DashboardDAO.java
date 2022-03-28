@@ -24,121 +24,412 @@ public class DashboardDAO {
     //private java.sql.Date sqlDate=new java.sql.Date(date.getTime());
 
     public DashboardBean stock(String bloodbank) {
-        int a_pos = 0;
-        int a_neg = 0;
-        int b_pos = 0;
-        int b_neg = 0;
-        int ab_pos = 0;
-        int ab_neg = 0;
-        int o_pos = 0;
-        int o_neg = 0;
+        List<Integer> rbc  = new ArrayList<Integer>();
+        List<Integer> wbc  = new ArrayList<Integer>();
+        List<Integer> platelets  = new ArrayList<Integer>();
+        List<Integer> plasma  = new ArrayList<Integer>();
 
+        ////////////////////////////////////////////////////////////////////////////
         String SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='A+' AND Status='Active'";
+                "AND Blood_Group='A+' AND Status='Active' AND Blood_Product='RBC'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                a_pos = rs.getInt("count");
+                rbc.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='A-' AND Status='Active'";
+                "AND Blood_Group='A+' AND Status='Active' AND Blood_Product='WBC'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                a_neg = rs.getInt("count");
+                wbc.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='B+' AND Status='Active'";
+                "AND Blood_Group='A+' AND Status='Active' AND Blood_Product='Platelets'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                b_pos = rs.getInt("count");
+                platelets.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='B-' AND Status='Active'";
+                "AND Blood_Group='A+' AND Status='Active' AND Blood_Product='Plasma'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                b_neg = rs.getInt("count");
+                plasma.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
 
+        //////////////////////////////////////////////////////////////////////////////
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='AB+' AND Status='Active'";
+                "AND Blood_Group='A-' AND Status='Active' AND Blood_Product='RBC'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ab_pos = rs.getInt("count");
+                rbc.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='AB-' AND Status='Active'";
+                "AND Blood_Group='A-' AND Status='Active' AND Blood_Product='WBC'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                ab_neg = rs.getInt("count");
+                wbc.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='O+' AND Status='Active'";
+                "AND Blood_Group='A-' AND Status='Active' AND Blood_Product='Platelets'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                o_pos = rs.getInt("count");
+                platelets.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-
         SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
-                "AND Blood_Group='O-' AND Status='Active'";
+                "AND Blood_Group='A-' AND Status='Active' AND Blood_Product='Plasma'";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, bloodbank);
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {
-                o_neg = rs.getInt("count");
+                plasma.add(rs.getInt("count"));
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
 
-        return new DashboardBean(a_pos, a_neg, b_pos, b_neg, ab_pos, ab_neg, o_pos, o_neg,
-                0, 0, 0, 0, 0);
+        //////////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B+' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B+' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B+' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B+' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        /////////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B-' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B-' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B-' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='B-' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB+' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB+' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB+' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB+' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        /////////////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB-' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB-' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB-' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='AB-' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        ///////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O+' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O+' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O+' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O+' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        //////////////////////////////////////////////////////////////////////////
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O-' AND Status='Active' AND Blood_Product='RBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                rbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O-' AND Status='Active' AND Blood_Product='WBC'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                wbc.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O-' AND Status='Active' AND Blood_Product='Platelets'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                platelets.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        SQL = "SELECT COUNT(*) AS count FROM blood WHERE BloodBank_Code=? " +
+                "AND Blood_Group='O-' AND Status='Active' AND Blood_Product='Plasma'";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setString(1, bloodbank);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                plasma.add(rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return new DashboardBean(rbc, wbc, platelets, plasma, 0, 0, 0, 0, 0);
     }
 
     public DashboardBean count(String bloodbank) {
@@ -217,8 +508,81 @@ public class DashboardDAO {
             printSQLException(e);
         }
 
-        return new DashboardBean(0, 0, 0, 0, 0, 0, 0, 0,
-                total_donor_count, new_donor_count, campaigns_count, appointments_count, donations_count);
+        return new DashboardBean(null, null, null, null, total_donor_count, new_donor_count, campaigns_count, appointments_count, donations_count);
+    }
+
+    public DashboardBean countAll() {
+        int total_donor_count = 0;
+        int new_donor_count = 0;
+        int campaigns_count = 0;
+        int appointments_count = 0;
+        int donations_count = 0;
+
+        String SQL = "SELECT COUNT(*) AS count FROM user_donor";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                total_donor_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE MONTH(Join_Date)=? AND YEAR(Join_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+            System.out.println(preparedStatement);
+
+            while (rs.next()) {
+                new_donor_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM campaign WHERE MONTH(Campaign_Date)=? AND YEAR(Campaign_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL)) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                campaigns_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM appointment WHERE MONTH(Appointment_Date)=? AND YEAR(Appointment_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                appointments_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        SQL = "SELECT COUNT(*) AS count FROM donation WHERE MONTH(Donation_Date)=? AND YEAR(Donation_Date)=?";
+        try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
+            preparedStatement.setInt(1, today.getMonthValue());
+            preparedStatement.setInt(2, today.getYear());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                donations_count = rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return new DashboardBean(null, null, null, null, total_donor_count, new_donor_count, campaigns_count, appointments_count, donations_count);
     }
 
     private void printSQLException(SQLException ex) {

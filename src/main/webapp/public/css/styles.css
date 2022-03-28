@@ -16,6 +16,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+@media print {
+  body {transform: scale(.8);}
+  table {page-break-inside: avoid;}
+}
+
 #sidebar_btn, .user-wrapper {
   cursor: pointer;
 }
@@ -468,6 +473,38 @@ header label span {
   padding-right: 1rem;
 }
 
+.header-right-flex {
+  display: flex;
+  position: relative;
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
+
+.notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  position: relative;
+  display: inline-block;
+  border-radius: 50px;
+  margin-right: 25px;
+}
+
+.notification:hover {
+  background: #3f0404;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: #750605;
+  color: white;
+}
+
 .user-wrapper {
   display: flex;
   align-items: center;
@@ -692,6 +729,7 @@ main {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
+  padding: 25px;
 }
 
 .card-header-center {
@@ -728,6 +766,10 @@ td a {
 
 table {
   border-collapse: collapse;
+}
+
+#table_id {
+  padding-top: 20px;
 }
 
 thead tr {
@@ -807,7 +849,7 @@ tr td:last-child {
  }
 .status.Pending {
    background: #e8e535;
-   color: white;
+   color: black;
  }
 
 .red-text {

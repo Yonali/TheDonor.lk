@@ -1,8 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.example.thedonorlk.Bean.ProfileBean" %>
+<%@ page import="org.apache.commons.codec.binary.Base64" %>
+<%@ page import="com.example.thedonorlk.Bean.PostBean" %>
+<%@ page import="java.util.List" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
     if (session.getAttribute("username") == null || !session.getAttribute("role").equals("donor")) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
+    Object user_id = session.getAttribute("user_id");
+    List<PostBean> posts = (List<PostBean>) request.getAttribute("posts");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,155 +20,121 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timeline</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/timeline.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="<%=request.getContextPath()%>/public/scripts/scripts.js"></script>
 </head>
 
 <body>
-    <div class="maincontainer">
-        <nav class="navcontainer">
-            <div class="col-1">
-                <div class="logo">
-                    <img src="<%=request.getContextPath()%>/public/images/Logo.png" height="75px">
-                </div>
-                <!-- ---------------------responsive logo------------------------------- -->
-                <div class="logo_responsive">
-                    <img src="<%=request.getContextPath()%>/public/images/Logo.png" height="45px" width="85px">
-                </div>
-                 <!-- ---------------------responsive logo------------------------------- -->
-                <div class="col-1-2">
-                    <div class="dropdown">
-                        <button class="dropbtn tes" id="pageName">Timeline</button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <a href="home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
-                            <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
-                            <a href="Donor_Appointments.jsp" target="mainframe" onclick="appSelect()">Appointment</a>
-                            <a href="Donors_Instructions.jsp" target="mainframe"
-                               onclick="instructionSelect()">Instructions</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="d2">
-                    <button><i class="fa fa-search" aria-hidden="true"></i></button>
-                    <input type="text" name="search" id="search" class="search" placeholder="Search">
-                </div>
-                
-            </div>
-            <div class="col-3">
-                <div class="col-3-1">
-                    <i class="fa fa-bell" aria-hidden="true"></i>
-                </div>
-                <div class="dropdown">
-                    <div class="col-3-2">
-                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP" style="width:50px;height:50px;">
-                        <div class="d col-3-3">
-                            <a href="#"><%=session.getAttribute("name")%></a>
-                        </div>
-                    </div>
-                    <div class="dropdown-content">
-                        <a href="Profile.jsp" target="mainframe" onclick="profileSelect()">Profile</a>
-                        <a href="<%=request.getContextPath()%>/logout">Logout</a>
-                    </div>
-
-                </div>
-                <!-- ----------------------responsive dropdown------------------------------   -->
-
-                <div class="dropdown_responsive">
-                    <div class="col-3-2">
-                        <img src="<%=request.getContextPath()%>/public/images/anne-doe.jpg" id="PP" style="width:35px;height:35px;">
-                        <a href="#">Anne Doe</a>
-                        <div class="d col-3-3">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                    <div class="dropdown-content_responsive">
-                        <a href="home.jsp" target="mainframe" onclick="timelineSelect()">Timeline</a>
-                        <a href="<%=request.getContextPath()%>/campaign_donor" target="mainframe" onclick="campaignSelect()">Campaigns</a>
-                        <a href="Donor_Appointments.jsp" target="mainframe" onclick="appSelect()">Appointment</a>
-                        <a href="Donors_Instructions.jsp" target="mainframe" onclick="instructionSelect()">Instructions</a>
-                        <!-- <a href="./Profile.jsp" target="mainframe" onclick="profileSelect()">Search</a> -->
-                        <a href="Profile.jsp" target="mainframe" onclick="profileSelect()">Profile</a>
-                        <a href="<%=request.getContextPath()%>/logout">Logout</a>
-                    </div>
-                </div>
-                 <!-- -----------------------responsive dropdown------------------------------   -->
-
-            </div>
-        </nav>
-
-        <nav class="nav_res">
-            <div class="inter_nav_res">
-                <div class="col">
-                    <div class="d2">
-                        <div class="inter_nav_res-l">
-                            <button>Search</button>
-                        </div>
-                        <div class="inter_nav_res-r">
-                            <input type="text" name="search" id="search" class="search" placeholder="Enter here">
-                        </div>
-                        
-                       
-                    </div>
-                    
-                </div>
-    
-            </div>
-        
-        </nav>
-
-        <div class="container">
-            <iframe name="mainframe" class="mainframe" id="icontent" scrolling="yes" width="100%" height="100%"></iframe>
-        </div>
-
-    </div>
-
-
-
-    <script>
-        function timelineSelect() {
-            var x = document.getElementById("pageName");
-            x.innerHTML = "Timeline";
-        }
-        function campaignSelect() {
-            var x = document.getElementById("pageName");
-            x.innerHTML = "Campaigns";
-        }
-        function appSelect() {
-            var x = document.getElementById("pageName");
-            x.innerHTML = "Appointment";
-        }
-        function instructionSelect() {
-            var x = document.getElementById("pageName");
-            x.innerHTML = "Instructions";
-        }
-        function profileSelect() {
-            var x = document.getElementById("pageName");
-            x.innerHTML = "Profile";
-        }
-
-        /***********************************************/
-
-        window.onscroll = function () { scrollFunction() };
-
-        function scrollFunction() {
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                document.getElementById("emergency").style.top = "0";
-            } else {
-                document.getElementById("emergency").style.top = "-50px";
+<div class="profile-container">
+    <div class="profile-info">
+        <% ProfileBean profile = (ProfileBean) request.getAttribute("profile");
+            String base64Encoded = null;
+            if (profile.getImgBytes() != null) {
+                byte[] bytes = profile.getImgBytes();
+                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                base64Encoded = new String(encodeBase64, "UTF-8");
             }
-        }
+        %>
 
-        /**********************************************/
+        <div class="post-col-timeline">
+            <!---------------------- Create Post -------------------------->
+            <div class="write-post-container">
+                <div class="user-profile">
+                    <img src="data:image/jpeg;base64,<%=base64Encoded%>"
+                         onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'">
+                    <div>
+                        <p><c:out value='${donor.first_name}'/> <c:out value='${donor.last_name}'/></p>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="post-input-container">
+                    <!-- <textarea name="" id="" rows="3" placeholder="Add something here"></textarea> -->
+                    <form action="postInsert" method="post" id="createPost" enctype="multipart/form-data">
+                        <textarea form="createPost" name="caption" rows="3" placeholder="Add something here"></textarea>
 
-        function loadIframe() {
-            var iframe = document.getElementById("icontent");
-            iframe.src = "home.jsp" // here goes your url
-        };
-        window.onload = loadIframe;
-    </script>
+                        <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
+                               style="display: none;">
+                        <img id="output" width="200"/>
+
+                        <div class="add-post-links">
+                            <label for="file" style="cursor: pointer;"><img
+                                    src="<%=request.getContextPath()%>/public/images/photo.png">Upload Media</label>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="javascript:{}" onclick="document.getElementById('createPost').submit();"><img
+                                    src="<%=request.getContextPath()%>/public/images/upload.png">Create Post</a>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <!---------------------- Create Post -------------------------->
+
+            <!-- --------------------------- Posts ---------------------------------------------->
+            <%for (PostBean post : posts) {%>
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <%  String base64EncodedProfile = null;
+                            if (post.getDonor_profile() != null) {
+                                byte[] bytes = post.getDonor_profile();
+                                byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                                base64EncodedProfile = new String(encodeBase64, "UTF-8");
+                            }
+                        %>
+                        <img src="data:image/jpeg;base64,<%=base64EncodedProfile%>"
+                             onerror="this.src='<%=request.getContextPath()%>/public/images/no-profile.jpg'">
+                        <div>
+                            <p><%=post.getDonor_name()%></p>
+                            <span><%=post.getDate()%>, <%=post.getTime()%></span>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <p class="post-text">
+                    <%=post.getCaption()%>
+                </p>
+                <%  String base64EncodedPost = null;
+                    if (post.getImgBytes() != null) {
+                        byte[] bytes = post.getImgBytes();
+                        byte[] encodeBase64 = Base64.encodeBase64(bytes);
+                        base64EncodedPost = new String(encodeBase64, "UTF-8");
+                    }
+                %>
+                <img src="data:image/jpeg;base64,<%=base64EncodedPost%>" class="post-img"
+                     onerror="this.style='display:none;'">
+                <div class="post-row">
+                    <div class="activity-icons">
+                        <%--<a href="#"><i class="fa fa-thumbs-up"></i> 120</a>--%>
+                        <%--<a href="#"><img src="<%=request.getContextPath()%>/public/images/comments.png">45</a>--%>
+                    </div>
+                    <div class="post-profile-icon">
+                        <% if (post.getDonor_id().equals(String.valueOf(user_id))) { %>
+                        <a href="<%=request.getContextPath()%>/postDelete?id=<%=post.getId()%>"><i class="fa fa-trash"></i> Delete</a>
+                        <% } else { %>
+                        <a href="<%=request.getContextPath()%>/violationShowNewForm?id=<%=post.getId()%>"><i class="fa fa-flag"></i> Report</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <!-- --------------------------- Posts ---------------------------------------------->
+
+            <button type="button" class="load-more-btn">Loadmore</button>
+        </div>
+    </div>
+</div>
+
+    <!-- --------------------back to up------------------------------------------------ -->
+    <div>
+        <!-- <h4>Top</h4> -->
+        <a onclick="topFunction()" id="myBtn" title="Go to top">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i>
+        </a>
+        <script src="<%=request.getContextPath()%>/public/scripts/backtotop.js"></script>
+    </div>
+    <!-- --------------------back to up------------------------------------------------ -->
+
 </body>
-
 </html>

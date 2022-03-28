@@ -30,10 +30,10 @@ public class DonorUpdate extends HttpServlet {
         try {
             updateUser(request, response);
         } catch (SQLException ex) {
-            request.setAttribute("error","Something went wrong, Please Try Again");
+            /*request.setAttribute("error","Something went wrong, Please Try Again");
             RequestDispatcher dispatcher = request.getRequestDispatcher("donor");
-            dispatcher.forward(request, response);
-            //throw new ServletException(ex);
+            dispatcher.forward(request, response);*/
+            throw new ServletException(ex);
         }
     }
 
@@ -49,15 +49,15 @@ public class DonorUpdate extends HttpServlet {
         String gender = request.getParameter("Gender");
         String status = request.getParameter("Status");
         String bloodbank_code = request.getParameter("BloodBank_Code");
-        DonorBean newDonor = new DonorBean(id, fname, lname, nic, blood_group, contact,dob, gender.equals("NULL") ? null: gender,
+        DonorBean newDonor = new DonorBean(id, fname, lname, nic, blood_group.equals("NULL") ? null: blood_group, contact,dob, gender.equals("NULL") ? null: gender,
                 "email", "add_street", "add_city", "profile", "description", bloodbank_code.equals("NULL") ? null: bloodbank_code, status);
 
             if (donorDAO.updateUser(newDonor)) {
                 response.sendRedirect("./donor");
-            } else {
+            }/* else {
                 request.setAttribute("error","Something went wrong, Please Try Again");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("donor");
                 dispatcher.forward(request, response);
-            }
+            }*/
     }
 }

@@ -111,21 +111,23 @@
                                     <span class="status progress">Normal</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'T_Deferred'}">
-                                    <span class="status open">T_Deferred</span>
+                                    <span class="status cancelled">T_Deferred</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'P_Deferred'}">
                                     <span class="status close">P_Deferred</span>
                                 </c:if>
                                 <c:if test="${donor.status == 'Not_Verified'}">
-                                    <span class="status cancelled">Not_Verified</span>
+                                    <span class="status open">Not_Verified</span>
                                 </c:if>
                             </td>
-                            <% if (!role.equals("admin")) { %>
                                 <td>
+                                    <% if (!(role.equals("admin")) && !(role.equals("bloodbank"))) { %>
                                     <a href="<%=request.getContextPath()%>/donorShowEditForm?id=<c:out value='${donor.id}' />">Edit</a>
+                                    <% } %>
+                                    <% if (!role.equals("admin")) { %>
                                     <a href="<%=request.getContextPath()%>/donorShowDeferralHistory?id=<c:out value='${donor.id}' />">Deferral History</a>
+                                    <% } %>
                                 </td>
-                            <% } %>
                         </tr>
                         </c:forEach>
                         </tbody>

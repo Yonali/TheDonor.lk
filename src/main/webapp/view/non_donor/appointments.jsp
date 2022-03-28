@@ -32,7 +32,7 @@
     <script>
         $(document).ready(function () {
             $('#table_id').DataTable({
-                "order": [[ 0, "desc" ]]
+                "order": [[0, "desc"]]
             });
         });
     </script>
@@ -44,11 +44,19 @@
             $.ajax({
                 url: "https://meghaduta.dhahas.com/sms/sendSMS",
                 type: "POST",
-                data: JSON.stringify({"senders": [ "+94<%=request.getAttribute("SendTo")%>" ], "message": "<%=request.getAttribute("Message")%>", "apiKey": "61df3f8b36fe65003089ed1b"}),
-                dataType:'json',
+                data: JSON.stringify({
+                    "senders": ["+94<%=request.getAttribute("SendTo")%>"],
+                    "message": "<%=request.getAttribute("Message")%>",
+                    "apiKey": "61df3f8b36fe65003089ed1b"
+                }),
+                dataType: 'json',
                 contentType: 'application/json',
-                success: function (response) {console.log(response); },
-                error: function(error){ console.log("Something went wrong", error); }
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log("Something went wrong", error);
+                }
             });
         });
     </script>
@@ -114,7 +122,7 @@
                             <td>ID</td>
                             <td>Blood Bank</td>
                             <td>Donor Name</td>
-                            <td>Donor NIC</td>
+                            <td>Contact</td>
                             <td>Date</td>
                             <td>Time</td>
                             <td>Status</td>
@@ -125,7 +133,7 @@
                         </thead>
                         <tbody>
                         <c:forEach var="appointment" items="${listAppointment}">
-                            <c:if test="${appointment.bloodbank_code == bloodbank}">
+                            <c:if test="${appointment.bloodbank_code == bloodbank || role == 'admin'}">
                                 <tr>
                                     <td>
                                         <c:out value="${appointment.id}"/>
@@ -161,12 +169,23 @@
                                     </td>
                                     <% if (role.equals("bloodbank")) { %>
                                     <td>
-                                        <a onclick="appointment_confirmation(event)"
-                                           href="<%=request.getContextPath()%>/appointmentStatus?type=Accepted&id=<c:out value='${appointment.id}'/>">Accept</a>
-                                        <a onclick="appointment_confirmation(event)"
-                                           href="<%=request.getContextPath()%>/appointmentStatus?type=Rejected&id=<c:out value='${appointment.id}'/>">Reject</a>
-                                        <a onclick="appointment_confirmation(event)"
-                                           href="<%=request.getContextPath()%>/appointmentStatus?type=Completed&id=<c:out value='${appointment.id}'/>">Complete</a>
+                                        <c:if test="${appointment.status != 'Completed'}">
+                                            <c:if test="${appointment.status != 'Accepted'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Accepted&id=<c:out value='${appointment.id}'/>">
+                                                    Accept</a>
+                                            </c:if>
+                                            <c:if test="${appointment.status != 'Rejected'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Rejected&id=<c:out value='${appointment.id}'/>">
+                                                    Reject</a>
+                                            </c:if>
+                                            <c:if test="${appointment.status == 'Accepted'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Completed&id=<c:out value='${appointment.id}'/>">
+                                                    Complete</a>
+                                            </c:if>
+                                        </c:if>
                                     </td>
                                     <% } %>
                                 </tr>

@@ -48,7 +48,7 @@
 
                     <div class="remember">
                         <input type="checkbox" class="chech-box"><span>Remember me</span>
-                        <a href="#" class="a">Forgot Password?</a>
+                        <a href="forgot.jsp" class="a">Forgot Password?</a>
                     </div>
 
                     <div >

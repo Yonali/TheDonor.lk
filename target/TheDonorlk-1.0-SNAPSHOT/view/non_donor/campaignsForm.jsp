@@ -36,22 +36,22 @@
 
     <div class="modal-body">
         <%
-            String reg_msg = (String) request.getAttribute("error");
-            if (reg_msg == null)
-                reg_msg = "";
+            String reg_msg = "";
+            reg_msg = reg_msg == null ? "": (String) request.getAttribute("error");
+            if (reg_msg != null) {
         %>
         <div id="error_message">
             <%= reg_msg %>
         </div>
+        <% } %>
 
         <c:if test="${user != null}">
         <form action="campaignUpdate" method="post" onsubmit="return validate();"></c:if>
             <c:if test="${user == null}">
-            <form action="campaignInsert" method="post" onsubmit="return validate();">
-                </c:if>
+            <form action="campaignInsert" method="post" onsubmit="return validate();"></c:if>
                 <div class="fields">
                     <c:if test="${user != null}">
-                        <input type="hidden" name="id" value="<c:out value='${user.id}' />"/>
+                        <input type="hidden" name="id" value="<c:out value='${user.id}'/>"/>
                     </c:if>
                     <div class="field-single">
                         <span>Campaign Name</span>
@@ -75,12 +75,13 @@
                     </div>
                     <div class="field-single">
                         <span>Date</span>
-                        <input type="date"  name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
+                        <input type="date" onfocus="this.min=new Date(new Date().setDate(new Date().getDate() + 2)).toISOString().split('T')[0]" step="1" name="Campaign_Date" id="Campaign_Date" value="<c:out value='${user.date}' />">
                     </div>
-                    <div class="field-single">
+                    <%--<div class="field-single">
                         <span>BloodBank Code</span>
                         <select name="BloodBank_Code" id="BloodBank_Code" >
-                            <c:forEach items="${listBloodBank}" var="bloodbank_code">
+                            <option value="${user.bloodbank_code}">${user.bloodbank_code}</option>
+                            &lt;%&ndash;<c:forEach items="${listBloodBank}" var="bloodbank_code">
                                 <c:if test="${bloodbank_code.code == user.bloodbank_code}">
                                     <option value="${bloodbank_code.code}" selected>${bloodbank_code.code}</option>
                                 </c:if>
@@ -88,9 +89,9 @@
                                     <option value="${bloodbank_code.code}">${bloodbank_code.code}</option>
                                 </c:if>
 
-                            </c:forEach>
+                            </c:forEach>&ndash;%&gt;
                         </select>
-                    </div>
+                    </div>--%>
                     <%--<c:if test="${user != null}">
                     <div class="field-single" id="status">
                         <span>Status</span>

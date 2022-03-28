@@ -74,7 +74,7 @@ public class DonorEmailCheck extends HttpServlet {
 
     private int checkEmail(String email) {
         int count = 0;
-        String SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE Email =?";
+        String SQL = "SELECT COUNT(*) AS count FROM user_donor WHERE Email=?";
         try (PreparedStatement preparedStatement = con.prepareStatement(SQL);) {
             preparedStatement.setString(1, email);
             ResultSet rs = preparedStatement.executeQuery();

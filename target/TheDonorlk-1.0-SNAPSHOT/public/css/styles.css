@@ -16,6 +16,11 @@
   font-family: "Poppins", sans-serif;
 }
 
+@media print {
+  body {transform: scale(.8);}
+  table {page-break-inside: avoid;}
+}
+
 #sidebar_btn, .user-wrapper {
   cursor: pointer;
 }
@@ -29,7 +34,7 @@
   font-size: smaller;
   padding: 10px;
   box-shadow: 0 8px 10px -10px;
-  margin-top: -20px;
+  //margin-top: -20px;
   margin-bottom: 20px;
 }
 
@@ -60,7 +65,7 @@
 }
 
 .modal-content {
-  position: fixed;
+  position: absolute;
   top: 80px;
   background-color: #fefefe;
   width: 100%;
@@ -468,6 +473,38 @@ header label span {
   padding-right: 1rem;
 }
 
+.header-right-flex {
+  display: flex;
+  position: relative;
+  /* justify-content: space-evenly; */
+  align-items: center;
+}
+
+.notification {
+  background-color: #555;
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  position: relative;
+  display: inline-block;
+  border-radius: 50px;
+  margin-right: 25px;
+}
+
+.notification:hover {
+  background: #3f0404;
+}
+
+.notification .badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: #750605;
+  color: white;
+}
+
 .user-wrapper {
   display: flex;
   align-items: center;
@@ -517,7 +554,7 @@ header label span {
 /*  ------------------------------------------------------*/
 
 main {
-  margin-top: 75px;
+  margin-top: 60px;
   padding: 2rem 1.5rem;
   background: #f1f5f9;
   width: available;
@@ -527,7 +564,8 @@ main {
 .chart {
   width: 500px;
   height: 300px;
-  margin-left: 320px;
+  //margin-left: 320px;
+
 }
 
 .card-details {
@@ -576,6 +614,18 @@ main {
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
   padding: 10px;
+}
+
+.card-2col-right {
+  display: flexbox;
+  justify-content: right;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 10px;
+  float: right;
+  padding-right: 20%;
+  padding-left: 50px;
 }
 
 .big_num {
@@ -641,6 +691,15 @@ main {
   border-radius: 2px;
 }
 
+.card-topic-red {
+  padding-top: 25px;
+  color: #750605;
+  text-align: center;
+}
+.card-topic-black {
+  text-align: center;
+}
+
 .card-bb {
   background: #fff;
   border-radius: 2px;
@@ -651,6 +710,18 @@ main {
 .card-header,
 .card-body {
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card-header-center {
+  display: block;
+  text-align: center;
+}
+
+.left-right-padding {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .card-header {
@@ -658,6 +729,7 @@ main {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #f0f0f0;
+  padding: 25px;
 }
 
 .card-header-center {
@@ -694,6 +766,10 @@ td a {
 
 table {
   border-collapse: collapse;
+}
+
+#table_id {
+  padding-top: 20px;
 }
 
 thead tr {
@@ -773,8 +849,16 @@ tr td:last-child {
  }
 .status.Pending {
    background: #e8e535;
-   color: white;
+   color: black;
  }
+
+.red-text {
+  color: red;
+}
+.green-text {
+  color: green;
+}
+
 .table-responsive {
   width: 100%;
   overflow-x: auto;

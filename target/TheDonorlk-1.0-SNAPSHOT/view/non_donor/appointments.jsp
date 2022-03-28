@@ -1,9 +1,14 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.util.*" %>
 <%
     if (session.getAttribute("username") == null) {
         response.sendRedirect(request.getContextPath() + "/login.jsp");
     }
     Object role = session.getAttribute("role");
+    Object bloodbank = session.getAttribute("bloodbank");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,17 +20,53 @@
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/public/css/styles.css">
-<%--    <script src="<%=request.getContextPath()%>/public/scripts/calender.js"></script>--%>
 
+    <script src="<%=request.getContextPath()%>/public/scripts/action_confirmation.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable({
+                "order": [[0, "desc"]]
+            });
+        });
+    </script>
+
+    <% if (request.getAttribute("SendTo") != null) {
+        System.out.println("Test"); %>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://meghaduta.dhahas.com/sms/sendSMS",
+                type: "POST",
+                data: JSON.stringify({
+                    "senders": ["+94<%=request.getAttribute("SendTo")%>"],
+                    "message": "<%=request.getAttribute("Message")%>",
+                    "apiKey": "61df3f8b36fe65003089ed1b"
+                }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log("Something went wrong", error);
+                }
+            });
+        });
+    </script>
+    <% } %>
 </head>
 
 <body>
 <main>
-<%--    <p style="text-align: center;">Development on Progress!<br>All DATA HARDCODED here for Demonstration Purpose</p>--%>
-
     <%----------------------------calendar----------------------------------------%>
-    <div class="container">
+    <%--<div class="container">
         <div class="calendar">
             <div class="month">
                 <i class="fa fa-angle-left prev"></i>
@@ -47,105 +88,110 @@
             </div>
             <div class="days"></div>
         </div>
-    </div>
+    </div>--%>
     <%---------------------------------------------------------------------------------%>
+
+    <%
+        String reg_msg = "";
+        reg_msg = reg_msg == null ? "" : (String) request.getAttribute("error");
+        if (reg_msg != null) {
+    %>
+    <div id="error_message">
+        <%= reg_msg %>
+    </div>
+    <% } %>
 
     <div class="recent-grid">
         <div class="card">
             <div class="card-header">
                 <h3>Appointments</h3>
-                <diiiiiiiv class="search-wrapper">
+                <%--<div class="search-wrapper">
                     <span class="las la-search"></span>
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="appointment-date-search">
-                </diiiiiiiv>
+                </div>--%>
                 <div class="buttons">
-                    <% if (role.equals("bloodbank")) { %>
-                    <button>Accept</button>
-                    <button>Decline</button>
-                    <% } %>
+
                 </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table width="100%">
+                    <table width="100%" id="table_id">
                         <thead>
                         <tr>
-                            <td>Appt. ID</td>
+                            <td>ID</td>
                             <td>Blood Bank</td>
                             <td>Donor Name</td>
-                            <td>Donor NIC</td>
+                            <td>Contact</td>
                             <td>Date</td>
                             <td>Time</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button class="dropbtn">Status</button>
-                                    <div id="myDropdown" class="dropdown-content">
-                                        <a href="#accepted" class="card-drop-down">New</a>
-                                        <a href="#accepted" class="card-drop-down">Accepted</a>
-                                        <a href="#declined" class="card-drop-down">Declined</a>
-                                    </div>
-                                </div>
-                            </td>
+                            <td>Status</td>
+                            <% if (role.equals("bloodbank")) { %>
+                            <td>Actions</td>
+                            <% } %>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>#D101</td>
-                            <td>NBTS</td>
-                            <td>Jake Clinton</td>
-                            <td>112344</td>
-                            <td>21/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status open">New</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D102</td>
-                            <td>NBTS</td>
-                            <td>Anita Rosewell</td>
-                            <td>112356</td>
-                            <td>21/09/2021</td>
-                            <td>10.00AM</td>
-                            <td>
-                                <span class="status close">Declined</span>
+                        <c:forEach var="appointment" items="${listAppointment}">
+                            <c:if test="${appointment.bloodbank_code == bloodbank || role == 'admin'}">
+                                <tr>
+                                    <td>
+                                        <c:out value="${appointment.id}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.bloodbank_code}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.donor_name}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.donor_contact}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.appointment_date}"/>
+                                    </td>
+                                    <td>
+                                        <c:out value="${appointment.appointment_time}"/>
+                                    </td>
+                                    <td>
+                                        <c:if test="${appointment.status == 'New'}">
+                                            <span class="status open">New</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == 'Accepted'}">
+                                            <span class="status progress">Accepted</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == 'Rejected'}">
+                                            <span class="status close">Rejected</span>
+                                        </c:if>
+                                        <c:if test="${appointment.status == 'Completed'}">
+                                            <span class="status consulted">Completed</span>
+                                        </c:if>
+                                    </td>
+                                    <% if (role.equals("bloodbank")) { %>
+                                    <td>
+                                        <c:if test="${appointment.status != 'Completed'}">
+                                            <c:if test="${appointment.status != 'Accepted'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Accepted&id=<c:out value='${appointment.id}'/>">
+                                                    Accept</a>
+                                            </c:if>
+                                            <c:if test="${appointment.status != 'Rejected'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Rejected&id=<c:out value='${appointment.id}'/>">
+                                                    Reject</a>
+                                            </c:if>
+                                            <c:if test="${appointment.status == 'Accepted'}">
+                                                <a onclick="appointment_confirmation(event)"
+                                                   href="<%=request.getContextPath()%>/appointmentStatus?type=Completed&id=<c:out value='${appointment.id}'/>">
+                                                    Complete</a>
+                                            </c:if>
+                                        </c:if>
+                                    </td>
+                                    <% } %>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
 
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D104</td>
-                            <td>NBTS</td>
-                            <td>Timothy Cameron</td>
-                            <td>234489</td>
-                            <td>21/09/2021</td>
-                            <td>3.00PM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D105</td>
-                            <td>NBTS</td>
-                            <td>Brendon Mack</td>
-                            <td>476532</td>
-                            <td>22/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>#D107</td>
-                            <td>NBTS</td>
-                            <td>Sara Ellies</td>
-                            <td>787855</td>
-                            <td>23/09/2021</td>
-                            <td>9.00AM</td>
-                            <td>
-                                <span class="status progress">Accepted</span>
-                            </td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -153,8 +199,6 @@
         </div>
     </div>
 </main>
-
-
 
 
 <!-- The Popup Modal -->
