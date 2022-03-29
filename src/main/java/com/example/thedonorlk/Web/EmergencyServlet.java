@@ -37,8 +37,22 @@ public class EmergencyServlet extends HttpServlet {
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
-        List <EmergencyBean> listEmergency = emergencyDAO.selectAllEmergency();
+        String group = request.getParameter("group");
+
+        List <EmergencyBean> listEmergency = null;
+
+            if (group.equals("all")) {
+                listEmergency = emergencyDAO.selectAllEmergency();
+            } else {
+                listEmergency = emergencyDAO.selectEmergencyByGroup(group);
+
+        }
+
+
         request.setAttribute("listEmergency", listEmergency);
+        List <EmergencyBean> listGroup = emergencyDAO.selectAllEmergency();
+        request.setAttribute("listGroup", listGroup);
+        request.setAttribute("selectedGroup", group);
         RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/emergency.jsp");
         dispatcher.forward(request, response);
     }

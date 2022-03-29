@@ -1,5 +1,6 @@
 package com.example.thedonorlk.Database;
 
+import com.example.thedonorlk.Bean.BloodStockBean;
 import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.EmergencyBean;
 
@@ -16,6 +17,7 @@ public class EmergencyDAO {
             " (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_BY_ID = "SELECT * FROM emergency_requirement WHERE Emg_ID = ? ORDER BY Emg_ID DESC";
     private static final String SELECT_ALL = "SELECT * FROM emergency_requirement ORDER BY Emg_ID DESC";
+    private static final String SELECT_ALL_EMERGENCY_BY_GROUP = "SELECT * FROM emergency_requirement WHERE Blood_Group = ? ORDER BY Emg_ID DESC";
     private static final String DELETE_SQL = "DELETE FROM emergency_requirement WHERE Emg_ID = ?";
     private static final String UPDATE_SQL = "UPDATE emergency_requirement SET " +
             "Blood_Group = ?, Status = ? " +
@@ -82,6 +84,30 @@ public class EmergencyDAO {
                 String bloodbank_code = rs.getString("BloodBank_Code");
 
                 emergency.add(new EmergencyBean(id, blood_group, req_amount, date, time, status, bloodbank_code));
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return emergency;
+    }
+
+    public List < EmergencyBean > selectEmergencyByGroup(String group) {
+        List < EmergencyBean > emergency = new ArrayList <>();
+        try (PreparedStatement preparedStatement = con.prepareStatement(SELECT_ALL_EMERGENCY_BY_GROUP);) {
+            preparedStatement.setString(1, group);
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("Emg_ID");
+                String blood_group = rs.getString("Blood_Group");
+                int req_amount = rs.getInt("Req_Amount");
+                String date = rs.getString("Date");
+                String time = rs.getString("Time");
+                String status = rs.getString("Status");
+                String bloodbank_code = rs.getString("BloodBank_Code");
+
+                emergency.add(new EmergencyBean(id, blood_group, req_amount, date, time, status, bloodbank_code));
+
             }
         } catch (SQLException e) {
             printSQLException(e);

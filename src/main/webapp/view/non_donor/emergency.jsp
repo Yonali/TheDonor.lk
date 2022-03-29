@@ -12,6 +12,8 @@
     Object role = session.getAttribute("role");
     Object bloodbank = session.getAttribute("bloodbank");
 
+    String selected_group = String.valueOf(request.getAttribute("selectedGroup"));
+
     List<DonorBean> sendToDonorList = (List<DonorBean>) request.getAttribute("SendToDonorList");
 %>
 <!DOCTYPE html>
@@ -88,79 +90,107 @@
                     <input type="search" placeholder="search here"/>
                     <input type="date" id="emergency-date-search">
                 </div>--%>
+
                 <div class="buttons">
                     <% if (role.equals("bloodbank")) { %>
                     <a href="<%=request.getContextPath()%>/emergencyShowNewForm">New</a>
                     <% } %>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table width="100%" id="table_id">
-                        <thead>
-                        <tr>
-                            <td>ID</td>
-                            <td>Blood Group</td>
-                            <td>Required Amount</td>
-                            <td>Date</td>
-                            <td>Time</td>
-                            <td>Blood Bank</td>
-                            <td>Status</td>
-                            <% if (role.equals("bloodbank")) { %>
-                            <td>Action</td>
-                            <% } %>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <c:forEach var="emergency" items="${listEmergency}">
-                            <tr>
-                                <td>
-                                    <c:out value="${emergency.id}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${emergency.blood_group}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${emergency.req_amount}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${emergency.date}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${emergency.time}"/>
-                                </td>
-                                <td>
-                                    <c:out value="${emergency.bloodbank_code}"/>
-                                </td>
-                                <td>
-                                    <c:if test="${emergency.status == 'Open'}">
-                                        <span class="status open">Open</span>
-                                    </c:if>
-                                    <c:if test="${emergency.status == 'Closed'}">
-                                        <span class="status close">Closed</span>
-                                    </c:if>
-                                </td>
-
-                                <% if (role.equals("bloodbank")) { %>
-                                <td>
-                                    <c:if test="${emergency.bloodbank_code == bloodbank}">
-
-                                        <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
-                                                                    href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
-
-                                    </c:if>
-                                </td>
-                                <% } %>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-
+            <%--Custom Blood bank filter--%>
+<div class="recent-grid">
+    <form action="emergency" method="post">
+        <div class="card">
+            <div class="modal-body">
+                <div class="fields" style="grid-template-columns: repeat(1, 1fr); justify-content: center;">
+                    <div class="field-single" style="justify-content: center;">
+                        <span style="padding: 10px;">Select Blood Group</span>
+                        <select class="box" name="group" id="group">
+                            <option value="all">All</option>
+                            <c:set var="s_group" value="<%= selected_group %>"/>
+                            <c:forEach var="group" items="${listGroup}">
+                                <option value="<c:out value='${group.blood_group}'/>" ${group.blood_group == s_group ? 'selected': ''}>
+                                    <c:out value="${group.blood_group}"/></option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-submit-button" style="padding-top: 0px;">
+                <div class="buttons">
+                    <button type="submit" class="bottom-full">Next</button>
                 </div>
             </div>
         </div>
+    </form>
+</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table width="100%" id="table_id">
+                    <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Blood Group</td>
+                        <td>Required Amount</td>
+                        <td>Date</td>
+                        <td>Time</td>
+                        <td>Blood Bank</td>
+                        <td>Status</td>
+                        <% if (role.equals("bloodbank")) { %>
+                        <td>Action</td>
+                        <% } %>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="emergency" items="${listEmergency}">
+                        <tr>
+                            <td>
+                                <c:out value="${emergency.id}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emergency.blood_group}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emergency.req_amount}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emergency.date}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emergency.time}"/>
+                            </td>
+                            <td>
+                                <c:out value="${emergency.bloodbank_code}"/>
+                            </td>
+                            <td>
+                                <c:if test="${emergency.status == 'Open'}">
+                                    <span class="status open">Open</span>
+                                </c:if>
+                                <c:if test="${emergency.status == 'Closed'}">
+                                    <span class="status close">Closed</span>
+                                </c:if>
+                            </td>
+
+                            <% if (role.equals("bloodbank")) { %>
+                            <td>
+                                <c:if test="${emergency.bloodbank_code == bloodbank}">
+
+                                    <a href="<%=request.getContextPath()%>/emergencyShowEditForm?id=<c:out value='${emergency.id}' />">Edit</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="confirmation(event)"
+                                                                href="emergencyDelete?id=<c:out value='${emergency.id}' />">Delete</a>
+
+                                </c:if>
+                            </td>
+                            <% } %>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
     </div>
+</div>
 </main>
 
 </div>

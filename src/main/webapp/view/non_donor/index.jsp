@@ -97,7 +97,7 @@
             <% } %>
             <% if (role.equals("admin") || role.equals("bloodbank") || role.equals("doctor") || role.equals("nurse")) { %>
             <li>
-                <a href="<%=request.getContextPath()%>/emergency" target="iframe"><span
+                <a href="<%=request.getContextPath()%>/emergency?group=all" target="iframe"><span
                         class="las la-ambulance"></span>
                     <span>Emergency Requirements</span></a>
             </li>
