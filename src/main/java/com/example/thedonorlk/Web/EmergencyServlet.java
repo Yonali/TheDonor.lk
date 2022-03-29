@@ -2,8 +2,10 @@ package com.example.thedonorlk.Web;
 
 import com.example.thedonorlk.Bean.CampaignBean;
 import com.example.thedonorlk.Bean.EmergencyBean;
+import com.example.thedonorlk.Bean.User.UserBloodBankBean;
 import com.example.thedonorlk.Database.CampaignDAO;
 import com.example.thedonorlk.Database.EmergencyDAO;
+import com.example.thedonorlk.Database.User.UserBloodBankDAO;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,8 +21,10 @@ import java.util.List;
 public class EmergencyServlet extends HttpServlet {
     //private static final long serialVersionUID = 1 L;
     private EmergencyDAO emergencyDAO;
+    private UserBloodBankDAO userBloodBankDAO;
     public void init() {
         emergencyDAO = new EmergencyDAO();
+        userBloodBankDAO = new UserBloodBankDAO();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -39,6 +43,8 @@ public class EmergencyServlet extends HttpServlet {
             throws SQLException, IOException, ServletException {
         List <EmergencyBean> listEmergency = emergencyDAO.selectAllEmergency();
         request.setAttribute("listEmergency", listEmergency);
+        List <UserBloodBankBean> listBloodBank = userBloodBankDAO.selectAllUsers();
+        request.setAttribute("listBloodBank", listBloodBank);
         RequestDispatcher dispatcher = request.getRequestDispatcher("./view/non_donor/emergency.jsp");
         dispatcher.forward(request, response);
     }

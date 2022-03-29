@@ -2,6 +2,7 @@ package com.example.thedonorlk.Bean.Donor;
 
 public class AppointmentBean {
     protected int id;
+    protected String name;
     protected String bloodbank_code;
     protected String appointment_time;
     protected String appointment_date;
@@ -13,7 +14,23 @@ public class AppointmentBean {
     protected String bloodbank_address_city;
     protected String bloodbank_email;
 
-    public AppointmentBean() {}
+    public AppointmentBean() {
+    }
+
+    public AppointmentBean(int id, String name, String bloodbank_code, String appointment_time, String appointment_date, String donor_id, String status, String bloodbank_name, String bloodbank_contact, String bloodbank_address_street, String bloodbank_address_city, String bloodbank_email) {
+        this.id = id;
+        this.name = name;
+        this.bloodbank_code = bloodbank_code;
+        this.appointment_time = appointment_time;
+        this.appointment_date = appointment_date;
+        this.donor_id = donor_id;
+        this.status = status;
+        this.bloodbank_name = bloodbank_name;
+        this.bloodbank_contact = bloodbank_contact;
+        this.bloodbank_address_street = bloodbank_address_street;
+        this.bloodbank_address_city = bloodbank_address_city;
+        this.bloodbank_email = bloodbank_email;
+    }
 
     public int getId() {
         return id;
@@ -21,6 +38,14 @@ public class AppointmentBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBloodbank_code() {
@@ -100,20 +125,6 @@ public class AppointmentBean {
     }
 
     public void setBloodbank_email(String bloodbank_email) {
-        this.bloodbank_email = bloodbank_email;
-    }
-
-    public AppointmentBean(int id, String bloodbank_code, String appointment_time, String appointment_date, String donor_id, String status, String bloodbank_name, String bloodbank_contact, String bloodbank_address_street, String bloodbank_address_city, String bloodbank_email) {
-        this.id = id;
-        this.bloodbank_code = bloodbank_code;
-        this.appointment_time = appointment_time;
-        this.appointment_date = appointment_date;
-        this.donor_id = donor_id;
-        this.status = status;
-        this.bloodbank_name = bloodbank_name;
-        this.bloodbank_contact = bloodbank_contact;
-        this.bloodbank_address_street = bloodbank_address_street;
-        this.bloodbank_address_city = bloodbank_address_city;
         this.bloodbank_email = bloodbank_email;
     }
 }

@@ -2,13 +2,25 @@ package com.example.thedonorlk.Bean;
 
 public class AppointmentBean {
     protected int id;
+    protected String name;
     protected String bloodbank_code;
     protected String appointment_time;
     protected String appointment_date;
     protected String donor_id;
     protected String status;
 
-    public AppointmentBean() {}
+    public AppointmentBean() {
+    }
+
+    public AppointmentBean(int id, String name, String bloodbank_code, String appointment_time, String appointment_date, String donor_id, String status) {
+        this.id = id;
+        this.name = name;
+        this.bloodbank_code = bloodbank_code;
+        this.appointment_time = appointment_time;
+        this.appointment_date = appointment_date;
+        this.donor_id = donor_id;
+        this.status = status;
+    }
 
     public int getId() {
         return id;
@@ -16,6 +28,14 @@ public class AppointmentBean {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBloodbank_code() {
@@ -55,15 +75,6 @@ public class AppointmentBean {
     }
 
     public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public AppointmentBean(int id, String bloodbank_code, String appointment_time, String appointment_date, String donor_id, String status) {
-        this.id = id;
-        this.bloodbank_code = bloodbank_code;
-        this.appointment_time = appointment_time;
-        this.appointment_date = appointment_date;
-        this.donor_id = donor_id;
         this.status = status;
     }
 }

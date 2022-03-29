@@ -38,11 +38,12 @@ public class AppointmentUpdate extends HttpServlet {
     private void updateUser(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
         String bloodbank_code = request.getParameter("BloodBank_Code");
         String appointment_time = request.getParameter("Appointment_Time");
         String appointment_date = request.getParameter("Appointment_Date");
         String donor_id = request.getParameter("Donor_ID");
-        AppointmentBean appointment = new AppointmentBean(id, bloodbank_code, appointment_time, appointment_date, donor_id, "New");
+        AppointmentBean appointment = new AppointmentBean(id, name, bloodbank_code, appointment_time, appointment_date, donor_id, "New");
 
             if (appointmentDAO.updateAppointment(appointment)) {
                 response.sendRedirect("./appointment_donor");

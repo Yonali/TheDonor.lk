@@ -12,6 +12,8 @@
     Object role = session.getAttribute("role");
     Object bloodbank = session.getAttribute("bloodbank");
 
+    String selected_bank = String.valueOf(request.getAttribute("selectedBank"));
+
     List<DonorBean> sendToDonorList = (List<DonorBean>) request.getAttribute("SendToDonorList");
 %>
 <!DOCTYPE html>
@@ -78,6 +80,33 @@
         <%= reg_msg %>
     </div>
     <% } %>
+
+    <div class="recent-grid">
+        <form action="bloodStock" method="post">
+            <div class="card">
+                <div class="modal-body">
+                    <div class="fields" style="grid-template-columns: repeat(1, 1fr); justify-content: center;">
+                        <div class="field-single" style="justify-content: center;">
+                            <span style="padding: 10px;">Select Blood Bank</span>
+                            <select class="box" name="bank" id="bank_switch">
+                                <option value="all">All</option>
+                                <c:set var="s_bank" value="<%= selected_bank %>"/>
+                                <c:forEach var="bank" items="${listBloodBank}">
+                                    <option value="<c:out value='${bank.code}'/>" ${bank.code == s_bank ? 'selected': ''}>
+                                        <c:out value="${bank.name}"/></option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-submit-button" style="padding-top: 0px;">
+                    <div class="buttons">
+                        <button type="submit" class="bottom-full">Next</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 
     <div class="recent-grid">
         <div class="card">

@@ -53,11 +53,12 @@ public class AppointmentInsert extends HttpServlet {
     private void insertAppointment(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, IOException, ServletException, ParseException {
 
+        String name = request.getParameter("name");
         String bloodbank_code = request.getParameter("BloodBank_Code");
         String appointment_time = request.getParameter("Appointment_Time");
         String appointment_date = request.getParameter("Appointment_Date");
         String donor_id = request.getParameter("Donor_ID");
-        AppointmentBean newAppointment = new AppointmentBean(Integer.parseInt(donor_id), bloodbank_code, appointment_time, appointment_date, donor_id, "New");
+        AppointmentBean newAppointment = new AppointmentBean(Integer.parseInt(donor_id), name, bloodbank_code, appointment_time, appointment_date, donor_id, "New");
 
 
         //  LocalDate today = LocalDate.now(); // Today's date here

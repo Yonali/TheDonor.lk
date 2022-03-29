@@ -91,6 +91,10 @@
                                value="<c:out value='${appointment.appointment_date}' />"/>
                     </div>
                     <div class="field-single">
+                        <span>Name</span>
+                        <input type="text" name="name" value="<c:out value='${appointment.name}'/>"/>
+                    </div>
+                    <div class="field-single">
                         <span>Start Time</span>
                         <input type="time" step="any" name="Appointment_Time" id="Appointment_Time"
                                value="<c:out value='${appointment.appointment_time}' />"/>

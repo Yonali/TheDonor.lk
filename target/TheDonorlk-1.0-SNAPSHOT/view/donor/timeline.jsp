@@ -64,6 +64,9 @@
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <a href="javascript:{}" onclick="document.getElementById('createPost').submit();"><img
                                     src="<%=request.getContextPath()%>/public/images/upload.png">Create Post</a>
+
+                            <a href="javascript:{}" onclick="document.getElementById('createPost').submit();"><img
+                                    src="<%=request.getContextPath()%>/public/images/upload.png">Update Post</a>
                         </div>
                     </form>
 
